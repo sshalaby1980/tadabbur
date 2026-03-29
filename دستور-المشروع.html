@@ -261,9 +261,61 @@ footer .brand{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold);displ
   .tier-row{grid-template-columns:36px 1fr;}
   .tier-row-meta{display:none;}
 }
+
+/* === Tadabbur Nav Bar === */
+.tdb-nav {
+  position: sticky; top: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(10,14,26,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,168,83,0.2);
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+.tdb-nav a { text-decoration: none; }
+.tdb-nav .tdb-brand {
+  font-family: 'Amiri', serif;
+  color: #d4a853;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.tdb-nav .tdb-links {
+  display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+}
+.tdb-nav .tdb-link {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: #8a9bb5;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.2s;
+}
+.tdb-nav .tdb-link:hover { color: #d4a853; border-color: rgba(212,168,83,0.3); }
+.tdb-nav .tdb-link.active { color: #d4a853; border-color: rgba(212,168,83,0.4); background: rgba(212,168,83,0.1); }
+@media (max-width: 600px) {
+  .tdb-nav { padding: 6px 10px; gap: 4px; }
+  .tdb-nav .tdb-link { padding: 3px 8px; font-size: 0.7em; }
+  .tdb-nav .tdb-brand { font-size: 0.95em; }
+}
+/* === End Nav Bar === */
 </style>
 </head>
 <body>
+<!-- Tadabbur Nav Bar -->
+<nav class="tdb-nav">
+  <a href="index.html" class="tdb-brand">تدبُّر</a>
+  <div class="tdb-links">
+    <a href="index.html" class="tdb-link">الرئيسية</a>
+    <a href="%D8%B3%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D9%83%D9%87%D9%81-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D8%A9.html" class="tdb-link">الكهف</a>
+    <a href="%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9-%D8%A7%D9%84%D9%85%D8%B7%D9%81%D9%81%D9%8A%D9%86-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D8%A9-v3.html" class="tdb-link">المطففين</a>
+    <a href="%D8%B3%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D8%B2%D9%85%D8%B1-%D9%83%D8%A7%D9%85%D9%84%D8%A9.html" class="tdb-link">الزمر</a>
+    <a href="infographic-aghraq-alsuwar.html" class="tdb-link">أغراض السور</a>
+  </div>
+</nav>
+
 
 <!-- HEADER -->
 <div class="doc-header">
@@ -365,13 +417,17 @@ footer .brand{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold);displ
   <div class="card">
     <div class="card-title">تشخيص المشكلة الحقيقية</div>
     <div class="card-text">
-      توظيف الدين لخدمة السلطة ظاهرة تاريخية عالمية: في اليهودية والمسيحية حُرِّفت النصوص
-      وأُقيمت الحروب وفُصل العلم عن الإيمان باسم الدين — فظنّ كثير من الناس أن ما رأوه
-      هو الدين المنزّل فأعرضوا عن الفكرة الدينية كلها.
+      <strong style="color:var(--gold2);">حاجز اللغة:</strong>
+      القرآن نزل بعربية عميقة وبليغة، وكثير من الناس اليوم لا يملكون الأدوات اللغوية لفهم مراد الآيات — فيمرّون عليها دون أن تمسّ قلوبهم.
       <br><br>
-      <strong style="color:var(--gold2);">في عصرنا:</strong>
-      فقدنا طريقة التلقي الصحيحة للقرآن — لا لأنه صعب،
-      بل لأن كثيرًا منا لم يصله أصيلًا كما وصل الصحابة والسلف الصالح.
+      <strong style="color:var(--gold2);">حاجز الزمن والسياق:</strong>
+      المسافة بيننا وبين زمن النزول تجعل كثيرًا من المعاني والمواقف والأحداث غير واضحة بدون شرح يربط النص بسياقه.
+      <br><br>
+      <strong style="color:var(--gold2);">سرعة العصر وتشتّت الانتباه:</strong>
+      الإنسان المعاصر يعيش في زحام معلوماتي هائل، وصبره على القراءة المتأنية يتآكل يومًا بعد يوم.
+      <br><br>
+      <strong style="color:var(--gold2);">البحث عن المعلومة السهلة:</strong>
+      الناس اعتادت المحتوى السريع والمبسّط — ولم تجد من يقدّم لها القرآن بأسلوب يحترم عقلها ووقتها دون أن يُخلّ بعمق المعنى.
     </div>
   </div>
 
