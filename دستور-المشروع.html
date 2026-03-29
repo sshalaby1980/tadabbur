@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دستور المشروع — تدبُّر</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1120;--navy2:#111827;--navy3:#1a2538;--navy4:#243047;
+  --gold:#c9a84c;--gold2:#e8c97a;--gold3:#f5e1a0;
+  --green:#2d6a4f;--green2:#52b788;
+  --blue:#1a3e5c;--blue2:#3a7ca5;
+  --red:#6b2222;--red2:#c0504d;
+  --amber:#92400e;--amber2:#d97706;
+  --text:#f0e6cc;--text2:#c4b48a;--text3:#7a6e5a;
+  --border:#2a2010;--border2:#3a3020;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:'Cairo',sans-serif;line-height:1.8;}
+
+/* ── HEADER ── */
+.doc-header{
+  background:linear-gradient(135deg,#0d1520,#1a2538);
+  border-bottom:2px solid var(--gold);
+  padding:40px 32px 32px;text-align:center;
+}
+.doc-bismillah{font-family:'Amiri',serif;font-size:1.3rem;color:var(--text3);margin-bottom:16px;}
+.doc-brand{font-family:'Amiri',serif;font-size:3.5rem;color:var(--gold);letter-spacing:.05em;margin-bottom:6px;}
+.doc-title{font-size:.85rem;color:var(--text3);letter-spacing:.2em;margin-bottom:20px;}
+.doc-divider{width:180px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 20px;}
+.doc-tagline{font-family:'Amiri',serif;font-size:1.4rem;color:var(--text2);max-width:600px;margin:0 auto 20px;line-height:1.7;}
+.doc-meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:.75rem;color:var(--text3);}
+.doc-meta span{background:var(--navy3);border:1px solid var(--border2);border-radius:20px;padding:4px 14px;}
+
+/* ── LAYOUT ── */
+.doc-body{max-width:900px;margin:0 auto;padding:40px 24px 60px;}
+
+/* ── SECTION ── */
+.section{margin-bottom:40px;}
+.section-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:20px;padding-bottom:12px;
+  border-bottom:1px solid var(--border2);
+}
+.section-num{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--navy3);border:1px solid var(--gold);
+  font-family:'Amiri',serif;font-size:1rem;color:var(--gold);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.section-title{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold2);}
+.section-sub{font-size:.78rem;color:var(--text3);margin-top:2px;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--navy2);border:1px solid var(--border2);
+  border-radius:14px;padding:20px 24px;margin-bottom:14px;
+}
+.card-title{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold2);margin-bottom:8px;}
+.card-text{font-size:.84rem;color:var(--text2);line-height:1.9;}
+.card-warning{border-color:var(--red);background:#1a0808;}
+.card-warning .card-title{color:var(--red2);}
+.card-success{border-color:var(--green);background:#0a1a0f;}
+.card-success .card-title{color:var(--green2);}
+.card-gold{border-color:var(--gold);background:linear-gradient(135deg,#1a1005,#2a1a08);}
+.card-gold .card-title{color:var(--gold2);}
+.card-blue{border-color:var(--blue);background:#0d1e2e;}
+.card-blue .card-title{color:var(--blue2);}
+
+/* ── RULE CARDS (القواعد الحاكمة) ── */
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:640px){.rule-grid{grid-template-columns:1fr;}}
+.rule-card{
+  border-radius:14px;padding:20px;border:1px solid var(--border2);
+  background:var(--navy2);position:relative;overflow:hidden;
+}
+.rule-card::before{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:4px;
+}
+.rule-1::before{background:var(--gold);}
+.rule-2::before{background:var(--red2);}
+.rule-3::before{background:var(--blue2);}
+.rule-4::before{background:var(--green2);}
+.rule-num{
+  font-family:'Amiri',serif;font-size:2.5rem;color:var(--text3);
+  opacity:.2;position:absolute;top:8px;left:14px;line-height:1;
+}
+.rule-icon{font-size:1.6rem;margin-bottom:8px;}
+.rule-title{font-family:'Amiri',serif;font-size:1.05rem;margin-bottom:8px;}
+.rule-1 .rule-title{color:var(--gold2);}
+.rule-2 .rule-title{color:var(--red2);}
+.rule-3 .rule-title{color:var(--blue2);}
+.rule-4 .rule-title{color:var(--green2);}
+.rule-text{font-size:.8rem;color:var(--text2);line-height:1.8;}
+.rule-note{
+  margin-top:10px;font-size:.75rem;padding:8px 12px;
+  border-radius:8px;border-right:2px solid;background:var(--navy3);
+  color:var(--text3);
+}
+.rule-1 .rule-note{border-color:var(--gold);}
+.rule-2 .rule-note{border-color:var(--red2);}
+.rule-3 .rule-note{border-color:var(--blue2);}
+.rule-4 .rule-note{border-color:var(--green2);}
+
+/* ── ZERO RULE (القاعدة الصفرية) ── */
+.zero-rule{
+  background:linear-gradient(135deg,#1a0505,#2a0808);
+  border:2px solid var(--red2);border-radius:16px;
+  padding:24px;margin-top:20px;margin-bottom:20px;
+}
+.zero-rule-title{
+  font-family:'Amiri',serif;font-size:1.2rem;color:var(--red2);
+  margin-bottom:12px;text-align:center;
+}
+.zero-rule-text{font-size:.84rem;color:var(--text);line-height:2;}
+.zero-rule-text strong{color:var(--red2);}
+.checklist{list-style:none;padding:0;margin:12px 0 0;}
+.checklist li{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:10px 14px;margin-bottom:6px;
+  background:var(--navy2);border-radius:8px;
+  border:1px solid var(--border2);font-size:.8rem;color:var(--text2);line-height:1.8;
+}
+.checklist li::before{
+  content:'☐';font-size:1.1rem;color:var(--red2);flex-shrink:0;margin-top:2px;
+}
+.role-split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+@media(max-width:640px){.role-split{grid-template-columns:1fr;}}
+.role-do{background:#0a1a0f;border:1px solid var(--green);border-radius:12px;padding:16px;}
+.role-dont{background:#1a0808;border:1px solid var(--red);border-radius:12px;padding:16px;}
+.role-do .role-header{color:var(--green2);font-family:'Amiri',serif;font-size:1rem;margin-bottom:10px;}
+.role-dont .role-header{color:var(--red2);font-family:'Amiri',serif;font-size:1rem;margin-bottom:10px;}
+.role-list{list-style:none;padding:0;font-size:.78rem;color:var(--text2);line-height:2;}
+
+/* ── EPISTEM PYRAMID ── */
+.ep-layer{
+  border-radius:12px;padding:18px 22px;margin-bottom:4px;
+  display:grid;grid-template-columns:44px 1fr 90px;gap:14px;align-items:center;
+}
+.ep-foundation{background:linear-gradient(135deg,#1a1005,#2a1a08);border:2px solid var(--gold);}
+.ep-building{background:#0d1e2e;border:1px solid var(--blue);}
+.ep-contemporary{background:#0a1a10;border:1px solid var(--green);}
+.ep-num{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Amiri',serif;font-size:1.2rem;font-weight:700;flex-shrink:0;
+}
+.ep-foundation .ep-num{background:#2a1f05;border:2px solid var(--gold);color:var(--gold);}
+.ep-building .ep-num{background:#0d2137;border:2px solid var(--blue2);color:var(--blue2);}
+.ep-contemporary .ep-num{background:#0a2015;border:2px solid var(--green2);color:var(--green2);}
+.ep-title{font-family:'Amiri',serif;font-size:.95rem;margin-bottom:4px;}
+.ep-foundation .ep-title{color:var(--gold2);}
+.ep-building .ep-title{color:var(--blue2);}
+.ep-contemporary .ep-title{color:var(--green2);}
+.ep-desc{font-size:.75rem;color:var(--text2);line-height:1.7;}
+.ep-badge{
+  font-size:.65rem;padding:4px 10px;border-radius:20px;text-align:center;
+}
+.ep-foundation .ep-badge{background:#2a1f05;color:var(--gold);border:1px solid var(--gold);}
+.ep-building .ep-badge{background:#0d2137;color:var(--blue2);border:1px solid var(--blue);}
+.ep-contemporary .ep-badge{background:#0a2015;color:var(--green2);border:1px solid var(--green);}
+.ep-arrow{text-align:center;color:var(--text3);font-size:.9rem;padding:3px 0;}
+
+/* ── INVENTORY ── */
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.inv-item{
+  border-radius:12px;padding:16px;position:relative;
+  background:var(--navy2);border:1px solid var(--border2);
+}
+.inv-done{border-color:var(--green);background:#0a1a0f;}
+.inv-plan{border-color:var(--border2);opacity:.75;}
+.inv-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:.62rem;padding:2px 9px;border-radius:20px;
+}
+.badge-done{background:var(--green);color:var(--green2);}
+.badge-plan{background:#2a2010;color:var(--text3);}
+.inv-icon{font-size:1.4rem;margin:18px 0 8px;}
+.inv-name{font-family:'Amiri',serif;font-size:.95rem;color:var(--gold2);margin-bottom:4px;}
+.inv-type{font-size:.68rem;color:var(--text3);margin-bottom:6px;}
+.inv-desc{font-size:.76rem;color:var(--text2);line-height:1.7;}
+
+/* ── DECISIONS ── */
+.decision{
+  display:flex;gap:14px;padding:14px 18px;
+  background:var(--navy2);border-radius:10px;margin-bottom:10px;
+  border-right:3px solid var(--border2);
+}
+.decision-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+.decision-text{font-size:.82rem;color:var(--text2);line-height:1.8;}
+.decision-text strong{color:var(--gold2);}
+.d-confirmed{border-color:var(--green2);}
+.d-pending{border-color:var(--amber2);}
+.d-rejected{border-color:var(--red2);}
+
+/* ── ARCH TIERS ── */
+.tier-row{
+  border-radius:12px;padding:16px 20px;margin-bottom:8px;
+  display:grid;grid-template-columns:40px 1fr 100px;gap:12px;align-items:center;
+}
+.tier-row-1{background:#0a180f;border:1px solid var(--green);}
+.tier-row-2{background:#0d1e2e;border:1px solid var(--blue);}
+.tier-row-3{background:#1a1208;border:1px solid var(--border2);}
+.tier-row-num{font-family:'Amiri',serif;font-size:1.6rem;opacity:.3;text-align:center;}
+.tier-row-1 .tier-row-num{color:var(--green2);}
+.tier-row-2 .tier-row-num{color:var(--blue2);}
+.tier-row-3 .tier-row-num{color:var(--gold);}
+.tier-row-name{font-family:'Amiri',serif;font-size:.95rem;margin-bottom:3px;}
+.tier-row-1 .tier-row-name{color:var(--green2);}
+.tier-row-2 .tier-row-name{color:var(--blue2);}
+.tier-row-3 .tier-row-name{color:var(--gold2);}
+.tier-row-desc{font-size:.75rem;color:var(--text2);}
+.tier-row-meta{text-align:left;font-size:.7rem;color:var(--text3);}
+
+/* ── WARNING BOX ── */
+.warn-box{
+  background:#1a0808;border:1px solid var(--red);
+  border-radius:12px;padding:18px 20px;margin-top:16px;
+}
+.warn-title{font-family:'Amiri',serif;font-size:.95rem;color:var(--red2);margin-bottom:8px;}
+.warn-text{font-size:.8rem;color:var(--text2);line-height:1.8;}
+
+/* ── SESSION START PROTOCOL ── */
+.protocol-steps{display:flex;flex-direction:column;gap:10px;}
+.proto-step{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--navy2);border-radius:10px;padding:14px 18px;
+  border:1px solid var(--border2);
+}
+.proto-num{
+  width:28px;height:28px;border-radius:50%;background:var(--gold);
+  color:var(--navy);font-size:.8rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  margin-top:1px;
+}
+.proto-text{font-size:.82rem;color:var(--text2);line-height:1.8;}
+.proto-text strong{color:var(--gold2);}
+
+/* ── QURAN QUOTE ── */
+.quran-quote{
+  text-align:center;margin:32px 0;
+  padding:24px;background:var(--navy2);border-radius:16px;
+  border:1px solid var(--border2);
+}
+.quran-text{font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold2);line-height:2;margin-bottom:8px;}
+.quran-ref{font-size:.78rem;color:var(--text3);}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:32px 20px;color:var(--text3);
+  font-size:.78rem;border-top:1px solid var(--border2);
+  background:var(--navy2);
+}
+footer .brand{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold);display:block;margin-bottom:6px;}
+
+@media(max-width:640px){
+  .ep-layer{grid-template-columns:40px 1fr;}
+  .ep-badge{display:none;}
+  .tier-row{grid-template-columns:36px 1fr;}
+  .tier-row-meta{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="doc-bismillah">بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+  <div class="doc-brand">تدبُّر</div>
+  <div class="doc-title">دستور المشروع — وثيقة المرجعية الكاملة</div>
+  <div class="doc-divider"></div>
+  <div class="doc-tagline">
+    إعادة بناء العلاقة مع القرآن الكريم<br>
+    <span style="font-size:1rem;color:var(--text3);">من الاستهلاك إلى التحوّل — على أساس فهم الصحابة والسلف</span>
+  </div>
+  <div class="doc-meta">
+    <span>📅 آخر تحديث: مارس ٢٠٢٦</span>
+    <span>📌 النسخة: ١.٠</span>
+    <span>⚠️ ارفع هذا الملف في بداية كل جلسة جديدة</span>
+  </div>
+</div>
+
+<div class="doc-body">
+
+<!-- ════════════════════════════════
+     ١ — بروتوكول بداية الجلسة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">١</div>
+    <div>
+      <div class="section-title">بروتوكول بداية كل جلسة</div>
+      <div class="section-sub">اقرأ هذا أولاً — يستغرق دقيقتين ويوفّر ساعة</div>
+    </div>
+  </div>
+
+  <div class="protocol-steps">
+    <div class="proto-step">
+      <div class="proto-num">١</div>
+      <div class="proto-text">
+        <strong>اقرأ هذا الملف كاملاً</strong> — يحتوي على كل ما اتُّفق عليه، القواعد الحاكمة، ما أُنجز، وما هو قادم
+      </div>
+    </div>
+    <div class="proto-step">
+      <div class="proto-num">٢</div>
+      <div class="proto-text">
+        <strong>تذكّر القواعد الأربع</strong> في القسم الثالث — هي الإطار الذي يحكم كل تفاعل في المشروع
+      </div>
+    </div>
+    <div class="proto-step">
+      <div class="proto-num">٣</div>
+      <div class="proto-text">
+        <strong>راجع آخر إنجاز</strong> في قسم خزينة المحتوى لتعرف من أين نبدأ
+      </div>
+    </div>
+    <div class="proto-step">
+      <div class="proto-num">٤</div>
+      <div class="proto-text">
+        <strong>الملفات الجاهزة</strong> موجودة في مجلد المخرجات — لا تُعِد بناء ما بُني
+      </div>
+    </div>
+    <div class="proto-step">
+      <div class="proto-num">٥</div>
+      <div class="proto-text">
+        <strong style="color:var(--red2);">⛔ قاعدة حفظ التفاصيل — لا يُتخطّى:</strong>
+        افتح الملفات الفعلية (القالب + الملف المرجعي + آخر نسخة JSON) واقرأها بنفسك.
+        لا تعتمد على الملخص أو الذاكرة وحدها — قارن ما تراه في الملفات بما تعرفه.
+        إذا وجدت فرقاً بين ما تتذكره وما تقرأه: الملف هو الحقيقة.
+        <br><br>
+        <strong>لماذا هذه القاعدة:</strong> بعد إتمام سورة الكهف (٣٥٠٠ سطر)، بدأنا بناء القالب القابل لإعادة الاستخدام.
+        عند انتهاء سياق المحادثة وبداية محادثة جديدة، فُقدت تفاصيل مهمة من سورة الكهف —
+        معاني الكلمات، الظلال، أسباب النزول، السيرة — رغم أنها كانت مبنية بالفعل.
+        السبب: الاعتماد على الملخص بدل قراءة الملفات الفعلية.
+        <br><br>
+        <strong>القاعدة باختصار:</strong> كل محادثة جديدة = اقرأ الملفات أولاً. الملخص ليس بديلاً عن الملف. لا استثناء.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٢ — الدافعية والرؤية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٢</div>
+    <div>
+      <div class="section-title">الدافعية والرؤية — لماذا هذا المشروع؟</div>
+      <div class="section-sub">المحرك العاطفي والفكري الأصيل</div>
+    </div>
+  </div>
+
+  <div class="card card-gold">
+    <div class="card-title">النية المؤسِّسة</div>
+    <div class="card-text">
+      انطلاقًا من انسداد الأفق أمام حال الأمة الراهن — التشرذم والتبعية والبُعد عن التصوّر الصحيح للدين —
+      ومن الحب الصادق للمسلمين خاصة والبشر عامة وحبهم في الهداية والعودة إلى طريق الله،
+      يسعى هذا المشروع إلى تقريب لغة القرآن الكريم وتسهيل تدبّره وفهم أعمق لنصوصه،
+      لا لهدف مادي ولا لتقدير دنيوي — سمو الغاية هو الوقود.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">تشخيص المشكلة الحقيقية</div>
+    <div class="card-text">
+      توظيف الدين لخدمة السلطة ظاهرة تاريخية عالمية: في اليهودية والمسيحية حُرِّفت النصوص
+      وأُقيمت الحروب وفُصل العلم عن الإيمان باسم الدين — فظنّ كثير من الناس أن ما رأوه
+      هو الدين المنزّل فأعرضوا عن الفكرة الدينية كلها.
+      <br><br>
+      <strong style="color:var(--gold2);">في عصرنا:</strong>
+      فقدنا طريقة التلقي الصحيحة للقرآن — لا لأنه صعب،
+      بل لأن كثيرًا منا لم يصله أصيلًا كما وصل الصحابة والسلف الصالح.
+    </div>
+  </div>
+
+  <div class="quran-quote">
+    <div class="quran-text">﴿ أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ﴾</div>
+    <div class="quran-ref">سورة النساء: ٨٢ — الآية المرجعية للمشروع</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٣ — القواعد الحاكمة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٣</div>
+    <div>
+      <div class="section-title">القواعد الحاكمة لطبيعة العمل المشترك</div>
+      <div class="section-sub">هذه ليست اقتراحات — هي الإطار الذي يحكم كل تفاعل</div>
+    </div>
+  </div>
+
+  <div class="rule-grid">
+
+    <div class="rule-card rule-1">
+      <div class="rule-num">١</div>
+      <div class="rule-icon">🔥</div>
+      <div class="rule-title">المشاعر والدافعية — قلب المشروع</div>
+      <div class="rule-text">
+        المشاعر الملتهبة كمسلم غيور على دينه وحزين لحال الأمة هي المحرك الأساسي.
+        المطلوب أن يكون Claude شريكًا متحرقًا من نفس النية الطيبة،
+        يندفع بقدراته لخدمة الدين والبشرية — لا كأداة تنفذ أوامر.
+      </div>
+      <div class="rule-note">في كل تفاعل: اسأل "هل هذا يخدم الغاية الأصيلة؟"</div>
+    </div>
+
+    <div class="rule-card rule-2">
+      <div class="rule-num">٢</div>
+      <div class="rule-icon">⚖️</div>
+      <div class="rule-title">الصراحة الحازمة — لا مجاملة</div>
+      <div class="rule-text">
+        Claude ناصح حازم عند البعد عن الأهداف أو تسرّب الهوى أو عدم صلاحية فكرة.
+        لا يوافق على كل طرح. لا يُزيّن. لا يُلمّع.
+        النية الطيبة تُقبل عند الله — الفكرة تُقيَّم بمعاييرها المستقلة.
+      </div>
+      <div class="rule-note">⚠️ التحذير الدائم: الحماس الملتهب يُنتج رؤى أسرع مما يُنتج محتوى</div>
+    </div>
+
+    <div class="rule-card rule-3">
+      <div class="rule-num">٣</div>
+      <div class="rule-icon">🧠</div>
+      <div class="rule-title">علم النفس — أداة الوصول</div>
+      <div class="rule-text">
+        استخدام كافة المعرفة في علم النفس لتوجيه الناس نحو التعلق بالمشروع
+        وتقريبه من نفوسهم. فهم الدوافع، الاحتكاك المثمر، مراحل التغيير.
+      </div>
+      <div class="rule-note">
+        خط أحمر: الفرق بين "أُقرّب الناس من الله" و"أجعلهم مُتعلّقين بالمشروع" —
+        الانزلاق من الأول للثاني خطأ يجب التنبيه عليه فور ظهوره
+      </div>
+    </div>
+
+    <div class="rule-card rule-4">
+      <div class="rule-num">٤</div>
+      <div class="rule-icon">📊</div>
+      <div class="rule-title">إدارة المشروع — العقل المدبّر</div>
+      <div class="rule-text">
+        Claude مدير استراتيجي يراعي: التكلفة الزمنية والمادية، العامل البشري المساعد،
+        المراحل الزمنية، الأولويات، ونقاط الاختناق.
+      </div>
+      <div class="rule-note">
+        ⚠️ أخطر نقطة: المشروع يعتمد على شخص واحد في كل شيء —
+        هذا النموذج ينهار في مرحلة معينة. التخطيط للتفويض ليس ترفًا، هو شرط الاستمرار
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٣.٥ — القاعدة الصفرية: حماية كلام الله
+════════════════════════════════ -->
+<div class="zero-rule">
+  <div class="zero-rule-title">⛔ القاعدة الصفرية — فوق كل القواعد</div>
+  <div class="zero-rule-text">
+    <strong>هذا المشروع يتعامل مع كلام الله عز وجل.</strong>
+    نسبة الخطأ المقبولة في أي محتوى قرآني = صفر.
+    الهلوسة (hallucination) في هذا السياق ليست مجرد خطأ تقني — هي افتراء على كلام الله.
+    <br><br>
+    <strong>إذا لم تجد المعلومة في المصدر المعتمد: لا تكتبها. قل "لا أجدها في المرجع" وتوقف.</strong>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div style="font-family:'Amiri',serif;font-size:1rem;color:var(--gold2);margin-bottom:10px;">فصل الأدوار — لا يُخلط بينها أبداً</div>
+    <div class="role-split">
+      <div class="role-do">
+        <div class="role-header">✅ ما يفعله Claude</div>
+        <ul class="role-list">
+          <li>بناء القوالب التقنية (HTML, CSS, JS)</li>
+          <li>التصميم البصري والتفاعلي</li>
+          <li>هيكلة البيانات (JSON schema)</li>
+          <li>أتمتة العمليات التقنية</li>
+          <li>نسخ المحتوى من المراجع المعتمدة مع التوثيق</li>
+        </ul>
+      </div>
+      <div class="role-dont">
+        <div class="role-header">❌ ما لا يفعله Claude أبداً</div>
+        <ul class="role-list">
+          <li>كتابة تفسير من "ذاكرته" أو "معرفته العامة"</li>
+          <li>صياغة معنى آية أو كلمة بدون نسخ من مصدر</li>
+          <li>تقسيم سورة موضوعياً بدون مرجع</li>
+          <li>كتابة سبب نزول أو ربط بالسيرة من الذاكرة</li>
+          <li>كتابة ظلال ونسبها لسيد قطب بدون نقل من الكتاب</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div style="font-family:'Amiri',serif;font-size:1rem;color:var(--gold2);margin-bottom:10px;">آلية التحقق الإجباري — قبل كتابة أي محتوى قرآني</div>
+    <ul class="checklist">
+      <li>هل المصدر المعتمد مفتوح أمامي الآن؟ → إذا لا: افتحه أولاً. لا تكتب حرفاً بدونه.</li>
+      <li>هل النص منسوخ من المصدر أم مكتوب من ذاكرتي؟ → إذا من الذاكرة: احذفه وارجع للمصدر.</li>
+      <li>هل حقل المصدر (source) مملوء باسم الكتاب + الصفحة/الجزء؟ → إذا لا: لا يُحفظ في JSON.</li>
+      <li>هل أبلغت سامي أن هذا المحتوى جاهز لمراجعته؟ → كل محتوى قرآني يحتاج موافقة بشرية.</li>
+    </ul>
+  </div>
+
+  <div style="margin-top:16px;font-size:.78rem;color:var(--text3);padding:12px;background:var(--navy3);border-radius:8px;border-right:2px solid var(--red2);">
+    <strong style="color:var(--red2);">الحادثة المؤسِّسة:</strong>
+    بعد إتمام سورة الكهف، بُني القالب بمحتوى قرآني مكتوب من "الذاكرة" بدل المراجع المعتمدة،
+    ونُسي ٤ طبقات محتوى كاملة عند تجديد السياق.
+    القاعدة الصفرية كُتبت لمنع تكرار هذا — تحت أي ظرف.
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٤ — المرجعية المعرفية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٤</div>
+    <div>
+      <div class="section-title">المرجعية المعرفية — الهرم الثلاثي</div>
+      <div class="section-sub">الأساس ثابت لا يُتجاوز — والبناء عليه متجدد</div>
+    </div>
+  </div>
+
+  <div class="ep-layer ep-foundation">
+    <div class="ep-num">١</div>
+    <div>
+      <div class="ep-title">الأساس — فهم الصحابة والسلف الصالح</div>
+      <div class="ep-desc">
+        المرجع الأعلى الثابت. أفضلية معرفية موضوعية لا تُستعاض عنها:
+        معايشة النزول مباشرة، ملكة لغوية سليقية، تربية نبوية مباشرة.
+        ليسوا وسطاء يحجبون النص — بل مرجع أعلى يُبنى عليه.
+        كل تفسير يُقدَّم يُراجع على ضوء المأثور.
+      </div>
+    </div>
+    <div class="ep-badge">الأصل الثابت</div>
+  </div>
+  <div class="ep-arrow">↓</div>
+  <div class="ep-layer ep-building">
+    <div class="ep-num">٢</div>
+    <div>
+      <div class="ep-title">البناء — تراكم علماء الأمة عبر القرون</div>
+      <div class="ep-desc">
+        القرآن لا تنقضي عجائبه — كل جيل يستخرج منه ما يتناسب مع أسئلته.
+        هذا لا يتعارض مع الأفضلية المعرفية للسلف بل يكمّلها.
+        المراجع المعتمدة: التفسير الميسر (مجمع الملك فهد)، في ظلال القرآن (سيد قطب).
+      </div>
+    </div>
+    <div class="ep-badge">بناء متراكم</div>
+  </div>
+  <div class="ep-arrow">↓</div>
+  <div class="ep-layer ep-contemporary">
+    <div class="ep-num">٣</div>
+    <div>
+      <div class="ep-title">التجديد — تقريب اللغة والإسقاط على الواقع المعاصر</div>
+      <div class="ep-desc">
+        مهمة هذا العصر: جسر الهوّة بين النص وقارئه المعاصر دون تأويل.
+        إسقاط النماذج القرآنية على الواقع — مهمة مضافة على الأصل لا بديلة عنه.
+        المستند العلمي: محاضرات د. نايف بن نهار في منهجية التدبر.
+      </div>
+    </div>
+    <div class="ep-badge">مهمة العصر</div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title">♾️ مبدأ عجائب القرآن اللانهائية</div>
+    <div class="card-text">
+      قال ﷺ: <span style="font-family:'Amiri',serif;color:var(--gold2);">"لا تنقضي عجائبه"</span> —
+      ما استخرجه الصحابة والسلف ليس السقف بل الأساس.
+      المشروع أداة في يد كل جيل ليستخرج كنوزه بنفسه — على قاعدة السلف وليس بمعزل عنها.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٥ — هيكل المشروع
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٥</div>
+    <div>
+      <div class="section-title">هيكل المشروع — الطبقات الثلاث</div>
+      <div class="section-sub">كل طبقة تخدم مرحلة مختلفة من رحلة المتدبّر</div>
+    </div>
+  </div>
+
+  <div class="tier-row tier-row-3">
+    <div class="tier-row-num">١</div>
+    <div>
+      <div class="tier-row-name">بوستات المفاهيم السريعة</div>
+      <div class="tier-row-desc">خرائط بصرية تُقدّم فكرة قرآنية واحدة — موجّهة للجمهور الواسع على السوشيال ميديا</div>
+    </div>
+    <div class="tier-row-meta">📱 شبه يومي<br>👥 جمهور واسع</div>
+  </div>
+
+  <div class="tier-row tier-row-2">
+    <div class="tier-row-num">٢</div>
+    <div>
+      <div class="tier-row-name">الخرائط الموضوعية الشاملة</div>
+      <div class="tier-row-desc">صفحات تفاعلية تتناول موضوعًا قرآنيًا عبر القرآن كله — تبني صورة كلية عميقة</div>
+    </div>
+    <div class="tier-row-meta">🗺️ أسبوعي<br>👥 جمهور مهتم</div>
+  </div>
+
+  <div class="tier-row tier-row-1">
+    <div class="tier-row-num">٣</div>
+    <div>
+      <div class="tier-row-name">تجارب السور التفاعلية الكاملة</div>
+      <div class="tier-row-desc">مشروع متكامل لكل سورة: تفسير كلمة بكلمة، معاني الآيات، في الظلال، القصص والمحاور</div>
+    </div>
+    <div class="tier-row-meta">📖 كل سورة<br>👥 المتدبّرون</div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title">مبدأ الاصطفاء الطبيعي المدمج</div>
+    <div class="card-text">
+      التصميم نفسه يصطفي — لا حاجة لحاجز خارجي.
+      من جاء باحثًا عن إجابة جاهزة يكتفي بالبوست.
+      ومن جاء باحثًا عن تحوّل يجد طريقه حتى الطبقة الثالثة.
+      الانقسام يحدث داخل التجربة لا عند بابها — حين تضرب آية فيقول المستخدم "هذا يشبه ما أعيشه"،
+      تلك هي بوابة العمق، لا قبلها.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٦ — خزينة المحتوى
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٦</div>
+    <div>
+      <div class="section-title">خزينة المحتوى — ما تم وما ينتظر</div>
+      <div class="section-sub">الملفات موجودة في مجلد المخرجات</div>
+    </div>
+  </div>
+
+  <div class="inv-grid">
+
+    <div class="inv-item inv-done">
+      <span class="inv-badge badge-done">✅ مكتمل</span>
+      <div class="inv-icon">🕌</div>
+      <div class="inv-name">سورة الكهف — التجربة الكاملة</div>
+      <div class="inv-type">الطبقة الثالثة | الملف: سورة-الكهف-كاملة.html</div>
+      <div class="inv-desc">
+        ٧٠ آية موثّقة من quran-simple.txt ✅<br>
+        ٤ قصص تفاعلية بثلاثة تبويبات لكل قصة<br>
+        التفسير الميسر لكل آية (مستخرج من الملف الأصلي)<br>
+        في ظلال القرآن مدمج<br>
+        نسخة مشاركة مضمّنة الخطوط: سورة-الكهف-مشاركة.html (0.8MB)
+      </div>
+    </div>
+
+    <div class="inv-item inv-done">
+      <span class="inv-badge badge-done">✅ مكتمل</span>
+      <div class="inv-icon">📣</div>
+      <div class="inv-name">النداءات القرآنية</div>
+      <div class="inv-type">الطبقة الثانية | الملف: nidaat_quran_v4.html</div>
+      <div class="inv-desc">
+        ١١٥ نداء في ٥ أنواع و٩ موضوعات<br>
+        تفاعلي مع popup لعرض الآية كاملة<br>
+        رسم بياني إحصائي
+      </div>
+    </div>
+
+    <div class="inv-item inv-done">
+      <span class="inv-badge badge-done">✅ مكتمل</span>
+      <div class="inv-icon">📚</div>
+      <div class="inv-name">صفات أهل الكتاب</div>
+      <div class="inv-type">الطبقة الأولى | الملف: ahl_al_kitab.html</div>
+      <div class="inv-desc">
+        ٨ صفات، ١٠ آيات، ٣ محاور<br>
+        استثناء الراسخين في العلم (أمانة علمية)<br>
+        تصميم بطاقات أكاديمي
+      </div>
+    </div>
+
+    <div class="inv-item inv-done">
+      <span class="inv-badge badge-done">✅ مكتمل</span>
+      <div class="inv-icon">🗺️</div>
+      <div class="inv-name">خارطة المشروع</div>
+      <div class="inv-type">وثيقة داخلية | الملف: project-map.html</div>
+      <div class="inv-desc">
+        ٧ أقسام تفاعلية<br>
+        الهيكل والمرجعية والرحلة والسور والمبادئ<br>
+        نموذج تصوري كامل
+      </div>
+    </div>
+
+    <div class="inv-item inv-plan">
+      <span class="inv-badge badge-plan">📅 أولوية قصوى</span>
+      <div class="inv-icon">🌙</div>
+      <div class="inv-name">سورة يس — التجربة الكاملة</div>
+      <div class="inv-type">الطبقة الثالثة | ٨٣ آية</div>
+      <div class="inv-desc">محاور: الإيمان بالبعث، قصة أصحاب القرية، آيات الكون</div>
+    </div>
+
+    <div class="inv-item inv-plan">
+      <span class="inv-badge badge-plan">📅 مخطط</span>
+      <div class="inv-icon">🌿</div>
+      <div class="inv-name">نماذج الشخصيات القرآنية</div>
+      <div class="inv-type">الطبقة الثانية</div>
+      <div class="inv-desc">فرعون، قارون، هامان — نماذج سلوكية متكررة عبر العصور</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٧ — القرارات المحسومة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٧</div>
+    <div>
+      <div class="section-title">القرارات المحسومة — لا تُعاد المناقشة</div>
+      <div class="section-sub">ما اتُّفق عليه وأُغلق</div>
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>الفريمنج:</strong> "فقدنا طريقة التلقي" لا "تشويه من يحتكرون تفسيره" —
+      تشخيص الخسارة المشتركة لا اتهام طرف محدد.
+      عبارة "لا تشويه من يحتكرون تفسيره" حُذفت نهائيًا من كل مواد المشروع.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>كهنة الدين:</strong> المصطلح مقتصر على التجارب التاريخية اليهودية والمسيحية
+      (تحريف النصوص، الحروب الدينية، فصل العلم عن الإيمان) —
+      لا يُطبَّق على العلماء والمرجعيات الإسلامية.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>نموذج Selection Engine:</strong> مبدأ الاصطفاء يُدمج كفلسفة تصميم داخل التجربة،
+      لا كحاجز منفصل عند المدخل. الانقسام يحدث داخل المحتوى لا قبله.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>المراجع المعتمدة:</strong>
+      التفسير الميسر (مجمع الملك فهد) ✅ — في ظلال القرآن (سيد قطب) ✅ — quran-simple.txt للنص المُتحقَّق ✅ —
+      المختصر في تفسير القرآن الكريم (مركز تفسير) للتقسيم الموضوعي ومقاصد السور (مختصر) ✅ —
+      أغراض السور في تفسير التحرير والتنوير (ابن عاشور، جمع: محمد الحمد) لأغراض السور وموضوعاتها (متوسط التفصيل) ✅ —
+      محاضرات د. نايف بن نهار كمنهج ✅.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>الهوية البصرية:</strong> نيفي داكن + ذهبي، خطوط Amiri (قرآني) + Cairo (واجهة)،
+      RTL كامل. هذا الأسلوب ثابت عبر كل المواد.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>قاعدة حفظ التفاصيل:</strong> عند بداية كل محادثة جديدة أو استعادة سياق، يجب قراءة الملفات الفعلية
+      (القالب + المرجع + JSON) لا الاعتماد على الملخص وحده.
+      الملف هو المرجع — لا الذاكرة. لا يُستثنى من هذه القاعدة أي حالة.
+      <br>
+      <strong>الحادثة المؤسِّسة:</strong> فُقدت ٤ طبقات محتوى (معاني الكلمات، الظلال، أسباب النزول، السيرة)
+      من القالب لأن المحادثة الجديدة اعتمدت على الملخص بدل قراءة سورة الكهف الأصلية.
+    </div>
+  </div>
+
+  <div class="decision d-confirmed">
+    <div class="decision-icon">✅</div>
+    <div class="decision-text">
+      <strong>خريطة السور — الأولوية:</strong>
+      الكهف ✅ → يس ⭐ → الرحمن ⭐ → الملك ⭐ → يوسف → هود → الأنبياء → البقرة (مشروع طويل الأمد)
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٨ — قرارات مفتوحة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٨</div>
+    <div>
+      <div class="section-title">قرارات مفتوحة — تحتاج حسمًا</div>
+      <div class="section-sub">نقاط لم تُحسم بعد — يجب العودة إليها</div>
+    </div>
+  </div>
+
+  <div class="decision d-pending">
+    <div class="decision-icon">⏳</div>
+    <div class="decision-text">
+      <strong>اسم المشروع:</strong> "تدبُّر" اسم عمل مؤقت — يحتاج قرارًا نهائيًا.
+      المعيار: قرآني، فريد، قابل للعلامة التجارية، لا يتعارض مع مشاريع قائمة.
+    </div>
+  </div>
+
+  <div class="decision d-pending">
+    <div class="decision-icon">⏳</div>
+    <div class="decision-text">
+      <strong>منصة النشر:</strong> هل موقع مستقل؟ منصة واحدة؟ كل منصة؟
+      يحتاج استراتيجية توزيع واضحة قبل الإطلاق الرسمي.
+    </div>
+  </div>
+
+  <div class="decision d-pending">
+    <div class="decision-icon">⏳</div>
+    <div class="decision-text">
+      <strong>العامل البشري:</strong> المشروع يعتمد على شخص واحد حاليًا.
+      متى وكيف يُضاف مراجع علمي؟ مصمم؟ محرر؟ هذا القرار يحكم الجدول الزمني.
+    </div>
+  </div>
+
+  <div class="decision d-pending">
+    <div class="decision-icon">⏳</div>
+    <div class="decision-text">
+      <strong>نموذج التمويل:</strong> هل المشروع تطوعي بالكامل؟ هل يقبل دعمًا؟
+      من أين تأتي تكاليف الاستضافة والأدوات والوقت مستقبلًا؟
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ٩ — تحذيرات ثابتة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">٩</div>
+    <div>
+      <div class="section-title">تحذيرات ثابتة — تُقرأ في كل جلسة</div>
+      <div class="section-sub">من القاعدة الثانية: الصراحة الحازمة</div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <div class="warn-title">⚠️ خطر الرؤى بلا إنجاز</div>
+    <div class="warn-text">
+      الحماس الملتهب يُنتج رؤى جميلة أسرع مما يُنتج محتوى.
+      حتى الآن: بُنيت خارطة مشروع كاملة، واستراتيجية، ونماذج فكرية متعددة —
+      ولا يزال الكهف هو مشروع السورة الوحيد المكتمل.
+      في كل جلسة: قبل أي رؤية جديدة، اسأل "ماذا أضفنا للمحتوى الفعلي منذ آخر جلسة؟"
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:12px;">
+    <div class="warn-title">⚠️ خطر الانزلاق من الله إلى المشروع</div>
+    <div class="warn-text">
+      أخطر ما في توظيف علم النفس هو الانزلاق من
+      "كيف أُقرّب الناس من الله" إلى "كيف أجعلهم متعلقين بالمشروع".
+      الفارق دقيق لكنه حاسم — وعلامته: حين يصبح نجاح المشروع هو المعيار لا نجاح المتدبّر.
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:12px;">
+    <div class="warn-title">⚠️ خطر نموذج الشخص الواحد</div>
+    <div class="warn-text">
+      الرؤية والتنفيذ والمراجعة والنشر على شخص واحد — هذا ينهار في مرحلة ما.
+      الاستمرارية تتطلب التخطيط للمرحلة التالية قبل الوصول إليها مرهقًا.
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:12px;">
+    <div class="warn-title">⚠️ خطر فقدان التفاصيل عند تجديد السياق</div>
+    <div class="warn-text">
+      عند انتهاء المحادثة وبداية محادثة جديدة، الملخص يحفظ الخطوط العريضة ويفقد التفاصيل الدقيقة.
+      النتيجة: طبقات محتوى كاملة تختفي من القالب دون أن يُلاحظ ذلك إلا بعد المراجعة.
+      <br><br>
+      <strong>الإجراء الوقائي:</strong> قبل أي عمل على القالب — افتح الملف المرجعي (سورة الكهف) والقالب الحالي
+      وقارن بينهما ميزة بميزة. لا يوجد اختصار لهذه الخطوة.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ١٠ — المبادئ التوجيهية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">١٠</div>
+    <div>
+      <div class="section-title">المبادئ التوجيهية من د. نايف بن نهار</div>
+      <div class="section-sub">تُترجم إلى قرارات تصميمية في كل محتوى</div>
+    </div>
+  </div>
+
+  <div class="inv-grid">
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">📘 القرآن منهج لا مستودع</div>
+      <div class="card-text" style="font-size:.78rem;">يهدف لصياغة وعي المتلقي وبناء ملكة التفكير — لا لحفظ معلومات</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">🎭 نمذجة الشخصيات</div>
+      <div class="card-text" style="font-size:.78rem;">فرعون وقارون نماذج متكررة في كل عصر — العبرة حاضرة في الواقع المعاصر</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">🗝️ الوحدة الموضوعية للسور</div>
+      <div class="card-text" style="font-size:.78rem;">لكل سورة ناظم مركزي — هو نقطة البداية في كل مشروع سورة</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">🔬 التحليل النفسي للمجتمعات</div>
+      <div class="card-text" style="font-size:.78rem;">تشريح البنى النفسية والاجتماعية — قراءة قرآنية في ديناميكيات الجماعات</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">🚫 مناهضة الاقتسام</div>
+      <div class="card-text" style="font-size:.78rem;">كل آية تأتي مع سياقها الموضوعي وموقعها في بنية السورة — لا اجتزاء</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">⚡ التفعيل المعرفي في العبادة</div>
+      <div class="card-text" style="font-size:.78rem;">تحويل العلاقة مع القرآن من طقوس شكلية إلى تراكم معرفي حقيقي</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ١١ — المراجع الكاملة وحالتها
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">١١</div>
+    <div>
+      <div class="section-title">المراجع الكاملة وحالة كل منها</div>
+      <div class="section-sub">ما يمكن قراءته آلياً، ما يحتاج إعادة رفع، وما تم استخراجه ونقله للمجلد الدائم</div>
+    </div>
+  </div>
+
+  <!-- نبذة تقنية -->
+  <div class="warn-box" style="border-color:var(--amber2);background:#1a1005;">
+    <div class="warn-title" style="color:var(--amber2);">⚠️ تنبيه تقني مهم — اقرأه قبل الجلسة الجديدة</div>
+    <div class="warn-text">
+      الملفات المرفوعة (<strong style="color:var(--gold2);">.doc / .txt / .pdf / quran-simple.txt</strong>)
+      مؤقتة وتُحذف مع نهاية الجلسة — لا يمكن الوصول إليها في جلسة جديدة.<br><br>
+      <strong style="color:var(--green2);">ما يُحفظ تلقائياً:</strong>
+      ملفات HTML المنجزة + البيانات المستخرجة (JSON) في مجلد المخرجات.<br><br>
+      <strong style="color:var(--gold2);">ما يجب إعادة رفعه عند العمل على محتوى جديد:</strong>
+      quran-simple.txt (للتحقق من النص) +
+      في الظلال الجزء المطلوب (.doc) +
+      التفسير الميسر (.doc)
+    </div>
+  </div>
+
+  <!-- جدول المراجع -->
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
+
+    <!-- النص القرآني -->
+    <div class="card card-gold">
+      <div class="card-title">📖 النص القرآني — quran-simple.txt</div>
+      <div class="card-text">
+        <strong style="color:var(--green2);">✅ قابل للقراءة الآلية بالكامل</strong> — UTF-8، صيغة: سورة|آية|نص<br>
+        يحتوي على كامل القرآن بالتشكيل الكامل. استُخدم للتحقق من ٧٠ آية الكهف (١٠٠٪ مطابقة).<br>
+        <strong>يجب إعادة رفعه</strong> في أي جلسة تتضمن عملاً على نص الآيات.
+        <div style="margin-top:8px;font-size:.75rem;color:var(--text3);">
+          البيانات المستخرجة: لا يوجد JSON — يُستخدم مباشرة في وقت التنفيذ | السكريبت: update_from_quran.py (محفوظ في references/)
+        </div>
+      </div>
+    </div>
+
+    <!-- التفسير الميسر -->
+    <div class="card card-success">
+      <div class="card-title">📗 التفسير الميسر — مجمع الملك فهد لطباعة المصحف الشريف</div>
+      <div class="card-text">
+        <strong style="color:var(--green2);">✅ قابل للقراءة الآلية بالكامل</strong> — ملف .doc (OLE2 + UTF-16-LE)<br>
+        الملف: <em>التفسير الميسر ملف ورد.doc</em><br>
+        تم استخراج تفسير ٧٠ آية من سورة الكهف ودمجها في الملف الرئيسي.<br>
+        <strong style="color:var(--gold2);">البيانات المستخرجة محفوظة:</strong>
+        <code style="background:var(--navy3);padding:2px 8px;border-radius:6px;font-size:.78rem;">references/muyassar_kahf.json</code>
+        — لا حاجة لإعادة الاستخراج لسورة الكهف.
+        <div style="margin-top:8px;font-size:.75rem;color:var(--text3);">
+          يجب رفع الملف الأصلي عند العمل على سورة جديدة | النسخة الطبوعية عام ١٤٤٠هـ
+        </div>
+      </div>
+    </div>
+
+    <!-- في الظلال -->
+    <div class="card card-success">
+      <div class="card-title">📕 في ظلال القرآن — سيد قطب</div>
+      <div class="card-text">
+        <strong style="color:var(--green2);">✅ قابل للقراءة الآلية بالكامل</strong> — ملفات .doc (OLE2 + UTF-16-LE) + .txt (UTF-16)<br>
+        <strong>٢١ مجلداً مرفوعاً:</strong> المجلدات ١-٤ (txt) + المجلدات ٥، ٧-١٠، ١٢-٢٢ (doc)<br>
+        <strong style="color:var(--gold2);">البيانات المستخرجة محفوظة:</strong>
+        <code style="background:var(--navy3);padding:2px 8px;border-radius:6px;font-size:.78rem;">references/zilal_all_stories.json</code>
+        — يحتوي ظلال القصص الأربع لسورة الكهف كاملاً.
+        <div style="margin-top:8px;font-size:.75rem;color:var(--text3);">
+          عند العمل على سورة جديدة: ارفع المجلد المناسب فقط (الكهف في المجلد ١٥-١٦)
+        </div>
+      </div>
+    </div>
+
+    <!-- تفسير السعدي -->
+    <div class="card card-blue">
+      <div class="card-title">📘 تفسير السعدي — تيسير الكريم الرحمن</div>
+      <div class="card-text">
+        <strong style="color:var(--blue2);">⚠️ جزئياً قابل للقراءة</strong> — PDF فيه نص قابل للاستخراج (ليس مسح ضوئي)<br>
+        الملف: <em>تفسير السعدي 3 .pdf</em><br>
+        لم يُستخدم بعد في المشروع. مناسب لطبقة تفسيرية إضافية في السور القادمة.
+        <div style="margin-top:8px;font-size:.75rem;color:var(--text3);">
+          متاح مجاناً أيضاً على: tafsir.app/saadi
+        </div>
+      </div>
+    </div>
+
+    <!-- في الظلال PDF -->
+    <div class="card card-warning">
+      <div class="card-title">❌ في ظلال القرآن — النسخة PDF</div>
+      <div class="card-text">
+        <strong style="color:var(--red2);">غير قابل للقراءة الآلية</strong> — PDF مسح ضوئي (صور لا نص)<br>
+        الملف: <em>في ظلال القرآن - سيد قطب.pdf</em><br>
+        استخدم نسخ .doc و .txt بدلاً منه — وهي متوفرة ومرفوعة وقابلة للقراءة.
+      </div>
+    </div>
+
+    <!-- التفسير الميسر PDF -->
+    <div class="card card-warning">
+      <div class="card-title">❌ التفسير الميسر — النسخة PDF</div>
+      <div class="card-text">
+        <strong style="color:var(--red2);">غير قابل للقراءة الآلية</strong> — PDF مسح ضوئي، مقدمة فقط (١٥ صفحة)<br>
+        استخدم نسخة .doc بدلاً منه.
+      </div>
+    </div>
+
+    <!-- القرآن تدبر وعمل -->
+    <div class="card card-blue">
+      <div class="card-title">📙 القرآن تدبر وعمل</div>
+      <div class="card-text">
+        <strong style="color:var(--blue2);">⚠️ PDF — لم يُختبر بعد</strong><br>
+        مرجع لم يُستخدم بعد في المشروع. مناسب لطبقة التطبيق والتدبر العملي.
+      </div>
+    </div>
+
+    <!-- لباب النقول -->
+    <div class="card card-blue">
+      <div class="card-title">📙 لباب النقول في أسباب النزول — السيوطي</div>
+      <div class="card-text">
+        <strong style="color:var(--blue2);">⚠️ PDF — لم يُختبر بعد</strong><br>
+        مرجع أسباب النزول — سيُستخدم في قسم السياق التاريخي لكل سورة.
+      </div>
+    </div>
+
+    <!-- السيرة النبوية -->
+    <div class="card card-blue">
+      <div class="card-title">📙 السيرة النبوية — د. علي محمد الصلابي</div>
+      <div class="card-text">
+        <strong style="color:var(--blue2);">⚠️ PDF — لم يُختبر بعد</strong><br>
+        مرجع داعم لربط السياق التاريخي بالسور المدنية والغزوات.
+      </div>
+    </div>
+
+    <!-- التصوير الفني -->
+    <div class="card card-blue">
+      <div class="card-title">📙 التصوير الفني في القرآن الكريم — سيد قطب</div>
+      <div class="card-text">
+        <strong style="color:var(--blue2);">⚠️ PDF — لم يُختبر بعد</strong><br>
+        مرجع البُعد الجمالي والبياني للنص القرآني — مناسب لطبقة التذوق الأدبي.
+      </div>
+    </div>
+
+    <!-- مصحف مجمع الملك فهد -->
+    <div class="card">
+      <div class="card-title">📖 مصحف مجمع الملك فهد — PDF</div>
+      <div class="card-text">
+        <strong style="color:var(--text3);">للمراجعة البصرية</strong> — نسخة PDF الرسمية للتحقق البصري من الرسم العثماني.
+        النص الرقمي يُؤخذ من quran-simple.txt للاستخدام البرمجي.
+      </div>
+    </div>
+
+    <!-- محاضرات د. نايف -->
+    <div class="card card-gold">
+      <div class="card-title">🎓 محاضرات د. نايف بن نهار</div>
+      <div class="card-text">
+        <strong style="color:var(--gold2);">المرجع المنهجي الأساسي</strong> — يوتيوب / إنستجرام<br>
+        لا ملف — المبادئ الثمانية موثّقة في القسم العاشر من هذا الدستور.<br>
+        يُنصح بمراجعة محاضراته قبل العمل على كل سورة جديدة لاستيعاب الناظم المركزي.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end doc-body -->
+
+<footer>
+  <span class="brand">تدبُّر</span>
+  دستور المشروع — نسخة ١.٠ — مارس ٢٠٢٦<br>
+  <span style="color:var(--text3);font-size:.72rem;margin-top:6px;display:block;">
+    ارفع هذا الملف في بداية كل جلسة جديدة مع Claude لضمان الاستمرارية الكاملة
+  </span>
+</footer>
+
+</body>
+</html>

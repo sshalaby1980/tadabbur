@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تدبُّر — تعريف المشروع</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0b1120; --navy2: #111827; --navy3: #1a2538; --navy4: #243047;
+  --gold: #c9a84c; --gold2: #e8c97a; --gold3: #f5e1a0;
+  --green: #2d6a4f; --green2: #52b788;
+  --blue: #1a3e5c; --blue2: #3a7ca5;
+  --text: #f0e6cc; --text2: #c4b48a; --text3: #7a6e5a;
+  --border: #2a2010; --border2: #3a3020;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-bismillah {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--text3);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+.hero-brand {
+  font-family: 'Amiri', serif;
+  font-size: clamp(4rem, 12vw, 7rem);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+.hero-tagline {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--text2);
+  max-width: 600px;
+  line-height: 2;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s forwards;
+}
+.hero-divider {
+  width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 48px;
+  opacity: 0;
+  animation: fadeUp 1s 1s forwards;
+}
+.hero-verse {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--gold2);
+  line-height: 2.2;
+  max-width: 500px;
+  opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+}
+.hero-verse-ref {
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text3);
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s forwards;
+}
+.scroll-hint {
+  position: absolute; bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 1s 1.8s forwards, bounce 2s 2.5s infinite;
+  color: var(--text3); font-size: 0.75rem;
+}
+.scroll-hint span { display: block; font-size: 1.4rem; margin-bottom: 4px; }
+
+/* ── CONTENT ── */
+.content { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 80px;
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.section-label {
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  color: var(--gold2);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.section-text {
+  font-size: 0.92rem;
+  color: var(--text2);
+  line-height: 2.1;
+}
+
+/* ── PROBLEM / SOLUTION CARDS ── */
+.contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 32px 0;
+}
+@media (max-width: 600px) { .contrast-grid { grid-template-columns: 1fr; } }
+
+.contrast-card {
+  border-radius: 16px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.contrast-card::after {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 4px; height: 100%;
+}
+.card-before {
+  background: linear-gradient(135deg, #1a0808, #200e0e);
+  border: 1px solid #3a1515;
+}
+.card-before::after { background: #c0504d; }
+.card-after {
+  background: linear-gradient(135deg, #0a1a10, #0d200f);
+  border: 1px solid #1a3a1f;
+}
+.card-after::after { background: var(--green2); }
+
+.contrast-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+.card-before .contrast-label { color: #c0504d; }
+.card-after .contrast-label { color: var(--green2); }
+
+.contrast-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.card-before .contrast-title { color: #e8a0a0; }
+.card-after .contrast-title { color: var(--green2); }
+
+.contrast-text { font-size: 0.82rem; color: var(--text2); line-height: 1.9; }
+
+/* ── LAYERS (FUNNEL) ── */
+.layers-stack {
+  display: flex; flex-direction: column;
+  gap: 12px; margin: 32px 0;
+}
+.layer {
+  border-radius: 16px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+.layer:hover { transform: translateX(-4px); }
+
+.layer-1 {
+  background: linear-gradient(135deg, #0a1a10, #0d200f);
+  border: 1px solid var(--green);
+}
+.layer-2 {
+  background: linear-gradient(135deg, #0d1a2e, #0f1e33);
+  border: 1px solid var(--blue);
+}
+.layer-3 {
+  background: linear-gradient(135deg, #1a1208, #231a0a);
+  border: 2px solid var(--gold);
+}
+
+.layer-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.layer-1 .layer-icon { background: #0d2815; border: 2px solid var(--green2); }
+.layer-2 .layer-icon { background: #0d2137; border: 2px solid var(--blue2); }
+.layer-3 .layer-icon { background: #2a1f05; border: 2px solid var(--gold); }
+
+.layer-name {
+  font-family: 'Amiri', serif;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+.layer-1 .layer-name { color: var(--green2); }
+.layer-2 .layer-name { color: var(--blue2); }
+.layer-3 .layer-name { color: var(--gold2); }
+
+.layer-desc { font-size: 0.8rem; color: var(--text2); }
+.layer-audience {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+.layer-1 .layer-audience { background: #0d2815; color: var(--green2); border: 1px solid var(--green); }
+.layer-2 .layer-audience { background: #0d2137; color: var(--blue2); border: 1px solid var(--blue); }
+.layer-3 .layer-audience { background: #2a1f05; color: var(--gold); border: 1px solid var(--gold); }
+
+.funnel-arrow {
+  text-align: center;
+  color: var(--text3);
+  font-size: 0.85rem;
+  padding: 2px 0;
+  opacity: 0.5;
+}
+
+/* ── METHODOLOGY ── */
+.method-pyramid {
+  display: flex; flex-direction: column;
+  gap: 6px; margin: 32px 0;
+}
+.pyramid-level {
+  border-radius: 12px;
+  padding: 18px 22px;
+  text-align: center;
+}
+.pyramid-1 {
+  background: linear-gradient(135deg, #1a1005, #2a1a08);
+  border: 2px solid var(--gold);
+}
+.pyramid-2 {
+  background: #0d1e2e;
+  border: 1px solid var(--blue);
+  margin: 0 32px;
+}
+.pyramid-3 {
+  background: #0a1a10;
+  border: 1px solid var(--green);
+  margin: 0 64px;
+}
+@media (max-width: 600px) {
+  .pyramid-2 { margin: 0 16px; }
+  .pyramid-3 { margin: 0 32px; }
+}
+.pyramid-label {
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.pyramid-1 .pyramid-label { color: var(--gold2); }
+.pyramid-2 .pyramid-label { color: var(--blue2); }
+.pyramid-3 .pyramid-label { color: var(--green2); }
+.pyramid-detail { font-size: 0.72rem; color: var(--text3); }
+
+/* ── DONE / STATS ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 32px 0;
+}
+@media (max-width: 600px) { .stats-row { grid-template-columns: 1fr; } }
+.stat-card {
+  background: var(--navy2);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Amiri', serif;
+  font-size: 2.4rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label { font-size: 0.78rem; color: var(--text2); }
+
+/* ── DONE ITEMS ── */
+.done-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+@media (max-width: 600px) { .done-grid { grid-template-columns: 1fr; } }
+.done-item {
+  background: var(--navy2);
+  border: 1px solid var(--green);
+  border-radius: 14px;
+  padding: 18px 20px;
+  position: relative;
+}
+.done-check {
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.7rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.done-name {
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem;
+  color: var(--green2);
+  margin-bottom: 4px;
+}
+.done-desc { font-size: 0.72rem; color: var(--text3); }
+
+/* ── QUOTE BOX ── */
+.quote-box {
+  background: var(--navy2);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 36px 28px;
+  text-align: center;
+  margin: 40px 0;
+  position: relative;
+}
+.quote-box::before {
+  content: '';
+  position: absolute; top: -1px; right: 20%; left: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.quote-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--text);
+  line-height: 2.2;
+  margin-bottom: 12px;
+}
+.quote-text em { color: var(--gold2); font-style: normal; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 48px 24px;
+  border-top: 1px solid var(--border2);
+}
+.footer-brand {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.footer-note { font-size: 0.78rem; color: var(--text3); line-height: 1.8; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+  <div class="hero-brand">تدبُّر</div>
+  <div class="hero-tagline">إعادة بناء العلاقة مع القرآن الكريم<br>من الاستهلاك إلى التحوّل</div>
+  <div class="hero-divider"></div>
+  <div class="hero-verse">﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَا﴾</div>
+  <div class="hero-verse-ref">سورة محمد: ٢٤</div>
+  <div class="scroll-hint">
+    <span>↓</span>
+    تعرّف على المشروع
+  </div>
+</section>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div class="content">
+
+  <!-- ── المشكلة والحل ── -->
+  <div class="section">
+    <div class="section-label">لماذا تدبُّر؟</div>
+    <div class="section-title">فقدنا طريقة التلقّي</div>
+    <div class="section-text">
+      القرآن نزل ليُغيّر حياة الناس — والصحابة تغيّروا به فعلاً. لكن مع الوقت، تحوّلت علاقتنا به من تدبّر وتحوّل إلى قراءة سريعة وبركة فقط. مشروع تدبُّر يحاول استعادة هذه العلاقة.
+    </div>
+
+    <div class="contrast-grid">
+      <div class="contrast-card card-before">
+        <div class="contrast-label">الواقع اليوم</div>
+        <div class="contrast-title">استهلاك</div>
+        <div class="contrast-text">
+          قراءة سريعة بدون وقوف<br>
+          ختمات بالعدد لا بالفهم<br>
+          علاقة موسمية (رمضان)<br>
+          التفسير «للعلماء فقط»
+        </div>
+      </div>
+      <div class="contrast-card card-after">
+        <div class="contrast-label">ما نسعى إليه</div>
+        <div class="contrast-title">تحوّل</div>
+        <div class="contrast-text">
+          وقفة حقيقية مع كل آية<br>
+          فهم يُغيّر السلوك والقلب<br>
+          علاقة يومية مستمرة<br>
+          التدبر حق كل مسلم
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── الطبقات الثلاث ── -->
+  <div class="section">
+    <div class="section-label">كيف نصل؟</div>
+    <div class="section-title">ثلاث طبقات من المحتوى</div>
+    <div class="section-text">
+      كل جزء من القرآن يُقدَّم في ثلاث طبقات — من البسيط للعميق — حتى يجد كل شخص ما يناسبه.
+    </div>
+
+    <div class="layers-stack">
+      <div class="layer layer-1">
+        <div class="layer-icon">💡</div>
+        <div>
+          <div class="layer-name">بوستات سريعة</div>
+          <div class="layer-desc">مفاهيم قرآنية مركّزة — فكرة واحدة في صورة واحدة تلفت الانتباه</div>
+          <div class="layer-audience">الجمهور الواسع</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+      <div class="layer layer-2">
+        <div class="layer-icon">🗺️</div>
+        <div>
+          <div class="layer-name">خرائط موضوعية</div>
+          <div class="layer-desc">خريطة شاملة لموضوع قرآني — تربط الآيات ببعضها وتكشف المعنى الكلّي</div>
+          <div class="layer-audience">الجمهور المهتم</div>
+        </div>
+      </div>
+      <div class="funnel-arrow">↓</div>
+      <div class="layer layer-3">
+        <div class="layer-icon">📖</div>
+        <div>
+          <div class="layer-name">تجربة تدبُّر تفاعلية</div>
+          <div class="layer-desc">تجربة كاملة — آية بآية — مع المعنى والسياق والإسقاط المعاصر وأسباب النزول</div>
+          <div class="layer-audience">المتدبّرون</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── المنهج ── -->
+  <div class="section">
+    <div class="section-label">على أي أساس؟</div>
+    <div class="section-title">منهج التدبر</div>
+    <div class="section-text">
+      لا نخترع تفسيراً جديداً — بل نقرّب ما قاله العلماء بلغة يفهمها الجيل الحالي.
+    </div>
+
+    <div class="method-pyramid">
+      <div class="pyramid-level pyramid-1">
+        <div class="pyramid-label">الأساس — فهم الصحابة والسلف</div>
+        <div class="pyramid-detail">لا يُتجاوز ولا يُخالَف</div>
+      </div>
+      <div class="pyramid-level pyramid-2">
+        <div class="pyramid-label">البناء — تراكم العلماء</div>
+        <div class="pyramid-detail">التفسير الميسر · في ظلال القرآن · تفسير السعدي · لباب النقول</div>
+      </div>
+      <div class="pyramid-level pyramid-3">
+        <div class="pyramid-label">التجديد — تقريب اللغة والإسقاط المعاصر</div>
+        <div class="pyramid-detail">لغة الجيل الحالي · دون تحريف المعنى · مراجعة شرعية لكل كلمة</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── الأرقام ── -->
+  <div class="section">
+    <div class="section-label">الخطة</div>
+    <div class="section-title">القرآن كاملاً في سنة</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">٣٠</div>
+        <div class="stat-label">جزءاً من القرآن</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">١٠</div>
+        <div class="stat-label">أيام لكل جزء</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">٣</div>
+        <div class="stat-label">طبقات لكل جزء</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ما أُنجز ── -->
+  <div class="section">
+    <div class="section-label">أين وصلنا؟</div>
+    <div class="section-title">ما أُنجز حتى الآن</div>
+
+    <div class="done-grid">
+      <div class="done-item">
+        <div class="done-check">✓</div>
+        <div class="done-name">سورة الكهف كاملة</div>
+        <div class="done-desc">٧٠ آية — تجربة تدبر تفاعلية كاملة</div>
+      </div>
+      <div class="done-item">
+        <div class="done-check">✓</div>
+        <div class="done-name">النداءات القرآنية</div>
+        <div class="done-desc">١١٥ نداء — خريطة موضوعية شاملة</div>
+      </div>
+      <div class="done-item">
+        <div class="done-check">✓</div>
+        <div class="done-name">صفات أهل الكتاب</div>
+        <div class="done-desc">بوستات سوشيال ميديا</div>
+      </div>
+      <div class="done-item">
+        <div class="done-check">✓</div>
+        <div class="done-name">دستور المشروع</div>
+        <div class="done-desc">القواعد والمنهج والمرجعية</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── البوصلة ── -->
+  <div class="section">
+    <div class="quote-box">
+      <div class="quote-text">
+        النجاح الحقيقي للمشروع<br>
+        ليس أن يتابعنا الناس…<br>
+        بل أن <em>يفتحوا القرآن لوحدهم ويتدبّروا</em>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <div class="footer-brand">تدبُّر</div>
+  <div class="footer-note">
+    إعادة بناء العلاقة مع القرآن الكريم — من الاستهلاك إلى التحوّل
+    <br>على أساس فهم الصحابة والسلف
+  </div>
+</div>
+
+<!-- ── Scroll Animation ── -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.section').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مشروع تدبُّر</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap');
+
+:root {
+  --navy: #0a0e1a;
+  --navy-light: #121829;
+  --navy-card: #161d30;
+  --gold: #d4a853;
+  --gold-dim: rgba(212,168,83,0.15);
+  --gold-glow: rgba(212,168,83,0.3);
+  --text: #e8e0d4;
+  --text-dim: #8a9bb5;
+  --border: rgba(255,255,255,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+/* ===== Header ===== */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(180deg, #0f1a2e 0%, var(--navy) 100%);
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center top, rgba(212,168,83,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-ayah {
+  font-family: 'Amiri', serif;
+  font-size: 1.6em;
+  color: var(--gold);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 20px var(--gold-glow);
+}
+.hero-ref {
+  font-size: 0.8em;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Amiri', serif;
+  font-size: 3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+.hero-sub {
+  font-size: 1em;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===== Layer Sections ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.layer-section {
+  margin: 50px 0;
+}
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--gold-dim);
+}
+.layer-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+.layer-1 .layer-badge { background: linear-gradient(135deg, #1a5c3a, #2d8a5c); color: #7be8b8; }
+.layer-2 .layer-badge { background: linear-gradient(135deg, #1a3a5c, #1e4d7b); color: #7cb8e8; }
+.layer-3 .layer-badge { background: linear-gradient(135deg, #5c3a1a, #8a5c2d); color: #e8c47b; }
+.layer-tools .layer-badge { background: linear-gradient(135deg, #3a3a3a, #555); color: #bbb; }
+
+.layer-info h2 {
+  font-size: 1.3em;
+  color: var(--gold);
+  font-weight: 700;
+}
+.layer-info p {
+  font-size: 0.85em;
+  color: var(--text-dim);
+}
+
+/* ===== Content Cards ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  border-color: var(--gold-glow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px var(--gold-dim);
+}
+
+.card-type {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.card h3 {
+  font-family: 'Amiri', serif;
+  font-size: 1.3em;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.card .card-desc {
+  font-size: 0.85em;
+  color: var(--text-dim);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+.card .card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.75em;
+  color: var(--text-dim);
+}
+
+/* Placeholder card */
+.card.placeholder {
+  border-style: dashed;
+  border-color: rgba(255,255,255,0.1);
+  opacity: 0.5;
+}
+.card.placeholder:hover {
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+.card.placeholder h3 { color: var(--text-dim); }
+
+/* Tag chips */
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+.tag-html { background: rgba(126,87,194,0.2); color: #b39ddb; }
+.tag-xlsx { background: rgba(76,175,80,0.2); color: #81c784; }
+.tag-interactive { background: rgba(255,152,0,0.2); color: #ffb74d; }
+.tag-soon { background: rgba(255,255,255,0.08); color: #777; }
+
+/* ===== Stats Strip ===== */
+.stats-strip {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 30px 20px;
+  margin: 10px 0 0;
+}
+.stat {
+  text-align: center;
+}
+.stat-val {
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.8em;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: #444;
+  font-size: 0.8em;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2em; }
+  .hero-ayah { font-size: 1.2em; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .stats-strip { gap: 16px; }
+  .stat-val { font-size: 1.6em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-ayah">﴿ أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ﴾</div>
+  <div class="hero-ref">النساء: ٨٢</div>
+  <h1>تدبُّر</h1>
+  <p class="hero-sub">إعادة بناء العلاقة مع القرآن الكريم — من الاستهلاك إلى التحوّل</p>
+
+  <div class="stats-strip">
+    <div class="stat"><div class="stat-val">٣</div><div class="stat-label">تجارب سور كاملة</div></div>
+    <div class="stat"><div class="stat-val">٣</div><div class="stat-label">إنفوجرافات</div></div>
+    <div class="stat"><div class="stat-val">١١٤</div><div class="stat-label">سورة في البحث</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== Layer 3: Full Surah Experiences ===== -->
+  <div class="layer-section layer-3">
+    <div class="layer-header">
+      <div class="layer-badge">٣</div>
+      <div class="layer-info">
+        <h2>تجارب سور تفاعلية كاملة</h2>
+        <p>تدبُّر عميق — آية آية — بالتفسير والظلال والمعاني والربط بالسيرة</p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" href="سورة-الكهف-مشاركة.html">
+        <div class="card-type">تجربة سورة كاملة</div>
+        <h3>سورة الكهف</h3>
+        <div class="card-desc">٧٠ آية — التفسير الميسر + في ظلال القرآن + معاني الكلمات + أسباب النزول + الربط بالسيرة. الفتن الأربع وكيف يواجهها المؤمن.</div>
+        <div class="card-meta">
+          <span class="tag tag-interactive">تفاعلي</span>
+          <span>١١٠ صفحة</span>
+        </div>
+      </a>
+
+      <a class="card" href="تجربة-المطففين-مشاركة-v3.html">
+        <div class="card-type">تجربة سورة كاملة</div>
+        <h3>سورة المطففين</h3>
+        <div class="card-desc">٣٦ آية — التفسير + الظلال + المعاني. الميزان الإلهي والعدل في المعاملات والجزاء.</div>
+        <div class="card-meta">
+          <span class="tag tag-interactive">تفاعلي</span>
+          <span>أحدث إصدار (v3)</span>
+        </div>
+      </a>
+
+      <a class="card" href="سورة-الزمر-كاملة.html">
+        <div class="card-type">تجربة سورة كاملة</div>
+        <h3>سورة الزمر</h3>
+        <div class="card-desc">الدعوة للتوحيد والإخلاص — وحتمية البعث والحساب.</div>
+        <div class="card-meta">
+          <span class="tag tag-interactive">تفاعلي</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ===== Layer 2: Infographics & Maps ===== -->
+  <div class="layer-section layer-2">
+    <div class="layer-header">
+      <div class="layer-badge">٢</div>
+      <div class="layer-info">
+        <h2>خرائط وإنفوجرافات موضوعية</h2>
+        <p>موضوعات عابرة للسور — تربط الخيوط القرآنية ببعضها</p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" href="infographic-aghraq-alsuwar.html">
+        <div class="card-type">إنفوجراف تفاعلي</div>
+        <h3>خريطة أغراض السور</h3>
+        <div class="card-desc">١١٤ سورة — خريطة لونية للمصحف + تجميع بالموضوع. ثلاثة مصادر: ابن عاشور + المختصر + الظلال.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+          <span>خريطة لونية + تجميع</span>
+        </div>
+      </a>
+
+      <a class="card" href="انفوجراف-المطففين.html">
+        <div class="card-type">إنفوجراف</div>
+        <h3>إنفوجراف المطففين</h3>
+        <div class="card-desc">البنية الموضوعية لسورة المطففين — التطفيف والجزاء والميزان.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+        </div>
+      </a>
+
+      <a class="card" href="سورة-المطففين-خريطة.html">
+        <div class="card-type">خريطة سورة</div>
+        <h3>خريطة سورة المطففين</h3>
+        <div class="card-desc">الهيكل الموضوعي والتقسيم البصري لسورة المطففين.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+        </div>
+      </a>
+
+      <!-- Placeholder: النداءات -->
+      <div class="card placeholder">
+        <div class="card-type">قريباً</div>
+        <h3>النداءات القرآنية</h3>
+        <div class="card-desc">١١٥ نداء عبر القرآن الكريم — تحتاج ربط الملف هنا.</div>
+        <div class="card-meta">
+          <span class="tag tag-soon">يحتاج ربط</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Layer 1: Quick Summaries ===== -->
+  <div class="layer-section layer-1">
+    <div class="layer-header">
+      <div class="layer-badge">١</div>
+      <div class="layer-info">
+        <h2>بوستات ومفاهيم سريعة</h2>
+        <p>محتوى للجمهور الواسع — سوشيال ميديا — مفاتيح وفكرة في دقيقة</p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <!-- Placeholder: صفات أهل الكتاب -->
+      <div class="card placeholder">
+        <div class="card-type">قريباً</div>
+        <h3>صفات أهل الكتاب</h3>
+        <div class="card-desc">بوست مفاهيمي — تحتاج ربط الملف هنا.</div>
+        <div class="card-meta">
+          <span class="tag tag-soon">يحتاج ربط</span>
+        </div>
+      </div>
+
+      <div class="card placeholder">
+        <div class="card-type">قادم</div>
+        <h3>المزيد قادم...</h3>
+        <div class="card-desc">ملخصات مفاهيمية سريعة حول موضوعات قرآنية محددة — للنشر على السوشيال ميديا.</div>
+        <div class="card-meta">
+          <span class="tag tag-soon">قيد البناء</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Tools & Research ===== -->
+  <div class="layer-section layer-tools">
+    <div class="layer-header">
+      <div class="layer-badge">+</div>
+      <div class="layer-info">
+        <h2>أدوات البحث والتخطيط</h2>
+        <p>ملفات العمل الداخلية — بحث وتصنيف وتخطيط</p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" href="أغراض_السور_114_ابن_عاشور.xlsx">
+        <div class="card-type">ملف بحث</div>
+        <h3>أغراض السور ١١٤</h3>
+        <div class="card-desc">كل سورة بغرضها من ٣ مصادر + تصنيف (فرد/أسرة/مجتمع/أحكام/عبادات/قصص).</div>
+        <div class="card-meta">
+          <span class="tag tag-xlsx">Excel</span>
+          <span>١٢ عمود</span>
+        </div>
+      </a>
+
+      <a class="card" href="دستور-المشروع.html">
+        <div class="card-type">وثيقة داخلية</div>
+        <h3>دستور المشروع</h3>
+        <div class="card-desc">القواعد الأربع الحاكمة والمرجعية المعرفية وهيكل الطبقات الثلاث.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+        </div>
+      </a>
+
+      <a class="card" href="project-map.html">
+        <div class="card-type">وثيقة داخلية</div>
+        <h3>خارطة المشروع</h3>
+        <div class="card-desc">نظرة شاملة على مكونات المشروع وتوجهاته والأولويات.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+        </div>
+      </a>
+
+      <a class="card" href="تعريف-مشروع-تدبر.html">
+        <div class="card-type">وثيقة داخلية</div>
+        <h3>تعريف المشروع</h3>
+        <div class="card-desc">الهوية والرؤية والأهداف.</div>
+        <div class="card-meta">
+          <span class="tag tag-html">HTML</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  مشروع تدبُّر — ﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ﴾
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سورة المطففين — الميزان المكسور</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+  --navy: #0a1628;
+  --navy-mid: #0d1b2e;
+  --navy-light: #132743;
+  --gold: #c9963a;
+  --gold-light: #e8c47a;
+  --gold-dim: rgba(201,150,58,0.15);
+  --red-deep: #8b1a1a;
+  --red-glow: #c0392b;
+  --green-deep: #1a6b3c;
+  --green-glow: #27ae60;
+  --text: #e8dcc8;
+  --text-dim: #8a9bb5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.quran-text {
+  font-family: 'Amiri', serif;
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(201,150,58,0.06) 0%, transparent 60%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.hero-surah {
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s forwards;
+}
+
+.hero-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.6s forwards;
+  text-shadow: 0 0 40px rgba(201,150,58,0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--gold-light);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s forwards;
+}
+
+.hero-verse {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  color: var(--gold);
+  max-width: 700px;
+  line-height: 2.2;
+  opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(201,150,58,0.2);
+  border-radius: 12px;
+  background: rgba(201,150,58,0.03);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.8s forwards, bounce 2s 2.5s infinite;
+  color: var(--gold-dim);
+  font-size: 0.85rem;
+}
+
+.scroll-hint span { display: block; font-size: 1.5rem; margin-top: 0.3rem; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ===== SECTION TITLES ===== */
+.section {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--text-dim);
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  line-height: 1.9;
+  font-size: 1.05rem;
+}
+
+/* ===== THE SCALE / BALANCE ===== */
+.scale-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  height: 500px;
+}
+
+.scale-pillar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 6px;
+  height: 300px;
+  background: linear-gradient(to top, var(--gold), rgba(201,150,58,0.3));
+  border-radius: 3px;
+}
+
+.scale-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 12px;
+  background: var(--gold);
+  border-radius: 6px;
+}
+
+.scale-beam {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-12deg);
+  width: 90%;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scale-beam.balanced {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.scale-pan {
+  position: absolute;
+  top: 100px;
+  width: 200px;
+  text-align: center;
+  transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scale-pan-right {
+  right: 2%;
+  transform: translateY(60px);
+}
+
+.scale-pan-left {
+  left: 2%;
+  transform: translateY(-20px);
+}
+
+.scale-pan.balanced-right {
+  transform: translateY(20px);
+}
+
+.scale-pan.balanced-left {
+  transform: translateY(20px);
+}
+
+.pan-dish {
+  width: 140px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 0 0 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.pan-dish-right {
+  background: linear-gradient(135deg, rgba(139,26,26,0.3), rgba(139,26,26,0.1));
+  border: 1px solid rgba(192,57,43,0.4);
+  color: #e74c3c;
+}
+
+.pan-dish-left {
+  background: linear-gradient(135deg, rgba(26,107,60,0.3), rgba(26,107,60,0.1));
+  border: 1px solid rgba(39,174,96,0.4);
+  color: #2ecc71;
+}
+
+.pan-label {
+  font-family: 'Amiri', serif;
+  font-size: 1.5rem;
+  margin-top: 0.8rem;
+  font-weight: 700;
+}
+
+.pan-label-right { color: #e74c3c; }
+.pan-label-left { color: #2ecc71; }
+
+.pan-chain {
+  width: 2px;
+  height: 40px;
+  margin: 0 auto;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.scale-fulcrum {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--gold);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(201,150,58,0.5);
+}
+
+.scale-question {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* ===== DUAL PATHS ===== */
+.paths-container {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  max-width: 950px;
+  margin: 0 auto 4rem;
+}
+
+.path {
+  padding: 1.5rem;
+  border-radius: 16px;
+  position: relative;
+}
+
+.path-down {
+  background: linear-gradient(180deg, rgba(139,26,26,0.1) 0%, rgba(139,26,26,0.25) 100%);
+  border: 1px solid rgba(192,57,43,0.2);
+}
+
+.path-up {
+  background: linear-gradient(180deg, rgba(26,107,60,0.25) 0%, rgba(26,107,60,0.1) 100%);
+  border: 1px solid rgba(39,174,96,0.2);
+}
+
+.path-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+}
+
+.path-arrow {
+  font-size: 1.5rem;
+  opacity: 0.3;
+}
+
+.path-arrow-down { color: #e74c3c; }
+.path-arrow-up { color: #2ecc71; }
+
+.path-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.path-title-down { color: #e74c3c; }
+.path-title-up { color: #2ecc71; }
+
+.path-step {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.path-step:hover {
+  transform: translateX(-4px);
+}
+
+.path-step-down {
+  background: rgba(139,26,26,0.1);
+  border-right: 3px solid rgba(192,57,43,0.4);
+}
+
+.path-step-down:hover {
+  background: rgba(139,26,26,0.2);
+}
+
+.path-step-up {
+  background: rgba(26,107,60,0.1);
+  border-right: 3px solid rgba(39,174,96,0.4);
+}
+
+.path-step-up:hover {
+  background: rgba(26,107,60,0.2);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-num-down {
+  background: rgba(192,57,43,0.3);
+  color: #e74c3c;
+}
+
+.step-num-up {
+  background: rgba(39,174,96,0.3);
+  color: #2ecc71;
+}
+
+.step-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.step-verse {
+  font-family: 'Amiri', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-top: 0.3rem;
+  opacity: 0.8;
+}
+
+.path-end {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 12px;
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.path-end-down {
+  background: rgba(139,26,26,0.25);
+  color: #e74c3c;
+  border: 1px solid rgba(192,57,43,0.4);
+}
+
+.path-end-up {
+  background: rgba(26,107,60,0.25);
+  color: #2ecc71;
+  border: 1px solid rgba(39,174,96,0.4);
+}
+
+/* ===== FOUR SCENES ===== */
+.scenes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 4rem;
+}
+
+.scene-card {
+  background: var(--navy-light);
+  border-radius: 16px;
+  padding: 1.8rem;
+  border: 1px solid rgba(201,150,58,0.1);
+  transition: all 0.4s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.scene-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 0 16px 0 60px;
+  opacity: 0.15;
+  transition: all 0.4s;
+}
+
+.scene-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,150,58,0.3);
+}
+
+.scene-card:hover::before {
+  opacity: 0.3;
+}
+
+.scene-1::before { background: var(--gold); }
+.scene-2::before { background: #e74c3c; }
+.scene-3::before { background: #2ecc71; }
+.scene-4::before { background: #9b59b6; }
+
+.scene-num {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.scene-name {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.scene-1 .scene-name { color: var(--gold); }
+.scene-2 .scene-name { color: #e74c3c; }
+.scene-3 .scene-name { color: #2ecc71; }
+.scene-4 .scene-name { color: #9b59b6; }
+
+.scene-verses {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.scene-desc {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.scene-ayah {
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(201,150,58,0.1);
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* ===== REVERSAL SCENE ===== */
+.reversal {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  min-height: 300px;
+}
+
+.reversal-side {
+  padding: 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.reversal-dunya {
+  background: linear-gradient(135deg, rgba(139,26,26,0.15), rgba(0,0,0,0.2));
+  border: 1px solid rgba(192,57,43,0.2);
+}
+
+.reversal-akhira {
+  background: linear-gradient(135deg, rgba(26,107,60,0.15), rgba(201,150,58,0.1));
+  border: 1px solid rgba(39,174,96,0.2);
+}
+
+.reversal-label {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.reversal-dunya .reversal-label { color: #e74c3c; }
+.reversal-akhira .reversal-label { color: #2ecc71; }
+
+.reversal-content {
+  font-size: 0.95rem;
+  line-height: 2;
+}
+
+.reversal-swap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--gold);
+  animation: swapPulse 3s ease-in-out infinite;
+}
+
+@keyframes swapPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.r-kuffar { color: #e74c3c; font-weight: 600; }
+.r-mumineen { color: #2ecc71; font-weight: 600; }
+
+/* ===== RAIN (RUST) ON HEARTS ===== */
+.hearts-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 3rem;
+}
+
+.heart-visual {
+  text-align: center;
+  width: 180px;
+}
+
+.heart-svg {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+}
+
+.heart-label {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.heart-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ===== CENTRAL THESIS ===== */
+.thesis {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(201,150,58,0.05), rgba(201,150,58,0.02));
+  border: 1px solid rgba(201,150,58,0.15);
+  border-radius: 20px;
+  position: relative;
+}
+
+.thesis-quote {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--gold);
+  line-height: 2.2;
+  margin-bottom: 1.5rem;
+}
+
+.thesis-explain {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 2;
+  opacity: 0.85;
+}
+
+.thesis-highlight {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.footer-verse {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+/* ===== NUZUL (REVELATION) ===== */
+.nuzul-card {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, rgba(201,150,58,0.08), rgba(201,150,58,0.02));
+  border: 1px solid rgba(201,150,58,0.2);
+  border-radius: 16px;
+  position: relative;
+}
+
+.nuzul-card::before {
+  content: '📜';
+  position: absolute;
+  top: -16px;
+  right: 24px;
+  font-size: 1.8rem;
+  background: var(--navy);
+  padding: 0 0.5rem;
+}
+
+.nuzul-hadith {
+  font-family: 'Amiri', serif;
+  font-size: 1.15rem;
+  color: var(--text);
+  line-height: 2.2;
+  margin-bottom: 1rem;
+}
+
+.nuzul-highlight {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.nuzul-source {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  border-top: 1px solid rgba(201,150,58,0.1);
+  padding-top: 0.8rem;
+}
+
+.nuzul-insight {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(201,150,58,0.05);
+  border-radius: 10px;
+  border-right: 3px solid var(--gold);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+/* ===== WORD MEANINGS ===== */
+.words-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.word-card {
+  background: var(--navy-light);
+  border: 1px solid rgba(201,150,58,0.1);
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: all 0.3s;
+  cursor: default;
+  text-align: center;
+}
+
+.word-card:hover {
+  border-color: rgba(201,150,58,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.word-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.word-meaning {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.word-source {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+/* ===== ZILAL QUOTES ===== */
+.zilal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.zilal-quote {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(201,150,58,0.04), transparent);
+  border-radius: 16px;
+  border-right: 4px solid var(--gold);
+  position: relative;
+  transition: all 0.3s;
+}
+
+.zilal-quote:hover {
+  background: linear-gradient(135deg, rgba(201,150,58,0.08), transparent);
+}
+
+.zilal-quote::before {
+  content: '❝';
+  font-size: 2.5rem;
+  color: var(--gold);
+  opacity: 0.2;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  line-height: 1;
+}
+
+.zilal-text {
+  font-size: 1.05rem;
+  line-height: 2.2;
+  color: var(--text);
+  padding-right: 1rem;
+}
+
+.zilal-text em {
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.zilal-topic {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--gold);
+  background: rgba(201,150,58,0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.zilal-ref {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .paths-container { grid-template-columns: 1fr; gap: 1.5rem; }
+  .path-center { flex-direction: row; padding: 0.5rem; }
+  .reversal { grid-template-columns: 1fr; }
+  .reversal-swap { transform: rotate(90deg); padding: 1rem; }
+  .scenes { grid-template-columns: 1fr; }
+  .scale-container { height: 400px; }
+  .scale-pan { width: 150px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-surah">سورة المطففين — ٣٦ آية — مكية</div>
+  <h1 class="hero-title">الميزان المكسور</h1>
+  <p class="hero-subtitle">حين يختل ميزانك مع الناس… فقد اختل أولاً مع الله</p>
+  <div class="hero-verse quran-text">
+    ﴿أَلَا يَظُنُّ أُولَـٰئِكَ أَنَّهُم مَّبْعُوثُونَ ۝ لِيَوْمٍ عَظِيمٍ ۝ يَوْمَ يَقُومُ النَّاسُ لِرَبِّ الْعَالَمِينَ﴾
+  </div>
+  <div class="scroll-hint">
+    اكتشف الخريطة
+    <span>↓</span>
+  </div>
+</div>
+
+<!-- ===== THE CENTRAL SCALE ===== -->
+<div class="section">
+  <div class="section-label">الفكرة المركزية</div>
+  <h2 class="section-title">الميزان</h2>
+  <p class="section-desc">
+    التطفيف ليس خللاً في ميزان التجارة — هو عَرَض لميزان داخلي مكسور.
+    إنسان يأخذ كل حقه ويعطي الناس ناقصاً… لأنه لا يؤمن أنه سيقف أمام رب العالمين.
+  </p>
+
+  <div class="scale-container" id="scaleContainer" onclick="toggleScale()">
+    <div class="scale-fulcrum"></div>
+    <div class="scale-beam" id="scaleBeam"></div>
+    <div class="scale-pillar"></div>
+    <div class="scale-base"></div>
+
+    <div class="scale-pan scale-pan-right" id="panRight">
+      <div class="pan-chain"></div>
+      <div class="pan-dish pan-dish-right">سِجِّين</div>
+      <div class="pan-label pan-label-right">↓ الفجار</div>
+    </div>
+
+    <div class="scale-pan scale-pan-left" id="panLeft">
+      <div class="pan-chain"></div>
+      <div class="pan-dish pan-dish-left">عِلِّيِّين</div>
+      <div class="pan-label pan-label-left">↑ الأبرار</div>
+    </div>
+
+    <div class="scale-question">⟡ اضغط لترى الميزان المستقيم ⟡</div>
+  </div>
+</div>
+
+<!-- ===== FOUR SCENES ===== -->
+<div class="section">
+  <div class="section-label">البنية الدرامية</div>
+  <h2 class="section-title">أربعة مشاهد</h2>
+  <p class="section-desc">
+    السورة محكمة كونية — تعرض لائحة اتهام، ثم ملف المتهمين، ثم ملف الأبرار، ثم المفارقة الكبرى.
+  </p>
+
+  <div class="scenes">
+    <div class="scene-card scene-1">
+      <div class="scene-num">المشهد الأول</div>
+      <div class="scene-name">لائحة الاتهام</div>
+      <div class="scene-verses">الآيات ١ — ٦</div>
+      <div class="scene-desc">
+        صوت إلهي عالٍ في وجه كبراء مكة: وَيْلٌ! تأخذون حقكم كاملاً وتعطون الناس ناقصاً — ألا تظنون أنكم واقفون أمام رب العالمين؟
+      </div>
+      <div class="scene-ayah">﴿وَيْلٌ لِلْمُطَفِّفِينَ﴾</div>
+    </div>
+
+    <div class="scene-card scene-2">
+      <div class="scene-num">المشهد الثاني</div>
+      <div class="scene-name">السقوط</div>
+      <div class="scene-verses">الآيات ٧ — ١٧</div>
+      <div class="scene-desc">
+        كتابهم في سجين. يكذبون → ران على قلوبهم → محجوبون عن ربهم. كل ذنب طبقة جديدة من الظلام حتى ينطفئ النور.
+      </div>
+      <div class="scene-ayah">﴿كَلَّا إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍ لَّمَحْجُوبُونَ﴾</div>
+    </div>
+
+    <div class="scene-card scene-3">
+      <div class="scene-num">المشهد الثالث</div>
+      <div class="scene-name">الصعود</div>
+      <div class="scene-verses">الآيات ١٨ — ٢٨</div>
+      <div class="scene-desc">
+        كتابهم في عليين. نعيم. أرائك. نضرة في الوجوه. رحيق مختوم ختامه مسك. تسنيم. هنا ميدان السباق الحقيقي.
+      </div>
+      <div class="scene-ayah">﴿وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ﴾</div>
+    </div>
+
+    <div class="scene-card scene-4">
+      <div class="scene-num">المشهد الرابع</div>
+      <div class="scene-name">الانقلاب</div>
+      <div class="scene-verses">الآيات ٢٩ — ٣٦</div>
+      <div class="scene-desc">
+        كانوا يضحكون ويتغامزون ويقولون هؤلاء ضالون. فاليوم — انقلب كل شيء. الذين آمنوا من الكفار يضحكون.
+      </div>
+      <div class="scene-ayah">﴿هَلْ ثُوِّبَ الْكُفَّارُ مَا كَانُوا يَفْعَلُونَ﴾</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DUAL PATHS ===== -->
+<div class="section">
+  <div class="section-label">المساران</div>
+  <h2 class="section-title">سجين ← الإنسان → عليين</h2>
+  <p class="section-desc">
+    نقطة البداية واحدة — الاختيار. لكن المسارين يتباعدان حتى لا يلتقيان أبداً.
+  </p>
+
+  <div class="paths-container">
+    <!-- PATH DOWN -->
+    <div class="path path-down">
+      <div class="path-title path-title-down">مسار السقوط</div>
+
+      <div class="path-step path-step-down">
+        <div class="step-num step-num-down">١</div>
+        <div>
+          <div class="step-text">لا إيمان بالآخرة — لا رادع داخلي</div>
+          <div class="step-verse">﴿أَلَا يَظُنُّ أُولَـٰئِكَ أَنَّهُم مَّبْعُوثُونَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-down">
+        <div class="step-num step-num-down">٢</div>
+        <div>
+          <div class="step-text">تطفيف وظلم — أخذ بلا عطاء</div>
+          <div class="step-verse">﴿إِذَا اكْتَالُوا عَلَى النَّاسِ يَسْتَوْفُونَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-down">
+        <div class="step-num step-num-down">٣</div>
+        <div>
+          <div class="step-text">التكذيب بالحق — أساطير الأولين</div>
+          <div class="step-verse">﴿إِذَا تُتْلَىٰ عَلَيْهِ آيَاتُنَا قَالَ أَسَاطِيرُ الْأَوَّلِينَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-down">
+        <div class="step-num step-num-down">٤</div>
+        <div>
+          <div class="step-text">الرَّين — ظلام يغطي القلب طبقة بعد طبقة</div>
+          <div class="step-verse">﴿كَلَّا بَلْ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا يَكْسِبُونَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-down">
+        <div class="step-num step-num-down">٥</div>
+        <div>
+          <div class="step-text">الحجاب عن الله — فقدان الإنسانية</div>
+          <div class="step-verse">﴿كَلَّا إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍ لَّمَحْجُوبُونَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-end path-end-down">سِجِّين ← الجحيم</div>
+    </div>
+
+    <!-- CENTER ARROWS -->
+    <div class="path-center">
+      <div class="path-arrow path-arrow-down">▼</div>
+      <div class="path-arrow path-arrow-down">▼</div>
+      <div style="color:var(--gold);font-family:'Amiri';font-size:0.9rem;writing-mode:vertical-rl;">الاختيار</div>
+      <div class="path-arrow path-arrow-up">▲</div>
+      <div class="path-arrow path-arrow-up">▲</div>
+    </div>
+
+    <!-- PATH UP -->
+    <div class="path path-up">
+      <div class="path-title path-title-up">مسار الصعود</div>
+
+      <div class="path-step path-step-up">
+        <div class="step-num step-num-up">١</div>
+        <div>
+          <div class="step-text">إيمان بالآخرة — يقين بالحساب</div>
+          <div class="step-verse">﴿يَوْمَ يَقُومُ النَّاسُ لِرَبِّ الْعَالَمِينَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-up">
+        <div class="step-num step-num-up">٢</div>
+        <div>
+          <div class="step-text">ميزان مستقيم — عدل مع الناس</div>
+          <div class="step-verse">العدل ثمرة طبيعية للإيمان</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-up">
+        <div class="step-num step-num-up">٣</div>
+        <div>
+          <div class="step-text">تصديق بالحق — قلب مفتوح</div>
+          <div class="step-verse">﴿إِنَّ الْأَبْرَارَ لَفِي نَعِيمٍ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-up">
+        <div class="step-num step-num-up">٤</div>
+        <div>
+          <div class="step-text">نضرة — نور يظهر على الوجوه</div>
+          <div class="step-verse">﴿تَعْرِفُ فِي وُجُوهِهِمْ نَضْرَةَ النَّعِيمِ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-step path-step-up">
+        <div class="step-num step-num-up">٥</div>
+        <div>
+          <div class="step-text">القرب من الله — التنافس الحقيقي</div>
+          <div class="step-verse">﴿وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ﴾</div>
+        </div>
+      </div>
+
+      <div class="path-end path-end-up">عِلِّيِّين ← النعيم</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RAIN ON HEARTS ===== -->
+<div class="section">
+  <div class="section-label">الآلية</div>
+  <h2 class="section-title">الرَّين — كيف يموت القلب؟</h2>
+  <p class="section-desc">
+    كل ذنب نكتة سوداء. إن تاب صُقل قلبه. وإن زاد زادت حتى تعلو قلبه — فذلك الرَّين.
+  </p>
+
+  <div class="hearts-container">
+    <div class="heart-visual">
+      <svg class="heart-svg" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="heart1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#1a6b3c;stop-opacity:0.6"/>
+          </radialGradient>
+        </defs>
+        <path d="M50 88 C25 65 5 50 5 30 C5 15 15 5 30 5 C38 5 45 10 50 18 C55 10 62 5 70 5 C85 5 95 15 95 30 C95 50 75 65 50 88Z" fill="url(#heart1)" opacity="0.9"/>
+        <text x="50" y="52" text-anchor="middle" fill="white" font-size="10" font-family="Amiri">نور</text>
+      </svg>
+      <div class="heart-label" style="color:#2ecc71">قلب سليم</div>
+      <div class="heart-desc">يرى الحق حقاً والباطل باطلاً — البوصلة تعمل</div>
+    </div>
+
+    <div class="heart-visual">
+      <svg class="heart-svg" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="heart2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#7f8c8d;stop-opacity:0.7"/>
+            <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:0.8"/>
+          </radialGradient>
+        </defs>
+        <path d="M50 88 C25 65 5 50 5 30 C5 15 15 5 30 5 C38 5 45 10 50 18 C55 10 62 5 70 5 C85 5 95 15 95 30 C95 50 75 65 50 88Z" fill="url(#heart2)" opacity="0.9"/>
+        <circle cx="35" cy="35" r="6" fill="rgba(0,0,0,0.4)"/>
+        <circle cx="60" cy="45" r="5" fill="rgba(0,0,0,0.3)"/>
+        <circle cx="50" cy="30" r="4" fill="rgba(0,0,0,0.35)"/>
+        <text x="50" y="65" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-family="Amiri">نكت سوداء</text>
+      </svg>
+      <div class="heart-label" style="color:#95a5a6">قلب مريض</div>
+      <div class="heart-desc">بدأت النكت السوداء — لم يتب فتراكمت</div>
+    </div>
+
+    <div class="heart-visual">
+      <svg class="heart-svg" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="heart3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#2c2c2c;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1"/>
+          </radialGradient>
+        </defs>
+        <path d="M50 88 C25 65 5 50 5 30 C5 15 15 5 30 5 C38 5 45 10 50 18 C55 10 62 5 70 5 C85 5 95 15 95 30 C95 50 75 65 50 88Z" fill="url(#heart3)" opacity="0.95"/>
+        <text x="50" y="50" text-anchor="middle" fill="rgba(139,26,26,0.8)" font-size="9" font-family="Amiri">رَان</text>
+      </svg>
+      <div class="heart-label" style="color:#e74c3c">قلب ميت</div>
+      <div class="heart-desc">ران عليه — لا يرى الحق، لا يحس. محجوب عن ربه</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REVERSAL ===== -->
+<div class="section">
+  <div class="section-label">المفارقة الكبرى</div>
+  <h2 class="section-title">الانقلاب</h2>
+  <p class="section-desc">
+    في الدنيا يضحكون على المؤمنين. في الآخرة ينقلب كل شيء.
+  </p>
+
+  <div class="reversal">
+    <div class="reversal-side reversal-dunya">
+      <div class="reversal-label">فِي الدُّنْيَا</div>
+      <div class="reversal-content">
+        <span class="r-kuffar">الذين أجرموا</span> كانوا من <span class="r-mumineen">الذين آمنوا</span> يضحكون
+        <br>وإذا مروا بهم <span class="r-kuffar">يتغامزون</span>
+        <br>وإذا رأوهم قالوا: <span class="r-kuffar">إن هؤلاء لضالون</span>
+      </div>
+    </div>
+
+    <div class="reversal-swap">⟲</div>
+
+    <div class="reversal-side reversal-akhira">
+      <div class="reversal-label">فِي الآخِرَة</div>
+      <div class="reversal-content">
+        فاليوم <span class="r-mumineen">الذين آمنوا</span> من <span class="r-kuffar">الكفار</span> يضحكون
+        <br>على <span class="r-mumineen">الأرائك ينظرون</span>
+        <br><span style="color:var(--gold)">هل ثُوِّب الكفار ما كانوا يفعلون؟</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NUZUL (REVELATION CONTEXT) ===== -->
+<div class="section">
+  <div class="section-label">سبب النزول</div>
+  <h2 class="section-title">لماذا نزلت هذه السورة؟</h2>
+  <p class="section-desc">
+    سورة تصدّت لواقع عملي كان يعيشه الناس — ظلم في الميزان يكشف خللاً في الإيمان.
+  </p>
+
+  <div class="nuzul-card">
+    <div class="nuzul-hadith">
+      أخرج <span class="nuzul-highlight">النسائي وابن ماجه</span> بسند صحيح عن <span class="nuzul-highlight">ابن عباس</span> رضي الله عنهما قال:
+      <br><br>
+      لما قدم النبي ﷺ المدينة كانوا من <span class="nuzul-highlight">أبخس الناس كيلاً</span>، فأنزل الله ﴿وَيْلٌ لِّلْمُطَفِّفِينَ﴾، <span class="nuzul-highlight">فأحسنوا الكيل بعد ذلك</span>.
+    </div>
+    <div class="nuzul-source">لباب النقول في أسباب النزول — السيوطي، ص ٢٤٩</div>
+    <div class="nuzul-insight">
+      <strong>تأمّل:</strong> القرآن لم ينتظر حتى يُبنى المجتمع — بدأ بإصلاح الميزان فوراً. الآية نزلت فتغيّر السلوك مباشرة: <em>«فأحسنوا الكيل بعد ذلك»</em>. هذا هو أثر القرآن حين يُتلقّى بصدق.
+    </div>
+  </div>
+</div>
+
+<!-- ===== WORD MEANINGS ===== -->
+<div class="section">
+  <div class="section-label">معاني الكلمات</div>
+  <h2 class="section-title">مفاتيح السورة</h2>
+  <p class="section-desc">
+    كلمات مفتاحية تفتح أبواب الفهم — من تفسير الإمام السعدي رحمه الله.
+  </p>
+
+  <div class="words-grid">
+    <div class="word-card">
+      <div class="word-arabic">وَيْلٌ</div>
+      <div class="word-meaning">كلمة عذاب ووعيد</div>
+      <div class="word-source">السعدي، ص ١٦٥٤</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">المُطَفِّفِينَ</div>
+      <div class="word-meaning">الذين إذا اكتالوا على الناس يستوفون، وإذا كالوهم أو وزنوهم يُخسرون</div>
+      <div class="word-source">السعدي، ص ١٦٥٤</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">يُخْسِرُونَ</div>
+      <div class="word-meaning">ينقصونهم حقهم، إما بمكيال وميزان ناقصين، أو بعدم ملء المكيال والميزان</div>
+      <div class="word-source">السعدي، ص ١٦٥٥</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">أَثِيمٍ</div>
+      <div class="word-meaning">كثير الإثم، متعدٍّ على محارم الله</div>
+      <div class="word-source">السعدي، ص ١٦٥٦</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">أَسَاطِيرُ الْأَوَّلِينَ</div>
+      <div class="word-meaning">من نرهات المتقدمين وأخبار الأمم الغابرين — ليس من عند الله تكبراً وعناداً</div>
+      <div class="word-source">السعدي، ص ١٦٥٦</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">رَانَ</div>
+      <div class="word-meaning">غطّى على قلوبهم ما كانوا يكسبون من الإثم والمعصية — الذنب بعد الذنب حتى يُطمس النور</div>
+      <div class="word-source">السعدي، ص ١٦٥٦</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">لَمَحْجُوبُونَ</div>
+      <div class="word-meaning">محجوبون عن ربهم يومئذ — لا يرونه. وعذاب الحجاب من أشد العذاب</div>
+      <div class="word-source">السعدي، ص ١٦٥٦</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">سِجِّين</div>
+      <div class="word-meaning">المحل الضيق الضنك — أسفل الأمكنة وأضيقها، مأوى الفجار ومستقرهم</div>
+      <div class="word-source">السعدي، ص ١٦٥٥–١٦٥٦</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">عِلِّيِّين</div>
+      <div class="word-meaning">اسم لأعلى الجنة — ضد سجين. محل كتاب الأبرار</div>
+      <div class="word-source">السعدي، ص ١٦٥٥–١٦٥٧</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">رَحِيقٍ مَخْتُومٍ</div>
+      <div class="word-meaning">أطيب الأشربة وألذّها — مختوم لا يدخله شيء ينقص لذته، ختامه مسك</div>
+      <div class="word-source">السعدي، ص ١٦٥٧</div>
+    </div>
+
+    <div class="word-card">
+      <div class="word-arabic">تَسْنِيم</div>
+      <div class="word-meaning">عين يشرب بها المقربون صرفاً — أعلى أشربة أهل الجنة على الإطلاق</div>
+      <div class="word-source">السعدي، ص ١٦٥٧</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ZILAL QUOTES ===== -->
+<div class="section">
+  <div class="section-label">من ظلال القرآن</div>
+  <h2 class="section-title">نظرات سيد قطب</h2>
+  <p class="section-desc">
+    إضاءات من «في ظلال القرآن» تكشف أبعاداً في السورة قد لا تظهر من القراءة الأولى.
+  </p>
+
+  <div class="zilal-container">
+    <div class="zilal-quote">
+      <div class="zilal-topic">التطفيف في سورة مكية — لماذا؟</div>
+      <div class="zilal-text">
+        التصدّي لشأن المطففين بهذا الأسلوب في سورة مكية أمر يستحق الانتباه. فالسورة المكية عادة توجّه اهتمامها إلى أصول العقيدة الكلية… ومن ثم فإن التصدّي لهذا الأمر بذاته في هذه السورة المكية أمر يبني بعدة دلالات — إنه يدل أولاً على أن الإسلام كان يواجه في البيئة المكية حالة صارخة من هذا التطفيف تزاوله الكبراء… طبقة الكبراء ذوي النفوذ الذين يملكون إكراه الناس.
+      </div>
+      <div class="zilal-ref">في ظلال القرآن — سيد قطب، ص ٣٨٥٥</div>
+    </div>
+
+    <div class="zilal-quote">
+      <div class="zilal-topic">الرَّين — كيف يموت الضمير</div>
+      <div class="zilal-text">
+        القلب الذي يمرد على المعصية ينطمس ويظلم… «إن العبد إذا أذنب ذنباً كانت نكتة سوداء في قلبه، فإن تاب منها صُقل قلبه، وإن زاد زادت»… فهو الران الذي قال الله تعالى: ﴿كَلَّا بَلْ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا يَكْسِبُونَ﴾. وقال الحسن البصري: هو الذنب على الذنب حتى يعمى القلب فيموت.
+      </div>
+      <div class="zilal-ref">في ظلال القرآن — سيد قطب، ص ٣٨٥٧–٣٨٥٨</div>
+    </div>
+
+    <div class="zilal-quote">
+      <div class="zilal-topic">الحجاب عن الله — أشد العذاب</div>
+      <div class="zilal-text">
+        وهذا الحجاب عن ربهم عذاب فوق كل عذاب، وحرمان فوق كل حرمان. ونهاية بائسة لإنسان يستمد إنسانيته من مصدر واحد هو اتصاله بروح ربه الكريم. فإذا حُجب عن هذا المصدر فقد خصائصه كإنسان كريم، وارتكس إلى درجة يستحق معها الجحيم.
+      </div>
+      <div class="zilal-ref">في ظلال القرآن — سيد قطب، ص ٣٨٥٨</div>
+    </div>
+
+    <div class="zilal-quote">
+      <div class="zilal-topic">التنافس الحقيقي — ميدان يستحق السباق</div>
+      <div class="zilal-text">
+        ومن عجب أن التنافس في أمر الآخرة يرتفع بأرواح المتنافسين جميعاً، بينما التنافس في أمر الدنيا ينحط بها جميعاً… والذين يتنافسون على شيء من أشياء الأرض مهما كبر وجلّ وارتفع وعظم، إنما يتنافسون في حقير قليل فانٍ قريب. والدنيا لا تزن عند الله جناح بعوضة. ولكن الآخرة ثقيلة في ميزانه. فهي إذن حقيقة تستحق المنافسة فيها والمسابقة.
+      </div>
+      <div class="zilal-ref">في ظلال القرآن — سيد قطب، ص ٣٨٥٩–٣٨٦٠</div>
+    </div>
+
+    <div class="zilal-quote">
+      <div class="zilal-topic">السخرية المتكررة عبر الأجيال</div>
+      <div class="zilal-text">
+        المشاهد التي يرسمها القرآن لسخرية الذين أجرموا من الذين آمنوا… مشاهد منتزعة من واقع البيئة في مكة. ولكنها متكررة في أجيال ومواطن شتى. وكثير من المعاصرين شهدوها كأنما هذه الآيات قد نزلت في وصفها وتصويرها — مما يدل على أن طبيعة الفجار المجرمين واحدة متشابهة في موقفها من الأبرار في جميع البيئات والعصور!
+      </div>
+      <div class="zilal-ref">في ظلال القرآن — سيد قطب، ص ٣٨٦٠</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CENTRAL THESIS ===== -->
+<div class="section">
+  <div class="thesis">
+    <div class="thesis-quote quran-text">
+      ﴿وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ﴾
+    </div>
+    <div class="thesis-explain">
+      القرآن لا يقول <span class="thesis-highlight">"كن عادلاً"</span> فقط — يقول <span class="thesis-highlight">"اعرف لماذا أنت عادل"</span>.
+      <br><br>
+      العدالة بلا عقيدة… هشّة.
+      <br>
+      العقيدة بلا عدالة… كذبة.
+      <br><br>
+      السورة تربط بينهما ربطاً لا ينفصل — <span class="thesis-highlight">الميزان المستقيم مع الناس ثمرة الميزان المستقيم مع الله</span>.
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="footer-verse quran-text">
+    ﴿يَوْمَ يَقُومُ النَّاسُ لِرَبِّ الْعَالَمِينَ﴾
+  </div>
+  مشروع تدبُّر — الخريطة الذهنية لسورة المطففين
+</div>
+
+<script>
+let balanced = false;
+function toggleScale() {
+  balanced = !balanced;
+  const beam = document.getElementById('scaleBeam');
+  const panR = document.getElementById('panRight');
+  const panL = document.getElementById('panLeft');
+
+  if (balanced) {
+    beam.classList.add('balanced');
+    panR.classList.add('balanced-right');
+    panL.classList.add('balanced-left');
+  } else {
+    beam.classList.remove('balanced');
+    panR.classList.remove('balanced-right');
+    panL.classList.remove('balanced-left');
+  }
+}
+
+// Intersection Observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.scene-card, .path-step, .heart-visual, .thesis, .nuzul-card, .word-card, .zilal-quote').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'all 0.6s ease-out';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

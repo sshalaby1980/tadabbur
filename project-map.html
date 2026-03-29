@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خارطة المشروع — تدبُّر</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1120;--navy2:#111827;--navy3:#1a2538;--navy4:#243047;
+  --gold:#c9a84c;--gold2:#e8c97a;--gold3:#f5e1a0;
+  --green:#2d6a4f;--green2:#52b788;
+  --blue:#1a3e5c;--blue2:#3a7ca5;
+  --red:#6b2222;--red2:#c0504d;
+  --text:#f0e6cc;--text2:#c4b48a;--text3:#7a6e5a;
+  --border:#2a2010;--border2:#3a3020;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:'Cairo',sans-serif;min-height:100vh;line-height:1.7;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;right:0;left:0;z-index:100;
+  background:rgba(11,17,32,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:56px;
+}
+.nav-brand{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold);letter-spacing:.02em;}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{
+  color:var(--text3);font-size:.8rem;text-decoration:none;
+  padding:6px 12px;border-radius:20px;transition:.2s;
+}
+.nav-links a:hover,.nav-links a.active{background:var(--border2);color:var(--gold2);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* ─── SECTIONS ─── */
+section{max-width:1100px;margin:0 auto;padding:80px 20px 60px;}
+section:first-of-type{padding-top:120px;}
+.section-label{
+  font-size:.75rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  border:1px solid var(--gold);border-radius:20px;padding:3px 14px;
+  display:inline-block;margin-bottom:14px;
+}
+h2.sec-title{font-family:'Amiri',serif;font-size:2rem;color:var(--text);margin-bottom:8px;}
+.sec-sub{color:var(--text3);font-size:.9rem;margin-bottom:36px;}
+.divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:16px 0;}
+
+/* ─── SECTION 1: IDENTITY ─── */
+#identity{text-align:center;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.brand-logo{
+  font-family:'Amiri',serif;font-size:5rem;color:var(--gold);
+  text-shadow:0 0 60px rgba(201,168,76,.3);
+  margin-bottom:8px;letter-spacing:.05em;
+}
+.brand-sub{font-size:.95rem;color:var(--text3);letter-spacing:.2em;margin-bottom:32px;}
+.brand-tagline{
+  font-family:'Amiri',serif;font-size:1.9rem;color:var(--text);
+  max-width:680px;line-height:1.6;margin-bottom:24px;
+}
+.brand-mission{
+  max-width:600px;font-size:.9rem;color:var(--text2);line-height:2;
+  background:var(--navy2);border:1px solid var(--border2);
+  border-radius:16px;padding:24px 28px;margin-bottom:40px;
+  border-right:3px solid var(--gold);
+}
+.stat-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;}
+.stat-box{
+  background:var(--navy2);border:1px solid var(--border2);
+  border-radius:14px;padding:18px 24px;text-align:center;min-width:120px;
+}
+.stat-num{font-family:'Amiri',serif;font-size:2rem;color:var(--gold2);display:block;}
+.stat-lbl{font-size:.75rem;color:var(--text3);}
+.scroll-hint{margin-top:48px;color:var(--text3);font-size:.8rem;animation:bob 2s infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ─── SECTION 2: PROBLEM ─── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:650px){.two-col{grid-template-columns:1fr;}}
+.prob-card,.sol-card{border-radius:16px;padding:28px;}
+.prob-card{background:#1a0a0a;border:1px solid var(--red);}
+.sol-card{background:#0a1a0f;border:1px solid var(--green);}
+.card-icon{font-size:2rem;margin-bottom:12px;}
+.card-title{font-family:'Amiri',serif;font-size:1.3rem;margin-bottom:14px;}
+.prob-card .card-title{color:var(--red2);}
+.sol-card .card-title{color:var(--green2);}
+.card-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.card-list li{font-size:.85rem;color:var(--text2);padding-right:16px;position:relative;}
+.card-list li::before{content:'▸';position:absolute;right:0;color:var(--text3);}
+.prob-card .card-list li::before{color:var(--red2);}
+.sol-card .card-list li::before{color:var(--green2);}
+.insight-box{
+  margin-top:24px;padding:20px;
+  background:linear-gradient(135deg,var(--navy3),var(--navy4));
+  border:1px solid var(--gold);border-radius:12px;
+  font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold2);
+  text-align:center;line-height:1.8;
+}
+
+/* ─── SECTION 3: ARCHITECTURE ─── */
+.arch-wrap{display:flex;flex-direction:column;gap:16px;}
+.tier-card{
+  border-radius:16px;padding:24px 28px;
+  display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:20px;
+  cursor:pointer;transition:.2s;position:relative;overflow:hidden;
+}
+.tier-card::before{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:4px;
+}
+.tier-card:hover{transform:translateY(-2px);}
+.tier-1{background:#0a180f;border:1px solid var(--green);}
+.tier-1::before{background:var(--green2);}
+.tier-2{background:#0d1e2e;border:1px solid var(--blue);}
+.tier-2::before{background:var(--blue2);}
+.tier-3{background:#1a1208;border:1px solid var(--border2);}
+.tier-3::before{background:var(--gold);}
+.tier-num{
+  font-family:'Amiri',serif;font-size:2.5rem;
+  opacity:.3;text-align:center;
+}
+.tier-1 .tier-num{color:var(--green2);}
+.tier-2 .tier-num{color:var(--blue2);}
+.tier-3 .tier-num{color:var(--gold);}
+.tier-content{}
+.tier-name{font-family:'Amiri',serif;font-size:1.3rem;margin-bottom:6px;}
+.tier-1 .tier-name{color:var(--green2);}
+.tier-2 .tier-name{color:var(--blue2);}
+.tier-3 .tier-name{color:var(--gold2);}
+.tier-desc{font-size:.82rem;color:var(--text2);}
+.tier-meta{text-align:left;min-width:110px;}
+.tier-tag{
+  display:inline-block;font-size:.7rem;border-radius:20px;
+  padding:4px 10px;margin-bottom:6px;
+}
+.tag-g{background:var(--green);color:var(--green2);}
+.tag-b{background:var(--blue);color:var(--blue2);}
+.tag-o{background:#2a1f05;color:var(--gold);}
+.tier-freq{font-size:.72rem;color:var(--text3);}
+.arch-flow{
+  display:flex;justify-content:center;align-items:center;gap:16px;
+  flex-wrap:wrap;margin-top:32px;padding:24px;
+  background:var(--navy2);border-radius:16px;border:1px solid var(--border2);
+}
+.flow-step{text-align:center;}
+.flow-icon{font-size:1.8rem;margin-bottom:6px;}
+.flow-lbl{font-size:.78rem;color:var(--text2);}
+.flow-arrow{color:var(--text3);font-size:1.2rem;}
+
+/* ─── SECTION 4: CONTENT ─── */
+.content-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.ctab{
+  padding:8px 18px;border-radius:20px;border:1px solid var(--border2);
+  background:var(--navy2);color:var(--text3);font-size:.82rem;cursor:pointer;
+  font-family:'Cairo',sans-serif;
+}
+.ctab.active{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700;}
+.cpanel{display:none;}.cpanel.active{display:block;}
+.content-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.ccard{
+  border-radius:14px;padding:20px;
+  background:var(--navy2);border:1px solid var(--border2);
+  position:relative;overflow:hidden;
+}
+.ccard-done{border-color:var(--green);}
+.ccard-prog{border-color:var(--blue);}
+.ccard-plan{border-color:var(--border2);opacity:.7;}
+.cstatus{
+  position:absolute;top:12px;left:12px;
+  font-size:.65rem;padding:3px 10px;border-radius:20px;
+}
+.st-done{background:var(--green);color:var(--green2);}
+.st-prog{background:var(--blue);color:var(--blue2);}
+.st-plan{background:#2a2010;color:var(--text3);}
+.ccard-icon{font-size:1.8rem;margin-bottom:10px;}
+.ccard-name{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold2);margin-bottom:6px;}
+.ccard-type{font-size:.72rem;color:var(--text3);margin-bottom:10px;}
+.ccard-desc{font-size:.8rem;color:var(--text2);line-height:1.7;}
+.ccard-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.ctag{font-size:.65rem;padding:3px 8px;border-radius:10px;background:var(--navy3);color:var(--text3);}
+
+/* ─── SECTION 5: USER JOURNEY ─── */
+.journey-wrap{display:flex;flex-direction:column;gap:0;}
+.jstage{
+  display:grid;grid-template-columns:80px 1fr 1fr;gap:0;
+  position:relative;
+}
+.jstage:not(:last-child)::after{
+  content:'';position:absolute;right:40px;bottom:-24px;
+  width:2px;height:24px;background:var(--border2);
+}
+.jnum{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Amiri',serif;font-size:1.4rem;font-weight:700;
+  margin:0 auto;flex-shrink:0;
+}
+.j1 .jnum{background:#0a180f;border:2px solid var(--green2);color:var(--green2);}
+.j2 .jnum{background:#0d1e2e;border:2px solid var(--blue2);color:var(--blue2);}
+.j3 .jnum{background:#1a1208;border:2px solid var(--gold);color:var(--gold);}
+.j4 .jnum{background:#1a0a0a;border:2px solid var(--red2);color:var(--red2);}
+.jcol{padding:16px 20px;margin-bottom:24px;}
+.jleft{background:var(--navy2);border-radius:14px 0 0 14px;border:1px solid var(--border2);border-left:none;}
+.jright{background:var(--navy3);border-radius:0 14px 14px 0;border:1px solid var(--border2);border-right:none;}
+.jstage-lbl{font-size:.7rem;color:var(--text3);margin-bottom:4px;letter-spacing:.1em;}
+.jstage-title{font-family:'Amiri',serif;font-size:1.1rem;margin-bottom:8px;}
+.j1 .jstage-title{color:var(--green2);}
+.j2 .jstage-title{color:var(--blue2);}
+.j3 .jstage-title{color:var(--gold);}
+.j4 .jstage-title{color:var(--red2);}
+.jstage-text{font-size:.8rem;color:var(--text2);line-height:1.8;}
+.jtool{
+  font-size:.72rem;margin-top:10px;padding:8px 12px;
+  border-radius:8px;background:var(--navy);color:var(--text3);
+  border-right:2px solid var(--border2);
+}
+.j1 .jtool{border-color:var(--green2);}
+.j2 .jtool{border-color:var(--blue2);}
+.j3 .jtool{border-color:var(--gold);}
+.j4 .jtool{border-color:var(--red2);}
+.selection-note{
+  margin-top:32px;padding:20px 24px;
+  background:linear-gradient(135deg,#1a1208,#0d1820);
+  border:1px solid var(--gold);border-radius:14px;
+  font-size:.85rem;color:var(--text2);line-height:2;
+}
+.selection-note strong{color:var(--gold2);}
+
+/* ─── SECTION 6: SURAH ROADMAP ─── */
+.roadmap-clusters{display:flex;flex-direction:column;gap:28px;}
+.cluster{background:var(--navy2);border-radius:16px;padding:22px;border:1px solid var(--border2);}
+.cluster-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.cluster-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.cluster-title{font-family:'Amiri',serif;font-size:1.1rem;color:var(--text);}
+.cluster-desc{font-size:.75rem;color:var(--text3);}
+.surah-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.surah-pill{
+  padding:8px 16px;border-radius:20px;font-family:'Amiri',serif;
+  font-size:.85rem;cursor:pointer;transition:.15s;
+  display:flex;align-items:center;gap:6px;
+}
+.s-done{background:#0a180f;border:1px solid var(--green);color:var(--green2);}
+.s-prog{background:#0d1e2e;border:1px solid var(--blue);color:var(--blue2);}
+.s-next{background:#1a1208;border:1px solid var(--gold);color:var(--gold2);}
+.s-plan{background:var(--navy3);border:1px solid var(--border2);color:var(--text3);}
+.surah-pill:hover{transform:scale(1.04);}
+.s-badge{font-size:.6rem;opacity:.8;}
+.roadmap-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text3);}
+.leg-dot{width:10px;height:10px;border-radius:50%;}
+
+/* ─── SECTION 7: PRINCIPLES ─── */
+.principles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.principle-card{
+  background:var(--navy2);border:1px solid var(--border2);
+  border-radius:14px;padding:20px;
+  transition:.2s;
+}
+.principle-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.p-num{
+  font-family:'Amiri',serif;font-size:2rem;color:var(--gold);
+  opacity:.2;float:left;margin-left:10px;line-height:1;
+}
+.p-icon{font-size:1.5rem;margin-bottom:10px;}
+.p-title{font-family:'Amiri',serif;font-size:1rem;color:var(--gold2);margin-bottom:8px;}
+.p-text{font-size:.78rem;color:var(--text2);line-height:1.8;}
+
+/* ─── SECTION: EPISTEMOLOGICAL FRAMEWORK ─── */
+.epistem-intro{
+  max-width:700px;margin:0 auto 36px;text-align:center;
+  font-size:.9rem;color:var(--text2);line-height:2;
+}
+.epistem-pyramid{display:flex;flex-direction:column;gap:0;max-width:800px;margin:0 auto;}
+.ep-layer{
+  border-radius:16px;padding:24px 28px;margin-bottom:4px;
+  display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:center;
+  position:relative;transition:.2s;
+}
+.ep-layer:hover{transform:translateY(-2px);}
+.ep-foundation{
+  background:linear-gradient(135deg,#1a1005,#2a1a08);
+  border:2px solid var(--gold);
+  box-shadow:0 0 30px rgba(201,168,76,.15);
+}
+.ep-building{background:#0d1e2e;border:1px solid var(--blue);}
+.ep-contemporary{background:#0a1a10;border:1px solid var(--green);}
+.ep-num{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Amiri',serif;font-size:1.4rem;font-weight:700;flex-shrink:0;
+}
+.ep-foundation .ep-num{background:#2a1f05;border:2px solid var(--gold);color:var(--gold);}
+.ep-building .ep-num{background:#0d2137;border:2px solid var(--blue2);color:var(--blue2);}
+.ep-contemporary .ep-num{background:#0a2015;border:2px solid var(--green2);color:var(--green2);}
+.ep-content{}
+.ep-title{font-family:'Amiri',serif;font-size:1.2rem;margin-bottom:6px;}
+.ep-foundation .ep-title{color:var(--gold2);}
+.ep-building .ep-title{color:var(--blue2);}
+.ep-contemporary .ep-title{color:var(--green2);}
+.ep-desc{font-size:.82rem;color:var(--text2);line-height:1.8;}
+.ep-badge{
+  text-align:center;font-size:.7rem;min-width:90px;
+  padding:6px 14px;border-radius:20px;flex-shrink:0;
+}
+.ep-foundation .ep-badge{background:#2a1f05;color:var(--gold);border:1px solid var(--gold);}
+.ep-building .ep-badge{background:#0d2137;color:var(--blue2);border:1px solid var(--blue);}
+.ep-contemporary .ep-badge{background:#0a2015;color:var(--green2);border:1px solid var(--green);}
+.ep-arrow{text-align:center;color:var(--text3);font-size:1.1rem;padding:6px 0;letter-spacing:2px;}
+.ep-inexhaustible{
+  margin-top:24px;padding:20px 24px;
+  background:var(--navy2);border:1px solid var(--border2);
+  border-radius:14px;display:flex;gap:16px;align-items:flex-start;
+}
+.ep-inexh-icon{font-size:1.8rem;flex-shrink:0;}
+.ep-inexh-title{font-family:'Amiri',serif;font-size:1rem;color:var(--gold2);margin-bottom:6px;}
+.ep-inexh-text{font-size:.8rem;color:var(--text2);line-height:1.8;}
+
+/* ─── PRINCIPLES — FEATURED ─── */
+.principle-featured{
+  grid-column:1/-1;
+  background:linear-gradient(135deg,#1a1005,#2a1a08);
+  border:2px solid var(--gold) !important;
+  box-shadow:0 0 30px rgba(201,168,76,.1);
+}
+.principle-featured .p-title{font-size:1.15rem;color:var(--gold2);}
+.pf-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.pf-badge{
+  background:#2a1f05;color:var(--gold);border:1px solid var(--gold);
+  border-radius:20px;font-size:.7rem;padding:4px 12px;white-space:nowrap;
+}
+.pf-points{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px;}
+@media(max-width:650px){.pf-points{grid-template-columns:1fr;}}
+.pf-point{
+  background:var(--navy3);border-radius:10px;padding:12px 14px;
+  border-right:3px solid var(--gold);
+}
+.pf-point-title{font-size:.78rem;color:var(--gold2);font-weight:600;margin-bottom:4px;}
+.pf-point-text{font-size:.74rem;color:var(--text2);line-height:1.7;}
+
+/* ─── FOOTER ─── */
+footer{
+  text-align:center;padding:40px 20px;color:var(--text3);
+  font-size:.8rem;border-top:1px solid var(--border2);
+  background:var(--navy2);
+}
+footer .brand{font-family:'Amiri',serif;font-size:1.2rem;color:var(--gold);display:block;margin-bottom:8px;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:700px){
+  .brand-logo{font-size:3.5rem;}
+  .brand-tagline{font-size:1.4rem;}
+  .tier-card{grid-template-columns:50px 1fr;}
+  .tier-meta{display:none;}
+  .jstage{grid-template-columns:60px 1fr;}
+  .jright{display:none;}
+  .stat-row{gap:12px;}
+  .stat-box{min-width:90px;padding:12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">تدبُّر</div>
+  <div class="nav-links">
+    <a href="#identity">الهوية</a>
+    <a href="#problem">المشكلة</a>
+    <a href="#epistemology">المرجعية</a>
+    <a href="#architecture">الهيكل</a>
+    <a href="#content">المحتوى</a>
+    <a href="#journey">الرحلة</a>
+    <a href="#surahs">السور</a>
+    <a href="#principles">المبادئ</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — IDENTITY
+════════════════════════════════════════════ -->
+<section id="identity">
+  <div style="font-family:'Amiri',serif;font-size:1.1rem;color:var(--text3);margin-bottom:20px;">
+    بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ
+  </div>
+  <div class="brand-logo">تدبُّر</div>
+  <div class="brand-sub">مشروع قرآني متكامل</div>
+  <div class="divider" style="margin:0 auto 28px;"></div>
+  <div class="brand-tagline">
+    إعادة بناء العلاقة مع القرآن الكريم<br>
+    <span style="font-size:1.3rem;color:var(--text3);">من الاستهلاك إلى التحوّل</span>
+  </div>
+  <div class="brand-mission">
+    انطلاقًا من الإيمان بأن القرآن الكريم كتاب منهج لا مستودع معلومات،<br>
+    وأن بُعد المسلمين عنه لم يكن لصعوبته بل لفقدان طريقة التلقي الصحيحة،<br>
+    يسعى هذا المشروع إلى تقريب لغة القرآن وتسهيل تدبّره بأدوات العصر<br>
+    دون المساس بعمق النص وأمانة النقل.
+  </div>
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-num">١</span>
+      <span class="stat-lbl">سورة مكتملة</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">٧٠</span>
+      <span class="stat-lbl">آية موثّقة</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">٣</span>
+      <span class="stat-lbl">مراجع مدمجة</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">٢</span>
+      <span class="stat-lbl">خريطة موضوعية</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">٣</span>
+      <span class="stat-lbl">طبقات المشروع</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ تصفّح الخارطة</div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — PROBLEM & SOLUTION
+════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="section-label">٠١ — المشكلة والحل</div>
+  <h2 class="sec-title">لماذا هذا المشروع؟</h2>
+  <div class="divider"></div>
+  <div class="two-col">
+    <div class="prob-card">
+      <div class="card-icon">⚠️</div>
+      <div class="card-title">المشكلة الحقيقية</div>
+      <ul class="card-list">
+        <li>توظيف الدين لخدمة السلطة ظاهرة تاريخية: في اليهودية والمسيحية حُرِّفت النصوص وأُقيمت الحروب وفُصل العلم عن الإيمان باسم الدين</li>
+        <li>ظنّ كثيرٌ من الناس أن ما رأوه من هذا التوظيف هو الدين المنزل — فأعرضوا عن الفكرة الدينية كلها</li>
+        <li>في عصرنا: فقدنا طريقة التلقي الصحيحة للقرآن فأصبح يُقرأ كطقس شكلي لا كمنهج حياة</li>
+        <li>بُعد الأمة عن التصوّر الصحيح للدين الذي يصلح دنياها وأخراها</li>
+        <li>التشرذم والتبعية الفكرية نتيجة الانفصال عن المرجع الأصيل المحفوظ</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="card-icon">💡</div>
+      <div class="card-title">الرؤية البديلة</div>
+      <ul class="card-list">
+        <li>تقريب لغة القرآن بدون تسطيح أو إخلال بالأمانة العلمية</li>
+        <li>تقديم التجربة الأصيلة مباشرةً دون وسيط مشوِّه</li>
+        <li>القرآن منهج يُعاش لا نص يُحفظ ويُهجر</li>
+        <li>الشخصيات القرآنية نماذج سلوكية متكررة في كل زمن</li>
+        <li>التدبّر حق لكل مسلم وليس حكرًا على النخبة</li>
+        <li>أدوات العصر في خدمة النص الخالد</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight-box">
+    " فقدنا طريقة التلقي — لا لأن القرآن صعب،<br>
+    بل لأن كثيرًا منا لم يصله أصيلًا كما وصل الصحابة والسلف الصالح "
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION: EPISTEMOLOGICAL FRAMEWORK
+════════════════════════════════════════════ -->
+<section id="epistemology">
+  <div class="section-label">٠٢ — المرجعية المعرفية</div>
+  <h2 class="sec-title">على ماذا يقوم المشروع؟</h2>
+  <p class="sec-sub">ثلاث طبقات معرفية متراكبة — الأساس ثابت والبناء عليه متجدد</p>
+
+  <div class="epistem-intro">
+    المشروع لا يقدّم تفسيرًا مستقلًا — بل يُيسّر الوصول إلى منظومة معرفية متكاملة
+    تنطلق من فهم الصحابة والسلف كأساس لا يُتجاوز،
+    وتبني عليه ما أثرى العلماء عبر القرون،
+    ثم تُقرّبه للقارئ المعاصر بلغته وواقعه.
+  </div>
+
+  <div class="epistem-pyramid">
+
+    <div class="ep-layer ep-foundation">
+      <div class="ep-num">١</div>
+      <div class="ep-content">
+        <div class="ep-title">الأساس — فهم الصحابة والسلف الصالح</div>
+        <div class="ep-desc">
+          الصحابة والتابعون أصحاب أفضلية معرفية موضوعية لا تُستعاض عنها:
+          معايشتهم المباشرة للنبي ﷺ والأحداث، ملكتهم اللغوية السليقية الراسخة،
+          وتربيتهم النبوية التي شكّلت منهج التلقي قبل محتواه.
+          فهمهم الأصل الذي يُرجع إليه — لا وسيط، بل مرجع أعلى.
+        </div>
+      </div>
+      <div class="ep-badge">الأصل الثابت</div>
+    </div>
+
+    <div class="ep-arrow">↓</div>
+
+    <div class="ep-layer ep-building">
+      <div class="ep-num">٢</div>
+      <div class="ep-content">
+        <div class="ep-title">البناء — تراكم علماء الأمة عبر الأجيال</div>
+        <div class="ep-desc">
+          القرآن لا تنقضي عجائبه — كل جيل يستخرج منه ما يتناسب مع أسئلته.
+          هذا لا يتعارض مع الأفضلية المعرفية للسلف بل يكمّلها:
+          التفاسير الكبرى، أسباب النزول، علوم اللغة، الفقه — كلها طبقات مبنية على الأصل.
+          المشروع يستفيد من التفسير الميسر وفي الظلال كنماذج من هذا التراكم.
+        </div>
+      </div>
+      <div class="ep-badge">بناء متراكم</div>
+    </div>
+
+    <div class="ep-arrow">↓</div>
+
+    <div class="ep-layer ep-contemporary">
+      <div class="ep-num">٣</div>
+      <div class="ep-content">
+        <div class="ep-title">التجديد — تقريب اللغة وإسقاطها على الواقع المعاصر</div>
+        <div class="ep-desc">
+          مهمة هذا العصر: جسر الهوّة بين النص وقارئه المعاصر —
+          تيسير اللغة دون تسطيح، وإسقاط النصوص على الواقع دون تأويل.
+          نموذج فرعون في بنية السلطة اليوم، وقصة موسى والخضر في مواجهة ما لا تفهم —
+          هذا التطبيق مهمة عصرنا المضافة على الأصل، لا بديلة عنه.
+        </div>
+      </div>
+      <div class="ep-badge">مهمة العصر</div>
+    </div>
+
+  </div>
+
+  <div class="ep-inexhaustible">
+    <div class="ep-inexh-icon">♾️</div>
+    <div>
+      <div class="ep-inexh-title">مبدأ عجائب القرآن اللانهائية</div>
+      <div class="ep-inexh-text">
+        قال ﷺ: <span style="font-family:'Amiri',serif;font-size:.95rem;color:var(--gold2);">"لا تنقضي عجائبه"</span> —
+        وهذا يعني أن ما استخرجه الصحابة والسلف ليس السقف بل الأساس.
+        كل حقبة تأتي بأسئلة جديدة يجد لها القرآن أجوبة لم تكن الحقب السابقة في حاجة إلى استخراجها.
+        المشروع يسعى لأن يكون أداةً في يد كل جيل ليستخرج كنوزه بنفسه — على قاعدة السلف وليس بمعزل عنها.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — ARCHITECTURE
+════════════════════════════════════════════ -->
+<section id="architecture">
+  <div class="section-label">٠٣ — هيكل المشروع</div>
+  <h2 class="sec-title">الطبقات الثلاث</h2>
+  <p class="sec-sub">كل طبقة تخدم مرحلة مختلفة من رحلة المتدبّر — من الاكتشاف إلى التحوّل</p>
+  <div class="arch-wrap">
+
+    <div class="tier-card tier-3">
+      <div class="tier-num">١</div>
+      <div class="tier-content">
+        <div class="tier-name">بوستات المفاهيم السريعة</div>
+        <div class="tier-desc">
+          خرائط بصرية سريعة تُقدّم فكرة قرآنية واحدة بوضوح وجمال —
+          موجّهة للجمهور الواسع الذي لا يعرف المشروع بعد.
+          مثال: النداءات القرآنية، صفات أهل الكتاب.
+        </div>
+      </div>
+      <div class="tier-meta">
+        <div><span class="tier-tag tag-o">السوشيال ميديا</span></div>
+        <div class="tier-freq">🗓 شبه يومي</div>
+        <div class="tier-freq" style="margin-top:4px;">👥 جمهور واسع</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;color:var(--text3);font-size:1.2rem;margin:-4px 0;">↓</div>
+
+    <div class="tier-card tier-2">
+      <div class="tier-num">٢</div>
+      <div class="tier-content">
+        <div class="tier-name">الخرائط الموضوعية الشاملة</div>
+        <div class="tier-desc">
+          صفحات تفاعلية تتناول موضوعًا قرآنيًا عبر القرآن كله —
+          تبني صورة كلية وتُعطي القارئ خريطة معرفية عميقة.
+          مثال: النداءات الـ 115، نماذج فرعون وقارون عبر السور.
+        </div>
+      </div>
+      <div class="tier-meta">
+        <div><span class="tier-tag tag-b">موقع وسوشيال</span></div>
+        <div class="tier-freq">🗓 أسبوعي / موسمي</div>
+        <div class="tier-freq" style="margin-top:4px;">👥 جمهور مهتم</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;color:var(--text3);font-size:1.2rem;margin:-4px 0;">↓</div>
+
+    <div class="tier-card tier-1">
+      <div class="tier-num">٣</div>
+      <div class="tier-content">
+        <div class="tier-name">تجارب السور التفاعلية الكاملة</div>
+        <div class="tier-desc">
+          مشروع متكامل لكل سورة يشمل: التفسير الكلمة بكلمة، معاني الآيات،
+          في ظلال القرآن، القصص والمحاور الرئيسية — تجربة تدبّر حقيقية.
+          مثال: مشروع سورة الكهف المكتمل (70 آية، 4 قصص).
+        </div>
+      </div>
+      <div class="tier-meta">
+        <div><span class="tier-tag tag-g">موقع مستقل</span></div>
+        <div class="tier-freq">🗓 كل سورة = مشروع</div>
+        <div class="tier-freq" style="margin-top:4px;">👥 المتدبّرون الجادّون</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="arch-flow">
+    <div class="flow-step">
+      <div class="flow-icon">📱</div>
+      <div class="flow-lbl">يرى البوست</div>
+    </div>
+    <div class="flow-arrow">←</div>
+    <div class="flow-step">
+      <div class="flow-icon">🗺️</div>
+      <div class="flow-lbl">يكتشف الخريطة</div>
+    </div>
+    <div class="flow-arrow">←</div>
+    <div class="flow-step">
+      <div class="flow-icon">📖</div>
+      <div class="flow-lbl">يعيش السورة</div>
+    </div>
+    <div class="flow-arrow">←</div>
+    <div class="flow-step">
+      <div class="flow-icon">✨</div>
+      <div class="flow-lbl">يتحوّل</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — CONTENT INVENTORY
+════════════════════════════════════════════ -->
+<section id="content">
+  <div class="section-label">٠٤ — خزينة المحتوى</div>
+  <h2 class="sec-title">ما تم وما ينتظر</h2>
+  <div class="divider"></div>
+  <div class="content-tabs">
+    <button class="ctab active" onclick="showCTab('all',this)">الكل</button>
+    <button class="ctab" onclick="showCTab('done',this)">✅ مكتمل</button>
+    <button class="ctab" onclick="showCTab('plan',this)">📅 مخطط</button>
+  </div>
+
+  <div id="cpanel-all" class="cpanel active">
+    <div class="content-grid">
+
+      <!-- DONE -->
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">🕌</div>
+        <div class="ccard-name">سورة الكهف — التجربة الكاملة</div>
+        <div class="ccard-type">الطبقة الثالثة — تجربة سورة</div>
+        <div class="ccard-desc">70 آية موثّقة، 4 قصص تفاعلية، معاني الكلمات، التفسير الميسر، في الظلال. نسخة قابلة للمشاركة مضمّنة الخطوط.</div>
+        <div class="ccard-tags">
+          <span class="ctag">٧٠ آية</span>
+          <span class="ctag">٤ قصص</span>
+          <span class="ctag">التفسير الميسر</span>
+          <span class="ctag">في الظلال</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">📣</div>
+        <div class="ccard-name">النداءات القرآنية</div>
+        <div class="ccard-type">الطبقة الثانية — خريطة موضوعية</div>
+        <div class="ccard-desc">١١٥ نداء في القرآن الكريم مصنّفة في ٥ أنواع و٩ موضوعات. تفاعلي مع عرض نص الآية كاملًا.</div>
+        <div class="ccard-tags">
+          <span class="ctag">١١٥ آية</span>
+          <span class="ctag">تفاعلي</span>
+          <span class="ctag">إحصائي</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">📚</div>
+        <div class="ccard-name">صفات أهل الكتاب</div>
+        <div class="ccard-type">الطبقة الأولى — بوست مفهوم</div>
+        <div class="ccard-desc">٨ صفات، ١٠ آيات، ٣ محاور. تصميم بطاقات أكاديمي مع استثناء الراسخين في العلم.</div>
+        <div class="ccard-tags">
+          <span class="ctag">٨ صفات</span>
+          <span class="ctag">١٠ آيات</span>
+          <span class="ctag">بطاقات</span>
+        </div>
+      </div>
+
+      <!-- PLANNED -->
+      <div class="ccard ccard-plan">
+        <span class="cstatus st-plan">📅 مخطط</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">🌙</div>
+        <div class="ccard-name">سورة يس — التجربة الكاملة</div>
+        <div class="ccard-type">الطبقة الثالثة — تجربة سورة</div>
+        <div class="ccard-desc">محاور: الإيمان بالبعث، قصة أصحاب القرية، آيات الكون الدالة على الوحدانية.</div>
+        <div class="ccard-tags">
+          <span class="ctag">٨٣ آية</span>
+          <span class="ctag">أولوية عالية</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-plan">
+        <span class="cstatus st-plan">📅 مخطط</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">🌿</div>
+        <div class="ccard-name">نماذج الشخصيات القرآنية</div>
+        <div class="ccard-type">الطبقة الثانية — خريطة موضوعية</div>
+        <div class="ccard-desc">فرعون، قارون، هامان، إبليس — نماذج سلوكية متكررة عبر العصور كما وصفها د. نايف بن نهار.</div>
+        <div class="ccard-tags">
+          <span class="ctag">عبر السور</span>
+          <span class="ctag">نفسي-اجتماعي</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-plan">
+        <span class="cstatus st-plan">📅 مخطط</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">📊</div>
+        <div class="ccard-name">الأوامر والنواهي في القرآن</div>
+        <div class="ccard-type">الطبقة الثانية — خريطة موضوعية</div>
+        <div class="ccard-desc">تصنيف إحصائي وموضوعي للأوامر والنواهي القرآنية — ماذا أمر الله؟ وماذا نهى؟ وكيف توزّعت؟</div>
+        <div class="ccard-tags">
+          <span class="ctag">إحصائي</span>
+          <span class="ctag">تصنيفي</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-plan">
+        <span class="cstatus st-plan">📅 مخطط</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">💫</div>
+        <div class="ccard-name">سورة الرحمن — التجربة الكاملة</div>
+        <div class="ccard-type">الطبقة الثالثة — تجربة سورة</div>
+        <div class="ccard-desc">محور: نعم الله لا تُحصى. تصميم خاص يعكس جمال التكرار في "فبأي آلاء ربكما تكذبان".</div>
+        <div class="ccard-tags">
+          <span class="ctag">٧٨ آية</span>
+          <span class="ctag">تصميم مميز</span>
+        </div>
+      </div>
+
+      <div class="ccard ccard-plan">
+        <span class="cstatus st-plan">📅 مخطط</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">🤲</div>
+        <div class="ccard-name">الدعاء في القرآن الكريم</div>
+        <div class="ccard-type">الطبقة الأولى / الثانية</div>
+        <div class="ccard-desc">جمع أدعية الأنبياء والصالحين من القرآن مع سياقها — أي ابتلاء قاد إلى أي دعاء؟</div>
+        <div class="ccard-tags">
+          <span class="ctag">أدعية الأنبياء</span>
+          <span class="ctag">سياق الابتلاء</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="cpanel-done" class="cpanel">
+    <div class="content-grid">
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">🕌</div>
+        <div class="ccard-name">سورة الكهف — التجربة الكاملة</div>
+        <div class="ccard-type">الطبقة الثالثة</div>
+        <div class="ccard-desc">70 آية موثّقة، 4 قصص، معاني الكلمات، التفسير الميسر، في الظلال.</div>
+      </div>
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">📣</div>
+        <div class="ccard-name">النداءات القرآنية</div>
+        <div class="ccard-type">الطبقة الثانية</div>
+        <div class="ccard-desc">١١٥ نداء مصنّف في ٩ موضوعات.</div>
+      </div>
+      <div class="ccard ccard-done">
+        <span class="cstatus st-done">✅ مكتمل</span>
+        <div style="margin-top:20px;"></div>
+        <div class="ccard-icon">📚</div>
+        <div class="ccard-name">صفات أهل الكتاب</div>
+        <div class="ccard-type">الطبقة الأولى</div>
+        <div class="ccard-desc">٨ صفات، ١٠ آيات بتصميم بطاقات.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cpanel-plan" class="cpanel">
+    <div class="content-grid">
+      <div class="ccard ccard-plan"><span class="cstatus st-plan">📅 مخطط</span><div style="margin-top:20px;"></div><div class="ccard-icon">🌙</div><div class="ccard-name">سورة يس</div><div class="ccard-type">الطبقة الثالثة</div><div class="ccard-desc">أولوية عالية — ٨٣ آية.</div></div>
+      <div class="ccard ccard-plan"><span class="cstatus st-plan">📅 مخطط</span><div style="margin-top:20px;"></div><div class="ccard-icon">🌿</div><div class="ccard-name">نماذج الشخصيات القرآنية</div><div class="ccard-type">الطبقة الثانية</div><div class="ccard-desc">فرعون، قارون، هامان عبر السور.</div></div>
+      <div class="ccard ccard-plan"><span class="cstatus st-plan">📅 مخطط</span><div style="margin-top:20px;"></div><div class="ccard-icon">📊</div><div class="ccard-name">الأوامر والنواهي</div><div class="ccard-type">الطبقة الثانية</div><div class="ccard-desc">تصنيف إحصائي وموضوعي.</div></div>
+      <div class="ccard ccard-plan"><span class="cstatus st-plan">📅 مخطط</span><div style="margin-top:20px;"></div><div class="ccard-icon">💫</div><div class="ccard-name">سورة الرحمن</div><div class="ccard-type">الطبقة الثالثة</div><div class="ccard-desc">تصميم خاص يعكس التكرار.</div></div>
+      <div class="ccard ccard-plan"><span class="cstatus st-plan">📅 مخطط</span><div style="margin-top:20px;"></div><div class="ccard-icon">🤲</div><div class="ccard-name">الدعاء في القرآن</div><div class="ccard-type">الطبقة الأولى/الثانية</div><div class="ccard-desc">أدعية الأنبياء وسياق الابتلاء.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — USER JOURNEY
+════════════════════════════════════════════ -->
+<section id="journey">
+  <div class="section-label">٠٥ — رحلة المتدبّر</div>
+  <h2 class="sec-title">كيف يتحرك المستخدم؟</h2>
+  <p class="sec-sub">أربع مراحل من اللقاء الأول حتى التحوّل الداخلي</p>
+  <div class="journey-wrap">
+
+    <div class="jstage j1">
+      <div class="jnum">١</div>
+      <div class="jcol jleft">
+        <div class="jstage-lbl">المرحلة الأولى</div>
+        <div class="jstage-title">الاكتشاف</div>
+        <div class="jstage-text">
+          يصطدم ببوست جميل عن النداءات أو صفات أهل الكتاب في تايم لاين مزدحم.
+          لم يبحث عن شيء — لكن شيئًا لفت انتباهه.
+        </div>
+        <div class="jtool">🛠 الأداة: بوستات المفاهيم السريعة (الطبقة الأولى)</div>
+      </div>
+      <div class="jcol jright">
+        <div class="jstage-lbl">ما يشعر به</div>
+        <div class="jstage-title">الدهشة</div>
+        <div class="jstage-text">
+          "لم أعرف أن في القرآن ١١٥ نداء…<br>
+          لم أكن أعرف أن لكل نوع نداء دلالته…<br>
+          من صنع هذا؟"
+        </div>
+      </div>
+    </div>
+
+    <div class="jstage j2">
+      <div class="jnum">٢</div>
+      <div class="jcol jleft">
+        <div class="jstage-lbl">المرحلة الثانية</div>
+        <div class="jstage-title">الإثارة</div>
+        <div class="jstage-text">
+          يبحث عن المزيد. يجد الخرائط الموضوعية الأشمل.
+          يقضي وقتًا في استكشاف المحتوى التفاعلي
+          ويبدأ يسأل أسئلة لم تخطر له من قبل.
+        </div>
+        <div class="jtool">🛠 الأداة: الخرائط الموضوعية الشاملة (الطبقة الثانية)</div>
+      </div>
+      <div class="jcol jright">
+        <div class="jstage-lbl">ما يشعر به</div>
+        <div class="jstage-title">الفضول</div>
+        <div class="jstage-text">
+          "لماذا خاطب الله بني آدم بهذا الأسلوب تحديدًا؟<br>
+          ما الفرق بين 'يا أيها الناس' و'يا أيها الذين آمنوا'؟<br>
+          أريد أن أفهم أكثر."
+        </div>
+      </div>
+    </div>
+
+    <div class="jstage j3">
+      <div class="jnum">٣</div>
+      <div class="jcol jleft">
+        <div class="jstage-lbl">المرحلة الثالثة</div>
+        <div class="jstage-title">التعمّق</div>
+        <div class="jstage-text">
+          يدخل تجربة سورة كاملة. يقرأ الكلمة بكلمة.
+          يفتح التفسير. يقرأ في الظلال.
+          يجلس مع آية واحدة لدقائق طويلة.
+        </div>
+        <div class="jtool">🛠 الأداة: تجارب السور التفاعلية (الطبقة الثالثة)</div>
+      </div>
+      <div class="jcol jright">
+        <div class="jstage-lbl">ما يشعر به</div>
+        <div class="jstage-title">الانعتاق</div>
+        <div class="jstage-text">
+          "هذه الآية عن الكهف تصف بالضبط ما أعيشه…<br>
+          موسى والخضر وتعلّم الصبر على ما لا تفهم…<br>
+          يخاطبني شخصيًا."
+        </div>
+      </div>
+    </div>
+
+    <div class="jstage j4">
+      <div class="jnum">٤</div>
+      <div class="jcol jleft">
+        <div class="jstage-lbl">المرحلة الرابعة</div>
+        <div class="jstage-title">التحوّل</div>
+        <div class="jstage-text">
+          لم يعد يقرأ القرآن كما قبل.
+          شيء تغيّر في طريقة تلقّيه للنص.
+          يعود من تلقاء نفسه. ويُشارك غيره.
+        </div>
+        <div class="jtool">✨ الهدف الأعلى للمشروع</div>
+      </div>
+      <div class="jcol jright">
+        <div class="jstage-lbl">ما يفعله</div>
+        <div class="jstage-title">الانتشار</div>
+        <div class="jstage-text">
+          يشارك ملف الكهف مع صديق.
+          يسأل: "هل هناك سورة يس بنفس الأسلوب؟"
+          يُصبح سفيرًا للمشروع بلا قصد.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="selection-note">
+    <strong>💡 مبدأ الاصطفاء الطبيعي:</strong>
+    لا يحتاج المشروع أن يُعقّد الوصول أو يمنع أحدًا —
+    التصميم نفسه يصطفي: من جاء باحثًا عن إجابة جاهزة سيكتفي بالبوست.
+    ومن جاء باحثًا عن تحوّل سيجد طريقه حتى الطبقة الثالثة.
+    <br><br>
+    <strong>الاحتكاك المطلوب ليس عائقًا — بل بوصلة</strong> تقول للمستخدم:
+    "ما تبحث عنه أعمق مما تظن."
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — SURAH ROADMAP
+════════════════════════════════════════════ -->
+<section id="surahs">
+  <div class="section-label">٠٦ — خارطة السور</div>
+  <h2 class="sec-title">الأولويات والتسلسل</h2>
+  <p class="sec-sub">مجموعات موضوعية مقترحة — تبدأ بالسور الأكثر تأثيرًا وانتشارًا</p>
+  <div class="roadmap-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green2);"></div>مكتملة</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold);"></div>أولوية قصوى</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--blue2);"></div>أولوية عالية</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--text3);"></div>مخطط</div>
+  </div>
+  <div class="roadmap-clusters">
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-dot" style="background:var(--green2);"></div>
+        <div>
+          <div class="cluster-title">المجموعة الأولى — الهوية والثبات</div>
+          <div class="cluster-desc">سور تبني الهوية الإيمانية في مواجهة التغريب والفتنة</div>
+        </div>
+      </div>
+      <div class="surah-grid">
+        <div class="surah-pill s-done">✅ الكهف <span class="s-badge">(١٨)</span></div>
+        <div class="surah-pill s-next">⭐ يس <span class="s-badge">(٣٦)</span></div>
+        <div class="surah-pill s-next">⭐ الملك <span class="s-badge">(٦٧)</span></div>
+        <div class="surah-pill s-plan">الأحزاب <span class="s-badge">(٣٣)</span></div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-dot" style="background:var(--gold);"></div>
+        <div>
+          <div class="cluster-title">المجموعة الثانية — الجمال والامتنان</div>
+          <div class="cluster-desc">سور تُعيد الوصل بنعم الله وجمال الخلق</div>
+        </div>
+      </div>
+      <div class="surah-grid">
+        <div class="surah-pill s-next">⭐ الرحمن <span class="s-badge">(٥٥)</span></div>
+        <div class="surah-pill s-prog">🔄 الواقعة <span class="s-badge">(٥٦)</span></div>
+        <div class="surah-pill s-plan">الغاشية <span class="s-badge">(٨٨)</span></div>
+        <div class="surah-pill s-plan">ق <span class="s-badge">(٥٠)</span></div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-dot" style="background:var(--blue2);"></div>
+        <div>
+          <div class="cluster-title">المجموعة الثالثة — الأنبياء والنماذج</div>
+          <div class="cluster-desc">سور القصص القرآني — النماذج الإنسانية المتكررة</div>
+        </div>
+      </div>
+      <div class="surah-grid">
+        <div class="surah-pill s-plan">يوسف <span class="s-badge">(١٢)</span></div>
+        <div class="surah-pill s-plan">هود <span class="s-badge">(١١)</span></div>
+        <div class="surah-pill s-plan">الأنبياء <span class="s-badge">(٢١)</span></div>
+        <div class="surah-pill s-plan">إبراهيم <span class="s-badge">(١٤)</span></div>
+        <div class="surah-pill s-plan">مريم <span class="s-badge">(١٩)</span></div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-dot" style="background:var(--text3);"></div>
+        <div>
+          <div class="cluster-title">المجموعة الرابعة — المنهج والتشريع</div>
+          <div class="cluster-desc">السور التشريعية الكبرى — القرآن كنظام حياة كامل</div>
+        </div>
+      </div>
+      <div class="surah-grid">
+        <div class="surah-pill s-plan">البقرة <span class="s-badge">(٢)</span></div>
+        <div class="surah-pill s-plan">آل عمران <span class="s-badge">(٣)</span></div>
+        <div class="surah-pill s-plan">النساء <span class="s-badge">(٤)</span></div>
+        <div class="surah-pill s-plan">المائدة <span class="s-badge">(٥)</span></div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-dot" style="background:var(--gold);"></div>
+        <div>
+          <div class="cluster-title">المجموعة الخامسة — الختم والتثبيت</div>
+          <div class="cluster-desc">قصار السور — كثيفة المعنى، يومية الاستخدام</div>
+        </div>
+      </div>
+      <div class="surah-grid">
+        <div class="surah-pill s-plan">الإخلاص <span class="s-badge">(١١٢)</span></div>
+        <div class="surah-pill s-plan">الفلق <span class="s-badge">(١١٣)</span></div>
+        <div class="surah-pill s-plan">الناس <span class="s-badge">(١١٤)</span></div>
+        <div class="surah-pill s-plan">الكافرون <span class="s-badge">(١٠٩)</span></div>
+        <div class="surah-pill s-plan">الفاتحة <span class="s-badge">(١)</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — PRINCIPLES
+════════════════════════════════════════════ -->
+<section id="principles">
+  <div class="section-label">٠٧ — المبادئ التوجيهية</div>
+  <h2 class="sec-title">الأسس الفكرية للمشروع</h2>
+  <p class="sec-sub">المبدأ الأول ثابت ولا يُتجاوز — وما يليه مستقى من محاضرات د. نايف بن نهار ويُترجم إلى قرارات تصميمية في المحتوى</p>
+  <div class="principles-grid">
+
+    <!-- FEATURED PRINCIPLE — SALAF -->
+    <div class="principle-card principle-featured">
+      <div class="pf-header">
+        <div class="p-icon" style="font-size:2rem;">🌟</div>
+        <div>
+          <div class="p-title">المبدأ الأول — فهم السلف الأصل الذي لا يُتجاوز</div>
+          <span class="pf-badge">الأساس الثابت للمشروع</span>
+        </div>
+      </div>
+      <div class="p-text" style="font-size:.85rem;">
+        فهم الصحابة الكرام والتابعين للقرآن الكريم هو المرجع الأعلى في هذا المشروع.
+        ليسوا وسطاء يحجبون النص — بل أصحاب أفضلية معرفية موضوعية لا تُستعاض عنها.
+        كل تفسير يُقدَّم يُراجع على ضوء المأثور، وكل إسقاط معاصر لا يتجاوز حدود ما أصّله السلف.
+      </div>
+      <div class="pf-points">
+        <div class="pf-point">
+          <div class="pf-point-title">📖 المعايشة المباشرة</div>
+          <div class="pf-point-text">عاشوا أحداث النزول وتلقّوا التفسير من المصدر مباشرة — لا يُعوَّض هذا بأي أداة أو عصر</div>
+        </div>
+        <div class="pf-point">
+          <div class="pf-point-title">🗣️ الملكة اللغوية</div>
+          <div class="pf-point-text">العربية فيهم سليقة لا اكتساباً — فهمهم اللغوي للنص أعمق مما يمكن لأي لاحق بلوغه باجتهاد</div>
+        </div>
+        <div class="pf-point">
+          <div class="pf-point-title">🌙 التربية النبوية</div>
+          <div class="pf-point-text">شكّل النبي ﷺ منهج تلقّيهم قبل محتواه — وهذا المنهج هو ما ينتقل عبر تفسيرهم المأثور</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">📘</div>
+      <div class="p-title">القرآن منهج لا مستودع معلومات</div>
+      <div class="p-text">يهدف النص القرآني إلى صياغة وعي المتلقي وبناء ملكة التفكير — لذا كل تجربة سورة تُقدَّم كمنهج يُعاش لا معلومات تُحفظ.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🎭</div>
+      <div class="p-title">نمذجة الشخصيات القرآنية</div>
+      <div class="p-text">فرعون وقارون وأصحاب الكهف ليسوا تاريخًا — بل نماذج نفسية وسلوكية متكررة. المحتوى يُظهر هذا التكرار في الواقع المعاصر.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🗝️</div>
+      <div class="p-title">الوحدة الموضوعية للسور</div>
+      <div class="p-text">لكل سورة محور مركزي تنتظم حوله الآيات. هذا "الناظم" هو نقطة البداية في كل مشروع سورة — يظهر بوضوح في الواجهة.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🔬</div>
+      <div class="p-title">التحليل النفسي للمجتمعات</div>
+      <div class="p-text">تشريح البنى النفسية والاجتماعية وقت الأزمات — قراءة قرآنية في ديناميكيات الجماعات البشرية كما في نموذج الأحزاب.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🤝</div>
+      <div class="p-title">استرداد الثقة في التلقي</div>
+      <div class="p-text">الإقبال على القرآن كمرجع أصيل مع التجرد من الأهواء الأيديولوجية. المشروع يقدّم النص أمام التفسير — الآية تسبق الشرح دائمًا.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🚫</div>
+      <div class="p-title">مناهضة الاقتسام والتجزيء</div>
+      <div class="p-text">التحذير من اجتزاء الآيات عن سياقها. كل آية في المشروع تأتي مع سياقها الموضوعي وموقعها في بنية السورة.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">🌍</div>
+      <div class="p-title">مشروعية التدبر كفعل جمعي</div>
+      <div class="p-text">التدبر حق لكل مسلم وليس حكرًا على أحد. المشروع يُقدَّم بأسلوب يُمكّن القارئ من الفهم المستقل مع الانضباط بأصول اللغة.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="p-icon">⚡</div>
+      <div class="p-title">التفعيل المعرفي في العبادة</div>
+      <div class="p-text">تحويل العلاقة مع القرآن من طقوس شكلية إلى تراكم معرفي حقيقي — هذا هو الهدف النهائي من كل طبقة في المشروع.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="brand">تدبُّر</span>
+  خارطة المشروع — نسخة أولية تصورية<br>
+  <span style="color:var(--gold);font-size:.85rem;">﴿ أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ﴾</span>
+</footer>
+
+<script>
+// Nav active
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s => observer.observe(s));
+
+// Content tabs
+function showCTab(tab, btn){
+  document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cpanel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cpanel-'+tab).classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>تدبّر سورة المطففين</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a1628">
+<meta property="og:title" content="تدبّر سورة المطففين">
+<meta property="og:description" content="تجربة تدبّر تفاعلية لسورة المطففين — الميزان المستقيم">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-light: #0f1f3a;
+  --navy-mid: #162a4a;
+  --navy-card: #111d33;
+  --gold: #c9963a;
+  --gold-light: #e8c06a;
+  --gold-dim: rgba(201, 150, 58, 0.12);
+  --gold-border: rgba(201, 150, 58, 0.2);
+  --red: #e74c3c;
+  --red-dim: rgba(231, 76, 60, 0.1);
+  --green: #2ecc71;
+  --green-dim: rgba(46, 204, 113, 0.1);
+  --purple: #9b59b6;
+  --purple-dim: rgba(155, 89, 182, 0.1);
+  --text: #e8e0d4;
+  --text-muted: #8a9bb5;
+  --text-dim: #5a6a80;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* scroll-behavior: smooth removed — interferes with iOS WebView click handling */
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ============= STAGE SYSTEM (scroll version) ============= */
+.stage { display: block; min-height: auto; }
+.stage#stage1 { min-height: 100dvh; }
+
+/* ============= PROGRESS BAR (hidden in share) ============= */
+.progress-bar { display: none; }
+.progress-fill { display: none; }
+
+/* ============= STAGE NAV (hidden in share) ============= */
+.stage-nav { display: none !important; }
+
+/* ============= FORCE ALL FADE-IN VISIBLE (share version) ============= */
+.fade-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ============= SECTION DIVIDER BETWEEN STAGES ============= */
+.stage-separator {
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+.stage-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-border), transparent);
+}
+.stage-separator .sep-icon {
+  position: relative;
+  background: var(--navy);
+  padding: 0 20px;
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+.stage-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--text-dim);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.stage-dot.active {
+  border-color: var(--gold);
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201, 150, 58, 0.4);
+}
+.stage-dot.completed {
+  border-color: var(--green);
+  background: var(--green);
+}
+.stage-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  direction: rtl;
+}
+.stage-dot:hover::after { opacity: 1; }
+
+/* ============================================ */
+/* ========== STAGE 1: LANDING =============== */
+/* ============================================ */
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.landing::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(201, 150, 58, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.landing-bismillah {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 40px;
+}
+
+.landing-surah {
+  font-family: 'Amiri', serif;
+  font-size: 3.5rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.landing-title {
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.landing-meta {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 50px;
+}
+
+/* Scale SVG illustration */
+.scale-illustration {
+  width: 280px;
+  height: 180px;
+  margin-bottom: 50px;
+  opacity: 0.85;
+}
+
+.landing-question {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--gold), #b8862f);
+  color: var(--navy);
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px 48px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(201, 150, 58, 0.25);
+}
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201, 150, 58, 0.35);
+}
+.btn-start .arrow { font-size: 1.3rem; }
+
+/* ============================================ */
+/* ========== STAGE 2: KHULASA =============== */
+/* ============================================ */
+.stage-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+.stage-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.stage-label {
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.stage-title {
+  font-family: 'Amiri', serif;
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.stage-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Insight items with expand */
+.insight-item {
+  background: var(--navy-card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.insight-item:hover { border-color: rgba(201, 150, 58, 0.4); }
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.insight-header .num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.insight-header .title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold-light);
+}
+.insight-header .summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-weight: 400;
+}
+.insight-header .toggle-icon {
+  color: var(--gold);
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.insight-item.open .toggle-icon { transform: rotate(180deg); }
+
+.insight-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.insight-item.open .insight-body {
+  max-height: 800px;
+  padding: 0 24px 24px;
+}
+
+.insight-body-content {
+  padding-top: 16px;
+  border-top: 1px solid rgba(201, 150, 58, 0.1);
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.95;
+}
+.insight-body-content strong { color: var(--text); font-weight: 600; }
+
+/* Scale visual inline */
+.scale-visual {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  margin: 24px 0;
+}
+.scale-box {
+  flex: 1;
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: center;
+}
+.scale-box.bad { background: var(--red-dim); border: 1px solid rgba(231, 76, 60, 0.15); }
+.scale-box.good { background: var(--green-dim); border: 1px solid rgba(46, 204, 113, 0.15); }
+.scale-box .label { font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; }
+.scale-box.bad .label { color: var(--red); }
+.scale-box.good .label { color: var(--green); }
+.scale-box .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+.scale-vs { display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+
+/* Flow chain */
+.flow-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px 0;
+}
+.flow-chip {
+  background: var(--navy-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.flow-chip.danger { background: var(--red-dim); border-color: rgba(231, 76, 60, 0.2); }
+.flow-arr { color: var(--gold); font-size: 1rem; }
+
+/* Parallels */
+.parallel-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.par-box {
+  flex: 1;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.par-box.d { background: var(--red-dim); border: 1px solid rgba(231, 76, 60, 0.12); color: var(--text-muted); }
+.par-box.a { background: var(--green-dim); border: 1px solid rgba(46, 204, 113, 0.12); color: var(--text-muted); }
+.par-arrow { display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+
+/* Ayah highlight */
+.ayah-highlight {
+  text-align: center;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.ayah-highlight .ayah-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  line-height: 2;
+  margin-bottom: 8px;
+}
+.ayah-highlight .ayah-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Hadith */
+.hadith-inline {
+  text-align: center;
+  background: var(--green-dim);
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 16px 0;
+}
+.hadith-inline .label { font-size: 0.7rem; color: var(--green); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+.hadith-inline .text { font-family: 'Amiri', serif; font-size: 1.15rem; color: var(--text); line-height: 1.8; }
+.hadith-inline .comment { font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; }
+
+/* Nav buttons */
+.stage-nav-btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--gold), #b8862f);
+  color: var(--navy);
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(201, 150, 58, 0.2);
+}
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201, 150, 58, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-right: 12px;
+}
+.btn-secondary:hover { background: var(--gold-dim); }
+
+/* ============================================ */
+/* ========== STAGE 3: READING =============== */
+/* ============================================ */
+.section-divider {
+  text-align: center;
+  margin: 50px 0 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+  border-radius: 16px;
+  border: 1px solid var(--gold-border);
+}
+.section-divider .sec-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.section-divider .sec-badge {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.section-divider .sec-theme {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.verse-block {
+  background: var(--navy-card);
+  border: 1px solid rgba(201, 150, 58, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  transition: border-color 0.3s;
+}
+.verse-block:hover { border-color: var(--gold-border); }
+.verse-block.highlighted { border-color: var(--gold); }
+
+.verse-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(201, 150, 58, 0.06);
+}
+
+.verse-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.verse-action-btn {
+  background: none;
+  border: 1px solid rgba(201, 150, 58, 0.15);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.verse-action-btn:hover, .verse-action-btn.open {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.verse-arabic-body { padding: 16px 20px 10px; }
+.verse-arabic-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  line-height: 2.4;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.1rem;
+  justify-content: center;
+}
+
+/* Clickable words like الكهف */
+.qw {
+  cursor: pointer;
+  position: relative;
+  padding: 0.15rem 0.3rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+.qw:hover {
+  background: rgba(201, 150, 58, 0.15);
+  border-bottom-color: var(--gold);
+  color: var(--gold-light);
+}
+.qw.active {
+  background: rgba(201, 150, 58, 0.2);
+  border-bottom-color: var(--gold);
+  color: var(--gold-light);
+}
+/* Button reset for clickable words — looks like text, acts like button */
+button.qw.has-meaning {
+  background: none;
+  border: none;
+  border-bottom: 2px dotted rgba(201, 150, 58, 0.3);
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  padding: 0.1rem 0.2rem;
+  margin: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  display: inline;
+}
+
+/* Word popup bar */
+.word-popup-bar {
+  margin: 0 20px;
+  background: rgba(201, 150, 58, 0.08);
+  border: 1px solid rgba(201, 150, 58, 0.25);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  display: none;
+  align-items: center;
+  gap: 1.2rem;
+  animation: slideDown 0.2s ease;
+}
+.word-popup-bar.visible { display: flex; }
+.popup-word { font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--gold-light); font-weight: 700; flex-shrink: 0; }
+.popup-divider { width: 1px; height: 28px; background: rgba(201, 150, 58, 0.3); flex-shrink: 0; }
+.popup-meaning { font-size: 0.92rem; color: rgba(255, 255, 255, 0.85); flex: 1; }
+.popup-close { font-size: 1rem; color: rgba(255, 255, 255, 0.3); cursor: pointer; padding: 0.2rem; flex-shrink: 0; }
+.popup-close:hover { color: rgba(255, 255, 255, 0.7); }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Meaning box (tafsir) */
+.verse-meaning-box {
+  margin: 0 20px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-right: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 16px;
+  display: none;
+  animation: slideDown 0.2s ease;
+}
+.verse-meaning-box.visible { display: block; }
+.verse-meaning-label { font-size: 0.72rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.verse-meaning-text { font-size: 0.92rem; line-height: 1.9; color: rgba(255, 255, 255, 0.78); }
+.verse-meaning-source { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.5rem; font-style: italic; }
+
+/* ============================================ */
+/* ========== STAGE 4: DEEP DIVE ============= */
+/* ============================================ */
+.deep-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.deep-tab {
+  background: var(--navy-card);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+.deep-tab.active {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.deep-tab:hover { border-color: var(--gold); }
+
+.deep-content { display: none; }
+.deep-content.active { display: block; }
+
+.zilal-card {
+  background: var(--navy-card);
+  border: 1px solid var(--gold-border);
+  border-right: 3px solid var(--gold);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.zilal-card .ayah {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+  line-height: 1.9;
+}
+.zilal-card .zilal-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+.zilal-card .zilal-source {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 10px;
+}
+
+.nuzul-card {
+  background: var(--navy-card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+}
+.nuzul-card .nuzul-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 2;
+  margin-bottom: 12px;
+}
+.nuzul-card .nuzul-source {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+/* ============================================ */
+/* ========== STAGE 5: JOURNAL =============== */
+/* ============================================ */
+.journal-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.journal-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.journal-question {
+  font-family: 'Amiri', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+
+.journal-textarea {
+  width: 100%;
+  max-width: 600px;
+  min-height: 250px;
+  background: var(--navy-card);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 24px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 2;
+  resize: vertical;
+  direction: rtl;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.journal-textarea:focus { border-color: var(--gold); }
+.journal-textarea::placeholder { color: var(--text-dim); }
+
+.journal-hint {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: #fff;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-save:hover { background: #27ae60; transform: translateY(-2px); }
+
+.saved-msg {
+  display: none;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: var(--green-dim);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+  border-radius: 12px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* ============= ANIMATIONS ============= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 700px) {
+  .landing-surah { font-size: 2.2rem; }
+  .landing-title { font-size: 1rem; }
+  .landing-question { font-size: 1.15rem; }
+  .scale-illustration { width: 220px; height: 150px; margin-bottom: 30px; }
+  .btn-start { padding: 14px 36px; font-size: 1rem; }
+  .scale-visual { flex-direction: column; }
+  .scale-vs { padding: 4px 0; }
+  .flow-chain { flex-direction: column; }
+  .flow-arr { transform: rotate(90deg); }
+  .parallel-row { flex-direction: column; }
+  .par-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .stage-inner { padding: 30px 14px 60px; }
+  .stage-title { font-size: 1.6rem; }
+  .insight-header { padding: 16px 14px; }
+  .insight-item.open .insight-body { max-height: 2000px; padding: 0 14px 20px; }
+  .verse-arabic-text { font-size: 1.35rem; line-height: 2.6; }
+  .qw { padding: 0.25rem 0.4rem; }
+  .word-popup-bar { flex-wrap: wrap; margin: 4px 10px; padding: 12px 14px; gap: 0.8rem; }
+  .popup-word { font-size: 1.2rem; }
+  .popup-close { font-size: 1.3rem; padding: 8px; min-width: 44px; min-height: 44px; }
+  .verse-action-btn { padding: 8px 16px; font-size: 0.82rem; min-height: 38px; }
+  .verse-meaning-box { margin: 0 10px 14px; padding: 12px 14px; }
+  .deep-tabs { gap: 5px; }
+  .deep-tab { padding: 10px 14px; font-size: 0.8rem; min-height: 44px; }
+  .zilal-card { padding: 18px 14px; }
+  .zilal-card .ayah { font-size: 1rem; }
+  .zilal-card .zilal-text { font-size: 0.85rem; }
+  .journal-section { padding: 40px 16px; }
+  .journal-question { font-size: 1.5rem; }
+  .journal-textarea { padding: 18px; min-height: 200px; }
+  .btn-next { padding: 14px 32px; font-size: 0.95rem; min-height: 48px; }
+  .btn-secondary { padding: 12px 24px; font-size: 0.85rem; min-height: 44px; }
+  .section-divider { margin: 30px 0 20px; padding: 16px; }
+  .section-divider .sec-title { font-size: 1.25rem; }
+  .nuzul-card { padding: 20px 14px; }
+  .hadith-inline .text { font-size: 1rem; }
+  .ayah-highlight .ayah-text { font-size: 1.1rem; }
+  .flow-chip { padding: 8px 12px; font-size: 0.75rem; }
+}
+@media (max-width: 380px) {
+  .landing-surah { font-size: 1.9rem; }
+  .verse-arabic-text { font-size: 1.2rem; }
+  .qw { padding: 0.2rem 0.3rem; }
+}
+
+/* ============= STATIC VERSION: details/summary ============= */
+details.insight-item { cursor: pointer; }
+details.insight-item summary { list-style: none; }
+details.insight-item summary::-webkit-details-marker { display: none; }
+details.insight-item[open] .toggle-icon { transform: rotate(180deg); }
+details.insight-item .insight-body { max-height: none; padding: 0 24px 24px; overflow: visible; }
+
+details.tafsir-details { margin-top: 10px; }
+summary.tafsir-summary {
+  background: none; border: 1px solid rgba(201,150,58,0.15); border-radius: 8px;
+  padding: 6px 14px; font-family: 'Cairo', sans-serif; font-size: 0.78rem;
+  color: var(--text-muted); cursor: pointer; display: inline-block;
+  list-style: none; touch-action: manipulation;
+}
+summary.tafsir-summary::-webkit-details-marker { display: none; }
+details.tafsir-details[open] summary.tafsir-summary { color: var(--gold); border-color: var(--gold); }
+details.tafsir-details .verse-meaning-box { display: block; margin-top: 10px; }
+
+details.words-details { margin-top: 8px; }
+summary.words-summary {
+  font-family: 'Cairo', sans-serif; font-size: 0.75rem; color: var(--gold);
+  cursor: pointer; opacity: 0.7; list-style: none;
+}
+summary.words-summary::-webkit-details-marker { display: none; }
+details.words-details[open] summary.words-summary { opacity: 1; }
+.words-list { padding: 10px 16px; background: rgba(201,150,58,0.05); border-radius: 8px; margin-top: 6px; }
+.word-item { display: flex; gap: 8px; align-items: baseline; padding: 4px 0; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.word-ar { font-family: 'Amiri', serif; color: var(--gold-light); font-size: 1rem; min-width: 80px; }
+.word-sep { color: var(--text-dim); }
+.word-meaning { color: var(--text-muted); flex: 1; }
+
+</style>
+</head>
+<body>
+
+<!-- Progress bar and side nav hidden in share version -->
+
+<!-- ======================================== -->
+<!-- STAGE 1: LANDING                         -->
+<!-- ======================================== -->
+<div class="stage active" id="stage1">
+  <div class="landing">
+    <div class="landing-bismillah">بسم الله الرحمن الرحيم</div>
+
+    <div class="landing-surah">سورة المطففين</div>
+    <div class="landing-title">ميزان البشر المطفَّف — ميزان الله العدل الحق</div>
+    <div class="landing-meta">٣٦ آية · الجزء ٣٠</div>
+
+    <!-- Scale SVG -->
+    <svg class="scale-illustration" viewBox="0 0 280 200" fill="none">
+      <!-- Base/Stand -->
+      <line x1="140" y1="30" x2="140" y2="130" stroke="#c9963a" stroke-width="2.5"/>
+      <rect x="100" y="128" width="80" height="8" rx="4" fill="#c9963a" opacity="0.25"/>
+      <!-- Top circle -->
+      <circle cx="140" cy="24" r="7" fill="#c9963a" opacity="0.25"/>
+      <circle cx="140" cy="24" r="3.5" fill="#c9963a"/>
+      <!-- Straight/balanced beam -->
+      <line x1="40" y1="60" x2="240" y2="60" stroke="#c9963a" stroke-width="3" stroke-linecap="round"/>
+      <!-- Left pan -->
+      <line x1="40" y1="60" x2="20" y2="70" stroke="#c9963a" stroke-width="1.2"/>
+      <line x1="40" y1="60" x2="60" y2="70" stroke="#c9963a" stroke-width="1.2"/>
+      <path d="M15 72 Q40 108 65 72" stroke="#c9963a" stroke-width="1.5" fill="rgba(201,150,58,0.06)"/>
+      <text x="40" y="98" text-anchor="middle" fill="#c9963a" font-size="9" font-family="Cairo" opacity="0.8">حقوق</text>
+      <!-- Right pan -->
+      <line x1="240" y1="60" x2="220" y2="70" stroke="#c9963a" stroke-width="1.2"/>
+      <line x1="240" y1="60" x2="260" y2="70" stroke="#c9963a" stroke-width="1.2"/>
+      <path d="M215 72 Q240 108 265 72" stroke="#c9963a" stroke-width="1.5" fill="rgba(201,150,58,0.06)"/>
+      <text x="240" y="98" text-anchor="middle" fill="#c9963a" font-size="9" font-family="Cairo" opacity="0.8">واجبات</text>
+      <!-- Verse below -->
+      <text x="140" y="165" text-anchor="middle" fill="#c9963a" font-size="9" font-family="Amiri" opacity="0.6">﴿يَوْمَ يَقُومُ النَّاسُ لِرَبِّ الْعَالَمِينَ﴾</text>
+    </svg>
+
+    <div class="landing-question">هل أنت جاهز للتدبّر؟</div>
+    <a href="#stage2" class="btn-start" style="text-decoration:none; touch-action:manipulation;">
+      ابدأ الرحلة
+      <span class="arrow">↓</span>
+    </a>
+  </div>
+</div>
+
+<div class="stage-separator"><span class="sep-icon">﷽</span></div>
+
+<!-- ======================================== -->
+<!-- STAGE 2: KHULASA                         -->
+<!-- ======================================== -->
+<div class="stage" id="stage2">
+  <div class="stage-inner">
+    <div class="stage-header">
+      <div class="stage-label">المرحلة الأولى</div>
+      <div class="stage-title">الخلاصة</div>
+      <div class="stage-subtitle">افهم روح السورة وصورتها الكلية قبل أن تقرأها — اضغط على أي نقطة للاستفاضة</div>
+    </div>
+
+    <!-- 1. Central thesis -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">١</div>
+        <div style="flex:1">
+          <div class="title">ميزان مقابل ميزان</div>
+          <div class="summary">الأطروحة المركزية للسورة</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <p>السورة كلها مبنية على مقابلة واحدة كبرى:</p>
+        <div class="scale-visual">
+          <div class="scale-box bad">
+            <div class="label">ميزان البشر المطفَّف</div>
+            <div class="desc">يستوفي لنفسه ويبخس غيره — يبني أمانه على حرمان الآخرين</div>
+          </div>
+          <div class="scale-vs">⚖️</div>
+          <div class="scale-box good">
+            <div class="label">ميزان الله العدل</div>
+            <div class="desc">يردّ كل شيء لنصابه — حتى النظرة والغمزة والكلمة</div>
+          </div>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- 2. Wider meaning -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٢</div>
+        <div style="flex:1">
+          <div class="title">التطفيف أوسع من التجارة</div>
+          <div class="summary">القرآن قال "ويل للمطففين" لا "ويل للغشاشين"</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <p>التطفيف ليس غشاً تجارياً فقط — بل هو <strong>خاصية بشرية</strong>: حب الخير للنفس مع عدم العدل مع الآخر. نفس شحيحة تطالب بحقها وترفع الصوت به حتى تستوفي، وتغفل عن حقوق الآخرين وتغمطهم.</p>
+        <p style="margin-top:10px">هذا النموذج مستشرّ من المدير في العمل إلى المؤسسات الدولية — <strong>تطفيف مؤسسي</strong>: نفس القوانين تُطبّق بكفّتين مختلفتين.</p>
+      </div></div>
+    </details>
+
+    <!-- 3. Security by injustice -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٣</div>
+        <div style="flex:1">
+          <div class="title">الأمان بالظلم</div>
+          <div class="summary">يحمون حقوقهم بسلب حقوق الآخرين</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <p>لا يكتفون بأخذ حقوقهم لترتاح نفوسهم، بل يشتاقون لأخذ قطعة من حقوق الآخرين <strong>كأنما هي أسوار يحمون بها حقوقهم</strong> وليذهب الآخرون للجحيم.</p>
+        <p style="margin-top:10px">الأخطر ليس الظالم نفسه — بل <strong>من يسكت عن الظلم حماية لمكاسبه</strong>. الظالم واحد، لكن الذين يمكّنونه هم من يقبلون أن يُظلم غيرهم مقابل أن ينجوا.</p>
+        <div class="hadith-inline">
+          <div class="label">المضاد الحيوي للتطفيف</div>
+          <div class="text">«لا يُؤمِنُ أحدُكم حتى يُحِبَّ لأخيه ما يُحِبُّ لنفسِه»</div>
+          <div class="comment">المطفف بالضبط هو من يحب لنفسه ما لا يحبه لأخيه</div>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- 4. Pivotal ayah -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٤</div>
+        <div style="flex:1">
+          <div class="title">الإيمان بالآخرة حامي العدل</div>
+          <div class="summary">محور السورة كلها</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <div class="ayah-highlight">
+          <div class="ayah-text">﴿أَلَا يَظُنُّ أُولَـٰئِكَ أَنَّهُم مَّبْعُوثُونَ ۝ لِيَوْمٍ عَظِيمٍ﴾</div>
+          <div class="ayah-note">الإيمان بهذا اليوم يمنع التطفيف — وغيابه يُطلقه</div>
+        </div>
+        <p>التكذيب بيوم الدين ليس موقفاً فكرياً — بل <strong>حيلة نفسية</strong>. المعتدي يُكذّب لأنه <strong>يحتاج</strong> أن يُكذّب. نفسه لا تحتمل أن تظلم وتعلم أن هناك حساباً. لذلك القرآن جعل الاعتداء <strong>سبباً</strong> للتكذيب لا نتيجة.</p>
+      </div></div>
+    </details>
+
+    <!-- 5. Deterioration chain -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٥</div>
+        <div style="flex:1">
+          <div class="title">خريطة التدهور النفسي</div>
+          <div class="summary">الران — نقطة اللاعودة في منتصف السورة</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <div class="flow-chain">
+          <div class="flow-chip">ذنوب في حق الله</div>
+          <div class="flow-arr">←</div>
+          <div class="flow-chip">تراكم وإصرار</div>
+          <div class="flow-arr">←</div>
+          <div class="flow-chip danger">رانَ على القلب</div>
+          <div class="flow-arr">←</div>
+          <div class="flow-chip">هانت حقوق الناس</div>
+          <div class="flow-arr">←</div>
+          <div class="flow-chip">تطفيف وظلم</div>
+          <div class="flow-arr">←</div>
+          <div class="flow-chip danger">تكذيب بالآخرة</div>
+        </div>
+        <p style="margin-top:16px">الران في <strong>منتصف السورة</strong> بالضبط — نقطة اللاعودة. قبله يمكن التوبة. بعده يقود القلب لذنب <strong>لا مخرج منه إلا بالقصاص</strong> — لأن حقوق العباد لا بد من استردادها.</p>
+      </div></div>
+    </details>
+
+    <!-- 6. Hijab -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٦</div>
+        <div style="flex:1">
+          <div class="title">الحجب عن الله: ليس عقوبة فقط</div>
+          <div class="summary">الله كره أن ينظروا إليه</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <p>الحجب ليس مجرد عقوبة — بل <strong>موقف من الله</strong>. هؤلاء الذين أفسدوا ميزان العدالة الذي قامت عليه السماوات والأرض لم يعودوا أهلاً لمواجهة صاحب الميزان الحق.</p>
+      </div></div>
+    </details>
+
+    <!-- 7. Parallels -->
+    <details class="insight-item">
+      <summary class="insight-header">
+        <div class="num">٧</div>
+        <div style="flex:1">
+          <div class="title">مقابلات السورة — الانقلاب الكامل</div>
+          <div class="summary">كل شيء في الدنيا ينعكس في الآخرة</div>
+        </div>
+        <span class="toggle-icon">▼</span>
+      </summary>
+      <div class="insight-body"><div class="insight-body-content">
+        <div class="parallel-row">
+          <div class="par-box d">نعيم مؤقت + سلطة وجاه</div>
+          <div class="par-arrow">↔</div>
+          <div class="par-box a">نضرة النعيم — نعيم دائم يُرى على الوجوه</div>
+        </div>
+        <div class="parallel-row">
+          <div class="par-box d">يسخرون ويتغامزون</div>
+          <div class="par-arrow">↔</div>
+          <div class="par-box a">المؤمنون يضحكون من الكفار</div>
+        </div>
+        <div class="parallel-row">
+          <div class="par-box d">هالة وكرامة بالظلم</div>
+          <div class="par-arrow">↔</div>
+          <div class="par-box a">منكسو الرأس، منزوعو الهالة</div>
+        </div>
+        <p style="margin-top:14px"><strong>ظلموا من أجل متاع زائل — ففاتهم نعيم دائم.</strong></p>
+      </div></div>
+    </details>
+
+    
+    <div class="stage-nav-btns">
+      <a href="#stage3" class="btn-next" style="text-decoration:none; touch-action:manipulation;">
+        أنت الآن جاهز للقراءة
+        <span>↓</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="stage-separator"><span class="sep-icon">❁</span></div>
+
+<!-- ======================================== -->
+<!-- STAGE 3: READING                         -->
+<!-- ======================================== -->
+<div class="stage" id="stage3">
+  <div class="stage-inner">
+    <div class="stage-header">
+      <div class="stage-label">المرحلة الثانية</div>
+      <div class="stage-title">القراءة والتدبّر</div>
+      <div class="stage-subtitle">اقرأ كل آية بتمعّن — المعاني والكلمات أمامك</div>
+    </div>
+
+    <div id="versesContainer">
+    <div class="section-divider">
+      <div style="font-size:1.6rem;margin-bottom:8px">⚖️</div>
+      <div class="sec-title">الويل للمطففين</div>
+      <div class="sec-badge">الآيات ١-٦</div>
+      <div class="sec-theme">التطفيف والوعيد</div>
+    </div>
+    <div class="verse-block" id="v1">
+        <div class="verse-topbar">
+          <div class="verse-num">1</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="وَيْلٌ" data-m="هلاك وخسار وعذاب">وَيْلٌ</span> <span class="qw has-meaning" data-ar="لِّلْمُطَفِّفِينَ" data-m="الذين ينقصون المكيال والميزان — من الطفيف وهو الشيء القليل الحقير">لِّلْمُطَفِّفِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">وَيْلٌ</span><span class="word-sep">—</span><span class="word-meaning">هلاك وخسار وعذاب</span></div>
+            <div class="word-item"><span class="word-ar">لِّلْمُطَفِّفِينَ</span><span class="word-sep">—</span><span class="word-meaning">الذين ينقصون المكيال والميزان — من الطفيف وهو الشيء القليل الحقير</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كلمة عذاب ووعيد للمطففين — الذين يبخسون الناس حقوقهم</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٤</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v2">
+        <div class="verse-topbar">
+          <div class="verse-num">2</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="الَّذِينَ">الَّذِينَ</span> <span class="qw" data-ar="إِذَا">إِذَا</span> <span class="qw has-meaning" data-ar="اكْتَالُوا" data-m="أخذوا بالكيل لأنفسهم">اكْتَالُوا</span> <span class="qw" data-ar="عَلَى">عَلَى</span> <span class="qw" data-ar="النَّاسِ">النَّاسِ</span> <span class="qw has-meaning" data-ar="يَسْتَوْفُونَ" data-m="يأخذون حقهم كاملاً دون نقص">يَسْتَوْفُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">اكْتَالُوا</span><span class="word-sep">—</span><span class="word-meaning">أخذوا بالكيل لأنفسهم</span></div>
+            <div class="word-item"><span class="word-ar">عَلَى النَّاسِ</span><span class="word-sep">—</span><span class="word-meaning">من الناس — أخذوا منهم</span></div>
+            <div class="word-item"><span class="word-ar">يَسْتَوْفُونَ</span><span class="word-sep">—</span><span class="word-meaning">يأخذون حقهم كاملاً دون نقص</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">إذا أخذوا من الناس ما ثبت لهم يستوفونه كاملاً من غير نقص</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٤</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v3">
+        <div class="verse-topbar">
+          <div class="verse-num">3</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَإِذَا">وَإِذَا</span> <span class="qw has-meaning" data-ar="كَالُوهُمْ" data-m="كالوا لهم — أعطوهم بالكيل">كَالُوهُمْ</span> <span class="qw" data-ar="أَو">أَو</span> <span class="qw has-meaning" data-ar="وَّزَنُوهُمْ" data-m="وزنوا لهم">وَّزَنُوهُمْ</span> <span class="qw has-meaning" data-ar="يُخْسِرُونَ" data-m="ينقصونهم حقهم">يُخْسِرُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">كَالُوهُمْ</span><span class="word-sep">—</span><span class="word-meaning">كالوا لهم — أعطوهم بالكيل</span></div>
+            <div class="word-item"><span class="word-ar">وَّزَنُوهُمْ</span><span class="word-sep">—</span><span class="word-meaning">وزنوا لهم</span></div>
+            <div class="word-item"><span class="word-ar">يُخْسِرُونَ</span><span class="word-sep">—</span><span class="word-meaning">ينقصونهم حقهم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">وإذا أعطوا الناس حقهم بكيل أو وزن ينقصونهم — فهذا سرقة لأموال الناس</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٥</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v4">
+        <div class="verse-topbar">
+          <div class="verse-num">4</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="أَلَا">أَلَا</span> <span class="qw has-meaning" data-ar="يَظُنُّ" data-m="يتوقع ويعتقد — حتى مجرد الاحتمال كان كافياً">يَظُنُّ</span> <span class="qw" data-ar="أُولَـٰئِكَ">أُولَـٰئِكَ</span> <span class="qw" data-ar="أَنَّهُم">أَنَّهُم</span> <span class="qw has-meaning" data-ar="مَّبْعُوثُونَ" data-m="يُحيَون بعد الموت للحساب">مَّبْعُوثُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يَظُنُّ</span><span class="word-sep">—</span><span class="word-meaning">يتوقع ويعتقد — حتى مجرد الاحتمال كان كافياً</span></div>
+            <div class="word-item"><span class="word-ar">مَّبْعُوثُونَ</span><span class="word-sep">—</span><span class="word-meaning">يُحيَون بعد الموت للحساب</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">ألا يظن هؤلاء أنهم مبعوثون — مجرد الظن كان يكفي ليصدّهم</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٥</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v5">
+        <div class="verse-topbar">
+          <div class="verse-num">5</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="لِيَوْمٍ">لِيَوْمٍ</span> <span class="qw" data-ar="عَظِيمٍ">عَظِيمٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يَوْمٍ عَظِيمٍ</span><span class="word-sep">—</span><span class="word-meaning">يوم القيامة — عظيم لما فيه من المعان والأهوال</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">يوم عظيم لما فيه من الأهوال — الذي جرّأهم على التطفيف عدم إيمانهم باليوم الآخر</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٥ + المختصر ص٥٨٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v6">
+        <div class="verse-topbar">
+          <div class="verse-num">6</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="يَوْمَ">يَوْمَ</span> <span class="qw has-meaning" data-ar="يَقُومُ" data-m="يقوم الناس من قبورهم للحساب">يَقُومُ</span> <span class="qw" data-ar="النَّاسُ">النَّاسُ</span> <span class="qw" data-ar="لِرَبِّ">لِرَبِّ</span> <span class="qw" data-ar="الْعَالَمِينَ">الْعَالَمِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يَقُومُ</span><span class="word-sep">—</span><span class="word-meaning">يقوم الناس من قبورهم للحساب</span></div>
+            <div class="word-item"><span class="word-ar">لِرَبِّ الْعَالَمِينَ</span><span class="word-sep">—</span><span class="word-meaning">خاضعين لله مالك كل شيء — لا أحد يملك شيئاً في ذلك اليوم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">يوم يدين الله فيه الناس بأعمالهم — يأخذ للمظلوم حقه من ظالمه</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٤</div>
+          </div>
+        </details>
+      </div>
+    <div class="section-divider">
+      <div style="font-size:1.6rem;margin-bottom:8px">📕</div>
+      <div class="sec-title">كتاب الفجار</div>
+      <div class="sec-badge">الآيات ٧-١٧</div>
+      <div class="sec-theme">التكذيب والران</div>
+    </div>
+    <div class="verse-block" id="v7">
+        <div class="verse-topbar">
+          <div class="verse-num">7</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="كَلَّا" data-m="ردع وزجر — ليس الأمر كما تصوروا">كَلَّا</span> <span class="qw" data-ar="إِنَّ">إِنَّ</span> <span class="qw" data-ar="كِتَابَ">كِتَابَ</span> <span class="qw has-meaning" data-ar="الْفُجَّارِ" data-m="الكفار والمنافقون المتجاوزون في المعصية">الْفُجَّارِ</span> <span class="qw" data-ar="لَفِي">لَفِي</span> <span class="qw has-meaning" data-ar="سِجِّينٍ" data-m="أسفل الأمكنة وأضيقها من الأرض السفلى — ضد عليين">سِجِّينٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">كَلَّا</span><span class="word-sep">—</span><span class="word-meaning">ردع وزجر — ليس الأمر كما تصوروا</span></div>
+            <div class="word-item"><span class="word-ar">الْفُجَّارِ</span><span class="word-sep">—</span><span class="word-meaning">الكفار والمنافقون المتجاوزون في المعصية</span></div>
+            <div class="word-item"><span class="word-ar">سِجِّينٍ</span><span class="word-sep">—</span><span class="word-meaning">أسفل الأمكنة وأضيقها من الأرض السفلى — ضد عليين</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كتاب الفجار في سجين — المحل الضيق الضنك أسفل الأمكنة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٥</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v8">
+        <div class="verse-topbar">
+          <div class="verse-num">8</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَمَا">وَمَا</span> <span class="qw has-meaning" data-ar="أَدْرَاكَ" data-m="أعلمك — استفهام للتعظيم والتهويل">أَدْرَاكَ</span> <span class="qw" data-ar="مَا">مَا</span> <span class="qw" data-ar="سِجِّينٌ">سِجِّينٌ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">أَدْرَاكَ</span><span class="word-sep">—</span><span class="word-meaning">أعلمك — استفهام للتعظيم والتهويل</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">سؤال التهويل: الأمر أكبر من الإدراك</div>
+            <div class="verse-meaning-source">الظلال ص٣٨٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v9">
+        <div class="verse-topbar">
+          <div class="verse-num">9</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="كِتَابٌ" data-m="سجل أعمالهم المكتوب">كِتَابٌ</span> <span class="qw has-meaning" data-ar="مَّرْقُومٌ" data-m="مكتوب مسطور لا يزول ولا يتبدل">مَّرْقُومٌ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">كِتَابٌ</span><span class="word-sep">—</span><span class="word-meaning">سجل أعمالهم المكتوب</span></div>
+            <div class="word-item"><span class="word-ar">مَّرْقُومٌ</span><span class="word-sep">—</span><span class="word-meaning">مكتوب مسطور لا يزول ولا يتبدل</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كتاب مسطور مفروغ منه لا يُزاد فيه ولا يُنقص</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٥ + المختصر ص٥٨٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v10">
+        <div class="verse-topbar">
+          <div class="verse-num">10</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَيْلٌ">وَيْلٌ</span> <span class="qw has-meaning" data-ar="يَوْمَئِذٍ" data-m="يوم القيامة">يَوْمَئِذٍ</span> <span class="qw" data-ar="لِّلْمُكَذِّبِينَ">لِّلْمُكَذِّبِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يَوْمَئِذٍ</span><span class="word-sep">—</span><span class="word-meaning">يوم القيامة</span></div>
+            <div class="word-item"><span class="word-ar">الْمُكَذِّبِينَ</span><span class="word-sep">—</span><span class="word-meaning">الذين ينكرون البعث والحساب</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">ويل يومئذ للمكذبين بيوم الجزاء</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v11">
+        <div class="verse-topbar">
+          <div class="verse-num">11</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="الَّذِينَ">الَّذِينَ</span> <span class="qw has-meaning" data-ar="يُكَذِّبُونَ" data-m="ينكرون ويجحدون">يُكَذِّبُونَ</span> <span class="qw" data-ar="بِيَوْمِ">بِيَوْمِ</span> <span class="qw" data-ar="الدِّينِ">الدِّينِ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يُكَذِّبُونَ</span><span class="word-sep">—</span><span class="word-meaning">ينكرون ويجحدون</span></div>
+            <div class="word-item"><span class="word-ar">يَوْمِ الدِّينِ</span><span class="word-sep">—</span><span class="word-meaning">يوم الجزاء والحساب</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">الذين يكذّبون بيوم الجزاء والحساب</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v12">
+        <div class="verse-topbar">
+          <div class="verse-num">12</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَمَا">وَمَا</span> <span class="qw" data-ar="يُكَذِّبُ">يُكَذِّبُ</span> <span class="qw" data-ar="بِهِ">بِهِ</span> <span class="qw" data-ar="إِلَّا">إِلَّا</span> <span class="qw" data-ar="كُلُّ">كُلُّ</span> <span class="qw has-meaning" data-ar="مُعْتَدٍ" data-m="متجاوز لحدود الله">مُعْتَدٍ</span> <span class="qw has-meaning" data-ar="أَثِيمٍ" data-m="كثير الإثم والذنوب">أَثِيمٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">مُعْتَدٍ</span><span class="word-sep">—</span><span class="word-meaning">متجاوز لحدود الله</span></div>
+            <div class="word-item"><span class="word-ar">أَثِيمٍ</span><span class="word-sep">—</span><span class="word-meaning">كثير الإثم والذنوب</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">ما يكذّب بيوم الدين إلا كل معتدٍ كثير الإثم — فالاعتداء يقود للتكذيب</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v13">
+        <div class="verse-topbar">
+          <div class="verse-num">13</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="إِذَا">إِذَا</span> <span class="qw has-meaning" data-ar="تُتْلَىٰ" data-m="تُقرأ عليه">تُتْلَىٰ</span> <span class="qw" data-ar="عَلَيْهِ">عَلَيْهِ</span> <span class="qw" data-ar="آيَاتُنَا">آيَاتُنَا</span> <span class="qw" data-ar="قَالَ">قَالَ</span> <span class="qw has-meaning" data-ar="أَسَاطِيرُ" data-m="أخبار وحكايات الأمم الغابرة — أي ليست من عند الله">أَسَاطِيرُ</span> <span class="qw has-meaning" data-ar="الْأَوَّلِينَ" data-m="الأمم السابقين">الْأَوَّلِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">تُتْلَىٰ</span><span class="word-sep">—</span><span class="word-meaning">تُقرأ عليه</span></div>
+            <div class="word-item"><span class="word-ar">أَسَاطِيرُ</span><span class="word-sep">—</span><span class="word-meaning">أخبار وحكايات الأمم الغابرة — أي ليست من عند الله</span></div>
+            <div class="word-item"><span class="word-ar">الْأَوَّلِينَ</span><span class="word-sep">—</span><span class="word-meaning">الأمم السابقين</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كبره ردّ الحق — قال هذه من أخبار الأمم الغابرين تكبراً وعناداً</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v14">
+        <div class="verse-topbar">
+          <div class="verse-num">14</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="كَلَّا">كَلَّا</span> <span class="qw" data-ar="بَلْ">بَلْ</span> <span class="qw" data-ar="ۜ">ۜ</span> <span class="qw has-meaning" data-ar="رَانَ" data-m="غطّى وأحاط — غطاء كثيف من الذنوب على القلب">رَانَ</span> <span class="qw" data-ar="عَلَىٰ">عَلَىٰ</span> <span class="qw" data-ar="قُلُوبِهِم">قُلُوبِهِم</span> <span class="qw" data-ar="مَّا">مَّا</span> <span class="qw" data-ar="كَانُوا">كَانُوا</span> <span class="qw has-meaning" data-ar="يَكْسِبُونَ" data-m="يقترفون من الذنوب والمعاصي">يَكْسِبُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">رَانَ</span><span class="word-sep">—</span><span class="word-meaning">غطّى وأحاط — غطاء كثيف من الذنوب على القلب</span></div>
+            <div class="word-item"><span class="word-ar">يَكْسِبُونَ</span><span class="word-sep">—</span><span class="word-meaning">يقترفون من الذنوب والمعاصي</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">غطّت الذنوب على قلوبهم طبقة بعد طبقة حتى أظلمت — الذنوب ترين على القلب حتى ينطمس نوره</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v15">
+        <div class="verse-topbar">
+          <div class="verse-num">15</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="كَلَّا">كَلَّا</span> <span class="qw" data-ar="إِنَّهُمْ">إِنَّهُمْ</span> <span class="qw" data-ar="عَن">عَن</span> <span class="qw" data-ar="رَّبِّهِمْ">رَّبِّهِمْ</span> <span class="qw" data-ar="يَوْمَئِذٍ">يَوْمَئِذٍ</span> <span class="qw has-meaning" data-ar="لَّمَحْجُوبُونَ" data-m="ممنوعون من رؤية ربهم — أشد العقوبات">لَّمَحْجُوبُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">لَّمَحْجُوبُونَ</span><span class="word-sep">—</span><span class="word-meaning">ممنوعون من رؤية ربهم — أشد العقوبات</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">محجوبون عن ربهم لا يرونه — وعذاب الحجاب أعظم من عذاب النار</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v16">
+        <div class="verse-topbar">
+          <div class="verse-num">16</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="ثُمَّ">ثُمَّ</span> <span class="qw" data-ar="إِنَّهُمْ">إِنَّهُمْ</span> <span class="qw has-meaning" data-ar="لَصَالُو" data-m="لداخلون ومقاسون حرّها">لَصَالُو</span> <span class="qw has-meaning" data-ar="الْجَحِيمِ" data-m="النار الشديدة الاستعار">الْجَحِيمِ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">لَصَالُو</span><span class="word-sep">—</span><span class="word-meaning">لداخلون ومقاسون حرّها</span></div>
+            <div class="word-item"><span class="word-ar">الْجَحِيمِ</span><span class="word-sep">—</span><span class="word-meaning">النار الشديدة الاستعار</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">مع الحجب عن الله يُصلّون الجحيم ويُعذّبون أشد العذاب</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦ + المختصر ص٥٨٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v17">
+        <div class="verse-topbar">
+          <div class="verse-num">17</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="ثُمَّ">ثُمَّ</span> <span class="qw has-meaning" data-ar="يُقَالُ" data-m="يُقال لهم توبيخاً وتقريعاً">يُقَالُ</span> <span class="qw" data-ar="هَـٰذَا">هَـٰذَا</span> <span class="qw" data-ar="الَّذِي">الَّذِي</span> <span class="qw" data-ar="كُنتُم">كُنتُم</span> <span class="qw" data-ar="بِهِ">بِهِ</span> <span class="qw has-meaning" data-ar="تُكَذِّبُونَ" data-m="تنكرون وتجحدون في الدنيا">تُكَذِّبُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يُقَالُ</span><span class="word-sep">—</span><span class="word-meaning">يُقال لهم توبيخاً وتقريعاً</span></div>
+            <div class="word-item"><span class="word-ar">تُكَذِّبُونَ</span><span class="word-sep">—</span><span class="word-meaning">تنكرون وتجحدون في الدنيا</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">توبيخ وتقريع — ثلاثة أنواع عذاب: الجحيم والتوبيخ والحجاب</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="section-divider">
+      <div style="font-size:1.6rem;margin-bottom:8px">📗</div>
+      <div class="sec-title">كتاب الأبرار</div>
+      <div class="sec-badge">الآيات ١٨-٢٨</div>
+      <div class="sec-theme">النعيم والتنافس</div>
+    </div>
+    <div class="verse-block" id="v18">
+        <div class="verse-topbar">
+          <div class="verse-num">18</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="كَلَّا">كَلَّا</span> <span class="qw" data-ar="إِنَّ">إِنَّ</span> <span class="qw" data-ar="كِتَابَ">كِتَابَ</span> <span class="qw has-meaning" data-ar="الْأَبْرَارِ" data-m="القائمون بحقوق الله وحقوق عباده — أصحاب الطاعة">الْأَبْرَارِ</span> <span class="qw" data-ar="لَفِي">لَفِي</span> <span class="qw has-meaning" data-ar="عِلِّيِّينَ" data-m="أعلى الجنة وأشرف أمكنتها — ضد سجين">عِلِّيِّينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">الْأَبْرَارِ</span><span class="word-sep">—</span><span class="word-meaning">القائمون بحقوق الله وحقوق عباده — أصحاب الطاعة</span></div>
+            <div class="word-item"><span class="word-ar">عِلِّيِّينَ</span><span class="word-sep">—</span><span class="word-meaning">أعلى الجنة وأشرف أمكنتها — ضد سجين</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كتاب الأبرار في عليّين — أعلى الجنة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٦</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v19">
+        <div class="verse-topbar">
+          <div class="verse-num">19</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَمَا">وَمَا</span> <span class="qw" data-ar="أَدْرَاكَ">أَدْرَاكَ</span> <span class="qw" data-ar="مَا">مَا</span> <span class="qw has-meaning" data-ar="عِلِّيُّونَ" data-m="أعلى مكان — الاسم مأخوذ من العلو والارتفاع">عِلِّيُّونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">عِلِّيُّونَ</span><span class="word-sep">—</span><span class="word-meaning">أعلى مكان — الاسم مأخوذ من العلو والارتفاع</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">سؤال التهويل والتفخيم — أمر فوق العلم والإدراك</div>
+            <div class="verse-meaning-source">الظلال ص٣٨٥٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v20">
+        <div class="verse-topbar">
+          <div class="verse-num">20</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="كِتَابٌ">كِتَابٌ</span> <span class="qw has-meaning" data-ar="مَّرْقُومٌ" data-m="مكتوب لا يزول ولا يزاد فيه ولا ينقص">مَّرْقُومٌ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">مَّرْقُومٌ</span><span class="word-sep">—</span><span class="word-meaning">مكتوب لا يزول ولا يزاد فيه ولا ينقص</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">كتاب مسطور مكتوب فيه كرائم الأفعال والصفات</div>
+            <div class="verse-meaning-source">الظلال ص٣٨٥٨ + المختصر ص٥٨٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v21">
+        <div class="verse-topbar">
+          <div class="verse-num">21</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="يَشْهَدُهُ" data-m="يحضره ويطّلع عليه">يَشْهَدُهُ</span> <span class="qw has-meaning" data-ar="الْمُقَرَّبُونَ" data-m="الملائكة المقربون وأرواح الأنبياء والصديقين">الْمُقَرَّبُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يَشْهَدُهُ</span><span class="word-sep">—</span><span class="word-meaning">يحضره ويطّلع عليه</span></div>
+            <div class="word-item"><span class="word-ar">الْمُقَرَّبُونَ</span><span class="word-sep">—</span><span class="word-meaning">الملائكة المقربون وأرواح الأنبياء والصديقين</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">يشهده المقربون من الملائكة والأنبياء والصديقين</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v22">
+        <div class="verse-topbar">
+          <div class="verse-num">22</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="إِنَّ">إِنَّ</span> <span class="qw" data-ar="الْأَبْرَارَ">الْأَبْرَارَ</span> <span class="qw" data-ar="لَفِي">لَفِي</span> <span class="qw has-meaning" data-ar="نَعِيمٍ" data-m="نعيم دائم شامل للقلب والروح والبدن">نَعِيمٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">نَعِيمٍ</span><span class="word-sep">—</span><span class="word-meaning">نعيم دائم شامل للقلب والروح والبدن</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">نعيم جامع للقلب والروح والبدن — في الدنيا والبرزخ ودار القرار</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٤</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v23">
+        <div class="verse-topbar">
+          <div class="verse-num">23</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="عَلَى">عَلَى</span> <span class="qw has-meaning" data-ar="الْأَرَائِكِ" data-m="السُرر المزيّنة بالفرش الحسان">الْأَرَائِكِ</span> <span class="qw has-meaning" data-ar="يَنظُرُونَ" data-m="ينظرون إلى ربهم وإلى ما أعد لهم من النعيم">يَنظُرُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">الْأَرَائِكِ</span><span class="word-sep">—</span><span class="word-meaning">السُرر المزيّنة بالفرش الحسان</span></div>
+            <div class="word-item"><span class="word-ar">يَنظُرُونَ</span><span class="word-sep">—</span><span class="word-meaning">ينظرون إلى ربهم وإلى ما أعد لهم من النعيم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">على السُرر المزيّنة ينظرون إلى ما أعد الله لهم وإلى وجه ربهم الكريم</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧ + المختصر ص٥٨٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v24">
+        <div class="verse-topbar">
+          <div class="verse-num">24</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="تَعْرِفُ" data-m="ترى وتميّز بوضوح">تَعْرِفُ</span> <span class="qw" data-ar="فِي">فِي</span> <span class="qw" data-ar="وُجُوهِهِمْ">وُجُوهِهِمْ</span> <span class="qw has-meaning" data-ar="نَضْرَةَ" data-m="بهاء وحُسن ونور وإشراق على الوجه">نَضْرَةَ</span> <span class="qw" data-ar="النَّعِيمِ">النَّعِيمِ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">تَعْرِفُ</span><span class="word-sep">—</span><span class="word-meaning">ترى وتميّز بوضوح</span></div>
+            <div class="word-item"><span class="word-ar">نَضْرَةَ</span><span class="word-sep">—</span><span class="word-meaning">بهاء وحُسن ونور وإشراق على الوجه</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">بهاء النعيم ونضارته — توالي اللذة والسرور يكسب الوجه نوراً وحُسناً وبهجة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v25">
+        <div class="verse-topbar">
+          <div class="verse-num">25</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="يُسْقَوْنَ" data-m="يُقدَّم لهم الشراب إكراماً">يُسْقَوْنَ</span> <span class="qw" data-ar="مِن">مِن</span> <span class="qw has-meaning" data-ar="رَّحِيقٍ" data-m="أطيب الأشربة وألذّها — الشراب الخالص">رَّحِيقٍ</span> <span class="qw has-meaning" data-ar="مَّخْتُومٍ" data-m="مختوم الإناء لا يدخله ما ينقص لذته">مَّخْتُومٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">يُسْقَوْنَ</span><span class="word-sep">—</span><span class="word-meaning">يُقدَّم لهم الشراب إكراماً</span></div>
+            <div class="word-item"><span class="word-ar">رَّحِيقٍ</span><span class="word-sep">—</span><span class="word-meaning">أطيب الأشربة وألذّها — الشراب الخالص</span></div>
+            <div class="word-item"><span class="word-ar">مَّخْتُومٍ</span><span class="word-sep">—</span><span class="word-meaning">مختوم الإناء لا يدخله ما ينقص لذته</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">أطيب ما يكون من الأشربة — مختوم لا يدخله شيء ينقص لذته</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v26">
+        <div class="verse-topbar">
+          <div class="verse-num">26</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="خِتَامُهُ" data-m="آخره عند الشرب">خِتَامُهُ</span> <span class="qw has-meaning" data-ar="مِسْكٌ" data-m="المسك — أطيب أنواع الطيب">مِسْكٌ</span> <span class="qw" data-ar="ۚ">ۚ</span> <span class="qw" data-ar="وَفِي">وَفِي</span> <span class="qw" data-ar="ذَٰلِكَ">ذَٰلِكَ</span> <span class="qw has-meaning" data-ar="فَلْيَتَنَافَسِ" data-m="فليتسابق ويتبارى بالأعمال الصالحة">فَلْيَتَنَافَسِ</span> <span class="qw" data-ar="الْمُتَنَافِسُونَ">الْمُتَنَافِسُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">خِتَامُهُ</span><span class="word-sep">—</span><span class="word-meaning">آخره عند الشرب</span></div>
+            <div class="word-item"><span class="word-ar">مِسْكٌ</span><span class="word-sep">—</span><span class="word-meaning">المسك — أطيب أنواع الطيب</span></div>
+            <div class="word-item"><span class="word-ar">فَلْيَتَنَافَسِ</span><span class="word-sep">—</span><span class="word-meaning">فليتسابق ويتبارى بالأعمال الصالحة</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">ختامه مسك — وفي ذلك النعيم فليتنافس المتنافسون بالأعمال الموصلة إليه</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v27">
+        <div class="verse-topbar">
+          <div class="verse-num">27</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَمِزَاجُهُ">وَمِزَاجُهُ</span> <span class="qw" data-ar="مِن">مِن</span> <span class="qw has-meaning" data-ar="تَسْنِيمٍ" data-m="أعلى عين في الجنة — من السَّنام أي العلو">تَسْنِيمٍ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">مِزَاجُهُ</span><span class="word-sep">—</span><span class="word-meaning">ما يُمزج ويُخلط به</span></div>
+            <div class="word-item"><span class="word-ar">تَسْنِيمٍ</span><span class="word-sep">—</span><span class="word-meaning">أعلى عين في الجنة — من السَّنام أي العلو</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">مزاجه من تسنيم — أعلى أشربة الجنة على الإطلاق</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v28">
+        <div class="verse-topbar">
+          <div class="verse-num">28</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="عَيْنًا" data-m="عين ماء في الجنة تجري">عَيْنًا</span> <span class="qw" data-ar="يَشْرَبُ">يَشْرَبُ</span> <span class="qw" data-ar="بِهَا">بِهَا</span> <span class="qw has-meaning" data-ar="الْمُقَرَّبُونَ" data-m="أعلى أهل الجنة منزلة — يشربون منها صرفاً">الْمُقَرَّبُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">عَيْنًا</span><span class="word-sep">—</span><span class="word-meaning">عين ماء في الجنة تجري</span></div>
+            <div class="word-item"><span class="word-ar">الْمُقَرَّبُونَ</span><span class="word-sep">—</span><span class="word-meaning">أعلى أهل الجنة منزلة — يشربون منها صرفاً</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">خالصة للمقربين صرفاً — أعلى الخلق منزلة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="section-divider">
+      <div style="font-size:1.6rem;margin-bottom:8px">🔄</div>
+      <div class="sec-title">الانقلاب الكبير</div>
+      <div class="sec-badge">الآيات ٢٩-٣٦</div>
+      <div class="sec-theme">المفارقة والجزاء</div>
+    </div>
+    <div class="verse-block" id="v29">
+        <div class="verse-topbar">
+          <div class="verse-num">29</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="إِنَّ">إِنَّ</span> <span class="qw" data-ar="الَّذِينَ">الَّذِينَ</span> <span class="qw has-meaning" data-ar="أَجْرَمُوا" data-m="ارتكبوا الجرائم والذنوب">أَجْرَمُوا</span> <span class="qw" data-ar="كَانُوا">كَانُوا</span> <span class="qw" data-ar="مِنَ">مِنَ</span> <span class="qw" data-ar="الَّذِينَ">الَّذِينَ</span> <span class="qw" data-ar="آمَنُوا">آمَنُوا</span> <span class="qw has-meaning" data-ar="يَضْحَكُونَ" data-m="يسخرون ويستهزئون احتقاراً">يَضْحَكُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">أَجْرَمُوا</span><span class="word-sep">—</span><span class="word-meaning">ارتكبوا الجرائم والذنوب</span></div>
+            <div class="word-item"><span class="word-ar">يَضْحَكُونَ</span><span class="word-sep">—</span><span class="word-meaning">يسخرون ويستهزئون احتقاراً</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">يسخرون بالمؤمنين ويستهزئون بهم — احتقاراً وازدراءً</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v30">
+        <div class="verse-topbar">
+          <div class="verse-num">30</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَإِذَا">وَإِذَا</span> <span class="qw has-meaning" data-ar="مَرُّوا" data-m="مشوا بجانبهم">مَرُّوا</span> <span class="qw" data-ar="بِهِمْ">بِهِمْ</span> <span class="qw has-meaning" data-ar="يَتَغَامَزُونَ" data-m="يتبادلون الغمز بالعين والإشارة سخريةً">يَتَغَامَزُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">مَرُّوا</span><span class="word-sep">—</span><span class="word-meaning">مشوا بجانبهم</span></div>
+            <div class="word-item"><span class="word-ar">يَتَغَامَزُونَ</span><span class="word-sep">—</span><span class="word-meaning">يتبادلون الغمز بالعين والإشارة سخريةً</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">يغمز بعضهم لبعض سخرية — حركة ضعيفة تكشف سوء الأدب</div>
+            <div class="verse-meaning-source">الظلال ص٣٨٦١</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v31">
+        <div class="verse-topbar">
+          <div class="verse-num">31</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَإِذَا">وَإِذَا</span> <span class="qw has-meaning" data-ar="انقَلَبُوا" data-m="رجعوا">انقَلَبُوا</span> <span class="qw" data-ar="إِلَىٰ">إِلَىٰ</span> <span class="qw" data-ar="أَهْلِهِمُ">أَهْلِهِمُ</span> <span class="qw has-meaning" data-ar="انقَلَبُوا" data-m="رجعوا">انقَلَبُوا</span> <span class="qw has-meaning" data-ar="فَكِهِينَ" data-m="فرحين مسرورين متلذذين بالسخرية">فَكِهِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">انقَلَبُوا</span><span class="word-sep">—</span><span class="word-meaning">رجعوا</span></div>
+            <div class="word-item"><span class="word-ar">فَكِهِينَ</span><span class="word-sep">—</span><span class="word-meaning">فرحين مسرورين متلذذين بالسخرية</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">رجعوا إلى أهلهم مسرورين مغتبطين بعد السخرية — أعظم الاغترار</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٧</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v32">
+        <div class="verse-topbar">
+          <div class="verse-num">32</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَإِذَا">وَإِذَا</span> <span class="qw" data-ar="رَأَوْهُمْ">رَأَوْهُمْ</span> <span class="qw" data-ar="قَالُوا">قَالُوا</span> <span class="qw" data-ar="إِنَّ">إِنَّ</span> <span class="qw" data-ar="هَـٰؤُلَاءِ">هَـٰؤُلَاءِ</span> <span class="qw has-meaning" data-ar="لَضَالُّونَ" data-m="تائهون عن طريق الحق — في زعم المجرمين">لَضَالُّونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">لَضَالُّونَ</span><span class="word-sep">—</span><span class="word-meaning">تائهون عن طريق الحق — في زعم المجرمين</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">أعجب شيء — أن يتحدث الفجار عن الهدى والضلال ويزعموا أنهم أهل الهدى!</div>
+            <div class="verse-meaning-source">الظلال ص٣٨٦١</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v33">
+        <div class="verse-topbar">
+          <div class="verse-num">33</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="وَمَا">وَمَا</span> <span class="qw has-meaning" data-ar="أُرْسِلُوا" data-m="ما وُكّلوا ولا كُلّفوا">أُرْسِلُوا</span> <span class="qw" data-ar="عَلَيْهِمْ">عَلَيْهِمْ</span> <span class="qw has-meaning" data-ar="حَافِظِينَ" data-m="رقباء على أعمال المؤمنين ومحاسبين لهم">حَافِظِينَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">أُرْسِلُوا</span><span class="word-sep">—</span><span class="word-meaning">ما وُكّلوا ولا كُلّفوا</span></div>
+            <div class="word-item"><span class="word-ar">حَافِظِينَ</span><span class="word-sep">—</span><span class="word-meaning">رقباء على أعمال المؤمنين ومحاسبين لهم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">ما أُقيموا على المؤمنين رقباء — تعنت وعناد بلا برهان</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v34">
+        <div class="verse-topbar">
+          <div class="verse-num">34</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw has-meaning" data-ar="فَالْيَوْمَ" data-m="يوم القيامة — يوم انقلاب كل شيء">فَالْيَوْمَ</span> <span class="qw" data-ar="الَّذِينَ">الَّذِينَ</span> <span class="qw" data-ar="آمَنُوا">آمَنُوا</span> <span class="qw" data-ar="مِنَ">مِنَ</span> <span class="qw" data-ar="الْكُفَّارِ">الْكُفَّارِ</span> <span class="qw has-meaning" data-ar="يَضْحَكُونَ" data-m="يضحكون من الكفار كما كانوا يُضحك منهم">يَضْحَكُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">فَالْيَوْمَ</span><span class="word-sep">—</span><span class="word-meaning">يوم القيامة — يوم انقلاب كل شيء</span></div>
+            <div class="word-item"><span class="word-ar">يَضْحَكُونَ</span><span class="word-sep">—</span><span class="word-meaning">يضحكون من الكفار كما كانوا يُضحك منهم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">الانقلاب! الذين آمنوا يضحكون من الكفار في الآخرة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٨ + المختصر ص٥٨٩</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v35">
+        <div class="verse-topbar">
+          <div class="verse-num">35</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="عَلَى">عَلَى</span> <span class="qw has-meaning" data-ar="الْأَرَائِكِ" data-m="السُرر المزيّنة في الجنة">الْأَرَائِكِ</span> <span class="qw has-meaning" data-ar="يَنظُرُونَ" data-m="ينظرون إلى النعيم الدائم">يَنظُرُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">الْأَرَائِكِ</span><span class="word-sep">—</span><span class="word-meaning">السُرر المزيّنة في الجنة</span></div>
+            <div class="word-item"><span class="word-ar">يَنظُرُونَ</span><span class="word-sep">—</span><span class="word-meaning">ينظرون إلى النعيم الدائم</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">على السُرر المزينة ينظرون إلى ما أعد الله لهم من النعيم</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٨</div>
+          </div>
+        </details>
+      </div>
+    <div class="verse-block" id="v36">
+        <div class="verse-topbar">
+          <div class="verse-num">36</div>
+        </div>
+        <div class="verse-arabic-body"><div class="verse-arabic-text">
+          <span class="qw" data-ar="هَلْ">هَلْ</span> <span class="qw has-meaning" data-ar="ثُوِّبَ" data-m="جوزي وكوفئ — الجزاء من جنس العمل">ثُوِّبَ</span> <span class="qw has-meaning" data-ar="الْكُفَّارُ" data-m="الذين كفروا وكذّبوا">الْكُفَّارُ</span> <span class="qw" data-ar="مَا">مَا</span> <span class="qw" data-ar="كَانُوا">كَانُوا</span> <span class="qw" data-ar="يَفْعَلُونَ">يَفْعَلُونَ</span>
+        </div></div>
+        <details class="words-details">
+          <summary class="words-summary">معاني الكلمات</summary>
+          <div class="words-list">
+            <div class="word-item"><span class="word-ar">ثُوِّبَ</span><span class="word-sep">—</span><span class="word-meaning">جوزي وكوفئ — الجزاء من جنس العمل</span></div>
+            <div class="word-item"><span class="word-ar">الْكُفَّارُ</span><span class="word-sep">—</span><span class="word-meaning">الذين كفروا وكذّبوا</span></div>
+          </div>
+        </details>
+        <details class="tafsir-details">
+          <summary class="tafsir-summary">التفسير</summary>
+          <div class="verse-meaning-box">
+            <div class="verse-meaning-label">التفسير</div>
+            <div class="verse-meaning-text">هل جوزي الكفار من جنس عملهم؟ نعم — عدلاً من الله وحكمة</div>
+            <div class="verse-meaning-source">السعدي ص١٦٥٨</div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+
+    <div class="stage-nav-btns">
+      <a href="#stage2" class="btn-secondary" style="text-decoration:none; touch-action:manipulation;">العودة للخلاصة</a>
+      <a href="#stage4" class="btn-next" style="text-decoration:none; touch-action:manipulation;">
+        توسّع في الفهم
+        <span>↓</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="stage-separator"><span class="sep-icon">❁</span></div>
+
+<!-- ======================================== -->
+<!-- STAGE 4: DEEP DIVE                       -->
+<!-- ======================================== -->
+<div class="stage" id="stage4">
+  <div class="stage-inner">
+    <div class="stage-header">
+      <div class="stage-label">المرحلة الثالثة</div>
+      <div class="stage-title">التوسّع</div>
+      <div class="stage-subtitle">اغمر نفسك في طبقات أعمق من الفهم</div>
+    </div>
+
+    <div class="deep-tabs" style="display:none">
+      <button type="button" class="deep-tab active" data-tab="zilal" style="touch-action:manipulation;cursor:pointer;">في ظلال القرآن</button>
+      <button type="button" class="deep-tab" data-tab="nuzul" style="touch-action:manipulation;cursor:pointer;">أسباب النزول</button>
+    </div>
+
+    <h3 style="color:var(--gold);text-align:center;font-size:1.1rem;margin-bottom:16px">في ظلال القرآن</h3>
+    <div class="deep-content" id="deep-zilal" style="display:block">
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">مدخل السورة</div>
+        <div class="ayah">﴿وَيْلٌ لِّلْمُطَفِّفِينَ﴾</div>
+        <div class="zilal-text">هذه السورة تعالج ظاهرة من ظواهر الغش في التعامل وتربطها بقضية العقيدة ربطاً محكماً وثيقاً. إن التطفيف في الكيل والميزان ناشئ من عدم الإحساس بأن هناك إلهاً يزن بالقسط، وأن هناك يوماً يوفّى فيه الناس أعمالهم. والإيمان بيوم القيامة هو الضمان الأول لاستقامة الموازين والأخلاق</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٥٣-٣٨٥٤</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">سجّين</div>
+        <div class="ayah">﴿وَمَا أَدْرَاكَ مَا سِجِّينٌ﴾</div>
+        <div class="zilal-text">وما أدراك ما سجين؟ سؤال يلقي ظلال التفخيم والتهويل. ويُشعر المخاطب أن هذا أمر أكبر من إدراكه وأعظم من تصوره. وهذا الأسلوب القرآني يترك في النفس أثراً أعمق من كل وصف وتحديد</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٥٧</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">الران</div>
+        <div class="ayah">﴿كَلَّا بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم مَّا كَانُوا يَكْسِبُونَ﴾</div>
+        <div class="zilal-text">أي غطى على قلوبهم ما كانوا يكسبونه من الإثم والمعصية. والقلب الذي يمرد على المعصية ينطمس ويظلم — يرين عليه غطاء كثيف يحجب النور عنه ويحجبه عن النور. روى ابن جرير والترمذي والنسائي عن أبي هريرة عن النبي ﷺ قال: «إن العبد إذا أذنب ذنباً كانت نكتة سوداء في قلبه، فإن تاب منها صُقل قلبه، وإن زاد زادت»</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٥٧-٣٨٥٨</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">الحجاب</div>
+        <div class="ayah">﴿كَلَّا إِنَّهُمْ عَن رَّبِّهِمْ يَوْمَئِذٍ لَّمَحْجُوبُونَ﴾</div>
+        <div class="zilal-text">وهذا الحجاب عن ربهم عذاب فوق كل عذاب، وحرمان فوق كل حرمان. ونهاية بائسة لإنسان يستمد إنسانيته من مصدر واحد هو اتصاله بروح ربه الكريم. فإذا حُجب عن هذا المصدر فقد خصائصه كإنسان كريم، وارتكس إلى درجة يستحق معها الجحيم</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٥٨</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">التنافس</div>
+        <div class="ayah">﴿وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ﴾</div>
+        <div class="zilal-text">وفي ذلك فليتنافس المتنافسون… ومن عجب أن التنافس في أمر الآخرة يرتفع بأرواح المتنافسين جميعاً. بينما التنافس في أمر الدنيا ينحط بها جميعاً. والذين يتنافسون على شيء من أشياء الأرض مهما كبر وجلّ وارتفع وعظم، إنما يتنافسون في حقير قليل فانٍ قريب. والدنيا لا تزن عند الله جناح بعوضة. ولكن الآخرة ثقيلة في ميزانه. فهي إذن حقيقة تستحق المنافسة فيها والمسابقة</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٥٩-٣٨٦٠</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">الانقلاب</div>
+        <div class="ayah">﴿إِنَّ الَّذِينَ أَجْرَمُوا كَانُوا مِنَ الَّذِينَ آمَنُوا يَضْحَكُونَ﴾</div>
+        <div class="zilal-text">المشاهد التي يرسمها القرآن لسخرية الذين أجرموا من الذين آمنوا… مشاهد منتزعة من واقع البيئة في مكة. ولكنها متكررة في أجيال ومواطن شتى. وكثير من المعاصرين شهدوها كأنما هذه الآيات قد نزلت في وصفها وتصويرها — مما يدل على أن طبيعة الفجار المجرمين واحدة متشابهة في موقفها من الأبرار في جميع البيئات والعصور</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٦٠</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">التغامز</div>
+        <div class="ayah">﴿وَإِذَا مَرُّوا بِهِمْ يَتَغَامَزُونَ﴾</div>
+        <div class="zilal-text">يغمز بعضهم لبعض بعينه أو يشير بيده أو يأتي بحركة معارفة بينهم. وهي حركة ضعيفة واطية تكشف عن سوء الأدب والتجرد من التهذيب. حركة أطفال لا رجال. ولكن الفجار المجرمين هم دائماً أطفال في سلوكهم أمام عقيدة الإيمان والالتزام</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٦١</div>
+      </div>
+      <div class="zilal-card">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">الجزاء</div>
+        <div class="ayah">﴿هَلْ ثُوِّبَ الْكُفَّارُ مَا كَانُوا يَفْعَلُونَ﴾</div>
+        <div class="zilal-text">وهذا السؤال الأخير يلقي ظلال التقرير والتثبيت. وأن ما جرى هو الجزاء العادل المستحق. وأن الكفار قد نالوا ما يستحقون — وأن الله لا يظلم أحداً. وهو ختام يتناسق مع جوّ السورة كلها — جوّ الموازين والكيل والوفاء والبخس</div>
+        <div class="zilal-source">في ظلال القرآن — سيد قطب، ص ٣٨٦٢-٣٨٦٣</div>
+      </div>
+
+    </div>
+
+    <h3 style="color:var(--gold);text-align:center;font-size:1.1rem;margin:30px 0 16px">أسباب النزول</h3>
+    <div class="deep-content" id="deep-nuzul" style="display:block">
+      <div class="nuzul-card">
+        <div style="font-size:1.8rem;margin-bottom:14px">📜</div>
+        <div class="nuzul-text">أخرج النسائي وابن ماجه بسند صحيح عن ابن عباس رضي الله عنهما قال: لما قدم النبي ﷺ المدينة كانوا من أبخس الناس كيلاً، فأنزل الله ﴿وَيْلٌ لِّلْمُطَفِّفِينَ﴾، فأحسنوا الكيل بعد ذلك</div>
+        <div class="nuzul-source">لباب النقول في أسباب النزول — السيوطي، ص ٢٤٩</div>
+      </div>
+    </div>
+
+    <div class="stage-nav-btns">
+      <a href="#stage3" class="btn-secondary" style="text-decoration:none; touch-action:manipulation;">العودة للقراءة</a>
+      <a href="#stage5" class="btn-next" style="text-decoration:none; touch-action:manipulation;">
+        دوّن ما تغيّر فيك
+        <span>↓</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="stage-separator"><span class="sep-icon">❁</span></div>
+
+<!-- ======================================== -->
+<!-- STAGE 5: JOURNAL                         -->
+<!-- ======================================== -->
+<div class="stage" id="stage5">
+  <div class="journal-section">
+    <div class="journal-icon">✍️</div>
+    <div class="journal-question">ماذا تغيّر فيك؟</div>
+
+    <div style="text-align: right; max-width: 600px; margin: 0 auto 30px; padding: 20px 24px; background: rgba(201,150,58,0.06); border-right: 3px solid var(--gold); border-radius: 8px;">
+      <div style="color: var(--gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 14px; font-family: Cairo;">أسئلة للتدبر</div>
+      <div style="color: var(--text); font-size: 0.95rem; line-height: 2; font-family: Cairo;">
+        <div style="margin-bottom: 10px;">۞ هل تستوفي حقوقك من الناس وتغمطهم حقوقهم؟</div>
+        <div style="margin-bottom: 10px;">۞ هل تستوفي وتوفي؟</div>
+        <div style="margin-bottom: 10px;">۞ أم أنك من المحسنين… تستوفي وتسامح؟</div>
+        <div>۞ هل ستسعى لنشر هذا المعنى للناس لتنشر قيم القرآن في مجتمعك؟</div>
+      </div>
+    </div>
+
+    <textarea class="journal-textarea" id="journalText" placeholder="اكتب هنا ما لمسك… ما غيّر نظرتك… ما تريد أن تتذكره…"></textarea>
+    <div class="journal-hint">هذا التدوين لك أنت — لا أحد يراه سواك</div>
+    
+    <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:12px;">اكتب تأملاتك ثم انسخها واحتفظ بها</div>
+  </div>
+</div>
+
+
+</body>
+</html>

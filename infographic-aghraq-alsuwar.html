@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خريطة أغراض السور القرآنية</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #0a0e1a;
+  color: #e8e0d4;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  background: linear-gradient(180deg, #0f1a2e 0%, #0a0e1a 100%);
+}
+.header h1 {
+  font-family: 'Amiri', serif;
+  font-size: 2.8em;
+  color: #d4a853;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(212,168,83,0.3);
+}
+.header p {
+  font-size: 1em;
+  color: #8a9bb5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Navigation Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,26,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,168,83,0.15);
+}
+.tab {
+  padding: 10px 24px;
+  border-radius: 25px;
+  border: 1px solid rgba(212,168,83,0.3);
+  background: transparent;
+  color: #8a9bb5;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.tab:hover { border-color: #d4a853; color: #d4a853; }
+.tab.active {
+  background: linear-gradient(135deg, #d4a853, #b8912e);
+  color: #0a0e1a;
+  border-color: #d4a853;
+}
+
+/* View containers */
+.view { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; }
+.view.active { display: block; }
+
+/* ===== View 1: Mushaf Color Map ===== */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 30px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85em;
+}
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+/* Mushaf Grid */
+.mushaf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 6px;
+  direction: rtl;
+}
+.surah-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  border: 2px solid transparent;
+  font-size: 0.7em;
+  padding: 4px;
+}
+.surah-cell:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  border-color: #d4a853;
+  box-shadow: 0 4px 20px rgba(212,168,83,0.4);
+}
+.surah-cell .num {
+  font-size: 0.75em;
+  opacity: 0.6;
+  font-weight: 400;
+}
+.surah-cell .name {
+  font-family: 'Amiri', serif;
+  font-weight: 700;
+  font-size: 1.1em;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Color coding by PRIMARY classification */
+.cat-fard { background: linear-gradient(135deg, #1a3a5c, #1e4d7b); color: #7cb8e8; }
+.cat-usra { background: linear-gradient(135deg, #3a1a5c, #5c2d8a); color: #c49ee8; }
+.cat-mujtama { background: linear-gradient(135deg, #1a5c3a, #2d8a5c); color: #7be8b8; }
+.cat-ahkam { background: linear-gradient(135deg, #5c3a1a, #8a5c2d); color: #e8c47b; }
+.cat-qasas { background: linear-gradient(135deg, #5c1a3a, #8a2d5c); color: #e87bb8; }
+.cat-ibadat { background: linear-gradient(135deg, #1a5c5c, #2d8a8a); color: #7be8e8; }
+
+/* Tooltip */
+.tooltip {
+  display: none;
+  position: fixed;
+  background: #1a2035;
+  border: 1px solid rgba(212,168,83,0.4);
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 400px;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  direction: rtl;
+  text-align: right;
+}
+.tooltip.show { display: block; }
+.tooltip h3 {
+  font-family: 'Amiri', serif;
+  color: #d4a853;
+  font-size: 1.3em;
+  margin-bottom: 8px;
+}
+.tooltip .source-label {
+  font-size: 0.75em;
+  color: #d4a853;
+  font-weight: 700;
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+.tooltip .source-text {
+  font-size: 0.85em;
+  color: #c0b8a8;
+  line-height: 1.6;
+}
+.tooltip .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.tooltip .tag {
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+/* ===== View 2: Topic Grouping ===== */
+.topic-section {
+  margin-bottom: 40px;
+}
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(212,168,83,0.2);
+}
+.topic-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+}
+.topic-title {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #d4a853;
+}
+.topic-count {
+  font-size: 0.9em;
+  color: #8a9bb5;
+}
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+.topic-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.topic-card:hover {
+  background: rgba(212,168,83,0.08);
+  border-color: rgba(212,168,83,0.3);
+}
+.topic-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.topic-card .card-num {
+  font-size: 0.75em;
+  color: #8a9bb5;
+  min-width: 24px;
+}
+.topic-card .card-name {
+  font-family: 'Amiri', serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #e8e0d4;
+}
+.topic-card .card-desc {
+  font-size: 0.8em;
+  color: #8a9bb5;
+  line-height: 1.5;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0 30px;
+}
+.stat-box {
+  text-align: center;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  min-width: 100px;
+}
+.stat-num {
+  font-size: 2em;
+  font-weight: 800;
+  color: #d4a853;
+}
+.stat-label {
+  font-size: 0.8em;
+  color: #8a9bb5;
+}
+
+/* Filter buttons for mushaf view */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: #8a9bb5;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: #d4a853; color: #d4a853; }
+.filter-btn.active { background: rgba(212,168,83,0.15); border-color: #d4a853; color: #d4a853; }
+
+.surah-cell.dimmed { opacity: 0.15; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: #555;
+  font-size: 0.8em;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.8em; }
+  .mushaf-grid { grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); gap: 4px; }
+  .surah-cell .name { font-size: 0.9em; }
+  .topic-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>خريطة أغراض سور القرآن</h1>
+  <p>١١٤ سورة — مقاصدها وتصنيفاتها من ثلاثة مصادر معتمدة</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchView('mushaf')">خريطة المصحف</button>
+  <button class="tab" onclick="switchView('topics')">تجميع بالموضوع</button>
+</div>
+
+<!-- View 1: Mushaf Color Map -->
+<div id="mushaf-view" class="view active">
+
+  <div class="stats-bar">
+    <div class="stat-box"><div class="stat-num">١١٤</div><div class="stat-label">سورة</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#7cb8e8">١٠٩</div><div class="stat-label">خطاب الفرد</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#7be8b8">٣٠</div><div class="stat-label">المجتمع</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#e87bb8">٣٢</div><div class="stat-label">قصص</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:#e8c47b">١٨</div><div class="stat-label">أحكام</div></div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all" onclick="filterSurahs('all',this)">الكل</button>
+    <button class="filter-btn" data-filter="fard" onclick="filterSurahs('fard',this)">الفرد</button>
+    <button class="filter-btn" data-filter="usra" onclick="filterSurahs('usra',this)">الأسرة</button>
+    <button class="filter-btn" data-filter="mujtama" onclick="filterSurahs('mujtama',this)">المجتمع</button>
+    <button class="filter-btn" data-filter="ahkam" onclick="filterSurahs('ahkam',this)">أحكام</button>
+    <button class="filter-btn" data-filter="ibadat" onclick="filterSurahs('ibadat',this)">عبادات</button>
+    <button class="filter-btn" data-filter="qasas" onclick="filterSurahs('qasas',this)">قصص</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot cat-fard"></div><span>فرد (بدون تصنيف إضافي)</span></div>
+    <div class="legend-item"><div class="legend-dot cat-usra"></div><span>أسرة</span></div>
+    <div class="legend-item"><div class="legend-dot cat-mujtama"></div><span>مجتمع</span></div>
+    <div class="legend-item"><div class="legend-dot cat-ahkam"></div><span>أحكام</span></div>
+    <div class="legend-item"><div class="legend-dot cat-qasas"></div><span>قصص</span></div>
+    <div class="legend-item"><div class="legend-dot cat-ibadat"></div><span>عبادات</span></div>
+  </div>
+
+  <div class="mushaf-grid" id="mushaf-grid"></div>
+</div>
+
+<!-- View 2: Topic Grouping -->
+<div id="topics-view" class="view">
+  <div id="topics-container"></div>
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<div class="footer">
+  مشروع تدبُّر — المصادر: أغراض السور (ابن عاشور) • المختصر في تفسير القرآن (مركز تفسير) • في ظلال القرآن (سيد قطب)
+</div>
+
+<script>
+const SURAHS = [{"num": 1, "name": "الفاتحة", "ibn_ashour": "مناجاة الخالق وطلب الهداية إلى الصراط المستقيم", "mukhtasar": "تحقيق العبودية الخالصة لله تعالى", "zilal": "أم القرآن وأساس العلاقة بين العبد وربه، جامعة لمعاني القرآن في التوحيد والعبادة والاستعانة والهداية", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 2, "name": "البقرة", "ibn_ashour": "إثبات سمو الدين الإسلامي وشرائعه، تصنيف الناس تجاه الكتاب، أحكام كثيرة في القصاص والوصية والصيام والحج والجهاد والنكاح والطلاق والإنفاق", "mukhtasar": "الأمر بتحقيق الخلافة في الأرض بإقامة الإسلام، والاستسلام لله، والتحذير من حال بني إسرائيل", "zilal": "بناء الجماعة المسلمة وتشريعاتها ومنهج حياتها الشامل، والرد على أهل الكتاب والمنافقين", "fard": 1, "usra": 1, "mujtama": 1, "ahkam": 1, "ibadat": 1, "qasas": 1}, {"num": 3, "name": "آل عمران", "ibn_ashour": "التنويه بالقرآن ومحمد ﷺ، إبطال إلهية غير الله، ذكر غزوة أحد، الاتحاد والوفاق", "mukhtasar": "إثبات أن دين الإسلام هو الحق، رداً على شبهات أهل الكتاب، وتثبيتاً للمؤمنين", "zilal": "مواجهة أهل الكتاب وشبهاتهم، وتثبيت المؤمنين بعد غزوة أحد ودروسها", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 4, "name": "النساء", "ibn_ashour": "أحكام معاملات الأقرباء وحقوقهم، أحكام النكاح والصداق، حقوق اليتامى، أحكام القتل والجهاد", "mukhtasar": "تنظيم المجتمع المسلم وبناء علاقاته، وحفظ الحقوق، والحث على الجهاد", "zilal": "تنظيم المجتمع المسلم في أحكام الأسرة والميراث والنساء والعلاقات الاجتماعية", "fard": 1, "usra": 1, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 5, "name": "المائدة", "ibn_ashour": "تشريعات كثيرة لاستكمال شرائع الإسلام، الوفاء بالعقود، أحكام الحلال والحرام، الوضوء، القصاص", "mukhtasar": "الأمر بالوفاء بالعقود، والتحذير من مشابهة أهل الكتاب في نقضهم", "zilal": "تأسيس نظام الحياة الإسلامي الكامل وبيان أحكام العقود والحلال والحرام", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 1, "qasas": 0}, {"num": 6, "name": "الأنعام", "ibn_ashour": "إثبات الإلهية لله وحده، إبطال الشرك، قواعد التوحيد، التقوى الحقة", "mukhtasar": "تقرير عقيدة التوحيد والرد على ضلالات المشركين", "zilal": "تقرير التوحيد والألوهية والرد على شبهات المشركين بالحجج والبراهين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 7, "name": "الأعراف", "ibn_ashour": "التنويه بالقرآن، النهي عن اتخاذ الشركاء، قصص الأنبياء مع أقوامهم", "mukhtasar": "انتصار الحق في صراعه مع الباطل، وبيان عاقبة المستكبرين في الدنيا والآخرة", "zilal": "استعراض قصص الأنبياء مع أقوامهم وبيان سنة الله في الصراع بين الحق والباطل", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 8, "name": "الأنفال", "ibn_ashour": "أحكام الأنفال والغنائم، طاعة الله ورسوله، غزوة بدر، إصلاح ذات البين", "mukhtasar": "الامتنان على المؤمنين بنصر الله لهم في بدر، وبيان سنن النصر والهزيمة", "zilal": "غزوة بدر والمعركة بين جند الله وجند الشيطان، وبيان سنن النصر والجهاد", "fard": 0, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 1}, {"num": 9, "name": "التوبة", "ibn_ashour": "تحديد مدة العهود مع المشركين، أحكام الجهاد والجزية، صفات المنافقين، الزكاة", "mukhtasar": "البراءة من المشركين والمنافقين وجهادهم، وفتح باب التوبة للتائبين", "zilal": "شريعة الجهاد والبراءة من المشركين، وكشف المنافقين وفتح باب التوبة", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 1, "qasas": 0}, {"num": 10, "name": "يونس", "ibn_ashour": "إثبات رسالة محمد ﷺ، إبطال الشرك، دلائل المخلوقات، إنذار المشركين", "mukhtasar": "تقرير النبوة بالأدلة، ودعوة المكذبين للإيمان مع تهديدهم بالعذاب", "zilal": "الدعوة الإسلامية وجدال المشركين حول النبوة والوحي والبعث", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 11, "name": "هود", "ibn_ashour": "الإيماء إلى التحدي بالقرآن، قصص الأنبياء (نوح وصالح وإبراهيم ولوط وشعيب وموسى)، الصلاة والصبر", "mukhtasar": "تثبيت النبي والمؤمنين بقصص الأنبياء السابقين، وتشديد الوعيد للمكذبين", "zilal": "قصص الأنبياء مع أقوامهم وصبرهم، وسنة الله في إهلاك المكذبين وتثبيت المؤمنين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 1}, {"num": 12, "name": "يوسف", "ibn_ashour": "قصة يوسف عليه السلام وعبرها، أسلوب القصص القرآني المعجز", "mukhtasar": "الاعتبار بلطف تدبير الله لأوليائه وتمكينهم، وحسن عاقبتهم", "zilal": "قصة يوسف عليه السلام ودروسها في الصبر والعفاف والتوكل ولطف تدبير الله", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 13, "name": "الرعد", "ibn_ashour": "إثبات صدق الرسول ﷺ، التنويه بالقرآن، دلائل الوحدانية", "mukhtasar": "الرد على منكري الوحي والنبوة، وبيان مظاهر عظمة الله", "zilal": "آيات الله في الكون وحججه على التوحيد والرسالة والرد على منكري البعث", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 14, "name": "إبراهيم", "ibn_ashour": "إخراج الناس من الظلمات إلى النور، تذكير بنعم الله، قصة إبراهيم", "mukhtasar": "إثبات قيام الرسل بالبيان والبلاغ، وتهديد المعرضين عن اتباعهم", "zilal": "دعوة إبراهيم وقصص الأنبياء مع أقوامهم وتثبيت النبي ﷺ على طريق الدعوة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 15, "name": "الحجر", "ibn_ashour": "التحدي بإعجاز القرآن، إنذار المشركين، خلق الإنسان، قصة الشيطان", "mukhtasar": "توعد المستهزئين بالقرآن، والوعد بحفظه تأييداً للنبي وتثبيتاً له", "zilal": "الوحي والنبوة والرد على معاندي الحق وتثبيت النبي ﷺ", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 16, "name": "النحل", "ibn_ashour": "تفرد الله بالإلهية، الأدلة على فساد الشرك، إثبات رسالة محمد ﷺ، النعم، أصول الشريعة", "mukhtasar": "التذكير بنعم الله الدالة على قدرته وتوحيده", "zilal": "نعم الله على الإنسان وحكمته في الخلق والتشريع والرد على من ينكر هذه النعم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 17, "name": "الإسراء", "ibn_ashour": "إثبات نبوة محمد ﷺ، الإسراء، الوصايا العشر، دلائل الوحدانية", "mukhtasar": "تثبيت الله لرسوله ﷺ وتأييده بالآيات البينات", "zilal": "الإسراء والمعراج وآيات الله في الكون والأحكام الشرعية وتكريم بني آدم", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 18, "name": "الكهف", "ibn_ashour": "التحميد على إنزال الكتاب، إنذار المعاندين، قصة أصحاب الكهف وذي القرنين وموسى والخضر", "mukhtasar": "بيان منهج التعامل مع الفتن، وأن الله ينجي أولياءه منها", "zilal": "الصراع بين الحق والباطل من خلال قصص أصحاب الكهف وصاحب الجنتين وموسى والخضر وذي القرنين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 19, "name": "مريم", "ibn_ashour": "الرد على اليهود، نزاهة آل عمران، كرامة زكريا ومريم وعيسى", "mukhtasar": "إبطال عقيدة نسبة الولد لله، من المشركين والنصارى، وبيان سعة رحمة الله بعباده", "zilal": "رحمة الله بأنبيائه ورعايته لهم من خلال قصص زكريا ويحيى ومريم وعيسى وإبراهيم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 20, "name": "طه", "ibn_ashour": "التحدي بالقرآن، قصة موسى وفرعون، قصة السامري", "mukhtasar": "السعادة باتباع هدى القرآن وحمل رسالته، والشقاء بمخالفته", "zilal": "قصة موسى مع فرعون وبيان سعادة اتباع الهدى وشقاء الإعراض عنه", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 21, "name": "الأنبياء", "ibn_ashour": "الإنذار بالبعث، ذكر الرسل والأنبياء، النعمة الكبرى وهي الحفظ", "mukhtasar": "إثبات الرسالة وبيان وحدة غاية الأنبياء وعناية الله بهم", "zilal": "وحدة رسالة الأنبياء ودعاؤهم وعناية الله بهم وتصحيح الانحرافات العقدية", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 22, "name": "الحج", "ibn_ashour": "خطاب الناس بالتقوى، نفي الشرك، البعث، الحج، الإذن بالقتال", "mukhtasar": "تعظيم الله ﷻ وشعائره والتسليم لأمره", "zilal": "تعظيم شعائر الله وتوحيده من خلال مناسك الحج وبناء البيت", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 1, "qasas": 0}, {"num": 23, "name": "المؤمنون", "ibn_ashour": "تحقيق الوحدانية، إبطال الشرك، فضائل المؤمنين الروحية والعملية", "mukhtasar": "بيان فلاح المؤمنين وخسران الكافرين", "zilal": "صفات المؤمنين الحقيقيين وفلاحهم في الدنيا والآخرة مقابل خسران الكافرين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 1}, {"num": 24, "name": "النور", "ibn_ashour": "أحكام معاشرة الرجال للنساء، حد الزنى، براءة عائشة، آداب الاستئذان، الحجاب", "mukhtasar": "الدعوة إلى العفاف وحماية الأعراض", "zilal": "تشريع العفة والطهارة وحماية المجتمع من الفاحشة وبيان آداب الاستئذان والحجاب", "fard": 1, "usra": 1, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 25, "name": "الفرقان", "ibn_ashour": "إثبات القرآن منزل من الله، وحدانية الله، تثبيت الرسول ﷺ، صفات عباد الرحمن", "mukhtasar": "الانتصار للرسول ﷺ وللقرآن ودفع شبه المشركين", "zilal": "الفرقان بين الحق والباطل وأن القرآن حجة الله على العالمين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 26, "name": "الشعراء", "ibn_ashour": "التنويه بالقرآن، تسلية النبي ﷺ، قصص الرسل مع أقوامهم", "mukhtasar": "بيان آيات الله في تأييد المرسلين وإهلاك المكذبين", "zilal": "عرض رسالات الأنبياء ومعاناتهم مع أقوامهم تثبيتاً للنبي ﷺ", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 27, "name": "النمل", "ibn_ashour": "إعجاز القرآن، قصة سليمان وداود، ملكة سبأ", "mukhtasar": "الامتنان على النبي ﷺ بنعمة القرآن وشكرها والصبر على تبليغه", "zilal": "معجزات الأنبياء (موسى وسليمان) وآيات الله في الكون دلالة على توحيده", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 28, "name": "القصص", "ibn_ashour": "التنويه بالقرآن، تفصيل قصة موسى، قصة قارون", "mukhtasar": "سنة الله في تمكين المؤمنين المستضعفين وإهلاك الطغاة المستكبرين", "zilal": "قصة موسى من مولده إلى بعثته رسولاً، وتثبيت قلب النبي والمؤمنين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 29, "name": "العنكبوت", "ibn_ashour": "تثبيت المسلمين المفتونين، التحدي بالقرآن، صبر المؤمنين", "mukhtasar": "الأمر بالصبر والثبات عند الابتلاء والفتن، وبيان حسن عاقبته", "zilal": "اختبار الإيمان بالابتلاءات ومواجهة المشركين بالحجج العقلية والآيات الكونية", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 30, "name": "الروم", "ibn_ashour": "غلب الروم والبشارة بانتصارهم، دلائل التوحيد والبعث، الإسلام دين الفطرة", "mukhtasar": "تأكيد تفرد الله سبحانه بتصريف الأمور، وبيان سنن الله في خلقه", "zilal": "آيات الله في الطبيعة والكون وسننه في غلبة الحق على الباطل", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 31, "name": "لقمان", "ibn_ashour": "وصايا لقمان لابنه، التنويه بهدي القرآن، مزية دين الإسلام", "mukhtasar": "الأمر باتباع الحكمة التي تضمنها القرآن، والتحذير من الإعراض عنها", "zilal": "وصايا لقمان لابنه في التوحيد والأخلاق والبر بالوالدين والأمر بالمعروف", "fard": 1, "usra": 1, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 32, "name": "السجدة", "ibn_ashour": "التنويه بالقرآن أنه من عند الله، البعث، إحياء الأرض", "mukhtasar": "بيان حقيقة الخلق وأحوال الإنسان في الدنيا والآخرة", "zilal": "حقيقة الخلق وقدرة الله في خلق السماوات والأرض وسجود الخلائق له", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 33, "name": "الأحزاب", "ibn_ashour": "الرد على المنافقين، أحكام أزواج النبي، الحجاب، التمسك بالشرائع", "mukhtasar": "بيان عناية الله بنبيه ﷺ وحمايته جنابه وأهل بيته", "zilal": "تنظيم الحياة الاجتماعية والأسرية وآداب المعاملات خاصة ما يتعلق بالنبي ﷺ وأزواجه", "fard": 1, "usra": 1, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 34, "name": "سبأ", "ibn_ashour": "إبطال الشرك، إنكار البعث، قصة داود وسليمان وسبأ", "mukhtasar": "بيان أحوال الناس مع النعم، وسنة الله في تغييرها", "zilal": "سنة الله في التمكين والاستدراج من خلال قصص سبأ وملك سليمان", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 35, "name": "فاطر", "ibn_ashour": "تفرد الله بالإلهية، صدق الرسول ﷺ، البعث، نعم الله", "mukhtasar": "بيان فقر العباد المطلق إلى فاطر السماوات والأرض، وكمال غناه عنهم", "zilal": "عظمة الله وشمول قدرته وملكه والرد على الشرك", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 36, "name": "يس", "ibn_ashour": "التحدي بإعجاز القرآن، تحقيق رسالة محمد ﷺ، دلائل التوحيد والبعث والجزاء", "mukhtasar": "إثبات الرسالة والبعث ودلائلهما", "zilal": "الصراع بين الحق والباطل من خلال قصة أهل القرية وتأكيد صدق الرسالة والبعث", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 37, "name": "الصافات", "ibn_ashour": "وحدانية الله، إثبات الرسالة والبعث، قصص الأنبياء", "mukhtasar": "إثبات وحدانية الله تعالى ونقاء رسله من افتراءات المشركين", "zilal": "تعظيم الملائكة وتنزيه الله عما نسبه إليه المشركون وتأكيد التوحيد", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 38, "name": "ص", "ibn_ashour": "توبيخ المشركين، قصة داود وسليمان وأيوب، قصة خلق آدم", "mukhtasar": "تثبيت النبي ﷺ بالاعتبار بقصص الأنبياء والصبر على الأذى", "zilal": "نماذج الملك العادل (داود وسليمان) والحكمة الإلهية في الابتلاء والتمكين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 39, "name": "الزمر", "ibn_ashour": "التنويه بالقرآن (٦ مواضع)، إثبات تفرد الله بالإلهية، البعث والجزاء", "mukhtasar": "الدعوة للتوحيد والإخلاص", "zilal": "وحدة الصراط المستقيم والدعوة للإخلاص وحتمية البعث والحساب", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 40, "name": "غافر", "ibn_ashour": "أصول الدعوة إلى الإيمان، صدق القرآن، موعظة مؤمن آل فرعون", "mukhtasar": "بيان حال المجادلين في آيات الله، والرد عليهم", "zilal": "سعة مغفرة الله ورحمته وقدرته مع عدله في الحساب والجزاء", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 41, "name": "فصلت", "ibn_ashour": "التنويه بالقرآن، إبطال مطاعن المشركين، دلائل تفرد الله بالخلق", "mukhtasar": "بيان حال المعرضين عن الله، وذكر عاقبتهم", "zilal": "إثبات التوحيد والرد على المشركين وتصوير قدرة الله في خلق السماوات والأرض", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 42, "name": "الشورى", "ibn_ashour": "تحدي الطاعنين في القرآن، وحدانية الله، الشورى، نعم الله", "mukhtasar": "بيان كمال تشريع الله، ووجوب متابعته، والتحذير من مخالفته", "zilal": "الدعوة إلى الشورى والعدل ووحدة الدين والشريعة", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 43, "name": "الزخرف", "ibn_ashour": "التحدي بإعجاز القرآن، إبطال الشرك، رسالة إبراهيم وموسى وعيسى", "mukhtasar": "التحذير من الافتتان بزخرف الحياة الدنيا", "zilal": "التحذير من الاغترار بزخرف الدنيا من خلال قصة موسى وفرعون", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 44, "name": "الدخان", "ibn_ashour": "التنويه بالقرآن وشرفه، رسالة محمد ﷺ، ليلة القدر، عذاب المشركين", "mukhtasar": "تهديد المشركين ببيان ما ينتظرهم من العقوبة العاجلة والآجلة", "zilal": "تهديد المكذبين بعذاب الدنيا والآخرة وبيان عظمة القرآن", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 45, "name": "الجاثية", "ibn_ashour": "التحدي بإعجاز القرآن وأنه جاء بالحق، إثبات انفراد الله بالإلهية، وعيد المكذبين", "mukhtasar": "بيان أحوال الخلق من الآيات الشرعية والكونية، ونقض حجج المنكرين وترهيبهم", "zilal": "الحياة الدنيا متاع زائل والآخرة هي الحياة الحقيقية", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 46, "name": "الأحقاف", "ibn_ashour": "إعجاز القرآن للاستدلال على أنه منزل من عند الله، إثبات جزاء الأعمال، إبطال الشرك", "mukhtasar": "بيان البراهين الدالة على صدق الرسالة والبعث، وعاقبة المعرضين عنها", "zilal": "تأكيد نبوة محمد ﷺ والرد على المكذبين من خلال قصص الأمم السابقة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 47, "name": "محمد", "ibn_ashour": "التحريض على قتال المشركين، ترغيب المسلمين في ثواب الجهاد", "mukhtasar": "بيان أحكام الجهاد في سبيل الله ومعاملة الكفار", "zilal": "حكم الجهاد والقتال والانتصار في سبيل الله ومعاملة الأسرى", "fard": 0, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 48, "name": "الفتح", "ibn_ashour": "بشارة المؤمنين بحسن عاقبة صلح الحديبية، نصر وفتح، بيعة الرضوان", "mukhtasar": "تبشير النبي والمؤمنين بالفتح والتمكين", "zilal": "صلح الحديبية وفتح مكة وما يترتب على ذلك من آثار عظيمة", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 49, "name": "الحجرات", "ibn_ashour": "آداب المسلمين مع النبي ﷺ، الإصلاح بين المسلمين، آداب حسن المعاملة، التحذير من بقايا الكفر", "mukhtasar": "إيمان الفرد وبيان أثره على أخلاق المجتمع", "zilal": "آداب التعامل بين المؤمنين وأحكام التثبت والعدل والتقوى", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 50, "name": "ق", "ibn_ashour": "التنويه بالقرآن، إثبات البعث، تنظير المشركين بالأمم المكذبة، وعد المؤمنين بنعيم الآخرة", "mukhtasar": "وعظ القلوب بالموت والبعث", "zilal": "وعظ القلوب بالتفكر في خلق الله وتذكيرها بالموت والبعث", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 51, "name": "الذاريات", "ibn_ashour": "تحقيق وقوع البعث والجزاء، إبطال مزاعم المكذبين، وعد المؤمنين بنعيم الخلد", "mukhtasar": "تعريف الجن والإنس بأن مصدر رزقهم من الله وحده ليخلصوا له العبادة", "zilal": "إثبات البعث والقيامة والرد على منكريها بالحجج والآيات", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 52, "name": "الطور", "ibn_ashour": "التهديد بتحقيق وقوع العذاب يوم القيامة، وعد المتقين، تسلية النبي ﷺ", "mukhtasar": "الحجج والبراهين لرد شبهات المكذبين للنبي ﷺ", "zilal": "أهوال يوم القيامة والجزاء ونعيم المؤمنين وعذاب المكذبين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 53, "name": "النجم", "ibn_ashour": "تحقيق أن الرسول ﷺ صادق فيما يبلغه، إثبات القرآن وحي من عند الله، إبطال إلهية الأصنام", "mukhtasar": "إثبات صدق الوحي وأنه من عند الله", "zilal": "صدق نبوة محمد ﷺ وحقيقة الوحي والرد على شبهات المشركين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 54, "name": "القمر", "ibn_ashour": "تسجيل مكابرة المشركين، إنذارهم باقتراب القيامة، تذكيرهم بعذاب الأمم السابقة", "mukhtasar": "التذكير بنعمة تيسير القرآن، وما فيه من الآيات والنذر", "zilal": "تيسير القرآن للذكر وقصص الأمم المكذبة وما حل بها من العذاب", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 55, "name": "الرحمن", "ibn_ashour": "التنويه بالقرآن وتعليمه وتنزيله، نعمة الدين ونعمة البيان، التذكير بدلائل القدرة، العدل وتوفية الحقوق", "mukhtasar": "تذكير الجن والإنس بنعم الله الباطنة والظاهرة، وآثار رحمته في الدنيا والآخرة", "zilal": "نعم الله على الإنسان في الكون والحياة وتذكير الجن والإنس بها", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 56, "name": "الواقعة", "ibn_ashour": "التذكير بيوم القيامة وتحقيق وقوعه، صفة أهل الجنة وأهل النار، الحشر والجزاء", "mukhtasar": "بيان أحوال العباد يوم القيامة وأصنافهم الثلاثة", "zilal": "تصوير أحوال يوم القيامة وتقسيم الناس إلى السابقين وأصحاب اليمين وأصحاب الشمال", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 57, "name": "الحديد", "ibn_ashour": "التذكير بجلال الله وصفاته العظيمة، الأمر بالإيمان والإنفاق في سبيل الله، تحذير المسلمين من قسوة القلوب", "mukhtasar": "الترقي بالنفوس للإيمان والإنفاق في سبيل الله", "zilal": "الترقي بالنفوس للإيمان والإنفاق في سبيل الله وحقيقة الحياة الدنيا", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 58, "name": "المجادلة", "ibn_ashour": "الحكم في قضية المظاهرة (الظهار)، إبطال ما كان في الجاهلية من تحريم المرأة، ضلالات المنافقين", "mukhtasar": "إظهار علم الله الشامل البالغ، تربية لمراقبته وتحذيراً من مخالفته", "zilal": "علم الله الشامل ومراقبته لعباده وأحكام المجادلة والظهار", "fard": 1, "usra": 1, "mujtama": 0, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 59, "name": "الحشر", "ibn_ashour": "أحكام أموال بني النضير بعد الانتصار عليهم، تعظيم شأن المهاجرين والأنصار، كشف دخائل المنافقين، عظمة القرآن", "mukhtasar": "إظهار قوة الله وعزته في تدمير اليهود والمنافقين، في مقابل تآلف المؤمنين", "zilal": "قصة يهود بني النضير وإجلاؤهم، وتقسيم الفيء وصفات المؤمنين", "fard": 0, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 60, "name": "الممتحنة", "ibn_ashour": "تحذير المؤمنين من اتخاذ المشركين أولياء، أحكام المؤمنات المهاجرات، مبايعة المؤمنات، تحريم تزوج المسلمين المشركات", "mukhtasar": "بيان أحكام العلاقة بين المؤمنين والكافرين، والتحذير من موالاة أعداء الله", "zilal": "اختبار العلاقة بين المؤمنين والكافرين وأحكام الموالاة والمعاداة", "fard": 1, "usra": 1, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 61, "name": "الصف", "ibn_ashour": "التحذير من إخلاف الوعد والالتزام بواجبات الدين، التحريض على الجهاد، نصرة الدين", "mukhtasar": "حث المؤمنين على نصرة دين الله وقدسه", "zilal": "الدعوة إلى الجهاد ونصرة دين الله والصدق في القول والعمل", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 62, "name": "الجمعة", "ibn_ashour": "التحذير من التخلف عن صلاة الجمعة، التنويه بالرسول ﷺ، توطئة لذم اليهود", "mukhtasar": "الامتنان على الأمة وتفضيلها برسولها، وبيان فضل يوم الجمعة", "zilal": "الامتنان على الأمة ببعثة النبي ﷺ وفضل الجمعة والتحذير من الانشغال بالتجارة", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 63, "name": "المنافقون", "ibn_ashour": "فضح أحوال المنافقين، كذبهم واضطرابهم في العقيدة، موعظة المؤمنين بالإنفاق", "mukhtasar": "بيان حقيقة المنافقين والتحذير منهم", "zilal": "كشف حقيقة المنافقين وخطرهم على الجماعة المسلمة", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 64, "name": "التغابن", "ibn_ashour": "التذكير بأن من في السماء والأرض يسبحون لله، الملك لله وحده، تحذير المؤمنين من بعض قرابتهم، الإنفاق", "mukhtasar": "التحذير مما تحصل به الندامة والغبن يوم القيامة", "zilal": "التغابن بين أهل الإيمان وأهل الكفر يوم القيامة والتحذير من فتنة الأموال والأولاد", "fard": 1, "usra": 1, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 65, "name": "الطلاق", "ibn_ashour": "تحديد أحكام الطلاق: العدة والإرضاع والإنفاق والإسكان، تتميماً لأحكام سورة البقرة", "mukhtasar": "بيان أحكام الطلاق وتعظيم حدوده وثمرات التقوى", "zilal": "أحكام الطلاق والعدة والمعاملة بين الزوجين وثمرات تقوى الله", "fard": 1, "usra": 1, "mujtama": 0, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 66, "name": "التحريم", "ibn_ashour": "أن لا يحرم أحد على نفسه ما أحل الله، أحكام اليمين والكفارة، تعليم الأزواج وتربية الأهل، موعظة بصالحات النساء", "mukhtasar": "الدعوة إلى إقامة البيوت على تعظيم حدود الله وتقديم مرضاته", "zilal": "أحكام تتعلق ببيت النبوة وتأديب أزواج النبي ﷺ وضرب الأمثال بامرأة نوح ولوط ومريم", "fard": 1, "usra": 1, "mujtama": 0, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 67, "name": "الملك", "ibn_ashour": "تعريف المؤمنين بعظمة الله وتفرده بالملك، انفراده بخلق العوالم العليا، التذكير بمتقن خلق العالم الأرضي، تحذير الناس من كيد الشياطين", "mukhtasar": "إظهار كمال ملك الله وقدرته، بعثاً على خشيته، وتحذيراً من عقابه", "zilal": "التفكر في ملك الله وعظمته وخشية عذابه والاستعداد للآخرة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 68, "name": "القلم", "ibn_ashour": "الإيماء بالتحدي بإعجاز القرآن، تسلية النبي ﷺ، إبطال مطاعن المشركين، تعليم الإنسان الكتابة والعلم", "mukhtasar": "شهادة الله للنبي ﷺ بحسن الخلق، والدفاع عنه وتثبيته", "zilal": "شرف القلم والعلم وتثبيت النبي ﷺ وصبره على أذى قومه", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 69, "name": "الحاقة", "ibn_ashour": "تهويل يوم القيامة وبوقوعه، تذكير بما حل بالأمم المكذبة، تنزيه الرسول ﷺ عن أن يكون غير رسول", "mukhtasar": "إثبات أن وقوع القيامة والجزاء فيها حق لا ريب فيه", "zilal": "تحقق وقوع القيامة وأهوالها وعدل الجزاء فيها", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 70, "name": "المعارج", "ibn_ashour": "تهديد الكافرين بعذاب يوم القيامة، وصف أهوال ذلك اليوم، صفة أهل الجنة وخصال المسلمين", "mukhtasar": "بيان حال وجزاء الخلق يوم القيامة", "zilal": "أهوال يوم القيامة وصفات المؤمنين الخاشعين المحافظين على صلاتهم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 71, "name": "نوح", "ibn_ashour": "ضرب المثل للمشركين بقوم نوح، تفصيل دعوة نوح إلى التوحيد، تذكيرهم بيوم البعث", "mukhtasar": "بيان منهج الدعوة للدعاة، من خلال قصة نوح عليه السلام", "zilal": "دعوة نوح قومه قروناً طويلة وإعراضهم وعاقبة تكذيبهم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 72, "name": "الجن", "ibn_ashour": "إثبات كرامة النبي ﷺ بأن دعوته بلغت الجن، إبطال عبادة الجن والكهانة، أصناف الجن", "mukhtasar": "إبطال دين المشركين، بيان حال الجن وإيمانهم بعد سماع القرآن", "zilal": "استماع الجن للقرآن وإيمانهم به وبيان حقائق عالم الغيب", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 73, "name": "المزمل", "ibn_ashour": "الإشعار بملاطفة الله رسوله ﷺ بندائه بوصفه، الأمر بقيام الليل، إقامة الصلاة وأداء الزكاة وإعطاء الصدقات", "mukhtasar": "بيان الأسباب المعينة على القيام بأعباء الدعوة", "zilal": "قيام الليل والتزود بالقرآن والصبر على أعباء الدعوة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 74, "name": "المدثر", "ibn_ashour": "تكريم النبي ﷺ والأمر بإبلاغ دعوة الرسالة، إعلان وحدانية الله، الأمر بالتطهر والصبر، إنذار المشركين بالبعث", "mukhtasar": "الأمر بالاجتهاد في دعوة المكذبين وإنذارهم بالآخرة والقرآن", "zilal": "الإنذار والدعوة إلى الله والتحذير من سقر وعذاب الآخرة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 75, "name": "القيامة", "ibn_ashour": "إثبات البعث والجزاء على الأعمال، تكريم أهل السعادة، التذكير بالموت وأنه أول مراحل الآخرة", "mukhtasar": "إظهار قدرة الله على بعث الخلق وإحياء الموتى", "zilal": "أحوال يوم القيامة والبعث والنشور وإثبات قدرة الله على إعادة الخلق", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 76, "name": "الإنسان", "ibn_ashour": "التذكير بأن كل إنسان كُوِّن بعد أن لم يكن، إثبات الجزاء، وصف جزاء الشاكرين، تثبيت النبي ﷺ على أعباء الرسالة", "mukhtasar": "تذكير الإنسان بأصل خلقه ومصيره، وبيان ما أعد الله في الجنة لأوليائه", "zilal": "تذكير الإنسان بأصل خلقه وجزاء المؤمنين الأبرار في الجنة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 77, "name": "المرسلات", "ibn_ashour": "الاستدلال على وقوع البعث عقب فناء الدنيا، إعادة الخلق بما سبق من خلق الإنسان والأرض، وعيد منكريه", "mukhtasar": "الوعيد للمكذبين بالويل يوم القيامة", "zilal": "أهوال يوم القيامة وتصوير مشاهده المؤثرة التي تهز النفوس", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 78, "name": "النبأ", "ibn_ashour": "وصف خوض المشركين في شأن القرآن، إثبات البعث، إقامة الحجة بخلق المخلوقات، وصف أهوال البعث ونعيم المؤمنين", "mukhtasar": "بيان أدلة القدرة على البعث والتخويف من العاقبة", "zilal": "البعث والحساب والتحدي للمكذبين بآيات الله في الكون", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 79, "name": "النازعات", "ibn_ashour": "إثبات البعث والجزاء، إبطال إحالة المشركين بتعذر الإحياء بعد انعدام الأجساد، قصة موسى وفرعون", "mukhtasar": "التذكير بالله واليوم الآخر", "zilal": "أهوال يوم القيامة وقدرة الله على البعث من خلال قصة موسى وفرعون", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 80, "name": "عبس", "ibn_ashour": "تعليم رسول الله ﷺ الموازنة بين مراتب المصالح، الإشارة إلى اختلاف حال المشركين المعرضين والمسلمين المقبلين", "mukhtasar": "تذكير الكافرين المستغنين عن ربهم ببراهين البعث", "zilal": "عتاب النبي ﷺ في شأن ابن أم مكتوم، وتذكير الإنسان بنعم الله عليه", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 81, "name": "التكوير", "ibn_ashour": "تحقيق الجزاء صريحاً وعلى إثبات البعث، التنويه بشأن القرآن الذي كذبوا به", "mukhtasar": "تذكير الأنس باختلال الكون عند البعث", "zilal": "انقلاب النظام الكوني يوم القيامة وأهوال ذلك اليوم العظيم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 82, "name": "الانفطار", "ibn_ashour": "إثبات البعث وذكر أهوال تتقدمه، إيقاظ المشركين للنظر في دلائل وقوع البعث والجزاء", "mukhtasar": "تحذير الإنسان من الاغترار وتذكيره بعلم الله الشامل", "zilal": "تحذير الإنسان من الاغترار بكرم ربه والملائكة الحافظون لأعماله", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 83, "name": "المطففين", "ibn_ashour": "التحذير من التطفيف في الكيل والوزن وتفظيعه، تهويل يوم الجزاء، وعيد المكذبين وكرامة المؤمنين", "mukhtasar": "الوعيد للمطففين وبشارة المؤمنين", "zilal": "ذم التطفيف والبخس في الكيل والميزان والتحذير من عذابه", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 1, "ibadat": 0, "qasas": 0}, {"num": 84, "name": "الانشقاق", "ibn_ashour": "وصف أشراط الساعة وحلول يوم البعث، اختلاف أحوال الخلق يومئذ بين أهل نعيم وأهل شقاء", "mukhtasar": "تذكير الإنسان برجوعه لربه، وبيان تقلب أحواله", "zilal": "انشقاق السماء وتغير النظام الكوني يوم القيامة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 85, "name": "البروج", "ibn_ashour": "ضرب المثل للذين فتنوا المسلمين بمكة بأصحاب الأخدود، إشعار المسلمين بأن قوة الله عظيمة، التنويه بشأن القرآن", "mukhtasar": "بيان قوة الله وإحاطته الشاملة، ونصرته لأوليائه، والبطش بأعدائه", "zilal": "قصة أصحاب الأخدود والثبات على الإيمان في مواجهة الطغيان", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 86, "name": "الطارق", "ibn_ashour": "إثبات إحصاء الأعمال والجزاء عليها، إثبات إمكان البعث بدقيق صنع الله في خلق الإنسان", "mukhtasar": "الاستدلال بالخلق على قدرة الله على البعث", "zilal": "عظمة الخلق (النجم الطارق وخلق الإنسان) دليل على قدرة الله على البعث", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 87, "name": "الأعلى", "ibn_ashour": "تنزيه الله والإشارة إلى وحدانيته بخلق الإنسان وخلق ما في الأرض، تأييد النبي ﷺ وتثبيته على تلقي الوحي", "mukhtasar": "الحث على تسبيح الله وتنزيهه والتذكير بالآخرة", "zilal": "تسبيح الله وتنزيهه والتذكير بالآخرة وأن الدار الآخرة خير وأبقى", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 88, "name": "الغاشية", "ibn_ashour": "تهويل يوم القيامة وما فيه من عقاب وثواب، الإنكار على قوم لم يهتدوا بدلالة مخلوقات الله على تفرده بالإلهية", "mukhtasar": "بيان أهوال يوم القيامة وأحوال أهل الجنة والنار", "zilal": "أحوال الناس يوم القيامة: وجوه خاشعة ووجوه ناعمة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 89, "name": "الفجر", "ibn_ashour": "ضرب المثل لمشركي مكة بمثل عاد وثمود وفرعون، إبطال غرور المشركين، إنذارهم بعذاب الآخرة", "mukhtasar": "بيان عاقبة الطغاة والحكمة من الابتلاء والتذكير بالآخرة", "zilal": "عاقبة الطغاة (عاد وثمود وفرعون) والحكمة من الابتلاء بالنعمة والضيق", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 90, "name": "البلد", "ibn_ashour": "التنويه بمكة وبمُقام النبي ﷺ بها، ذم سيرة أهل الشرك وإنكارهم البعث، نعمة الفكر ونعمة الإرشاد", "mukhtasar": "بيان كبد الإنسان في الدنيا والحث على فعل الخير لفك الرقاب وإطعام المساكين", "zilal": "كبد الإنسان في الدنيا والحث على اقتحام العقبة بالإيمان والعمل الصالح", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 91, "name": "الشمس", "ibn_ashour": "تهديد المشركين بأنهم يوشك أن يصيبهم عذاب بإشراكهم وتكذيبهم برسالة محمد ﷺ كما أصاب ثمود", "mukhtasar": "التذكير بآيات الله وقدرته، وبيان عاقبة تزكية النفس وتدسيتها", "zilal": "تزكية النفس وتدسيتها من خلال القسم بالآيات الكونية وقصة ثمود", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 92, "name": "الليل", "ibn_ashour": "بيان شرف المؤمنين وفضائل أعمالهم ومذمة المشركين، وأن الله يهدي الناس إلى الخير", "mukhtasar": "بيان أن السعي نوعان: سعي للآخرة وسعي للدنيا، ولكل جزاؤه", "zilal": "اختلاف مساعي الناس بين سعي للآخرة وسعي للدنيا ولكل جزاؤه", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 93, "name": "الضحى", "ibn_ashour": "إبطال قول المشركين إن الوحي انقطع، بشارة بأن الآخرة خير له من الأولى، تذكير بنعم الله عليه", "mukhtasar": "تسلية النبي ﷺ وتطييب نفسه بذكر نعم الله عليه", "zilal": "تسلية النبي ﷺ وتطمينه بأن ربه ما ودعه وبيان نعم الله عليه", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 94, "name": "الانشراح", "ibn_ashour": "ذكر عناية الله لرسوله ﷺ بلطف الله له وإزالة الغم والحرج، وتيسير ما عسر عليه وترفيع درجته", "mukhtasar": "تسلية النبي ﷺ ببشارة النصر واليسر بعد العسر", "zilal": "شرح صدر النبي ﷺ ورفع ذكره وبشارته باليسر بعد العسر", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 95, "name": "التين", "ibn_ashour": "التنبيه بأن الله خلق الإنسان على الفطرة المستقيمة ليعلموا أن الإسلام هو الفطرة، والتعريض بالوعيد للمكذبين", "mukhtasar": "الاستدلال بالخلق على الحساب والجزاء", "zilal": "تكريم الإنسان وكرامته عند الله والاستدلال على البعث والجزاء", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 96, "name": "العلق", "ibn_ashour": "تلقين محمد ﷺ الكلام القرآني وتلاوته، الإيماء إلى أن أمته ستصير إلى معرفة القراءة والكتابة والعلم، تهديد من كذّب النبي ﷺ", "mukhtasar": "بيان فضل العلم، وتحذير الإنسان من الطغيان إذا استغنى", "zilal": "بدء الوحي وأول ما نزل من القرآن وتحذير الإنسان من الطغيان", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 97, "name": "القدر", "ibn_ashour": "التنويه بفضل القرآن وعظمته بإسناد إنزاله إلى الله، رفع شأن ليلة القدر، تحريض المسلمين على تحيُّن ليلة القدر بالقيام والتصدق", "mukhtasar": "بيان فضل ليلة القدر وعظم شرفها", "zilal": "عظمة ليلة القدر وفضل إنزال القرآن فيها", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 98, "name": "البينة", "ibn_ashour": "توبيخ المشركين وأهل الكتاب على تكذيبهم بالقرآن والرسول ﷺ، والثناء على الذين آمنوا وعملوا الصالحات", "mukhtasar": "بيان أن الحجة قامت على أهل الكتاب والمشركين بالبينة", "zilal": "قيام الحجة على أهل الكتاب والمشركين بالبينة والرسالة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 99, "name": "الزلزلة", "ibn_ashour": "إثبات البعث وذكر أشراطه، حضور الناس للحشر وجزاؤهم على أعمالهم، تحريض على فعل الخير واجتناب الشر", "mukhtasar": "بيان أهوال يوم القيامة ومحاسبة الناس على أعمالهم", "zilal": "الزلزال العظيم يوم القيامة ومحاسبة الناس على أعمالهم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 100, "name": "العاديات", "ibn_ashour": "ذم خصال تُفضي بأصحابها إلى الخسران في الآخرة، ووعظ الناس بأن وراءهم حساباً على أعمالهم", "mukhtasar": "التنبيه على جحود الإنسان لنعم ربه وحبه الشديد للمال", "zilal": "جحود الإنسان لنعم ربه وحبه الشديد للمال", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 101, "name": "القارعة", "ibn_ashour": "ذكر إثبات وقوع البعث وما يسبق ذلك من الأهوال، إثبات الجزاء على الأعمال", "mukhtasar": "تصوير أهوال يوم القيامة وأحوال الناس فيها", "zilal": "هول القارعة يوم القيامة والفصل بين الناس بأعمالهم", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 102, "name": "التكاثر", "ibn_ashour": "التوبيخ على اللهو عن النظر في دلائل القرآن، ودعوة الإسلام بإيثار المال والتكاثر به والتفاخر بالأسلاف", "mukhtasar": "التحذير من الانشغال بالتكاثر في الدنيا عن طاعة الله", "zilal": "التحذير من الانشغال بالتكاثر والتنافس في الدنيا عن ذكر الله", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 103, "name": "العصر", "ibn_ashour": "إثبات الخسران الشديد لأهل الشرك ومن تقلد أعمالهم، وإثبات نجاة وفوز الذين آمنوا وعملوا الصالحات والداعين إلى الحق", "mukhtasar": "بيان أن الإنسان في خسارة إلا من آمن وعمل صالحاً وتواصى بالحق والصبر", "zilal": "خسران الإنسان إلا من آمن وعمل صالحاً وتواصى بالحق والصبر", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 104, "name": "الهمزة", "ibn_ashour": "وعيد جماعة من المشركين جعلوا هَمْزَ المسلمين ولَمْزَهُمْ ضرباً من أذاهم، طمعاً في الانصراف عن الإسلام", "mukhtasar": "ذم الهمز واللمز والتحذير من جمع المال وعدم إنفاقه", "zilal": "ذم الهمز واللمز والغيبة وسوء عاقبة من يسخر من الناس", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 105, "name": "الفيل", "ibn_ashour": "التذكير بأن الكعبة حرم الله وأنه حماها، تنبيه قريش بما ظهر من كرامة النبي ﷺ عند الله", "mukhtasar": "بيان نعمة الله على أهل مكة بحفظ بيته من أصحاب الفيل", "zilal": "حماية الله للبيت الحرام من أصحاب الفيل وإظهار قدرته", "fard": 0, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 1}, {"num": 106, "name": "قريش", "ibn_ashour": "أمر قريش بتوحيد الله بالربوبية، تذكيراً لهم بنعمة الأمن ورحلتي الشتاء والصيف وجلب الميرة", "mukhtasar": "امتنان الله على قريش بنعمة الأمن والرزق", "zilal": "نعم الله على قريش في الأمان والرزق والتجارة", "fard": 0, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 107, "name": "الماعون", "ibn_ashour": "التعجيب من حال من كذّبوا بالبعث: الاعتداء على الضعيف واحتقاره والإمساك عن إطعام المسكين والإعراض عن قواعد الإسلام من الصلاة والزكاة", "mukhtasar": "ذم من كذب بالدين وأعرض عن أعمال البر", "zilal": "التحذير من ترك الواجبات الدينية والاجتماعية ومنع الماعون", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 108, "name": "الكوثر", "ibn_ashour": "بشارة النبي ﷺ بأنه أعطي الخير الكثير في الدنيا والآخرة، وأمره بالشكر على ذلك بالإقبال على العبادة", "mukhtasar": "بشارة النبي ﷺ بالخير الكثير والأمر بالصلاة والنحر", "zilal": "بشارة النبي ﷺ بالكوثر والأمر بالصلاة والنحر", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 1, "qasas": 0}, {"num": 109, "name": "الكافرون", "ibn_ashour": "البراءة من عبادة الأصنام والفصل بين الإسلام ودين الشرك لا يختلط شيء من دين الشرك بالإسلام", "mukhtasar": "البراءة من الشرك وأهله", "zilal": "المفاصلة الكاملة بين التوحيد والشرك وتأكيد حرية العقيدة", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 110, "name": "النصر", "ibn_ashour": "الوعد بنصر كامل من عند الله وبفتح مكة، والبشارة بدخول خلائق كثيرة في الإسلام، والإيماء إلى اقتراب انتقال الرسول ﷺ", "mukhtasar": "بشارة النبي ﷺ بالنصر وفتح مكة والأمر بالتسبيح والاستغفار", "zilal": "فتح مكة ودخول الناس في دين الله أفواجاً والأمر بالتسبيح والاستغفار", "fard": 1, "usra": 0, "mujtama": 1, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 111, "name": "المسد", "ibn_ashour": "زجر أبي لهب على قوله ووعيده، ووعيد امرأته على انتصارها لزوجها وبغضها النبي ﷺ", "mukhtasar": "بيان عاقبة من عادى النبي ﷺ", "zilal": "عاقبة أبي لهب وامرأته في معاداة النبي ﷺ والحق", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 112, "name": "الإخلاص", "ibn_ashour": "إثبات وحدانية الله، وتنزيهه عن سمات المحدثات، وإبطال أن يكون له ابن، وأنه لا يُقصد في الحوائج غيره", "mukhtasar": "إخلاص التوحيد لله وتنزيهه عن الولد والشريك", "zilal": "توحيد الله الخالص وتنزيهه عن الولد والشريك والمثيل", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 113, "name": "الفلق", "ibn_ashour": "تعليم النبي ﷺ كلمات للتعوذ بالله من شر المخلوقات الشريرة والأوقات التي يكثر فيها حدوث الشر", "mukhtasar": "الاستعاذة بالله من شرور المخلوقات", "zilal": "الاستعاذة بالله من شرور المخلوقات والحاسدين", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}, {"num": 114, "name": "الناس", "ibn_ashour": "إرشاد النبي ﷺ لأن يتعوذ بالله ربه من شر الوسواس الذي يحاول إفساد عمله وإرشاده الناس", "mukhtasar": "الاستعاذة بالله من شر الوسواس الخناس", "zilal": "الاستعاذة بالله من وسوسة الشيطان وشروره", "fard": 1, "usra": 0, "mujtama": 0, "ahkam": 0, "ibadat": 0, "qasas": 0}];
+
+const toArabicNum = n => n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+function getPrimaryCategory(s) {
+  if (s.qasas) return 'qasas';
+  if (s.ahkam) return 'ahkam';
+  if (s.usra) return 'usra';
+  if (s.mujtama) return 'mujtama';
+  if (s.ibadat) return 'ibadat';
+  return 'fard';
+}
+
+function getTags(s) {
+  const tags = [];
+  if (s.fard) tags.push({label:'فرد', color:'#1e4d7b'});
+  if (s.usra) tags.push({label:'أسرة', color:'#5c2d8a'});
+  if (s.mujtama) tags.push({label:'مجتمع', color:'#2d8a5c'});
+  if (s.ahkam) tags.push({label:'أحكام', color:'#8a5c2d'});
+  if (s.ibadat) tags.push({label:'عبادات', color:'#2d8a8a'});
+  if (s.qasas) tags.push({label:'قصص', color:'#8a2d5c'});
+  return tags;
+}
+
+// Build Mushaf Grid
+function buildMushafGrid() {
+  const grid = document.getElementById('mushaf-grid');
+  grid.innerHTML = '';
+  SURAHS.forEach(s => {
+    const cat = getPrimaryCategory(s);
+    const cell = document.createElement('div');
+    cell.className = `surah-cell cat-${cat}`;
+    cell.dataset.num = s.num;
+    cell.dataset.fard = s.fard;
+    cell.dataset.usra = s.usra;
+    cell.dataset.mujtama = s.mujtama;
+    cell.dataset.ahkam = s.ahkam;
+    cell.dataset.ibadat = s.ibadat;
+    cell.dataset.qasas = s.qasas;
+    cell.innerHTML = `<span class="num">${toArabicNum(s.num)}</span><span class="name">${s.name}</span>`;
+    cell.addEventListener('mouseenter', e => showTooltip(e, s));
+    cell.addEventListener('mouseleave', hideTooltip);
+    cell.addEventListener('click', e => showTooltip(e, s));
+    grid.appendChild(cell);
+  });
+}
+
+// Tooltip
+function showTooltip(e, s) {
+  const tip = document.getElementById('tooltip');
+  const tags = getTags(s);
+  const tagsHtml = tags.map(t => `<span class="tag" style="background:${t.color}40;color:${t.color.replace(/2d|1e/g,'9e')}">${t.label}</span>`).join('');
+
+  tip.innerHTML = `
+    <h3>${toArabicNum(s.num)}. سورة ${s.name}</h3>
+    <div class="source-label">ابن عاشور:</div>
+    <div class="source-text">${s.ibn_ashour}</div>
+    <div class="source-label">المختصر:</div>
+    <div class="source-text">${s.mukhtasar}</div>
+    <div class="source-label">في ظلال القرآن:</div>
+    <div class="source-text">${s.zilal}</div>
+    <div class="tags">${tagsHtml}</div>
+  `;
+
+  const rect = e.target.getBoundingClientRect();
+  let x = rect.left - 420;
+  let y = rect.top;
+  if (x < 10) x = rect.right + 10;
+  if (y + 300 > window.innerHeight) y = window.innerHeight - 320;
+  if (y < 10) y = 10;
+
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+  tip.classList.add('show');
+}
+
+function hideTooltip() {
+  document.getElementById('tooltip').classList.remove('show');
+}
+
+// Filter
+function filterSurahs(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.surah-cell').forEach(cell => {
+    if (filter === 'all') {
+      cell.classList.remove('dimmed');
+    } else {
+      cell.classList.toggle('dimmed', cell.dataset[filter] !== '1');
+    }
+  });
+}
+
+// Topic Grouping
+function buildTopics() {
+  const container = document.getElementById('topics-container');
+
+  const topics = [
+    { key: 'fard_only', label: 'خطاب الفرد (توحيد وإيمان)', icon: 'cat-fard', emoji: '',
+      filter: s => s.fard && !s.usra && !s.mujtama && !s.ahkam && !s.qasas && !s.ibadat },
+    { key: 'qasas', label: 'قصص الأنبياء والأقوام', icon: 'cat-qasas', emoji: '',
+      filter: s => s.qasas },
+    { key: 'mujtama', label: 'بناء المجتمع المسلم', icon: 'cat-mujtama', emoji: '',
+      filter: s => s.mujtama },
+    { key: 'ahkam', label: 'أحكام وتشريعات', icon: 'cat-ahkam', emoji: '',
+      filter: s => s.ahkam },
+    { key: 'ibadat', label: 'عبادات وأذكار', icon: 'cat-ibadat', emoji: '',
+      filter: s => s.ibadat },
+    { key: 'usra', label: 'الأسرة والعلاقات', icon: 'cat-usra', emoji: '',
+      filter: s => s.usra },
+  ];
+
+  let html = '';
+  topics.forEach(topic => {
+    const surahs = SURAHS.filter(topic.filter);
+    if (surahs.length === 0) return;
+
+    html += `
+      <div class="topic-section">
+        <div class="topic-header">
+          <div class="topic-icon ${topic.icon}">${topic.emoji}</div>
+          <div>
+            <div class="topic-title">${topic.label}</div>
+            <div class="topic-count">${toArabicNum(surahs.length)} سورة</div>
+          </div>
+        </div>
+        <div class="topic-grid">
+          ${surahs.map(s => `
+            <div class="topic-card" onmouseenter="showTooltip(event, SURAHS[${s.num-1}])" onmouseleave="hideTooltip()">
+              <div class="card-header">
+                <span class="card-num">${toArabicNum(s.num)}</span>
+                <span class="card-name">سورة ${s.name}</span>
+              </div>
+              <div class="card-desc">${s.mukhtasar}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+// View switching
+function switchView(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(view + '-view').classList.add('active');
+  event.target.classList.add('active');
+  hideTooltip();
+}
+
+// Init
+buildMushafGrid();
+buildTopics();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>سورة الزمر — كاملة</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0d1b2e; --navy2:#142338; --navy3:#1c3050;
+  --gold:#c9963a; --gold-light:#e8c07a; --gold-pale:#f5e9cc;
+  --cream:#faf7f0;
+  --blue:#4a9eff; --green:#5ecb6a; --teal:#3dd4b4;
+  --amber:#f0b94a; --coral:#f07070; --purple:#a89ef5;
+  --gray:#b0aca5;
+  --body-font:'Noto Naskh Arabic','Cairo',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--navy);color:var(--cream);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 60%,rgba(201,150,58,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 75% 35%,rgba(255,255,255,.2) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 85% 20%,rgba(201,150,58,.2) 0%,transparent 100%);
+  pointer-events:none;z-index:0}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;z-index:1}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+  background:linear-gradient(transparent,var(--navy));pointer-events:none}
+.hero-bismillah{font-family:'Amiri',serif;font-size:clamp(1.2rem,3vw,1.8rem);
+  color:var(--gold-light);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .2s}
+.hero-number{font-size:.85rem;color:rgba(255,255,255,.55);letter-spacing:.15em;margin-bottom:.5rem;
+  opacity:0;animation:fadeUp .8s ease forwards .4s}
+.hero-title{font-family:'Amiri',serif;font-size:clamp(3.5rem,10vw,7rem);font-weight:700;
+  color:var(--cream);line-height:1.1;margin-bottom:.8rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--gold-light);font-weight:600;
+  margin-bottom:.5rem;opacity:0;animation:fadeUp .8s ease forwards .8s}
+.hero-meta{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .8s ease forwards 1s}
+.hero-meta-item{font-size:.82rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:.4rem}
+.hero-meta-item::before{content:'◆';color:var(--gold);font-size:.5rem}
+.hero-themes{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2rem;
+  opacity:0;animation:fadeUp .8s ease forwards 1.2s}
+.theme-pill{padding:.5rem 1.4rem;border-radius:50px;font-size:.88rem;font-weight:700;
+  border:1.5px solid currentColor;cursor:pointer;transition:all .3s;text-decoration:none}
+.theme-pill:hover{transform:translateY(-3px);filter:brightness(1.2)}
+.scroll-hint{opacity:0;animation:fadeUp .8s ease forwards 1.5s;display:flex;flex-direction:column;
+  align-items:center;gap:.4rem;color:rgba(255,255,255,.3);font-size:.8rem}
+.scroll-hint::before{content:'';width:1.5px;height:40px;
+  background:linear-gradient(var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+/* ── NAV ── */
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(13,27,46,.95);
+  backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,150,58,.25)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;
+  padding:0 1rem;max-width:1200px;margin:0 auto}
+.nav-tabs-wrap{position:relative;flex:1;overflow:hidden}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tabs-wrap::after{content:'';position:absolute;top:0;bottom:0;left:0;width:35px;
+  background:linear-gradient(to right,rgba(13,27,46,.95),transparent);pointer-events:none;
+  opacity:0;transition:opacity .3s}
+.nav-tabs-wrap.has-scroll::after{opacity:1}
+.nav-tab{padding:.9rem 1.1rem;font-family:'Cairo',sans-serif;font-size:.8rem;font-weight:600;
+  color:rgba(255,255,255,.55);background:none;border:none;
+  border-bottom:2.5px solid transparent;cursor:pointer;transition:all .3s;white-space:nowrap}
+.nav-tab:hover{color:rgba(255,255,255,.75)}
+.nav-tab.active{color:var(--gold-light);border-bottom-color:var(--gold)}
+.nav-progress{font-size:.75rem;color:rgba(255,255,255,.55);white-space:nowrap;padding-right:1rem;
+  flex-shrink:0;max-width:180px;text-align:left;overflow:hidden;text-overflow:ellipsis}
+
+/* ── SECTION TRANSITIONS ── */
+.section{display:none;max-width:1100px;margin:0 auto;padding:3rem 1.5rem 5rem;
+  position:relative;z-index:1}
+.section.active{display:block;animation:sectionEnter .6s ease}
+@keyframes sectionEnter{
+  0%{opacity:0;transform:translateY(15px)}
+  30%{opacity:0;transform:translateY(15px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.sec-header{text-align:center;margin-bottom:3rem}
+.sec-badge{display:inline-block;padding:.3rem 1.2rem;border-radius:50px;
+  font-size:.8rem;font-weight:700;margin-bottom:1rem;border:1px solid currentColor}
+.sec-title{font-family:'Amiri',serif;font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;color:var(--cream);margin-bottom:.4rem}
+.sec-subtitle{font-size:.9rem;color:rgba(255,255,255,.55)}
+
+/* ── OVERVIEW ── */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;margin-bottom:3rem}
+.overview-card{background:rgba(255,255,255,.04);border-radius:16px;padding:1.8rem 1.4rem;
+  text-align:center;border:1px solid rgba(255,255,255,.1);
+  transition:all .35s;cursor:pointer;position:relative;overflow:hidden}
+.overview-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:currentColor;opacity:.8}
+.overview-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.08);
+  box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.overview-num{width:50px;height:50px;border-radius:50%;display:inline-flex;
+  align-items:center;justify-content:center;font-family:'Amiri',serif;
+  font-size:1.4rem;font-weight:700;background:currentColor;margin-bottom:1rem}
+.overview-num span{color:var(--navy)}
+.overview-story{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.overview-theme{font-size:.8rem;padding:.3rem .9rem;border-radius:50px;
+  border:1px solid currentColor;display:inline-block;margin-bottom:.8rem;opacity:.8}
+.overview-lesson{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* ── MIND MAP ── */
+.mindmap-wrap{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:2rem;padding:2rem 1rem}
+.mm-center-node{background:linear-gradient(135deg,var(--navy3),var(--navy2));
+  border:2px solid var(--gold);border-radius:20px;padding:1.5rem 2.5rem;
+  text-align:center;box-shadow:0 0 40px rgba(201,150,58,.2);position:relative;z-index:2}
+.mm-surah-name{font-family:'Amiri',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--gold-light);font-weight:700}
+.mm-theme{font-size:1rem;color:var(--cream);font-weight:600;margin:.3rem 0}
+.mm-stats{font-size:.78rem;color:rgba(255,255,255,.55)}
+.mm-vline{width:2px;height:50px;background:linear-gradient(var(--gold),rgba(201,150,58,.3))}
+.mm-hline{height:2px;background:linear-gradient(to left,transparent,var(--gold),var(--gold),transparent);width:80%;max-width:800px;margin:0 auto}
+.mm-branches{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;width:100%;padding-top:12px}
+.mm-branch{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;min-width:150px;max-width:220px}
+.mm-branch-vline{width:2px;height:30px;flex-shrink:0}
+.mm-branch-node{border-radius:14px;padding:1.1rem 1.2rem;text-align:center;cursor:pointer;
+  border:1.5px solid currentColor;background:rgba(255,255,255,.04);transition:all .3s;width:100%}
+.mm-branch-node:hover{transform:translateY(-5px);background:rgba(255,255,255,.09);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.mm-branch-icon{font-size:1.6rem;margin-bottom:.4rem}
+.mm-branch-theme{font-size:.78rem;font-weight:700;opacity:.8;margin-bottom:.3rem}
+.mm-branch-title{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.mm-branch-lesson{font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.5}
+
+/* ── STORY SUB-TOGGLE ── */
+.story-sub-bar{display:flex;justify-content:center;margin-bottom:2rem}
+.story-sub-pill{display:flex;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:.25rem}
+.sub-btn{padding:.55rem 1.8rem;border-radius:50px;font-family:'Cairo',sans-serif;
+  font-size:.88rem;font-weight:700;border:none;cursor:pointer;transition:all .3s;
+  background:transparent;color:rgba(255,255,255,.5)}
+.sub-btn.active{background:rgba(255,255,255,.08);color:var(--cream);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.story-view{display:none}.story-view.active{display:block;animation:fadeIn .3s ease}
+
+/* ── MODE TOGGLE ── */
+.mode-toggle-bar{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:.3rem;
+  margin-bottom:2rem;width:fit-content}
+.mode-btn{padding:.5rem 1.6rem;border-radius:50px;font-family:'Cairo',sans-serif;
+  font-size:.88rem;font-weight:700;border:none;cursor:pointer;transition:all .3s;
+  background:transparent;color:rgba(255,255,255,.5)}
+.mode-btn.active{background:var(--gold);color:var(--navy);box-shadow:0 4px 15px rgba(201,150,58,.3)}
+.mode-brief{display:block}
+.mode-detail{display:none}
+.mode-detail.active{display:block}
+.mode-brief.hidden{display:none}
+
+/* ── BRIEF CARD ── */
+.brief-card{background:rgba(255,255,255,.04);border-radius:20px;padding:2rem;
+  border:1px solid rgba(255,255,255,.1);margin-bottom:2rem;position:relative;overflow:hidden}
+.brief-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:currentColor;opacity:.7}
+.brief-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.brief-card-icon{font-size:2.2rem}
+.brief-card-title{font-size:1.2rem;font-weight:700;margin-bottom:.2rem}
+.brief-card-theme{font-size:.8rem;font-weight:700;padding:.2rem .9rem;border-radius:50px;
+  border:1px solid currentColor;display:inline-block;opacity:.8}
+.brief-summary{font-family:var(--body-font);font-size:.95rem;line-height:2;color:rgba(255,255,255,.78);margin-bottom:1.2rem}
+.brief-ayah{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold-light);
+  background:rgba(201,150,58,.08);border-right:3px solid var(--gold);
+  padding:.7rem 1rem;border-radius:8px;margin-bottom:1.2rem;line-height:2}
+.brief-lessons{display:flex;flex-wrap:wrap;gap:.7rem}
+.brief-lesson-tag{padding:.35rem 1rem;border-radius:50px;font-size:.8rem;font-weight:600;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;display:flex;flex-direction:column;gap:0;margin-bottom:3rem}
+.timeline::before{content:'';position:absolute;right:28px;top:24px;bottom:24px;width:2px;
+  background:linear-gradient(to bottom,var(--gold),rgba(201,150,58,.1))}
+.tl-item{display:flex;gap:1.5rem;align-items:flex-start;padding:.5rem 0;
+  cursor:pointer;position:relative}
+.tl-dot{width:58px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
+.tl-dot-circle{width:48px;height:48px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;
+  border:2px solid currentColor;background:var(--navy2);transition:all .3s;flex-shrink:0}
+.tl-item:hover .tl-dot-circle,.tl-item.open .tl-dot-circle{transform:scale(1.1);box-shadow:0 0 20px currentColor}
+.tl-card{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:.75rem;transition:all .3s;
+  border-right:3px solid currentColor}
+.tl-item:hover .tl-card{background:rgba(255,255,255,.07)}
+.tl-card-title{font-size:1rem;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.tl-chevron{font-size:.7rem;opacity:.5;transition:transform .3s}
+.tl-item.open .tl-chevron{transform:rotate(180deg)}
+.tl-body{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0}
+.tl-item.open .tl-body{max-height:600px;opacity:1}
+.tl-body-inner{padding-top:.9rem;border-top:1px solid rgba(255,255,255,.08);margin-top:.9rem}
+.tl-body-inner p{font-family:var(--body-font);font-size:.92rem;line-height:2;color:rgba(255,255,255,.75);margin-bottom:.5rem}
+.tl-ayah{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold-light);
+  background:rgba(201,150,58,.08);border-right:2px solid var(--gold);
+  padding:.6rem 1rem;border-radius:6px;margin:.5rem 0;line-height:2}
+
+/* ── VERSE BLOCK ── */
+.verse-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:18px;margin-bottom:1.5rem;overflow:hidden;transition:all .3s}
+.verse-block:hover{background:rgba(255,255,255,.05)}
+.verse-topbar{display:flex;align-items:center;justify-content:space-between;
+  padding:.6rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+.verse-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Amiri',serif;font-size:1rem;font-weight:700;background:rgba(201,150,58,.15);
+  color:var(--gold-light);border:1px solid rgba(201,150,58,.3);flex-shrink:0}
+.verse-actions{display:flex;gap:.4rem}
+.verse-action-btn{padding:.3rem .8rem;border-radius:50px;font-family:'Cairo',sans-serif;
+  font-size:.73rem;font-weight:600;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:all .25s}
+.verse-action-btn:hover,.verse-action-btn.open{background:rgba(201,150,58,.15);
+  border-color:var(--gold);color:var(--gold-light)}
+.verse-arabic-body{padding:1.4rem 1.5rem 1rem}
+.verse-arabic-text{font-family:'Amiri',serif;font-size:clamp(1.4rem,4vw,2rem);
+  line-height:2.4;color:var(--cream);text-align:right}
+.verse-meaning-box{margin:0 1.5rem 1.2rem;background:rgba(255,255,255,.04);
+  border-right:3px solid var(--gold);border-radius:0 10px 10px 0;
+  padding:1rem 1.2rem;display:none;animation:slideDown .2s ease}
+.verse-meaning-box.visible{display:block}
+.verse-meaning-label{font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.08em;margin-bottom:.5rem}
+.verse-meaning-text{font-family:var(--body-font);font-size:.95rem;line-height:2;color:rgba(255,255,255,.78)}
+.verse-meaning-source{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.5rem;font-style:italic}
+
+/* ── LESSONS ── */
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.lesson-card{background:rgba(255,255,255,.04);border-radius:12px;padding:1.2rem;
+  border:1px solid rgba(255,255,255,.08);border-top:3px solid currentColor;transition:all .3s}
+.lesson-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.07)}
+.lesson-icon{font-size:1.6rem;margin-bottom:.6rem}
+.lesson-title{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.lesson-body{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.7}
+
+/* ── الظلال ── */
+.zilal-box{margin:0 1.5rem 1.2rem;background:rgba(94,203,106,.06);
+  border-right:3px solid var(--green);border-radius:0 10px 10px 0;
+  padding:1rem 1.2rem;display:none;animation:slideDown .2s ease}
+.zilal-box.visible{display:block}
+.zilal-label{font-size:.72rem;font-weight:700;color:var(--green);letter-spacing:.08em;margin-bottom:.5rem}
+.zilal-text{font-family:var(--body-font);font-size:.92rem;line-height:2;color:rgba(255,255,255,.75)}
+.zilal-source{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.5rem;font-style:italic}
+
+/* ── أسباب النزول ── */
+.nuzul-box{background:rgba(74,158,255,.06);border:1px solid rgba(74,158,255,.2);
+  border-radius:14px;padding:1.4rem;margin-bottom:2rem}
+.nuzul-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.nuzul-icon{font-size:1.3rem}
+.nuzul-title{font-size:.85rem;font-weight:700;color:var(--blue)}
+.nuzul-text{font-family:var(--body-font);font-size:.9rem;line-height:2;color:rgba(255,255,255,.72)}
+.nuzul-source{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.5rem;font-style:italic}
+
+/* ── السيرة / السياق التاريخي ── */
+.seerah-box{background:rgba(168,158,245,.06);border:1px solid rgba(168,158,245,.2);
+  border-radius:14px;padding:1.4rem;margin-bottom:2rem}
+.seerah-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.seerah-icon{font-size:1.3rem}
+.seerah-title{font-size:.85rem;font-weight:700;color:var(--purple)}
+.seerah-text{font-family:var(--body-font);font-size:.9rem;line-height:2;color:rgba(255,255,255,.72)}
+
+/* ── التحذير ── */
+.warning-banner{background:rgba(240,185,74,.1);border:1px solid rgba(240,185,74,.3);
+  border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;display:flex;gap:.8rem;align-items:flex-start}
+.warning-icon{font-size:1.4rem;flex-shrink:0}
+.warning-text{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6}
+
+/* ── أزرار التنقل ── */
+.story-nav{display:flex;justify-content:space-between;margin-top:2rem;gap:1rem}
+.story-nav-btn{padding:.7rem 1.8rem;border-radius:50px;font-family:'Cairo',sans-serif;
+  font-size:.85rem;font-weight:600;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);cursor:pointer;transition:all .3s}
+.story-nav-btn:hover{background:rgba(255,255,255,.08);color:var(--cream);border-color:rgba(255,255,255,.25)}
+.story-nav-btn.gold{background:rgba(201,150,58,.15);border-color:var(--gold);color:var(--gold-light)}
+.story-nav-btn.gold:hover{background:rgba(201,150,58,.25)}
+
+/* ── زر العودة لأعلى ── */
+.back-top{position:fixed;bottom:2rem;left:2rem;width:44px;height:44px;border-radius:50%;
+  background:var(--gold);color:var(--navy);border:none;cursor:pointer;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(201,150,58,.4);transition:all .3s;z-index:200;
+  opacity:0;pointer-events:none}
+.back-top.visible{opacity:1;pointer-events:all}
+.back-top:hover{transform:translateY(-3px)}
+
+/* ── COLORS ── */
+.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-teal{color:var(--teal)}
+.c-amber{color:var(--amber)}.c-coral{color:var(--coral)}.c-purple{color:var(--purple)}
+.c-gold{color:var(--gold-light)}.c-gray{color:var(--gray)}.c-red{color:var(--red)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:.9}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .mm-branches{gap:.8rem}.mm-branch{min-width:130px}.mm-hline{width:90%}
+  .timeline::before{right:22px}.tl-dot{width:46px}
+  .tl-dot-circle{width:38px;height:38px;font-size:.9rem}
+  .nav-tab{padding:.8rem .7rem;font-size:.75rem}
+  .story-nav{flex-direction:column;gap:.8rem}
+  .verse-arabic-text{font-size:1.5rem;line-height:2.5}
+  .sub-btn{padding:.5rem 1.2rem;font-size:.8rem}
+}
+@media(max-width:480px){
+  .mm-branch{min-width:110px}.mm-branch-node{padding:.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+  <p class="hero-number">السورة التاسعة والثلاثون</p>
+  <h1 class="hero-title">سورة الزُّمَر</h1>
+  <p class="hero-subtitle">سورة التوحيد الخالص</p>
+  <div class="hero-meta">
+    <span class="hero-meta-item">مكية</span>
+    <span class="hero-meta-item">٧٥ آية</span>
+    <span class="hero-meta-item">الجزء ٢٣-٢٤</span>
+  </div>
+  <div class="hero-themes">
+    <span class="theme-pill c-blue" onclick="goSection('s1')">الإخلاص والتوحيد (آيات ١-١٠)</span>
+    <span class="theme-pill c-green" onclick="goSection('s2')">طريق النجاة (آيات ١١-٢٠)</span>
+    <span class="theme-pill c-teal" onclick="goSection('s3')">أحسن الحديث (آيات ٢١-٣١)</span>
+    <span class="theme-pill c-amber" onclick="goSection('s4')">كفاية الله (آيات ٣٢-٤٢)</span>
+    <span class="theme-pill c-coral" onclick="goSection('s5')">باب الرحمة (آيات ٤٣-٥٩)</span>
+    <span class="theme-pill c-purple" onclick="goSection('s6')">المشهد الأخير (آيات ٦٠-٧٥)</span>
+  </div>
+  <div class="scroll-hint">اضغط للتصفح</div>
+</section>
+
+<!-- ══ NAV ══ -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-tabs-wrap">
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showSection('mindmap')">🗺 الخريطة</button>
+        <button class="nav-tab" onclick="showSection('overview')">📋 نظرة عامة</button>
+        <button class="nav-tab c-blue" onclick="showSection('s1')">١ الإخلاص</button>
+        <button class="nav-tab c-green" onclick="showSection('s2')">٢ طريق النجاة</button>
+        <button class="nav-tab c-teal" onclick="showSection('s3')">٣ أحسن الحديث</button>
+        <button class="nav-tab c-amber" onclick="showSection('s4')">٤ كفاية الله</button>
+        <button class="nav-tab c-coral" onclick="showSection('s5')">٥ باب الرحمة</button>
+        <button class="nav-tab c-purple" onclick="showSection('s6')">٦ المشهد الأخير</button>
+      </div>
+    </div>
+    <div class="nav-progress" id="navProgress">١ / ٨</div>
+  </div>
+</nav>
+
+<!-- ══ SECTION: MIND MAP ══ -->
+<section id="mindmap" class="section active">
+  <div class="sec-header">
+    <div class="sec-badge c-gold" style="border-color:var(--gold)">الخريطة الذهنية</div>
+    <h2 class="sec-title">بنية السورة الكاملة</h2>
+    <p class="sec-subtitle">اضغط على أي محور للانتقال إلى قسمه</p>
+  </div>
+  <div class="mindmap-wrap">
+    <div class="mm-center-node">
+      <div class="mm-surah-name">سورة الزمر</div>
+      <div class="mm-theme">سورة التوحيد الخالص</div>
+      <div class="mm-stats">٧٥ آية • مكية • الجزء ٢٣-٢٤</div>
+    </div>
+    <div class="mm-vline"></div>
+    <div class="mm-hline"></div>
+    <div class="mm-branches">
+      <div class="mm-branch c-blue">
+        <div class="mm-branch-vline" style="background:var(--blue)"></div>
+        <div class="mm-branch-node" onclick="goSection('s1')" style="color:var(--blue);border-color:var(--blue)">
+          <div class="mm-branch-icon">🕌</div>
+          <div class="mm-branch-theme">الإخلاص والتوحيد</div>
+          <div class="mm-branch-title">آيات ١-١٠</div>
+          <div class="mm-branch-lesson">عظمة القرآن ودلائل الوحدانية</div>
+        </div>
+      </div>
+      <div class="mm-branch c-green">
+        <div class="mm-branch-vline" style="background:var(--green)"></div>
+        <div class="mm-branch-node" onclick="goSection('s2')" style="color:var(--green);border-color:var(--green)">
+          <div class="mm-branch-icon">🌟</div>
+          <div class="mm-branch-theme">طريق النجاة</div>
+          <div class="mm-branch-title">آيات ١١-٢٠</div>
+          <div class="mm-branch-lesson">الإخلاص والبشرى لأولي الألباب</div>
+        </div>
+      </div>
+      <div class="mm-branch c-teal">
+        <div class="mm-branch-vline" style="background:var(--teal)"></div>
+        <div class="mm-branch-node" onclick="goSection('s3')" style="color:var(--teal);border-color:var(--teal)">
+          <div class="mm-branch-icon">📖</div>
+          <div class="mm-branch-theme">القرآن أحسن الحديث</div>
+          <div class="mm-branch-title">آيات ٢١-٣١</div>
+          <div class="mm-branch-lesson">أمثال القرآن وشرح الصدر</div>
+        </div>
+      </div>
+      <div class="mm-branch c-amber">
+        <div class="mm-branch-vline" style="background:var(--amber)"></div>
+        <div class="mm-branch-node" onclick="goSection('s4')" style="color:var(--amber);border-color:var(--amber)">
+          <div class="mm-branch-icon">🛡️</div>
+          <div class="mm-branch-theme">كفاية الله</div>
+          <div class="mm-branch-title">آيات ٣٢-٤٢</div>
+          <div class="mm-branch-lesson">التوكل وتوفي الأنفس</div>
+        </div>
+      </div>
+      <div class="mm-branch c-coral">
+        <div class="mm-branch-vline" style="background:var(--coral)"></div>
+        <div class="mm-branch-node" onclick="goSection('s5')" style="color:var(--coral);border-color:var(--coral)">
+          <div class="mm-branch-icon">🚪</div>
+          <div class="mm-branch-theme">باب الرحمة</div>
+          <div class="mm-branch-title">آيات ٤٣-٥٩</div>
+          <div class="mm-branch-lesson">لا تقنطوا من رحمة الله</div>
+        </div>
+      </div>
+      <div class="mm-branch c-purple">
+        <div class="mm-branch-vline" style="background:var(--purple)"></div>
+        <div class="mm-branch-node" onclick="goSection('s6')" style="color:var(--purple);border-color:var(--purple)">
+          <div class="mm-branch-icon">⚖️</div>
+          <div class="mm-branch-theme">المشهد الأخير</div>
+          <div class="mm-branch-title">آيات ٦٠-٧٥</div>
+          <div class="mm-branch-lesson">يوم القيامة والحمد لله</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="story-nav">
+    <span></span>
+    <button class="story-nav-btn gold" onclick="showSection('overview')">نظرة عامة ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION: OVERVIEW ══ -->
+<section id="overview" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-gold" style="border-color:var(--gold)">نظرة عامة</div>
+    <h2 class="sec-title">محاور السورة الستة</h2>
+    <p class="sec-subtitle">اضغط على أي محور للدخول إليه</p>
+  </div>
+  <div class="overview-grid">
+    <div class="overview-card" onclick="goSection('s1')" style="color:var(--blue)">
+      <div class="overview-num"><span>١</span></div>
+      <div class="overview-story">الإخلاص والتوحيد</div>
+      <div class="overview-theme">آيات ١-١٠</div>
+      <div class="overview-lesson">عظمة القرآن ودلائل الوحدانية في الخلق</div>
+    </div>
+    <div class="overview-card" onclick="goSection('s2')" style="color:var(--green)">
+      <div class="overview-num"><span>٢</span></div>
+      <div class="overview-story">طريق النجاة</div>
+      <div class="overview-theme">آيات ١١-٢٠</div>
+      <div class="overview-lesson">الإخلاص طريق السعادة والنجاة في الآخرة</div>
+    </div>
+    <div class="overview-card" onclick="goSection('s3')" style="color:var(--teal)">
+      <div class="overview-num"><span>٣</span></div>
+      <div class="overview-story">أحسن الحديث</div>
+      <div class="overview-theme">آيات ٢١-٣١</div>
+      <div class="overview-lesson">فضل القرآن وأمثاله وأثره في الصدور</div>
+    </div>
+    <div class="overview-card" onclick="goSection('s4')" style="color:var(--amber)">
+      <div class="overview-num"><span>٤</span></div>
+      <div class="overview-story">كفاية الله</div>
+      <div class="overview-theme">آيات ٣٢-٤٢</div>
+      <div class="overview-lesson">الله يكفي عباده والتوكل عليه</div>
+    </div>
+    <div class="overview-card" onclick="goSection('s5')" style="color:var(--coral)">
+      <div class="overview-num"><span>٥</span></div>
+      <div class="overview-story">باب الرحمة</div>
+      <div class="overview-theme">آيات ٤٣-٥٩</div>
+      <div class="overview-lesson">سعة رحمة الله وعدم القنوط من رحمته</div>
+    </div>
+    <div class="overview-card" onclick="goSection('s6')" style="color:var(--purple)">
+      <div class="overview-num"><span>٦</span></div>
+      <div class="overview-story">المشهد الأخير</div>
+      <div class="overview-theme">آيات ٦٠-٧٥</div>
+      <div class="overview-lesson">يوم القيامة والحمد لله رب العالمين</div>
+    </div>
+  </div>
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="showSection('mindmap')">→ الخريطة</button>
+    <button class="story-nav-btn gold" onclick="goSection('s1')">الإخلاص والتوحيد ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 1: الإخلاص والتوحيد ══ -->
+<section id="s1" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-blue" style="border-color:var(--blue)">المحور الأول</div>
+    <h2 class="sec-title">الإخلاص والتوحيد</h2>
+    <p class="sec-subtitle">الآيات ١-١٠</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s1','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s1','ayat')">🔤 معاني الآيات</button>
+      <button class="sub-btn" onclick="setStoryView('s1','zilal')">🌿 في الظلال</button>
+    </div>
+  </div>
+
+  <!-- VIEW: SUMMARY -->
+  <div id="s1-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s1','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s1','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s1-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--blue)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">🕌</div>
+          <div>
+            <div class="brief-card-title">الإخلاص والتوحيد</div>
+            <span class="brief-card-theme">آيات ١-١٠</span>
+          </div>
+        </div>
+        <p class="brief-summary">تبدأ السورة بتأكيد عظمة القرآن وأنه تنزيل من الله العزيز الحكيم، ثم تأمر المؤمن بإخلاص الدين لله وحده. تعرض دلائل الوحدانية في خلق السماوات والأرض وتسخير الليل والنهار، وتقارن بين من أخلص لله وبين من ألحق به آلهة أخرى.</p>
+        <div class="brief-ayah">ألا للهِ الدِّينُ الْخَالِصُ</div>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 عظمة القرآن</span>
+          <span class="brief-lesson-tag">🕌 الإخلاص والتوحيد</span>
+          <span class="brief-lesson-tag">🌍 دلائل الوحدانية</span>
+          <span class="brief-lesson-tag">⚠️ خطر الشرك</span>
+        </div>
+      </div>
+    </div>
+    <div id="s1-detail" class="mode-detail">
+      <div class="timeline">
+        <div class="tl-item c-blue" onclick="toggleTl(this)">
+          <div class="tl-dot"><div class="tl-dot-circle c-blue">١</div></div>
+          <div class="tl-card c-blue">
+            <div class="tl-card-title">الحق والباطل <span class="tl-chevron">▼</span></div>
+            <div class="tl-body"><div class="tl-body-inner">
+              <p>تنزيل الكتاب من الله العزيز الحكيم — القرآن يأتي من مصدر قوي لا يُقهر وحكيم في كل قضاياه.</p>
+              <p>الأمر الأول: {إِنَّا أَنزَلْنَا إِلَيْكَ الْكِتَابَ بِالْحَقِّ فَاعْبُدِ اللَّهَ مُخْلِصًا لَّهُ الدِّينَ}</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="tl-item c-teal" onclick="toggleTl(this)">
+          <div class="tl-dot"><div class="tl-dot-circle c-teal">٢</div></div>
+          <div class="tl-card c-teal">
+            <div class="tl-card-title">الإخلاص لا الشرك <span class="tl-chevron">▼</span></div>
+            <div class="tl-body"><div class="tl-body-inner">
+              <p>ألا للهِ الدِّينُ الْخَالِصُ — الدين والعبادة حق الله وحده، لا يستحقها إلا هو سبحانه.</p>
+              <p>المشركون يزعمون أن معبوداتهم تقربهم إلى الله، لكن هذا كذب وضلال مبين.</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="tl-item c-amber" onclick="toggleTl(this)">
+          <div class="tl-dot"><div class="tl-dot-circle c-amber">٣</div></div>
+          <div class="tl-card c-amber">
+            <div class="tl-card-title">دلائل التوحيد <span class="tl-chevron">▼</span></div>
+            <div class="tl-body"><div class="tl-body-inner">
+              <p>خلقكم من نفس واحدة — آدم عليه السلام — وجعل منها زوجها. دليل على الوحدانية والقدرة.</p>
+              <p>الخلق المتعدد الطبقات (الظلمات الثلاث) يدل على حكمة الله وعلمه اللامحدود.</p>
+            </div></div>
+          </div>
+        </div>
+        <div class="tl-item c-coral" onclick="toggleTl(this)">
+          <div class="tl-dot"><div class="tl-dot-circle c-coral">٤</div></div>
+          <div class="tl-card c-coral">
+            <div class="tl-card-title">المسؤولية الفردية <span class="tl-chevron">▼</span></div>
+            <div class="tl-body"><div class="tl-body-inner">
+              <p>كل نفس محاسبة على عملها — كفركم لا يقلل من قوة الله، وإيمانكم لا يزيد في ملكه.</p>
+              <p>ولا تزر وازرة وزر أخرى — كل واحد يتحمل مسؤولية أعماله فقط في يوم الدين.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: AYAT -->
+  <div id="s1-ayat" class="story-view">
+    <div class="warning-banner">
+      <span class="warning-icon">⚠️</span>
+      <span class="warning-text">هذا المحتوى من تفسير السعدي. كل آية مصحوبة بمصدر المعلومة. يُراجع من المراجع المعتمدة.</span>
+    </div>
+
+    <!-- VERSE 1 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">١</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v1')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">تَنزِيلُ الْكِتَابِ مِنَ اللَّهِ الْعَزِيزِ الْحَكِيمِ</div>
+        <div class="verse-meaning-box" id="v1">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">يخبر تعالى عن كتابه العظيم وبأنه صادر ومنزل من الله، المألوه المعبود، لكماله وانفراده بأفعاله، العزيز الذي قهر بعزته كل مخلوق، الحكيم في كل قضاياه وأحكامه.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٨٩</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 2 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٢</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v2')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">إِنَّا أَنزَلْنَا إِلَيْكَ الْكِتَابَ بِالْحَقِّ فَاعْبُدِ اللَّهَ مُخْلِصًا لَّهُ الدِّينَ</div>
+        <div class="verse-meaning-box" id="v2">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">أمر بالإخلاص وحده لله تعالى في العبادة، وأن لا يُشرك معه أحد في الدعاء والخضوع والتوجه، فإن الدين الخالص لا يستحقه إلا الله وحده.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٨٩</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 3 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٣</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v3')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">أَلَا لِلَّهِ الدِّينُ الْخَالِصُ ۚ وَالَّذِينَ اتَّخَذُوا مِن دُونِهِ أَوْلِيَاءَ مَا نَعْبُدُهُمْ إِلَّا لِيُقَرِّبُونَا إِلَى اللَّهِ زُلْفَىٰ إِنَّ اللَّهَ يَحْكُمُ بَيْنَهُمْ فِي مَا هُمْ فِيهِ يَخْتَلِفُونَ ۗ إِنَّ اللَّهَ لَا يَهْدِي مَنْ هُوَ كَاذِبٌ كَفَّارٌ</div>
+        <div class="verse-meaning-box" id="v3">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">لله وحده الدين الخالص من الشرك. والمشركون يزعمون أن معبوداتهم تقربهم إلى الله، وهذا كذب وافتراء. الله سيحكم بينهم يوم القيامة، والله لا يهدي من هو كاذب كافر.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٨٩-١٢٩٠</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 4 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٤</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v4')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">لَّوْ أَرَادَ اللَّهُ أَن يَتَّخِذَ وَلَدًا لَّاصْطَفَىٰ مِمَّا يَخْلُقُ مَا يَشَاءُ ۚ سُبْحَانَهُ ۖ هُوَ اللَّهُ الْوَاحِدُ الْقَهَّارُ</div>
+        <div class="verse-meaning-box" id="v4">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">نفي الولد عن الله سبحانه وتنزيهه عن كل نقص. لو أراد الله أن يتخذ ولداً لاختار من أحسن مخلوقاته، لكنه منزه عن ذلك. هو الواحد الذي لا شريك له، القهار الذي قهر كل شيء بقدرته.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩٠</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 5 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٥</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v5')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ ۖ يُكَوِّرُ اللَّيْلَ عَلَى النَّهَارِ وَيُكَوِّرُ النَّهَارَ عَلَى اللَّيْلِ ۖ وَسَخَّرَ الشَّمْسَ وَالْقَمَرَ ۖ كُلٌّ يَجْرِي لِأَجَلٍ مُّسَمًّى ۗ أَلَا هُوَ الْعَزِيزُ الْغَفَّارُ</div>
+        <div class="verse-meaning-box" id="v5">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">خلق السماوات والأرض بالحكمة والحق. يُدخل الليل في النهار والنهار في الليل (تعاقبهما المستمر)، وسخّر الشمس والقمر لمنافع الخلق. كل يجري لأجل محدود معلوم عند الله. تُظهر هذه الآيات عظمة قدرته وحكمته.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩٠</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 6 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٦</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v6')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">خَلَقَكُم مِّن نَّفْسٍ وَاحِدَةٍ ثُمَّ جَعَلَ مِنْهَا زَوْجَهَا وَأَنزَلَ لَكُم مِّنَ الْأَنْعَامِ ثَمَانِيَةَ أَزْوَاجٍ ۚ يَخْلُقُكُمْ فِي بُطُونِ أُمَّهَاتِكُمْ خَلْقًا مِّن بَعْدِ خَلْقٍ فِي ظُلُمَاتٍ ثَلَاثٍ ۚ ذَٰلِكُمُ اللَّهُ رَبُّكُمْ لَهُ الْمُلْكُ ۖ لَا إِلَٰهَ إِلَّا هُوَ ۖ فَأَنَّىٰ تُصْرَفُونَ</div>
+        <div class="verse-meaning-box" id="v6">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">خلقكم من نفس واحدة هي آدم عليه السلام، وجعل منها زوجها حواء. أنزل لكم من الأنعام ثمانية أزواج (ذكر وأنثى من الإبل والبقر والضأن والماعز). يخلقكم في أرحام أمهاتكم في ظلمات ثلاث (البطن والرحم والمشيمة). ذلكم الله ربكم، لا معبود إلا هو، فكيف تُصرفون عن عبادته؟</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩٠-١٢٩١</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 7 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٧</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v7')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">إِن تَكْفُرُوا فَإِنَّ اللَّهَ غَنِيٌّ عَنكُمْ ۖ وَلَا يَرْضَىٰ لِعِبَادِهِ الْكُفْرَ ۖ وَإِن تَشْكُرُوا يَرْضَهُ لَكُمْ ۗ وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ ۗ ثُمَّ إِلَىٰ رَبِّكُم مَّرْجِعُكُمْ فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ۚ إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ</div>
+        <div class="verse-meaning-box" id="v7">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">إيمانكم لا يزيد في ملكه شيئاً، وكفركم لا ينقص منه. لكنه لا يرضى عن كفر الكافرين لعباده. وإن تشكروا نعمه يرضه لكم. كل فرد مأخوذ بعمله، لا يحمل أحد عبء أحد. ثم إلى ربكم مرجعكم فينبئكم بما كنتم تعملون. إنه عليم بذات الصدور (بكل ما في القلوب).</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩١</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 8 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٨</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v8')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">وَإِذَا مَسَّ الْإِنسَانَ ضُرٌّ دَعَا رَبَّهُ مُنِيبًا إِلَيْهِ ثُمَّ إِذَا خَوَّلَهُ نِعْمَةً مِّنْهُ نَسِيَ مَا كَانَ يَدْعُو إِلَيْهِ مِن قَبْلُ وَجَعَلَ لِلَّهِ أَندَادًا لِّيُضِلَّ عَن سَبِيلِهِ ۚ قُلْ تَمَتَّعْ بِكُفْرِكَ قَلِيلًا ۖ إِنَّكَ مِنْ أَصْحَابِ النَّارِ</div>
+        <div class="verse-meaning-box" id="v8">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">طبيعة الإنسان: حين يمسّه ضرر دعا ربه مُنيباً (راجعاً تائباً). فإذا كشف الله عنه الضر وأعطاه نعمة، نسي ما كان يدعو إليه من قبل وجعل لله أنداداً (شركاء) يضلله عن سبيل الله. الجواب: تمتع بكفرك قليلاً، فإنك من أصحاب النار.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩١</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 9 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">٩</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v9')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">أَمَّنْ هُوَ قَانِتٌ آنَاءَ اللَّيْلِ سَاجِدًا وَقَائِمًا يَحْذَرُ الْآخِرَةَ وَيَرْجُو رَحْمَةَ رَبِّهِ ۗ قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ ۗ إِنَّمَا يَتَذَكَّرُ أُولُو الْأَلْبَابِ</div>
+        <div class="verse-meaning-box" id="v9">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">مقارنة بين من هو قانت (مطيع خاشع) في ساعات الليل ساجداً وقائماً، يحذر الآخرة ويرجو رحمة ربه، وبين الكافر. هل يستويان؟ كلا. الذين يعلمون (أهل العلم والإيمان) لا يستوون مع الذين لا يعلمون. فقط أصحاب الألباب (العقول السليمة) يتذكرون.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩١</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE 10 -->
+    <div class="verse-block">
+      <div class="verse-topbar">
+        <div class="verse-num">١٠</div>
+        <div class="verse-actions">
+          <button class="verse-action-btn" onclick="toggleMeaning(this, 'v10')">التفسير</button>
+        </div>
+      </div>
+      <div class="verse-arabic-body">
+        <div class="verse-arabic-text">قُلْ يَا عِبَادِ الَّذِينَ آمَنُوا اتَّقُوا رَبَّكُمْ ۚ لِلَّذِينَ أَحْسَنُوا فِي هَٰذِهِ الدُّنْيَا حَسَنَةٌ ۗ وَأَرْضُ اللَّهِ وَاسِعَةٌ ۗ إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ</div>
+        <div class="verse-meaning-box" id="v10">
+          <div class="verse-meaning-label">التفسير</div>
+          <div class="verse-meaning-text">النداء الموجه للمؤمنين: اتقوا ربكم. للذين أحسنوا في هذه الدنيا حسنة في الدنيا والآخرة. أرض الله واسعة فالعزيمة والهجرة مفتوحة. والصابرون على أذى الكفار وعلى طاعة الله يوفّى أجرهم بغير حساب.</div>
+          <div class="verse-meaning-source">تفسير السعدي، ص ١٢٩٢</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIEW: ZILAL -->
+  <div id="s1-zilal" class="story-view">
+    <div class="warning-banner">
+      <span class="warning-icon">⚠️</span>
+      <span class="warning-text">هذا المحتوى من كتاب «في ظلال القرآن» لسيد قطب. تفاصيل كاملة بانتظار المراجعة من المصادر.</span>
+    </div>
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      تفصيلات الظلال في هذا القسم قيد التطوير. سيتم ملأها من صفحات ٣٠٤٠-٣٠٤٢ من كتاب «في ظلال القرآن» لسيد قطب.
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="showSection('overview')">→ نظرة عامة</button>
+    <button class="story-nav-btn gold" onclick="goSection('s2')">طريق النجاة ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 2: طريق النجاة ══ -->
+<section id="s2" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-green" style="border-color:var(--green)">المحور الثاني</div>
+    <h2 class="sec-title">طريق النجاة</h2>
+    <p class="sec-subtitle">الآيات ١١-٢٠</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s2','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s2','ayat')">🔤 معاني الآيات</button>
+    </div>
+  </div>
+
+  <div id="s2-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s2','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s2','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s2-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--green)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">🌟</div>
+          <div>
+            <div class="brief-card-title">طريق النجاة</div>
+            <span class="brief-card-theme">آيات ١١-٢٠</span>
+          </div>
+        </div>
+        <p class="brief-summary">⏳ بانتظار المراجعة من المصادر المعتمدة</p>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 قرآن مكي</span>
+          <span class="brief-lesson-tag">🌟 إخلاص</span>
+        </div>
+      </div>
+    </div>
+    <div id="s2-detail" class="mode-detail">
+      <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+        ⏳ بانتظار المراجعة من المصادر المعتمدة
+      </p>
+    </div>
+  </div>
+
+  <div id="s2-ayat" class="story-view">
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      ⏳ بانتظار المراجعة من المصادر المعتمدة
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="goSection('s1')">→ الإخلاص والتوحيد</button>
+    <button class="story-nav-btn gold" onclick="goSection('s3')">أحسن الحديث ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 3: أحسن الحديث ══ -->
+<section id="s3" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-teal" style="border-color:var(--teal)">المحور الثالث</div>
+    <h2 class="sec-title">القرآن أحسن الحديث</h2>
+    <p class="sec-subtitle">الآيات ٢١-٣١</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s3','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s3','ayat')">🔤 معاني الآيات</button>
+    </div>
+  </div>
+
+  <div id="s3-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s3','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s3','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s3-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--teal)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">📖</div>
+          <div>
+            <div class="brief-card-title">أحسن الحديث</div>
+            <span class="brief-card-theme">آيات ٢١-٣١</span>
+          </div>
+        </div>
+        <p class="brief-summary">⏳ بانتظار المراجعة من المصادر المعتمدة</p>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 قرآن مكي</span>
+        </div>
+      </div>
+    </div>
+    <div id="s3-detail" class="mode-detail">
+      <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+        ⏳ بانتظار المراجعة من المصادر المعتمدة
+      </p>
+    </div>
+  </div>
+
+  <div id="s3-ayat" class="story-view">
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      ⏳ بانتظار المراجعة من المصادر المعتمدة
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="goSection('s2')">→ طريق النجاة</button>
+    <button class="story-nav-btn gold" onclick="goSection('s4')">كفاية الله ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 4: كفاية الله ══ -->
+<section id="s4" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-amber" style="border-color:var(--amber)">المحور الرابع</div>
+    <h2 class="sec-title">كفاية الله</h2>
+    <p class="sec-subtitle">الآيات ٣٢-٤٢</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s4','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s4','ayat')">🔤 معاني الآيات</button>
+    </div>
+  </div>
+
+  <div id="s4-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s4','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s4','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s4-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--amber)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">🛡️</div>
+          <div>
+            <div class="brief-card-title">كفاية الله</div>
+            <span class="brief-card-theme">آيات ٣٢-٤٢</span>
+          </div>
+        </div>
+        <p class="brief-summary">⏳ بانتظار المراجعة من المصادر المعتمدة</p>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 قرآن مكي</span>
+        </div>
+      </div>
+    </div>
+    <div id="s4-detail" class="mode-detail">
+      <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+        ⏳ بانتظار المراجعة من المصادر المعتمدة
+      </p>
+    </div>
+  </div>
+
+  <div id="s4-ayat" class="story-view">
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      ⏳ بانتظار المراجعة من المصادر المعتمدة
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="goSection('s3')">→ أحسن الحديث</button>
+    <button class="story-nav-btn gold" onclick="goSection('s5')">باب الرحمة ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 5: باب الرحمة ══ -->
+<section id="s5" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-coral" style="border-color:var(--coral)">المحور الخامس</div>
+    <h2 class="sec-title">باب الرحمة</h2>
+    <p class="sec-subtitle">الآيات ٤٣-٥٩</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s5','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s5','ayat')">🔤 معاني الآيات</button>
+    </div>
+  </div>
+
+  <div id="s5-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s5','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s5','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s5-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--coral)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">🚪</div>
+          <div>
+            <div class="brief-card-title">باب الرحمة</div>
+            <span class="brief-card-theme">آيات ٤٣-٥٩</span>
+          </div>
+        </div>
+        <p class="brief-summary">⏳ بانتظار المراجعة من المصادر المعتمدة</p>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 قرآن مكي</span>
+        </div>
+      </div>
+    </div>
+    <div id="s5-detail" class="mode-detail">
+      <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+        ⏳ بانتظار المراجعة من المصادر المعتمدة
+      </p>
+    </div>
+  </div>
+
+  <div id="s5-ayat" class="story-view">
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      ⏳ بانتظار المراجعة من المصادر المعتمدة
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="goSection('s4')">→ كفاية الله</button>
+    <button class="story-nav-btn gold" onclick="goSection('s6')">المشهد الأخير ←</button>
+  </div>
+</section>
+
+<!-- ══ SECTION 6: المشهد الأخير ══ -->
+<section id="s6" class="section">
+  <div class="sec-header">
+    <div class="sec-badge c-purple" style="border-color:var(--purple)">المحور السادس</div>
+    <h2 class="sec-title">المشهد الأخير</h2>
+    <p class="sec-subtitle">الآيات ٦٠-٧٥</p>
+  </div>
+
+  <div class="story-sub-bar">
+    <div class="story-sub-pill">
+      <button class="sub-btn active" onclick="setStoryView('s6','summary')">📝 الملخص</button>
+      <button class="sub-btn" onclick="setStoryView('s6','ayat')">🔤 معاني الآيات</button>
+    </div>
+  </div>
+
+  <div id="s6-summary" class="story-view active">
+    <div style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="mode-toggle-bar">
+        <button class="mode-btn active" onclick="setMode(this,'s6','brief')">⚡ مختصر</button>
+        <button class="mode-btn" onclick="setMode(this,'s6','detail')">📖 تفصيلي</button>
+      </div>
+    </div>
+    <div id="s6-brief" class="mode-brief">
+      <div class="brief-card" style="color:var(--purple)">
+        <div class="brief-card-header">
+          <div class="brief-card-icon">⚖️</div>
+          <div>
+            <div class="brief-card-title">المشهد الأخير</div>
+            <span class="brief-card-theme">آيات ٦٠-٧٥</span>
+          </div>
+        </div>
+        <p class="brief-summary">⏳ بانتظار المراجعة من المصادر المعتمدة</p>
+        <div class="brief-lessons">
+          <span class="brief-lesson-tag">📖 قرآن مكي</span>
+        </div>
+      </div>
+    </div>
+    <div id="s6-detail" class="mode-detail">
+      <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+        ⏳ بانتظار المراجعة من المصادر المعتمدة
+      </p>
+    </div>
+  </div>
+
+  <div id="s6-ayat" class="story-view">
+    <p style="color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.9;text-align:center;margin:2rem 0">
+      ⏳ بانتظار المراجعة من المصادر المعتمدة
+    </p>
+  </div>
+
+  <div class="story-nav">
+    <button class="story-nav-btn" onclick="goSection('s5')">→ باب الرحمة</button>
+    <button class="story-nav-btn gold" onclick="showSection('mindmap')">الخريطة الكاملة ←</button>
+  </div>
+</section>
+
+<!-- BACK TO TOP BUTTON -->
+<button class="back-top" onclick="scrollToTop()">↑</button>
+
+<script>
+const SECTIONS = ['mindmap','overview','s1','s2','s3','s4','s5','s6'];
+let currentSection = 0;
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    updateNav();
+    updateProgress();
+  }
+}
+
+function goSection(id) {
+  showSection(id);
+}
+
+function setStoryView(storyId, view) {
+  document.querySelectorAll(`#${storyId}-summary, #${storyId}-ayat, #${storyId}-zilal`).forEach(v => {
+    v.classList.remove('active');
+  });
+  const viewEl = document.getElementById(`${storyId}-${view}`);
+  if (viewEl) viewEl.classList.add('active');
+
+  document.querySelectorAll(`.story-sub-pill .sub-btn`).forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+}
+
+function setMode(btn, storyId, mode) {
+  const brief = document.getElementById(`${storyId}-brief`);
+  const detail = document.getElementById(`${storyId}-detail`);
+
+  document.querySelectorAll(`.mode-toggle-bar .mode-btn`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  if (mode === 'brief') {
+    brief.classList.remove('hidden');
+    detail.classList.remove('active');
+  } else {
+    brief.classList.add('hidden');
+    detail.classList.add('active');
+  }
+}
+
+function toggleTl(item) {
+  item.classList.toggle('open');
+}
+
+function toggleMeaning(btn, verseId) {
+  const box = document.getElementById(verseId);
+  if (box) {
+    box.classList.toggle('visible');
+    btn.classList.toggle('open');
+  }
+}
+
+function updateNav() {
+  document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+  const activeSection = document.querySelector('.section.active');
+  if (activeSection) {
+    const tabText = activeSection.querySelector('.sec-title')?.textContent || 'الخريطة';
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sectionId = activeSection.id;
+    tabs.forEach(tab => {
+      if (tab.textContent.includes('الخريطة') && sectionId === 'mindmap') tab.classList.add('active');
+      else if (tab.textContent.includes('نظرة') && sectionId === 'overview') tab.classList.add('active');
+      else if (tab.textContent.includes(sectionId)) tab.classList.add('active');
+    });
+  }
+}
+
+function updateProgress() {
+  const activeId = document.querySelector('.section.active').id;
+  const index = SECTIONS.indexOf(activeId) + 1;
+  document.getElementById('navProgress').textContent = `${toArabicNum(index)} / ${toArabicNum(SECTIONS.length)}`;
+}
+
+function toArabicNum(n) {
+  const arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  return String(n).split('').map(d => arabic[parseInt(d)]).join('');
+}
+
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+window.addEventListener('scroll', () => {
+  const backTop = document.querySelector('.back-top');
+  if (window.scrollY > 300) {
+    backTop.classList.add('visible');
+  } else {
+    backTop.classList.remove('visible');
+  }
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>
