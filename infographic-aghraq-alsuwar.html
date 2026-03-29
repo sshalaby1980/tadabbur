@@ -190,6 +190,32 @@ body {
   font-size: 0.75em;
   font-weight: 600;
 }
+.tooltip .close-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #8a9bb5;
+  font-size: 1.2em;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+/* Mobile overlay background */
+.tooltip-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+.tooltip-overlay.show { display: block; }
 
 /* ===== View 2: Topic Grouping ===== */
 .topic-section {
@@ -321,11 +347,28 @@ body {
   margin-top: 40px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .header h1 { font-size: 1.8em; }
   .mushaf-grid { grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); gap: 4px; }
   .surah-cell .name { font-size: 0.9em; }
   .topic-grid { grid-template-columns: 1fr; }
+  .tooltip {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    max-width: 100% !important;
+    border-radius: 20px 20px 0 0;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 20px 16px 30px;
+    border: none;
+    border-top: 2px solid rgba(212,168,83,0.5);
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.7);
+  }
+  .tooltip .close-btn { display: flex; }
+  .surah-cell:hover { transform: none; }
 }
 </style>
 </head>
@@ -380,6 +423,7 @@ body {
 </div>
 
 <!-- Tooltip -->
+<div class="tooltip-overlay" id="tooltip-overlay" onclick="hideTooltip()"></div>
 <div class="tooltip" id="tooltip"></div>
 
 <div class="footer">
@@ -427,20 +471,26 @@ function buildMushafGrid() {
     cell.dataset.ibadat = s.ibadat;
     cell.dataset.qasas = s.qasas;
     cell.innerHTML = `<span class="num">${toArabicNum(s.num)}</span><span class="name">${s.name}</span>`;
-    cell.addEventListener('mouseenter', e => showTooltip(e, s));
-    cell.addEventListener('mouseleave', hideTooltip);
-    cell.addEventListener('click', e => showTooltip(e, s));
+    if (!isMobile()) {
+      cell.addEventListener('mouseenter', e => showTooltip(e, s));
+      cell.addEventListener('mouseleave', hideTooltip);
+    }
+    cell.addEventListener('click', e => { e.stopPropagation(); showTooltip(e, s); });
     grid.appendChild(cell);
   });
 }
 
 // Tooltip
+function isMobile() { return window.innerWidth <= 700; }
+
 function showTooltip(e, s) {
   const tip = document.getElementById('tooltip');
+  const overlay = document.getElementById('tooltip-overlay');
   const tags = getTags(s);
   const tagsHtml = tags.map(t => `<span class="tag" style="background:${t.color}40;color:${t.color.replace(/2d|1e/g,'9e')}">${t.label}</span>`).join('');
 
   tip.innerHTML = `
+    <button class="close-btn" onclick="hideTooltip()">✕</button>
     <h3>${toArabicNum(s.num)}. سورة ${s.name}</h3>
     <div class="source-label">ابن عاشور:</div>
     <div class="source-text">${s.ibn_ashour}</div>
@@ -451,20 +501,28 @@ function showTooltip(e, s) {
     <div class="tags">${tagsHtml}</div>
   `;
 
-  const rect = e.target.getBoundingClientRect();
-  let x = rect.left - 420;
-  let y = rect.top;
-  if (x < 10) x = rect.right + 10;
-  if (y + 300 > window.innerHeight) y = window.innerHeight - 320;
-  if (y < 10) y = 10;
-
-  tip.style.left = x + 'px';
-  tip.style.top = y + 'px';
+  if (isMobile()) {
+    // Bottom sheet on mobile
+    tip.style.left = '';
+    tip.style.top = '';
+    overlay.classList.add('show');
+  } else {
+    // Desktop: position near cell
+    const rect = e.target.getBoundingClientRect();
+    let x = rect.left - 420;
+    let y = rect.top;
+    if (x < 10) x = rect.right + 10;
+    if (y + 300 > window.innerHeight) y = window.innerHeight - 320;
+    if (y < 10) y = 10;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
   tip.classList.add('show');
 }
 
 function hideTooltip() {
   document.getElementById('tooltip').classList.remove('show');
+  document.getElementById('tooltip-overlay').classList.remove('show');
 }
 
 // Filter
