@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفات أهل الكتاب - سورة النساء</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --bg2: #ede7d9;
+    --gold: #9a7230;
+    --gold-light: #c9a84c;
+    --green: #2a5e24;
+    --green-light: #3a7e32;
+    --green-bg: #e8f4e6;
+    --red: #8b2020;
+    --red-bg: #fdf0f0;
+    --amber: #7a5010;
+    --amber-bg: #fdf6e8;
+    --ink: #1a1208;
+    --ink2: #3d2b10;
+    --ink3: #5c4020;
+    --border: #d4c4a0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Noto Naskh Arabic', serif;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: var(--ink);
+    background-image: 
+      radial-gradient(ellipse at 10% 10%, rgba(154,114,48,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 90%, rgba(42,94,36,0.06) 0%, transparent 50%);
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+
+  .surah-badge {
+    display: inline-block;
+    background: var(--green);
+    color: #e8c97a;
+    font-family: 'Amiri', serif;
+    font-size: 16px;
+    padding: 8px 30px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+  }
+
+  .main-title {
+    font-family: 'Amiri', serif;
+    font-size: 48px;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .ayah-ref {
+    color: var(--ink3);
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 32px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(to left, transparent, var(--gold-light), transparent);
+  }
+  .divider-diamond {
+    width: 9px; height: 9px;
+    background: var(--gold-light);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .intro-ayah {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-right: 6px solid var(--gold-light);
+    border-radius: 14px;
+    padding: 28px 34px;
+    text-align: center;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 14px rgba(154,114,48,0.09);
+  }
+  .intro-ayah p {
+    font-family: 'Amiri', serif;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 2.2;
+  }
+  .intro-ayah .ref {
+    display: inline-block;
+    margin-top: 12px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    font-size: 15px;
+    padding: 4px 18px;
+    border-radius: 20px;
+    border: 1px solid #e0b870;
+    font-weight: 700;
+  }
+
+  .count-strip {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .count-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: white;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .count-badge .num {
+    font-family: 'Amiri', serif;
+    font-size: 30px;
+    color: var(--gold);
+    line-height: 1;
+    font-weight: 700;
+  }
+  .count-badge .lbl {
+    color: var(--ink2);
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  .section-label {
+    text-align: center;
+    margin-bottom: 14px;
+    margin-top: 4px;
+  }
+  .section-label span {
+    display: inline-block;
+    background: var(--bg2);
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    font-size: 16px;
+    padding: 6px 24px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .trait-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .trait-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+  }
+
+  .card-red  { border-right: 6px solid var(--red);         background: var(--red-bg); }
+  .card-amber{ border-right: 6px solid var(--gold-light);  background: var(--amber-bg); }
+  .card-green{ border-right: 6px solid var(--green-light); background: var(--green-bg); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .card-red   .card-icon { background: rgba(139,32,32,0.1); }
+  .card-amber .card-icon { background: rgba(154,114,48,0.12); }
+  .card-green .card-icon { background: rgba(42,94,36,0.1); }
+
+  .card-title {
+    font-family: 'Amiri', serif;
+    font-size: 21px;
+    line-height: 1.6;
+    flex: 1;
+    font-weight: 700;
+  }
+  .card-red   .card-title { color: var(--red); }
+  .card-amber .card-title { color: var(--amber); }
+  .card-green .card-title { color: var(--green); }
+
+  .card-body {
+    font-size: 15.5px;
+    color: var(--ink2);
+    line-height: 2.1;
+    font-weight: 400;
+  }
+
+  .card-ayah {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    padding: 3px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+  .card-red   .card-ayah { background: rgba(139,32,32,0.08); color: var(--red); }
+  .card-amber .card-ayah { background: rgba(154,114,48,0.1);  color: var(--amber); }
+  .card-green .card-ayah { background: rgba(42,94,36,0.1);    color: var(--green); }
+
+  .trait-card.full-width { grid-column: 1 / -1; }
+
+  .summary {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-right: 6px solid var(--gold-light);
+    border-radius: 14px;
+    padding: 24px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-top: 6px;
+  }
+  .summary-icon { font-size: 30px; flex-shrink: 0; margin-top: 4px; }
+  .summary-text {
+    font-family: 'Amiri', serif;
+    font-size: 20px;
+    color: var(--ink);
+    line-height: 2.1;
+  }
+  .summary-text strong { color: var(--gold); }
+
+  .footer-note {
+    text-align: center;
+    margin-top: 28px;
+    color: var(--ink3);
+    font-size: 14px;
+  }
+
+  @media(max-width: 620px) {
+    .traits-grid { grid-template-columns: 1fr; }
+    .trait-card.full-width { grid-column: 1; }
+    .main-title { font-size: 36px; }
+    .intro-ayah p { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="surah-badge">سُورَةُ النِّسَاءِ &nbsp;·&nbsp; الجُزْءُ السَّادِسُ</div>
+    <h1 class="main-title">صِفَاتُ أَهْلِ الكِتَابِ</h1>
+    <p class="ayah-ref">كما وردت في الآيات الكريمة ١٥٣ — ١٦٢</p>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="intro-ayah">
+    <p>﴿ يَسْأَلُكَ أَهْلُ الْكِتَابِ أَن تُنَزِّلَ عَلَيْهِمْ كِتَابًا مِّنَ السَّمَاءِ فَقَدْ سَأَلُوا مُوسَىٰ أَكْبَرَ مِن ذَٰلِكَ ﴾</p>
+    <span class="ref">الآية ١٥٣</span>
+  </div>
+
+  <div class="count-strip">
+    <div class="count-badge">
+      <span class="num">٨</span>
+      <span class="lbl">صفات مذكورة</span>
+    </div>
+    <div class="count-badge">
+      <span class="num">١٠</span>
+      <span class="lbl">آيات كريمة</span>
+    </div>
+    <div class="count-badge">
+      <span class="num">٣</span>
+      <span class="lbl">محاور رئيسية</span>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section-label"><span>📌 أولاً: التعنت والاستكبار على الحق</span></div>
+  <div class="traits-grid">
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">📜</div>
+        <div class="card-title">طلب المعجزات بالتعنت</div>
+      </div>
+      <div class="card-body">
+        طالبوا بإنزال كتاب من السماء، كما سألوا موسى عليه السلام رؤية الله جهرةً — وهو استكبار وتعنت لا طلب حق
+      </div>
+      <span class="card-ayah">الآية ١٥٣</span>
+    </div>
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">🗨️</div>
+        <div class="card-title">قولهم "قلوبنا غُلْف"</div>
+      </div>
+      <div class="card-body">
+        ادّعوا أن قلوبهم مغلّفة لا تصلها الحجج والبينات، وهو إعلان صريح بالرفض المتعمد للهداية والاستكبار عنها
+      </div>
+      <span class="card-ayah">الآية ١٥٥</span>
+    </div>
+
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section-label"><span>📌 ثانياً: الجرائم والمخالفات العقدية</span></div>
+  <div class="traits-grid">
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">نقض الميثاق الغليظ</div>
+      </div>
+      <div class="card-body">
+        نقضوا عهودهم مع الله مراراً، واتخذوا العجل إلهاً من بعد ما جاءتهم البينات والمعجزات الواضحة
+      </div>
+      <span class="card-ayah">الآيات ١٥٣–١٥٤</span>
+    </div>
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">🗡️</div>
+        <div class="card-title">الكفر بآيات الله وقتل الأنبياء</div>
+      </div>
+      <div class="card-body">
+        كفروا بآيات الله وقتلوا الأنبياء بغير حق — وهذا من أعظم الجرائم التي شهد عليهم بها التاريخ والقرآن الكريم
+      </div>
+      <span class="card-ayah">الآية ١٥٥</span>
+    </div>
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">🌺</div>
+        <div class="card-title">البهتان على مريم عليها السلام</div>
+      </div>
+      <div class="card-body">
+        رموا مريم العذراء ببهتان عظيم، وهو من أقبح الافتراءات وأشنع الكذب في تاريخ بني إسرائيل
+      </div>
+      <span class="card-ayah">الآية ١٥٦</span>
+    </div>
+
+    <div class="trait-card card-red">
+      <div class="card-header">
+        <div class="card-icon">🔱</div>
+        <div class="card-title">ادعاء قتل عيسى ابن مريم ﷺ</div>
+      </div>
+      <div class="card-body">
+        افتخروا بزعم قتل المسيح وصلبه، وما قتلوه وما صلبوه بل رفعه الله إليه وكان الله عزيزاً حكيماً
+      </div>
+      <span class="card-ayah">الآيات ١٥٧–١٥٨</span>
+    </div>
+
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section-label"><span>📌 ثالثاً: المخالفات الأخلاقية والمالية</span></div>
+  <div class="traits-grid">
+
+    <div class="trait-card card-amber">
+      <div class="card-header">
+        <div class="card-icon">🏛️</div>
+        <div class="card-title">الصدّ عن سبيل الله</div>
+      </div>
+      <div class="card-body">
+        صدّوا الناس عن سبيل الله كثيراً، فحرموا على أنفسهم وعلى غيرهم طريق الهداية والإيمان
+      </div>
+      <span class="card-ayah">الآية ١٦٠</span>
+    </div>
+
+    <div class="trait-card card-amber">
+      <div class="card-header">
+        <div class="card-icon">💰</div>
+        <div class="card-title">أكل الربا وأموال الناس بالباطل</div>
+      </div>
+      <div class="card-body">
+        أخذوا الربا وقد نُهوا عنه صراحةً، وأكلوا أموال الناس بالباطل — فعوقبوا بتحريم طيبات أُحلّت لهم
+      </div>
+      <span class="card-ayah">الآيات ١٦٠–١٦١</span>
+    </div>
+
+  </div>
+
+  <!-- Green exception -->
+  <div class="traits-grid">
+    <div class="trait-card card-green full-width">
+      <div class="card-header">
+        <div class="card-icon">📖</div>
+        <div class="card-title">الاستثناء المهم: الراسخون في العلم منهم</div>
+      </div>
+      <div class="card-body">
+        أثنى الله على من آمن منهم: الراسخون في العلم والمؤمنون بما أُنزل إليك وما أُنزل من قبلك، والمقيمون الصلاة والمؤتون الزكاة والمؤمنون بالله واليوم الآخر — أولئك سيؤتيهم الله أجراً عظيماً
+      </div>
+      <span class="card-ayah">الآية ١٦٢</span>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-icon">⚖️</div>
+    <div class="summary-text">
+      تكشف هذه الآيات عن نمط متكرر: <strong>التعنت والاستكبار</strong> على الحق، و<strong>نقض العهود</strong>، والجرأة على الأنبياء والأخلاق — مع تأكيد القرآن أن هذا ليس حكماً على كل فرد، بل <strong>من آمن منهم وعمل صالحاً فله أجره العظيم</strong>
+    </div>
+  </div>
+
+  <p class="footer-note">سورة النساء · الجزء السادس · الآيات ١٥٣–١٦٢</p>
+
+</div>
+</body>
+</html>

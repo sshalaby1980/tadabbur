@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>النداءات القرآنية</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#1a1208 !important;color:#f5edd6 !important;font-family:'Noto Naskh Arabic',serif;min-height:100vh;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 16px 70px;background:#1a1208;}
+.bism{font-family:'Amiri',serif;font-size:1.9rem;color:#c9a84c;text-align:center;margin-bottom:12px;}
+.ttl{font-family:'Amiri',serif;font-size:2.6rem;color:#f5edd6;text-align:center;margin-bottom:6px;}
+.sub{font-size:.85rem;color:#7a6e5a;text-align:center;margin-bottom:10px;}
+.dvd{width:180px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:10px auto;}
+.badge{display:flex;justify-content:center;align-items:center;gap:8px;background:#2a2010;border:1px solid #6b5820;border-radius:50px;padding:6px 20px;color:#e8c97a;font-size:.9rem;margin:8px auto 0;}
+.hdr-wrap{text-align:center;margin-bottom:36px;}
+.tabs{display:flex;justify-content:center;gap:6px;margin-bottom:26px;flex-wrap:wrap;}
+.tb{padding:8px 14px;border-radius:50px;border:1px solid #555;background:#252010;color:#a89878;font-family:'Noto Naskh Arabic',serif;font-size:.84rem;cursor:pointer;touch-action:manipulation;-webkit-appearance:none;outline:none;}
+.t-am.on{background:#52b788;border-color:#52b788;color:#1a1208;font-weight:700;}
+.t-na.on{background:#3a7ca5;border-color:#3a7ca5;color:#1a1208;font-weight:700;}
+.t-ba.on{background:#c9a84c;border-color:#c9a84c;color:#1a1208;font-weight:700;}
+.t-ka.on{background:#c0504d;border-color:#c0504d;color:#1a1208;font-weight:700;}
+.t-ch.on{background:#7b52ab;border-color:#7b52ab;color:#1a1208;font-weight:700;}
+.pnl{display:none;}.pnl.on{display:block;}
+.nh{border-radius:12px;padding:20px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.nh-g{background:#0f2a1c;border:1px solid #2d6a4f;}
+.nh-b{background:#091828;border:1px solid #1a3e5c;}
+.nh-o{background:#1e1506;border:1px solid #6b5820;}
+.nh-r{background:#1e0808;border:1px solid #6b2222;}
+.na{font-family:'Amiri',serif;font-size:1.6rem;line-height:1.4;}
+.nd{font-size:.78rem;color:#7a6e5a;margin-top:4px;}
+.cg{color:#52b788;}.cb{color:#3a7ca5;}.co{color:#e8c97a;}.cr{color:#c0504d;}
+.pill{padding:6px 14px;border-radius:50px;font-family:'Amiri',serif;font-size:1.2rem;font-weight:700;text-align:center;flex-shrink:0;}
+.pill-g{background:#1b4332;color:#52b788;border:1px solid #2d6a4f;}
+.pill-b{background:#0d2137;color:#3a7ca5;border:1px solid #1a3e5c;}
+.pill-o{background:#2a1f05;color:#e8c97a;border:1px solid #6b5820;}
+.pill-r{background:#2a0a0a;color:#c0504d;border:1px solid #6b2222;}
+.psub{font-size:.55rem;color:#7a6e5a;display:block;}
+.ts{margin-bottom:20px;}
+.tl{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.td{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tn{font-size:.9rem;font-weight:600;color:#f5edd6;}
+.tc{font-size:.73rem;color:#7a6e5a;}
+.tbg{flex:1;height:3px;background:#2a2416;border-radius:2px;overflow:hidden;}
+.tf{height:100%;border-radius:2px;}
+.sg{margin-bottom:9px;padding-right:12px;}
+.sr{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.st{font-size:.78rem;color:#7a6e5a;font-weight:600;white-space:nowrap;}
+.sd{flex:1;height:1px;background:#2a2416;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;}
+button.chip{padding:5px 12px;border-radius:20px;font-size:.8rem;font-family:'Amiri',serif;background:#252010;color:#a89878;cursor:pointer;touch-action:manipulation;-webkit-appearance:none;outline:none;min-height:34px;line-height:1;border:1px solid #444;}
+button.chip-g{border-color:#2d6a4f;color:#52b788;}
+button.chip-b{border-color:#1a3e5c;color:#3a7ca5;}
+button.chip-o{border-color:#6b5820;color:#e8c97a;}
+button.chip-r{border-color:#6b2222;color:#c0504d;}
+button.chip.sel{color:#1a1208 !important;font-weight:700;}
+button.chip-g.sel{background:#52b788 !important;border-color:#52b788 !important;}
+button.chip-b.sel{background:#3a7ca5 !important;border-color:#3a7ca5 !important;}
+button.chip-o.sel{background:#c9a84c !important;border-color:#c9a84c !important;}
+button.chip-r.sel{background:#c0504d !important;border-color:#c0504d !important;}
+#pop{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;}
+#pop.on{display:flex;}
+.pb{background:#1e1609;border:1px solid #6b5820;border-radius:16px;max-width:680px;width:100%;padding:24px 20px;position:relative;}
+#pop-x{position:absolute;top:10px;left:12px;background:#2a2010;border:1px solid #555;color:#c4b48a;width:34px;height:34px;border-radius:50%;font-size:.95rem;cursor:pointer;touch-action:manipulation;-webkit-appearance:none;display:flex;align-items:center;justify-content:center;}
+.pr{font-size:.78rem;color:#a08040;margin-bottom:10px;}
+.pr span{background:#2a1f05;padding:2px 9px;border-radius:20px;border:1px solid #6b5820;}
+.pa{font-family:'Amiri',serif;font-size:1.4rem;color:#f5edd6;line-height:2;text-align:justify;}
+.pt{margin-top:10px;padding:8px 12px;background:#252010;border-radius:8px;font-size:.78rem;color:#a08040;border-right:2px solid #6b5820;}
+.cs{background:#201a0a;border:1px solid #3a3020;border-radius:14px;padding:22px;margin-bottom:18px;}
+.ct{font-family:'Amiri',serif;font-size:1.2rem;color:#c9a84c;text-align:center;margin-bottom:18px;}
+.br{display:grid;grid-template-columns:140px 1fr 38px;align-items:center;gap:10px;margin-bottom:10px;}
+.bl{font-family:'Amiri',serif;font-size:.82rem;color:#c4b48a;text-align:right;}
+.bt{height:20px;background:#2a2010;border-radius:4px;overflow:hidden;}
+.bf{height:100%;border-radius:4px;}
+.bfg{background:#52b788;}.bfb{background:#3a7ca5;}.bfo{background:#c9a84c;}.bfr{background:#c0504d;}
+.bn{font-family:'Amiri',serif;font-size:.95rem;color:#f5edd6;text-align:center;}
+.tr{display:grid;grid-template-columns:160px 1fr 32px;align-items:center;gap:8px;margin-bottom:8px;}
+.tll{font-size:.78rem;color:#a08040;text-align:right;}
+.tt{height:14px;background:#2a2010;border-radius:3px;overflow:hidden;}
+.tff{height:100%;border-radius:3px;}
+.tn2{font-size:.78rem;color:#c4b48a;text-align:center;}
+.nb{margin-top:18px;padding:12px 16px;background:#201a0a;border-right:3px solid #c9a84c;border-radius:0 8px 8px 0;font-size:.8rem;color:#a08040;line-height:1.9;}
+.hidden-data{display:none;}
+@media(max-width:600px){
+  .br{grid-template-columns:95px 1fr 30px;}
+  .tr{grid-template-columns:110px 1fr 28px;}
+  .ttl{font-size:2rem;}.pa{font-size:1.2rem;}.na{font-size:1.3rem;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr-wrap">
+  <div class="bism">بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+  <div class="dvd"></div>
+  <div class="ttl">النداءات القرآنية</div>
+  <div class="sub">اضغط على رقم أي آية لعرض نصها الكامل</div>
+  <div class="dvd"></div>
+  <div class="badge">✦ إجمالي النداءات: <strong>115 آية</strong> في القرآن الكريم ✦</div>
+</div>
+
+<div class="tabs">
+  <button class="tb t-am on" data-tab="am">يا أيها الذين آمنوا (89)</button>
+  <button class="tb t-na" data-tab="na">يا أيها الناس (20)</button>
+  <button class="tb t-ba" data-tab="ba">يا بني آدم (5)</button>
+  <button class="tb t-ka" data-tab="ka">يا أيها الكافرون (1)</button>
+  <button class="tb t-ch" data-tab="ch">📊 البياني</button>
+</div>
+
+<div id="pnl-am" class="pnl on">
+  <div class="nh nh-g">
+    <div><div class="na cg">يَا أَيُّهَا الَّذِينَ آمَنُوا</div><div class="nd">نداء للمؤمنين — أكثر النداءات في القرآن</div></div>
+    <div class="pill pill-g">89<span class="psub">آية</span></div>
+  </div>
+  <div class="ts"><div class="tl"><div class="td" style="background:#C0504D"></div><span class="tn">الجهاد والصبر</span><span class="tc">(11)</span><div class="tbg"><div class="tf" style="background:#C0504D;width:69%"></div></div></div><div class="sg"><div class="sr"><span class="st">الأنفال</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="8:15" data-tp="الجهاد والصبر">آية 15</button><button class="chip chip-g" data-r="8:45" data-tp="الجهاد والصبر">آية 45</button></div></div><div class="sg"><div class="sr"><span class="st">التوبة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="9:38" data-tp="الجهاد والصبر">آية 38</button><button class="chip chip-g" data-r="9:123" data-tp="الجهاد والصبر">آية 123</button></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:71" data-tp="الجهاد والصبر">آية 71</button><button class="chip chip-g" data-r="4:94" data-tp="الجهاد والصبر">آية 94</button></div></div><div class="sg"><div class="sr"><span class="st">محمد</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="47:7" data-tp="الجهاد والصبر">آية 7</button></div></div><div class="sg"><div class="sr"><span class="st">الصف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="61:10" data-tp="الجهاد والصبر">آية 10</button><button class="chip chip-g" data-r="61:14" data-tp="الجهاد والصبر">آية 14</button></div></div><div class="sg"><div class="sr"><span class="st">آل عمران</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="3:200" data-tp="الجهاد والصبر">آية 200</button><button class="chip chip-g" data-r="3:156" data-tp="الجهاد والصبر">آية 156</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#3A7CA5"></div><span class="tn">الولاء والبراء</span><span class="tc">(11)</span><div class="tbg"><div class="tf" style="background:#3A7CA5;width:69%"></div></div></div><div class="sg"><div class="sr"><span class="st">آل عمران</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="3:100" data-tp="الولاء والبراء">آية 100</button><button class="chip chip-g" data-r="3:118" data-tp="الولاء والبراء">آية 118</button><button class="chip chip-g" data-r="3:149" data-tp="الولاء والبراء">آية 149</button></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:144" data-tp="الولاء والبراء">آية 144</button></div></div><div class="sg"><div class="sr"><span class="st">المائدة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="5:51" data-tp="الولاء والبراء">آية 51</button><button class="chip chip-g" data-r="5:54" data-tp="الولاء والبراء">آية 54</button><button class="chip chip-g" data-r="5:57" data-tp="الولاء والبراء">آية 57</button></div></div><div class="sg"><div class="sr"><span class="st">التوبة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="9:23" data-tp="الولاء والبراء">آية 23</button><button class="chip chip-g" data-r="9:28" data-tp="الولاء والبراء">آية 28</button></div></div><div class="sg"><div class="sr"><span class="st">الممتحنة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="60:1" data-tp="الولاء والبراء">آية 1</button><button class="chip chip-g" data-r="60:13" data-tp="الولاء والبراء">آية 13</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#E8C97A"></div><span class="tn">أخلاق المجتمع</span><span class="tc">(14)</span><div class="tbg"><div class="tf" style="background:#E8C97A;width:88%"></div></div></div><div class="sg"><div class="sr"><span class="st">الحجرات</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="49:11" data-tp="أخلاق المجتمع">آية 11</button><button class="chip chip-g" data-r="49:12" data-tp="أخلاق المجتمع">آية 12</button><button class="chip chip-g" data-r="49:1" data-tp="أخلاق المجتمع">آية 1</button><button class="chip chip-g" data-r="49:2" data-tp="أخلاق المجتمع">آية 2</button><button class="chip chip-g" data-r="49:6" data-tp="أخلاق المجتمع">آية 6</button></div></div><div class="sg"><div class="sr"><span class="st">النور</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="24:27" data-tp="أخلاق المجتمع">آية 27</button><button class="chip chip-g" data-r="24:58" data-tp="أخلاق المجتمع">آية 58</button></div></div><div class="sg"><div class="sr"><span class="st">الأحزاب</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="33:53" data-tp="أخلاق المجتمع">آية 53</button><button class="chip chip-g" data-r="33:70" data-tp="أخلاق المجتمع">آية 70</button><button class="chip chip-g" data-r="33:69" data-tp="أخلاق المجتمع">آية 69</button></div></div><div class="sg"><div class="sr"><span class="st">المجادلة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="58:9" data-tp="أخلاق المجتمع">آية 9</button><button class="chip chip-g" data-r="58:11" data-tp="أخلاق المجتمع">آية 11</button></div></div><div class="sg"><div class="sr"><span class="st">الصف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="61:2" data-tp="أخلاق المجتمع">آية 2</button></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="2:104" data-tp="أخلاق المجتمع">آية 104</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#52B788"></div><span class="tn">الطاعة والاستجابة</span><span class="tc">(8)</span><div class="tbg"><div class="tf" style="background:#52B788;width:50%"></div></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:59" data-tp="الطاعة والاستجابة">آية 59</button></div></div><div class="sg"><div class="sr"><span class="st">الأنفال</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="8:20" data-tp="الطاعة والاستجابة">آية 20</button><button class="chip chip-g" data-r="8:24" data-tp="الطاعة والاستجابة">آية 24</button><button class="chip chip-g" data-r="8:27" data-tp="الطاعة والاستجابة">آية 27</button></div></div><div class="sg"><div class="sr"><span class="st">محمد</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="47:33" data-tp="الطاعة والاستجابة">آية 33</button></div></div><div class="sg"><div class="sr"><span class="st">المائدة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="5:35" data-tp="الطاعة والاستجابة">آية 35</button><button class="chip chip-g" data-r="5:105" data-tp="الطاعة والاستجابة">آية 105</button></div></div><div class="sg"><div class="sr"><span class="st">التوبة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="9:119" data-tp="الطاعة والاستجابة">آية 119</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#D4840A"></div><span class="tn">الأحكام الشرعية</span><span class="tc">(16)</span><div class="tbg"><div class="tf" style="background:#D4840A;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="2:178" data-tp="الأحكام الشرعية">آية 178</button><button class="chip chip-g" data-r="2:282" data-tp="الأحكام الشرعية">آية 282</button><button class="chip chip-g" data-r="2:278" data-tp="الأحكام الشرعية">آية 278</button><button class="chip chip-g" data-r="2:183" data-tp="الأحكام الشرعية">آية 183</button></div></div><div class="sg"><div class="sr"><span class="st">آل عمران</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="3:130" data-tp="الأحكام الشرعية">آية 130</button></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:29" data-tp="الأحكام الشرعية">آية 29</button><button class="chip chip-g" data-r="4:43" data-tp="الأحكام الشرعية">آية 43</button></div></div><div class="sg"><div class="sr"><span class="st">المائدة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="5:1" data-tp="الأحكام الشرعية">آية 1</button><button class="chip chip-g" data-r="5:6" data-tp="الأحكام الشرعية">آية 6</button><button class="chip chip-g" data-r="5:95" data-tp="الأحكام الشرعية">آية 95</button><button class="chip chip-g" data-r="5:106" data-tp="الأحكام الشرعية">آية 106</button><button class="chip chip-g" data-r="5:90" data-tp="الأحكام الشرعية">آية 90</button><button class="chip chip-g" data-r="5:94" data-tp="الأحكام الشرعية">آية 94</button><button class="chip chip-g" data-r="5:87" data-tp="الأحكام الشرعية">آية 87</button><button class="chip chip-g" data-r="5:101" data-tp="الأحكام الشرعية">آية 101</button><button class="chip chip-g" data-r="5:2" data-tp="الأحكام الشرعية">آية 2</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#7B52AB"></div><span class="tn">الإنفاق والصدقة</span><span class="tc">(5)</span><div class="tbg"><div class="tf" style="background:#7B52AB;width:31%"></div></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="2:254" data-tp="الإنفاق والصدقة">آية 254</button><button class="chip chip-g" data-r="2:264" data-tp="الإنفاق والصدقة">آية 264</button><button class="chip chip-g" data-r="2:267" data-tp="الإنفاق والصدقة">آية 267</button></div></div><div class="sg"><div class="sr"><span class="st">المجادلة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="58:12" data-tp="الإنفاق والصدقة">آية 12</button></div></div><div class="sg"><div class="sr"><span class="st">التوبة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="9:34" data-tp="الإنفاق والصدقة">آية 34</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#3AA8A8"></div><span class="tn">الأسرة والعلاقات</span><span class="tc">(5)</span><div class="tbg"><div class="tf" style="background:#3AA8A8;width:31%"></div></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:19" data-tp="الأسرة والعلاقات">آية 19</button></div></div><div class="sg"><div class="sr"><span class="st">الأحزاب</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="33:49" data-tp="الأسرة والعلاقات">آية 49</button></div></div><div class="sg"><div class="sr"><span class="st">التغابن</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="64:14" data-tp="الأسرة والعلاقات">آية 14</button></div></div><div class="sg"><div class="sr"><span class="st">التحريم</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="66:6" data-tp="الأسرة والعلاقات">آية 6</button></div></div><div class="sg"><div class="sr"><span class="st">الممتحنة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="60:10" data-tp="الأسرة والعلاقات">آية 10</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#7EC88A"></div><span class="tn">العقيدة والإيمان</span><span class="tc">(7)</span><div class="tbg"><div class="tf" style="background:#7EC88A;width:44%"></div></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="2:208" data-tp="العقيدة والإيمان">آية 208</button></div></div><div class="sg"><div class="sr"><span class="st">آل عمران</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="3:102" data-tp="العقيدة والإيمان">آية 102</button></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="4:136" data-tp="العقيدة والإيمان">آية 136</button></div></div><div class="sg"><div class="sr"><span class="st">الأنفال</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="8:29" data-tp="العقيدة والإيمان">آية 29</button></div></div><div class="sg"><div class="sr"><span class="st">الحديد</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="57:28" data-tp="العقيدة والإيمان">آية 28</button></div></div><div class="sg"><div class="sr"><span class="st">التحريم</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="66:8" data-tp="العقيدة والإيمان">آية 8</button></div></div><div class="sg"><div class="sr"><span class="st">الحشر</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="59:18" data-tp="العقيدة والإيمان">آية 18</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#6AABCF"></div><span class="tn">العبادة والذكر</span><span class="tc">(9)</span><div class="tbg"><div class="tf" style="background:#6AABCF;width:56%"></div></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="2:153" data-tp="العبادة والذكر">آية 153</button></div></div><div class="sg"><div class="sr"><span class="st">الحج</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="22:77" data-tp="العبادة والذكر">آية 77</button></div></div><div class="sg"><div class="sr"><span class="st">الأحزاب</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="33:41" data-tp="العبادة والذكر">آية 41</button><button class="chip chip-g" data-r="33:9" data-tp="العبادة والذكر">آية 9</button><button class="chip chip-g" data-r="33:56" data-tp="العبادة والذكر">آية 56</button></div></div><div class="sg"><div class="sr"><span class="st">الجمعة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="62:9" data-tp="العبادة والذكر">آية 9</button></div></div><div class="sg"><div class="sr"><span class="st">المنافقون</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="63:9" data-tp="العبادة والذكر">آية 9</button></div></div><div class="sg"><div class="sr"><span class="st">المائدة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-g" data-r="5:11" data-tp="العبادة والذكر">آية 11</button><button class="chip chip-g" data-r="5:8" data-tp="العبادة والذكر">آية 8</button></div></div></div>
+</div>
+
+<div id="pnl-na" class="pnl">
+  <div class="nh nh-b">
+    <div><div class="na cb">يَا أَيُّهَا النَّاسُ</div><div class="nd">نداء عام للبشرية جمعاء</div></div>
+    <div class="pill pill-b">20<span class="psub">آية</span></div>
+  </div>
+  <div class="ts"><div class="tl"><div class="td" style="background:#52B788"></div><span class="tn">الدعوة إلى التوحيد</span><span class="tc">(3)</span><div class="tbg"><div class="tf" style="background:#52B788;width:75%"></div></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="2:21" data-tp="الدعوة إلى التوحيد">آية 21</button></div></div><div class="sg"><div class="sr"><span class="st">يونس</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="10:104" data-tp="الدعوة إلى التوحيد">آية 104</button></div></div><div class="sg"><div class="sr"><span class="st">الأعراف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="7:158" data-tp="الدعوة إلى التوحيد">آية 158</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#3AA8A8"></div><span class="tn">التقوى واليوم الآخر</span><span class="tc">(4)</span><div class="tbg"><div class="tf" style="background:#3AA8A8;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="4:1" data-tp="التقوى واليوم الآخر">آية 1</button></div></div><div class="sg"><div class="sr"><span class="st">الحج</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="22:1" data-tp="التقوى واليوم الآخر">آية 1</button></div></div><div class="sg"><div class="sr"><span class="st">لقمان</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="31:33" data-tp="التقوى واليوم الآخر">آية 33</button></div></div><div class="sg"><div class="sr"><span class="st">فاطر</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="35:5" data-tp="التقوى واليوم الآخر">آية 5</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#3A7CA5"></div><span class="tn">الإيمان بالرسول</span><span class="tc">(4)</span><div class="tbg"><div class="tf" style="background:#3A7CA5;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">النساء</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="4:170" data-tp="الإيمان بالرسول">آية 170</button><button class="chip chip-b" data-r="4:174" data-tp="الإيمان بالرسول">آية 174</button></div></div><div class="sg"><div class="sr"><span class="st">يونس</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="10:108" data-tp="الإيمان بالرسول">آية 108</button></div></div><div class="sg"><div class="sr"><span class="st">الحج</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="22:49" data-tp="الإيمان بالرسول">آية 49</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#D4840A"></div><span class="tn">الموعظة والهداية</span><span class="tc">(4)</span><div class="tbg"><div class="tf" style="background:#D4840A;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">يونس</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="10:57" data-tp="الموعظة والهداية">آية 57</button><button class="chip chip-b" data-r="10:23" data-tp="الموعظة والهداية">آية 23</button></div></div><div class="sg"><div class="sr"><span class="st">الحج</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="22:73" data-tp="الموعظة والهداية">آية 73</button></div></div><div class="sg"><div class="sr"><span class="st">البقرة</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="2:168" data-tp="الموعظة والهداية">آية 168</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#7B52AB"></div><span class="tn">وحدانية الله ونعمته</span><span class="tc">(3)</span><div class="tbg"><div class="tf" style="background:#7B52AB;width:75%"></div></div></div><div class="sg"><div class="sr"><span class="st">فاطر</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="35:3" data-tp="وحدانية الله ونعمته">آية 3</button><button class="chip chip-b" data-r="35:15" data-tp="وحدانية الله ونعمته">آية 15</button></div></div><div class="sg"><div class="sr"><span class="st">الحج</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="22:5" data-tp="وحدانية الله ونعمته">آية 5</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#E8C97A"></div><span class="tn">الوحدة الإنسانية</span><span class="tc">(2)</span><div class="tbg"><div class="tf" style="background:#E8C97A;width:50%"></div></div></div><div class="sg"><div class="sr"><span class="st">الحجرات</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="49:13" data-tp="الوحدة الإنسانية">آية 13</button></div></div><div class="sg"><div class="sr"><span class="st">النمل</span><div class="sd"></div></div><div class="chips"><button class="chip chip-b" data-r="27:16" data-tp="الوحدة الإنسانية">آية 16</button></div></div></div>
+</div>
+
+<div id="pnl-ba" class="pnl">
+  <div class="nh nh-o">
+    <div><div class="na co">يَا بَنِي آدَمَ</div><div class="nd">نداء للإنسانية من أصلها الأول</div></div>
+    <div class="pill pill-o">5<span class="psub">آيات</span></div>
+  </div>
+  <div class="ts"><div class="tl"><div class="td" style="background:#C9A84C"></div><span class="tn">اللباس والزينة</span><span class="tc">(2)</span><div class="tbg"><div class="tf" style="background:#C9A84C;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">الأعراف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-o" data-r="7:26" data-tp="اللباس والزينة">آية 26</button><button class="chip chip-o" data-r="7:31" data-tp="اللباس والزينة">آية 31</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#C0504D"></div><span class="tn">التحذير من الشيطان</span><span class="tc">(2)</span><div class="tbg"><div class="tf" style="background:#C0504D;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">الأعراف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-o" data-r="7:27" data-tp="التحذير من الشيطان">آية 27</button></div></div><div class="sg"><div class="sr"><span class="st">يس</span><div class="sd"></div></div><div class="chips"><button class="chip chip-o" data-r="36:60" data-tp="التحذير من الشيطان">آية 60</button></div></div></div><div class="ts"><div class="tl"><div class="td" style="background:#52B788"></div><span class="tn">الرسالة والاتباع</span><span class="tc">(1)</span><div class="tbg"><div class="tf" style="background:#52B788;width:50%"></div></div></div><div class="sg"><div class="sr"><span class="st">الأعراف</span><div class="sd"></div></div><div class="chips"><button class="chip chip-o" data-r="7:35" data-tp="الرسالة والاتباع">آية 35</button></div></div></div>
+</div>
+
+<div id="pnl-ka" class="pnl">
+  <div class="nh nh-r">
+    <div><div class="na cr">يَا أَيُّهَا الْكَافِرُونَ</div><div class="nd">سورة كاملة — إعلان براءة وحسم</div></div>
+    <div class="pill pill-r">1<span class="psub">آية</span></div>
+  </div>
+  <div class="ts"><div class="tl"><div class="td" style="background:#C0504D"></div><span class="tn">البراءة وفصل الدين</span><span class="tc">(1)</span><div class="tbg"><div class="tf" style="background:#C0504D;width:100%"></div></div></div><div class="sg"><div class="sr"><span class="st">الكافرون</span><div class="sd"></div></div><div class="chips"><button class="chip chip-r" data-r="109:1" data-tp="البراءة وفصل الدين">آية 1</button></div></div></div>
+</div>
+
+<div id="pnl-ch" class="pnl">
+  <div class="cs">
+    <div class="ct">✦ التوزيع العام للنداءات ✦</div>
+    <div class="br"><div class="bl">يا أيها الذين آمنوا</div><div class="bt"><div class="bf bfg" style="width:77%"></div></div><div class="bn">89</div></div>
+    <div class="br"><div class="bl">يا أيها الناس</div><div class="bt"><div class="bf bfb" style="width:22%"></div></div><div class="bn">20</div></div>
+    <div class="br"><div class="bl">يا بني آدم</div><div class="bt"><div class="bf bfo" style="width:5%"></div></div><div class="bn">5</div></div>
+    <div class="br"><div class="bl">يا أيها الكافرون</div><div class="bt"><div class="bf bfr" style="width:1%"></div></div><div class="bn">1</div></div>
+  </div>
+  <div class="cs"><div class="ct">✦ مواضيع "يا أيها الذين آمنوا" ✦</div><div class="tr"><div class="tll">الأحكام الشرعية</div><div class="tt"><div class="tff" style="background:#D4840A;width:100%"></div></div><div class="tn2">16</div></div><div class="tr"><div class="tll">أخلاق المجتمع</div><div class="tt"><div class="tff" style="background:#E8C97A;width:88%"></div></div><div class="tn2">14</div></div><div class="tr"><div class="tll">الجهاد والصبر</div><div class="tt"><div class="tff" style="background:#C0504D;width:69%"></div></div><div class="tn2">11</div></div><div class="tr"><div class="tll">الولاء والبراء</div><div class="tt"><div class="tff" style="background:#3A7CA5;width:69%"></div></div><div class="tn2">11</div></div><div class="tr"><div class="tll">العبادة والذكر</div><div class="tt"><div class="tff" style="background:#6AABCF;width:56%"></div></div><div class="tn2">9</div></div><div class="tr"><div class="tll">الطاعة والاستجابة</div><div class="tt"><div class="tff" style="background:#52B788;width:50%"></div></div><div class="tn2">8</div></div><div class="tr"><div class="tll">العقيدة والإيمان</div><div class="tt"><div class="tff" style="background:#7EC88A;width:44%"></div></div><div class="tn2">7</div></div><div class="tr"><div class="tll">الإنفاق والصدقة</div><div class="tt"><div class="tff" style="background:#7B52AB;width:31%"></div></div><div class="tn2">5</div></div><div class="tr"><div class="tll">الأسرة والعلاقات</div><div class="tt"><div class="tff" style="background:#3AA8A8;width:31%"></div></div><div class="tn2">5</div></div></div>
+  <div class="cs"><div class="ct">✦ مواضيع "يا أيها الناس" ✦</div><div class="tr"><div class="tll">التقوى واليوم الآخر</div><div class="tt"><div class="tff" style="background:#3AA8A8;width:100%"></div></div><div class="tn2">4</div></div><div class="tr"><div class="tll">الإيمان بالرسول</div><div class="tt"><div class="tff" style="background:#3A7CA5;width:100%"></div></div><div class="tn2">4</div></div><div class="tr"><div class="tll">الموعظة والهداية</div><div class="tt"><div class="tff" style="background:#D4840A;width:100%"></div></div><div class="tn2">4</div></div><div class="tr"><div class="tll">الدعوة إلى التوحيد</div><div class="tt"><div class="tff" style="background:#52B788;width:75%"></div></div><div class="tn2">3</div></div><div class="tr"><div class="tll">وحدانية الله ونعمته</div><div class="tt"><div class="tff" style="background:#7B52AB;width:75%"></div></div><div class="tn2">3</div></div><div class="tr"><div class="tll">الوحدة الإنسانية</div><div class="tt"><div class="tff" style="background:#E8C97A;width:50%"></div></div><div class="tn2">2</div></div></div>
+  <div class="nb"><strong style="color:#e8c97a">ملاحظة:</strong> لم يرد "يا أيها المؤمنون" في القرآن الكريم قط. النداء دائماً بـ"الذين آمنوا" لأن الصيغة الفعلية تستحضر سبب التكليف.</div>
+</div>
+
+</div><!-- /wrap -->
+
+<div id="pop">
+  <div class="pb">
+    <button id="pop-x">✕</button>
+    <div class="pr">سورة <span id="ps"></span> — الآية <span id="pa-n"></span></div>
+    <div class="pa" id="pa-t"></div>
+    <div class="pt" id="pa-tp"></div>
+  </div>
+</div>
+
+<script>
+
+var AYAHS = {"2:104": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَقُولُوا رَاعِنَا وَقُولُوا انظُرْنَا وَاسْمَعُوا ۗ وَلِلْكَافِرِينَ عَذَابٌ أَلِيمٌ", "2:153": "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", "2:172": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ وَاشْكُرُوا لِلَّهِ إِن كُنتُمْ إِيَّاهُ تَعْبُدُونَ", "2:178": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الْقِصَاصُ فِي الْقَتْلَى ۖ الْحُرُّ بِالْحُرِّ وَالْعَبْدُ بِالْعَبْدِ وَالْأُنثَىٰ بِالْأُنثَىٰ", "2:183": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ", "2:208": "يَا أَيُّهَا الَّذِينَ آمَنُوا ادْخُلُوا فِي السِّلْمِ كَافَّةً وَلَا تَتَّبِعُوا خُطُوَاتِ الشَّيْطَانِ ۚ إِنَّهُ لَكُمْ عَدُوٌّ مُّبِينٌ", "2:254": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَنفِقُوا مِمَّا رَزَقْنَاكُم مِّن قَبْلِ أَن يَأْتِيَ يَوْمٌ لَّا بَيْعٌ فِيهِ وَلَا خُلَّةٌ وَلَا شَفَاعَةٌ", "2:264": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُبْطِلُوا صَدَقَاتِكُم بِالْمَنِّ وَالْأَذَىٰ كَالَّذِي يُنفِقُ مَالَهُ رِئَاءَ النَّاسِ", "2:267": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَنفِقُوا مِن طَيِّبَاتِ مَا كَسَبْتُمْ وَمِمَّا أَخْرَجْنَا لَكُم مِّنَ الْأَرْضِ", "2:278": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَذَرُوا مَا بَقِيَ مِنَ الرِّبَا إِن كُنتُم مُّؤْمِنِينَ", "2:282": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا تَدَايَنتُم بِدَيْنٍ إِلَىٰ أَجَلٍ مُّسَمًّى فَاكْتُبُوهُ", "3:100": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تُطِيعُوا فَرِيقًا مِّنَ الَّذِينَ أُوتُوا الْكِتَابَ يَرُدُّوكُم بَعْدَ إِيمَانِكُمْ كَافِرِينَ", "3:102": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ", "3:118": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا بِطَانَةً مِّن دُونِكُمْ لَا يَأْلُونَكُمْ خَبَالًا", "3:130": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا الرِّبَا أَضْعَافًا مُّضَاعَفَةً ۖ وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُفْلِحُونَ", "3:149": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تُطِيعُوا الَّذِينَ كَفَرُوا يَرُدُّوكُمْ عَلَىٰ أَعْقَابِكُمْ فَتَنقَلِبُوا خَاسِرِينَ", "3:156": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَكُونُوا كَالَّذِينَ كَفَرُوا وَقَالُوا لِإِخْوَانِهِمْ إِذَا ضَرَبُوا فِي الْأَرْضِ أَوْ كَانُوا غُزًّى لَّوْ كَانُوا عِندَنَا مَا مَاتُوا وَمَا قُتِلُوا", "3:200": "يَا أَيُّهَا الَّذِينَ آمَنُوا اصْبِرُوا وَصَابِرُوا وَرَابِطُوا وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُفْلِحُونَ", "4:19": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَحِلُّ لَكُمْ أَن تَرِثُوا النِّسَاءَ كَرْهًا", "4:29": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا أَمْوَالَكُم بَيْنَكُم بِالْبَاطِلِ إِلَّا أَن تَكُونَ تِجَارَةً عَن تَرَاضٍ مِّنكُمْ", "4:43": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَقْرَبُوا الصَّلَاةَ وَأَنتُمْ سُكَارَىٰ حَتَّىٰ تَعْلَمُوا مَا تَقُولُونَ", "4:59": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَطِيعُوا اللَّهَ وَأَطِيعُوا الرَّسُولَ وَأُولِي الْأَمْرِ مِنكُمْ", "4:71": "يَا أَيُّهَا الَّذِينَ آمَنُوا خُذُوا حِذْرَكُمْ فَانفِرُوا ثُبَاتٍ أَوِ انفِرُوا جَمِيعًا", "4:94": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا ضَرَبْتُمْ فِي سَبِيلِ اللَّهِ فَتَبَيَّنُوا وَلَا تَقُولُوا لِمَنْ أَلْقَىٰ إِلَيْكُمُ السَّلَامَ لَسْتَ مُؤْمِنًا", "4:135": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ بِالْقِسْطِ شُهَدَاءَ لِلَّهِ وَلَوْ عَلَىٰ أَنفُسِكُمْ أَوِ الْوَالِدَيْنِ وَالْأَقْرَبِينَ", "4:136": "يَا أَيُّهَا الَّذِينَ آمَنُوا آمِنُوا بِاللَّهِ وَرَسُولِهِ وَالْكِتَابِ الَّذِي نَزَّلَ عَلَىٰ رَسُولِهِ", "4:144": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا الْكَافِرِينَ أَوْلِيَاءَ مِن دُونِ الْمُؤْمِنِينَ", "5:1": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَوْفُوا بِالْعُقُودِ", "5:2": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُحِلُّوا شَعَائِرَ اللَّهِ وَلَا الشَّهْرَ الْحَرَامَ وَلَا الْهَدْيَ وَلَا الْقَلَائِدَ", "5:6": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ", "5:8": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ لِلَّهِ شُهَدَاءَ بِالْقِسْطِ وَلَا يَجْرِمَنَّكُمْ شَنَآنُ قَوْمٍ عَلَىٰ أَلَّا تَعْدِلُوا", "5:11": "يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا نِعْمَتَ اللَّهِ عَلَيْكُمْ إِذْ هَمَّ قَوْمٌ أَن يَبْسُطُوا إِلَيْكُمْ أَيْدِيَهُمْ فَكَفَّ أَيْدِيَهُمْ عَنكُمْ", "5:35": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَابْتَغُوا إِلَيْهِ الْوَسِيلَةَ وَجَاهِدُوا فِي سَبِيلِهِ", "5:51": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا الْيَهُودَ وَالنَّصَارَىٰ أَوْلِيَاءَ", "5:54": "يَا أَيُّهَا الَّذِينَ آمَنُوا مَن يَرْتَدَّ مِنكُمْ عَن دِينِهِ فَسَوْفَ يَأْتِي اللَّهُ بِقَوْمٍ يُحِبُّهُمْ وَيُحِبُّونَهُ", "5:57": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا الَّذِينَ اتَّخَذُوا دِينَكُمْ هُزُوًا وَلَعِبًا أَوْلِيَاءَ", "5:87": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُحَرِّمُوا طَيِّبَاتِ مَا أَحَلَّ اللَّهُ لَكُمْ وَلَا تَعْتَدُوا", "5:90": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّمَا الْخَمْرُ وَالْمَيْسِرُ وَالْأَنصَابُ وَالْأَزْلَامُ رِجْسٌ مِّنْ عَمَلِ الشَّيْطَانِ فَاجْتَنِبُوهُ", "5:94": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَيَبْلُوَنَّكُمُ اللَّهُ بِشَيْءٍ مِّنَ الصَّيْدِ تَنَالُهُ أَيْدِيكُمْ وَرِمَاحُكُمْ", "5:95": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَقْتُلُوا الصَّيْدَ وَأَنتُمْ حُرُمٌ", "5:101": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَسْأَلُوا عَنْ أَشْيَاءَ إِن تُبْدَ لَكُمْ تَسُؤْكُمْ", "5:105": "يَا أَيُّهَا الَّذِينَ آمَنُوا عَلَيْكُمْ أَنفُسَكُمْ ۖ لَا يَضُرُّكُم مَّن ضَلَّ إِذَا اهْتَدَيْتُمْ", "5:106": "يَا أَيُّهَا الَّذِينَ آمَنُوا شَهَادَةُ بَيْنِكُمْ إِذَا حَضَرَ أَحَدَكُمُ الْمَوْتُ حِينَ الْوَصِيَّةِ اثْنَانِ ذَوَا عَدْلٍ مِّنكُمْ", "8:15": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمُ الَّذِينَ كَفَرُوا زَحْفًا فَلَا تُوَلُّوهُمُ الْأَدْبَارَ", "8:20": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَطِيعُوا اللَّهَ وَرَسُولَهُ وَلَا تَوَلَّوْا عَنْهُ وَأَنتُمْ تَسْمَعُونَ", "8:24": "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَجِيبُوا لِلَّهِ وَلِلرَّسُولِ إِذَا دَعَاكُمْ لِمَا يُحْيِيكُمْ", "8:27": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَخُونُوا اللَّهَ وَالرَّسُولَ وَتَخُونُوا أَمَانَاتِكُمْ وَأَنتُمْ تَعْلَمُونَ", "8:29": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تَتَّقُوا اللَّهَ يَجْعَل لَّكُمْ فُرْقَانًا وَيُكَفِّرْ عَنكُمْ سَيِّئَاتِكُمْ", "8:45": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمْ فِئَةً فَاثْبُتُوا وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ", "9:23": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا آبَاءَكُمْ وَإِخْوَانَكُمْ أَوْلِيَاءَ إِنِ اسْتَحَبُّوا الْكُفْرَ عَلَى الْإِيمَانِ", "9:28": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّمَا الْمُشْرِكُونَ نَجَسٌ فَلَا يَقْرَبُوا الْمَسْجِدَ الْحَرَامَ بَعْدَ عَامِهِمْ هَٰذَا", "9:34": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّ كَثِيرًا مِّنَ الْأَحْبَارِ وَالرُّهْبَانِ لَيَأْكُلُونَ أَمْوَالَ النَّاسِ بِالْبَاطِلِ", "9:38": "يَا أَيُّهَا الَّذِينَ آمَنُوا مَا لَكُمْ إِذَا قِيلَ لَكُمُ انفِرُوا فِي سَبِيلِ اللَّهِ اثَّاقَلْتُمْ إِلَى الْأَرْضِ", "9:119": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ", "9:123": "يَا أَيُّهَا الَّذِينَ آمَنُوا قَاتِلُوا الَّذِينَ يَلُونَكُم مِّنَ الْكُفَّارِ وَلْيَجِدُوا فِيكُمْ غِلْظَةً", "22:77": "يَا أَيُّهَا الَّذِينَ آمَنُوا ارْكَعُوا وَاسْجُدُوا وَاعْبُدُوا رَبَّكُمْ وَافْعَلُوا الْخَيْرَ لَعَلَّكُمْ تُفْلِحُونَ", "24:21": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّبِعُوا خُطُوَاتِ الشَّيْطَانِ", "24:27": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَدْخُلُوا بُيُوتًا غَيْرَ بُيُوتِكُمْ حَتَّىٰ تَسْتَأْنِسُوا وَتُسَلِّمُوا عَلَىٰ أَهْلِهَا", "24:58": "يَا أَيُّهَا الَّذِينَ آمَنُوا لِيَسْتَأْذِنكُمُ الَّذِينَ مَلَكَتْ أَيْمَانُكُمْ وَالَّذِينَ لَمْ يَبْلُغُوا الْحُلُمَ مِنكُمْ ثَلَاثَ مَرَّاتٍ", "33:9": "يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا نِعْمَةَ اللَّهِ عَلَيْكُمْ إِذْ جَاءَتْكُمْ جُنُودٌ فَأَرْسَلْنَا عَلَيْهِمْ رِيحًا وَجُنُودًا لَّمْ تَرَوْهَا", "33:41": "يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا", "33:49": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نَكَحْتُمُ الْمُؤْمِنَاتِ ثُمَّ طَلَّقْتُمُوهُنَّ مِن قَبْلِ أَن تَمَسُّوهُنَّ", "33:53": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَدْخُلُوا بُيُوتَ النَّبِيِّ إِلَّا أَن يُؤْذَنَ لَكُمْ", "33:56": "إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا", "33:69": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَكُونُوا كَالَّذِينَ آذَوْا مُوسَىٰ فَبَرَّأَهُ اللَّهُ مِمَّا قَالُوا", "33:70": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَقُولُوا قَوْلًا سَدِيدًا", "47:7": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تَنصُرُوا اللَّهَ يَنصُرْكُمْ وَيُثَبِّتْ أَقْدَامَكُمْ", "47:33": "يَا أَيُّهَا الَّذِينَ آمَنُوا أَطِيعُوا اللَّهَ وَأَطِيعُوا الرَّسُولَ وَلَا تُبْطِلُوا أَعْمَالَكُمْ", "49:1": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُقَدِّمُوا بَيْنَ يَدَيِ اللَّهِ وَرَسُولِهِ وَاتَّقُوا اللَّهَ", "49:2": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَرْفَعُوا أَصْوَاتَكُمْ فَوْقَ صَوْتِ النَّبِيِّ", "49:6": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن جَاءَكُمْ فَاسِقٌ بِنَبَإٍ فَتَبَيَّنُوا أَن تُصِيبُوا قَوْمًا بِجَهَالَةٍ", "49:11": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَسْخَرْ قَوْمٌ مِّن قَوْمٍ عَسَىٰ أَن يَكُونُوا خَيْرًا مِّنْهُمْ", "49:12": "يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِّنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ وَلَا تَجَسَّسُوا", "57:28": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَآمِنُوا بِرَسُولِهِ يُؤْتِكُمْ كِفْلَيْنِ مِن رَّحْمَتِهِ", "58:9": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا تَنَاجَيْتُمْ فَلَا تَتَنَاجَوْا بِالْإِثْمِ وَالْعُدْوَانِ وَمَعْصِيَتِ الرَّسُولِ", "58:11": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قِيلَ لَكُمْ تَفَسَّحُوا فِي الْمَجَالِسِ فَافْسَحُوا يَفْسَحِ اللَّهُ لَكُمْ", "58:12": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نَاجَيْتُمُ الرَّسُولَ فَقَدِّمُوا بَيْنَ يَدَيْ نَجْوَاكُمْ صَدَقَةً", "59:18": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَلْتَنظُرْ نَفْسٌ مَّا قَدَّمَتْ لِغَدٍ", "60:1": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا عَدُوِّي وَعَدُوَّكُمْ أَوْلِيَاءَ", "60:10": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا جَاءَكُمُ الْمُؤْمِنَاتُ مُهَاجِرَاتٍ فَامْتَحِنُوهُنَّ", "60:13": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَوَلَّوْا قَوْمًا غَضِبَ اللَّهُ عَلَيْهِمْ", "61:2": "يَا أَيُّهَا الَّذِينَ آمَنُوا لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ", "61:10": "يَا أَيُّهَا الَّذِينَ آمَنُوا هَلْ أَدُلُّكُمْ عَلَىٰ تِجَارَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ", "61:14": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا أَنصَارَ اللَّهِ كَمَا قَالَ عِيسَى ابْنُ مَرْيَمَ لِلْحَوَارِيِّينَ", "62:9": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ", "63:9": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُلْهِكُمْ أَمْوَالُكُمْ وَلَا أَوْلَادُكُمْ عَن ذِكْرِ اللَّهِ", "64:14": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّ مِنْ أَزْوَاجِكُمْ وَأَوْلَادِكُمْ عَدُوًّا لَّكُمْ فَاحْذَرُوهُمْ", "66:6": "يَا أَيُّهَا الَّذِينَ آمَنُوا قُوا أَنفُسَكُمْ وَأَهْلِيكُمْ نَارًا وَقُودُهَا النَّاسُ وَالْحِجَارَةُ", "66:8": "يَا أَيُّهَا الَّذِينَ آمَنُوا تُوبُوا إِلَى اللَّهِ تَوْبَةً نَّصُوحًا", "2:21": "يَا أَيُّهَا النَّاسُ اعْبُدُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ وَالَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ", "2:168": "يَا أَيُّهَا النَّاسُ كُلُوا مِمَّا فِي الْأَرْضِ حَلَالًا طَيِّبًا وَلَا تَتَّبِعُوا خُطُوَاتِ الشَّيْطَانِ", "4:1": "يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمُ الَّذِي خَلَقَكُم مِّن نَّفْسٍ وَاحِدَةٍ وَخَلَقَ مِنْهَا زَوْجَهَا", "4:170": "يَا أَيُّهَا النَّاسُ قَدْ جَاءَكُمُ الرَّسُولُ بِالْحَقِّ مِن رَّبِّكُمْ فَآمِنُوا خَيْرًا لَّكُمْ", "4:174": "يَا أَيُّهَا النَّاسُ قَدْ جَاءَكُم بُرْهَانٌ مِّن رَّبِّكُمْ وَأَنزَلْنَا إِلَيْكُمْ نُورًا مُّبِينًا", "7:158": "قُلْ يَا أَيُّهَا النَّاسُ إِنِّي رَسُولُ اللَّهِ إِلَيْكُمْ جَمِيعًا", "10:23": "يَا أَيُّهَا النَّاسُ إِنَّمَا بَغْيُكُمْ عَلَىٰ أَنفُسِكُمْ مَتَاعَ الْحَيَاةِ الدُّنْيَا", "10:57": "يَا أَيُّهَا النَّاسُ قَدْ جَاءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَاءٌ لِّمَا فِي الصُّدُورِ", "10:104": "قُلْ يَا أَيُّهَا النَّاسُ إِن كُنتُمْ فِي شَكٍّ مِّن دِينِي فَلَا أَعْبُدُ الَّذِينَ تَعْبُدُونَ مِن دُونِ اللَّهِ", "10:108": "قُلْ يَا أَيُّهَا النَّاسُ قَدْ جَاءَكُمُ الْحَقُّ مِن رَّبِّكُمْ فَمَنِ اهْتَدَىٰ فَإِنَّمَا يَهْتَدِي لِنَفْسِهِ", "22:1": "يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمْ ۚ إِنَّ زَلْزَلَةَ السَّاعَةِ شَيْءٌ عَظِيمٌ", "22:5": "يَا أَيُّهَا النَّاسُ إِن كُنتُمْ فِي رَيْبٍ مِّنَ الْبَعْثِ فَإِنَّا خَلَقْنَاكُم مِّن تُرَابٍ", "22:49": "قُلْ يَا أَيُّهَا النَّاسُ إِنَّمَا أَنَا لَكُمْ نَذِيرٌ مُّبِينٌ", "22:73": "يَا أَيُّهَا النَّاسُ ضُرِبَ مَثَلٌ فَاسْتَمِعُوا لَهُ ۚ إِنَّ الَّذِينَ تَدْعُونَ مِن دُونِ اللَّهِ لَن يَخْلُقُوا ذُبَابًا", "27:16": "وَقَالَ يَا أَيُّهَا النَّاسُ عُلِّمْنَا مَنطِقَ الطَّيْرِ وَأُوتِينَا مِن كُلِّ شَيْءٍ", "31:33": "يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمْ وَاخْشَوْا يَوْمًا لَّا يَجْزِي وَالِدٌ عَن وَلَدِهِ", "35:3": "يَا أَيُّهَا النَّاسُ اذْكُرُوا نِعْمَتَ اللَّهِ عَلَيْكُمْ ۚ هَلْ مِنْ خَالِقٍ غَيْرُ اللَّهِ يَرْزُقُكُم", "35:5": "يَا أَيُّهَا النَّاسُ إِنَّ وَعْدَ اللَّهِ حَقٌّ فَلَا تَغُرَّنَّكُمُ الْحَيَاةُ الدُّنْيَا", "35:15": "يَا أَيُّهَا النَّاسُ أَنتُمُ الْفُقَرَاءُ إِلَى اللَّهِ وَاللَّهُ هُوَ الْغَنِيُّ الْحَمِيدُ", "49:13": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا", "7:26": "يَا بَنِي آدَمَ قَدْ أَنزَلْنَا عَلَيْكُمْ لِبَاسًا يُوَارِي سَوْآتِكُمْ وَرِيشًا وَلِبَاسُ التَّقْوَىٰ ذَٰلِكَ خَيْرٌ", "7:27": "يَا بَنِي آدَمَ لَا يَفْتِنَنَّكُمُ الشَّيْطَانُ كَمَا أَخْرَجَ أَبَوَيْكُم مِّنَ الْجَنَّةِ", "7:31": "يَا بَنِي آدَمَ خُذُوا زِينَتَكُمْ عِندَ كُلِّ مَسْجِدٍ وَكُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا", "7:35": "يَا بَنِي آدَمَ إِمَّا يَأْتِيَنَّكُمْ رُسُلٌ مِّنكُمْ يَقُصُّونَ عَلَيْكُمْ آيَاتِي فَمَنِ اتَّقَىٰ وَأَصْلَحَ فَلَا خَوْفٌ عَلَيْهِمْ", "36:60": "أَلَمْ أَعْهَدْ إِلَيْكُمْ يَا بَنِي آدَمَ أَن لَّا تَعْبُدُوا الشَّيْطَانَ إِنَّهُ لَكُمْ عَدُوٌّ مُّبِينٌ", "109:1": "قُلْ يَا أَيُّهَا الْكَافِرُونَ"};
+
+var selChip = null;
+
+function openPop(ref) {
+  var text = AYAHS[ref] || '';
+  var parts = ref.split(':');
+  var btn = document.querySelector('button[data-r="' + ref + '"]');
+  var sname = btn ? btn.getAttribute('data-s') : '';
+  var topic = btn ? btn.getAttribute('data-tp') : '';
+  var anum = parts[1];
+  document.getElementById('ps').textContent = sname;
+  document.getElementById('pa-n').textContent = anum;
+  document.getElementById('pa-t').textContent = text;
+  document.getElementById('pa-tp').textContent = topic;
+  document.getElementById('pop').className = 'on';
+}
+
+function closePop() {
+  document.getElementById('pop').className = '';
+  if (selChip) {
+    selChip.className = selChip.className.replace(' sel', '');
+    selChip = null;
+  }
+}
+
+function switchTab(name) {
+  var panels = document.querySelectorAll('.pnl');
+  var tabs = document.querySelectorAll('.tb');
+  for (var i = 0; i < panels.length; i++) panels[i].className = 'pnl';
+  for (var i = 0; i < tabs.length; i++) {
+    var c = tabs[i].className;
+    tabs[i].className = c.replace(' on', '');
+  }
+  var p = document.getElementById('pnl-' + name);
+  if (p) p.className = 'pnl on';
+  var t = document.querySelector('.t-' + name);
+  if (t && t.className.indexOf(' on') < 0) t.className = t.className + ' on';
+}
+
+function getTarget(el) {
+  for (var i = 0; i < 6; i++) {
+    if (!el || el === document.body) return null;
+    var cls = el.className || '';
+    var id = el.id || '';
+    if (id === 'pop-x' || id === 'pop') return el;
+    if (cls.indexOf('chip') >= 0 && el.getAttribute('data-r')) return el;
+    if (cls.indexOf('tb') >= 0 && el.getAttribute('data-tab')) return el;
+    el = el.parentNode;
+  }
+  return null;
+}
+
+function handle(el) {
+  if (!el) return;
+  var cls = el.className || '';
+  var id = el.id || '';
+  if (id === 'pop-x' || id === 'pop') { closePop(); return; }
+  if (cls.indexOf('chip') >= 0 && el.getAttribute('data-r')) {
+    if (selChip) selChip.className = selChip.className.replace(' sel', '');
+    el.className = el.className + ' sel';
+    selChip = el;
+    openPop(el.getAttribute('data-r'));
+    return;
+  }
+  if (cls.indexOf('tb') >= 0 && el.getAttribute('data-tab')) {
+    switchTab(el.getAttribute('data-tab'));
+    return;
+  }
+}
+
+document.addEventListener('click', function(e) {
+  handle(getTarget(e.target));
+});
+
+document.addEventListener('touchend', function(e) {
+  e.preventDefault();
+  var touch = e.changedTouches[0];
+  var el = document.elementFromPoint(touch.clientX, touch.clientY);
+  handle(getTarget(el));
+}, {passive: false});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePop();
+});
+
+</script>
+</body>
+</html>
