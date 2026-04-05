@@ -403,6 +403,58 @@ body {
 </head>
 <body>
 
+<!-- Tadabbur Nav Bar -->
+<style>
+.tdb-nav {
+  position: sticky; top: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px;
+  background: rgba(10,14,26,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,168,83,0.2);
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+.tdb-nav a { text-decoration: none; }
+.tdb-nav .tdb-brand {
+  font-family: 'Amiri', serif;
+  color: #d4a853;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.tdb-nav .tdb-links {
+  display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+}
+.tdb-nav .tdb-link {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.75em;
+  font-weight: 600;
+  color: #8a9bb5;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.2s;
+}
+.tdb-nav .tdb-link:hover { color: #d4a853; border-color: rgba(212,168,83,0.3); }
+.tdb-nav .tdb-link.active { color: #d4a853; border-color: rgba(212,168,83,0.4); background: rgba(212,168,83,0.1); }
+@media (max-width: 600px) {
+  .tdb-nav { padding: 6px 10px; gap: 4px; }
+  .tdb-nav .tdb-link { padding: 3px 8px; font-size: 0.7em; }
+  .tdb-nav .tdb-brand { font-size: 0.95em; }
+}
+</style>
+<nav class="tdb-nav">
+  <a href="index.html" class="tdb-brand">تدبُّر</a>
+  <div class="tdb-links">
+    <a href="index.html" class="tdb-link">الرئيسية</a>
+    <a href="%D8%B3%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D9%83%D9%87%D9%81-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D8%A9.html" class="tdb-link">الكهف</a>
+    <a href="%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9-%D8%A7%D9%84%D9%85%D8%B7%D9%81%D9%81%D9%8A%D9%86-%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D8%A9-v3.html" class="tdb-link">المطففين</a>
+    <a href="%D8%B3%D9%88%D8%B1%D8%A9-%D8%A7%D9%84%D8%B2%D9%85%D8%B1-%D9%83%D8%A7%D9%85%D9%84%D8%A9.html" class="tdb-link">الزمر</a>
+    <a href="infographic-aghraq-alsuwar.html" class="tdb-link">أغراض السور</a>
+    <a href="tahrir-al-qalb.html" class="tdb-link active">تحرير القلب</a>
+  </div>
+</nav>
+
 <div class="page-wrapper">
 
   <!-- HERO -->
@@ -411,7 +463,7 @@ body {
     <h1 class="hero-title">تحرير القلب من التعلق بالبشر</h1>
     <p class="hero-subtitle">مسار قرآني من ١٠ مراحل — من كسر الوهم إلى الطمأنينة الكاملة<br>لا يطلب ضرورياته بمعصية الله، ولا يخشى فيها أحداً سواه</p>
     <div class="hero-verse">
-      ﴿وَمَن يَتَوَكَّلۡ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُەٓ﴾
+      ﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُٓ﴾
       <span class="hero-verse-ref">الطلاق : ٣</span>
     </div>
   </header>
@@ -435,24 +487,24 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿ٱعۡلَمُوٓاْ أَنَّمَا ٱلۡحَيَوٰةُ ٱلدُّنۡيَا لَعِبٞ وَلَهۡوٞ وَزِينَةٞ وَتَفَاخُرُۢ بَيۡخَكُمۡ وَتَكَاثُرٞ فِي ٱلۡأَمۡوَٰلِ وَٱلۡأَوۡلَٰدِۖ كَمَثَلِ غَيۡثٍ أَعۡجَبَ ٱلۡكُفَّارَ نَبَاتُهُۥ ثُمَّ يَهِيجُ فَتَرَىٰهُ مُصۡفَرّٗا ثُمَّ يَكُونُ حُطَٰمٗاۖ وَفِي ٱلۡأٓخِرَةِ عَذَابٞ شَدِيدٞ وَمَغۡفِرَةٞ مِّنَ ٱللَّهِ وَرِضۡوَٰنٞۚ وَمَا ٱلۡحَيَوٰةُ ٱلدُّنۡيَآ إِلَّا مَتَٰعُ ٱلۡغُرُورِ﴾</div>
+          <div class="verse-text">﴿اعْلَمُوٓاْ أَنَّمَا الْحَيَوٰةُ الدُّنْيَا لَعِبٞ وَلَهْوٞ وَزِينَةٞ وَتَفَاخُرُ بَيْنَكُمْ وَتَكَاثُرٞ فِي الْأَمْوَٰلِ وَالْأَوْلَٰدِۖ كَمَثَلِ غَيْثٍ أَعْجَبَ الْكُفَّارَ نَبَاتُهُ ثُمَّ يَهِيجُ فَتَرَىٰهُ مُصْفَرّٗا ثُمَّ يَكُونُ حُطَٰمٗاۖ وَفِي الْأٓخِرَةِ عَذَابٞ شَدِيدٞ وَمَغْفِرَةٞ مِّنَ اللَّهِ وَرِضْوَٰنٞۚ وَمَا الْحَيَوٰةُ الدُّنْيَآ إِلَّا مَتَٰعُ الْغُرُورِ﴾</div>
           <div class="verse-ref">الحديد : ٢٠</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿قٟل  مَتَعُ ٱلدُّنۡيَا قَلِيلٖ وَٱلۡأٓخِرَةُ خَيۡرٞ لِّمَنِ ٱتَّقَىٰ وَلَا تُظۡلَمُونَ فَتِيلًا﴾</div>
+          <div class="verse-text">﴿قُلْ مَتَٰعُ الدُّنْيَا قَلِيلٞ وَالْأٓخِرَةُ خَيْرٞ لِّمَنِ اتَّقَىٰ وَلَا تُظْلَمُونَ فَتِيلًا﴾</div>
           <div class="verse-ref">النساء : ٧٧</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَلَوۡلَآ أَن يَكُونَ ٱلنَّاسُ أُمَّةٗ وَٰحِدَةٗ لَّجَعَلۡنَا لِمَن يَكۡفُرُ بِٱلرَّحۡمَٰنِ لِبُيُوتِهِمۡ سُقُفٗا مِّن فِضَّةٖ وَمَعَارِجَ عَلَيۡهَا يَظۡهَرُونَ ۝ وَلِبُيُوتِهِمۡ أَتۡبَوَٰبٗا وَسُرُرًا عَلَيۡهَا يَتَّكِئُٔونَ ٝ وَزُخۡرُفٗاۚ وَإِن كُلُّ ذَٰلِكَ لَمَّا مَتَٰعُ ٱلۡحَيَوٰةِ ٱلدُّنۡيَا ۚ وَٱلۡأٓخِرَةُ عِندَ رَبِّكَ لِلۡمُتَّقِينٌ﴾</div>
-          <div class="verse-ref">الزخرف : ٣٣-٣5</div>
+          <div class="verse-text">﴿وَلَوْلَآ أَن يَكُونَ النَّاسُ أُمَّةٗ وَٰحِدَةٗ لَّجَعَلْنَا لِمَن يَكْفُرُ بِالرَّحْمَٰنِ لِبُيُوتِهِمْ سُقُفٗا مِّن فِضَّةٖ وَمَعَارِجَ عَلَيْهَا يَظْهَرُونَ ۝ وَلِبُيُوتِهِمْ أَبْوَٰبٗا وَسُرُرًا عَلَيْهَا يَتَّكِـُٔونَ ۝ وَزُخْرُفٗاۚ وَإِن كُلُّ ذَٰلِكَ لَمَّا مَتَٰعُ الْحَيَوٰةِ الدُّنْيَاۚ وَالْأٓخِرَةُ عِندَ رَبِّكَ لِلْمُتَّقِينَ﴾</div>
+          <div class="verse-ref">الزخرف : ٣٣-٣٥</div>
         </div>
         <div class="extra-verses" id="extra0">
           <div class="verse-card">
-            <div class="verse-text">﴿وَٱضۡرِبۡ لَهُمۡ مَّثَلَ ٱلۡحَيَوٰةِ ٱلدُّنۡيَا كَمَآءٍ أَنزَلۡنَٰهُ مِنَ ٱلسَّمَآءِ فَٱخۡتَلَطَ بِهِۦ نَبَاتُ ٱلۡأَرۡضِ فَأَصۡبَحَ هَشِيمٗا تَذۡرُوهُ ٱلرِّيَٰحُۗ وَكَانَ ٱللَّهُ عَلَىٰ كُلِّ شَيۡءٖ مُّقۡتَدِرًا﴾</div>
+            <div class="verse-text">﴿وَاضْرِبْ لَهُم مَّثَلَ الْحَيَوٰةِ الدُّنْيَا كَمَآءٍ أَنزَلْنَٰهُ مِنَ السَّمَآءِ فَاخْتَلَطَ بِهِ نَبَاتُ الْأَرْضِ فَأَصْبَحَ هَشِيمٗا تَذْرُوهُ الرِّيَٰحُۗ وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٖ مُّقْتَدِرًا﴾</div>
             <div class="verse-ref">الكهف : ٤٥</div>
           </div>
           <div class="verse-card">
-            <div class="verse-text">﴿كُلُّ نَفۡسٖ ذَآئِقَةُ ٱلۡمَوۡتِۗ وَإِنَّمَا تُوَفَّوۡنَ أُجُورَكُمۡ يَوۡمَ ٱلۡقِيَٰمَةِۖ فَمَن زُحۡزِحَ عَنِ ٱلنَّارِ وَأُدۡخِلَ ٱلۡجَنَّةَ فَقَدۡ فَازَۗ وَمَا ٱلۡحَيَوٰةُ ٱلدُّنۡيَآ إِلَّا مَتَٰعُ ٱلۡغُرُورِ﴾</div>
+            <div class="verse-text">﴿كُلُّ نَفْسٖ ذَآئِقَةُ الْمَوْتِۗ وَإِنَّمَا تُوَفَّوْنَ أُجُورَكُمْ يَوْمَ الْقِيَٰمَةِۖ فَمَن زُحْزِحَ عَنِ النَّارِ وَأُدْخِلَ الْجَنَّةَ فَقَدْ فَازَۗ وَمَا الْحَيَوٰةُ الدُّنْيَآ إِلَّا مَتَٰعُ الْغُرُورِ﴾</div>
             <div class="verse-ref">آل عمران : ١٨٥</div>
           </div>
         </div>
@@ -476,19 +528,19 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿قُل لَّن يُصِيبَنَآ إِلَّا مَا كَتَبَ ٱللَّهُ لَنَا هُوَ مَوۡلَيٰنَاۚ وَعَلَى ٱللَّهِ فَلۡيَتَوَكَّلِ ٱلۡمُؤۡمِنُونَ﴾</div>
+          <div class="verse-text">﴿قُل لَّن يُصِيبَنَآ إِلَّا مَا كَتَبَ اللَّهُ لَنَا هُوَ مَوْلَىٰنَاۚ وَعَلَى اللَّهِ فَلْيَتَوَكَّلِ الْمُؤْمِنُونَ﴾</div>
           <div class="verse-ref">التوبة : ٥١</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَمَا هُم بِضَآرِّينَ بِهِۦ مِنۡ أَحَدٍ إِلَّا بِإِذۡنِ ٱللَّهِ﴾</div>
+          <div class="verse-text">﴿وَمَا هُم بِضَآرِّينَ بِهِ مِنْ أَحَدٍ إِلَّا بِإِذْنِ اللَّهِ﴾</div>
           <div class="verse-ref">البقرة : ١٠٢</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿مَآ أَصَابَ مِن مُّصِيبَةٍ إِلَّا بِإِذۡنِ ٱللَّهِۗ وَمَن يُؤۡمِنۢ بِٱللَّهِ يَهۡدِ قَلۡبَهُەۚ وَٱللَّهُ بِكُلِّ شَيۡءٍ عَلِيمٞ﴾</div>
+          <div class="verse-text">﴿مَآ أَصَابَ مِن مُّصِيبَةٍ إِلَّا بِإِذْنِ اللَّهِۗ وَمَن يُؤْمِن بِاللَّهِ يَهْدِ قَلْبَهُۚ وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٞ﴾</div>
           <div class="verse-ref">التغابن : ١١</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَمَا كَانَ لِنَفۡسٍ أَن تَمُوتَ إِلَّا بِإِذۡنِ ٱللَّهِ كِتَٰبٗا مُّؤَجَّلٗا﴾</div>
+          <div class="verse-text">﴿وَمَا كَانَ لِنَفْسٍ أَن تَمُوتَ إِلَّا بِإِذْنِ اللَّهِ كِتَٰبٗا مُّؤَجَّلٗا﴾</div>
           <div class="verse-ref">آل عمران : ١٤٥</div>
         </div>
       </div>
@@ -510,15 +562,15 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿وَإِن يَمسَسكَ ٱللَّهُ بِضُرّٖ فَلَا كَاشِفَ لَهُەٓ إِلَّا هُوَٖؖ وَإِن يُرِدءكَ بِخَيرٖ فَهُوَ عَلَىٰ كُلِّ شَيئٖ قَدِيرٌ﴾</div>
+          <div class="verse-text">﴿وَإِن يَمْسَسْكَ اللَّهُ بِضُرّٖ فَلَا كَاشِفَ لَهُٓ إِلَّا هُوَۖ وَإِن يَمْسَسْكَ بِخَيْرٖ فَهُوَ عَلَىٰ كُلِّ شَيْءٖ قَدِيرٞ﴾</div>
           <div class="verse-ref">الأنعام : ١٧</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَإِن يَمسَسكَ ٱللَّهُ بِضُرّٖ فَلَا كَاشِفَ لَهُەٓ إِلَّا هُوَٖؖ وَإِن يُرِدءكَ بِخَيرٖ فَلَا رَآدَّ لِفَزلِهِ٦﴾</div>
+          <div class="verse-text">﴿وَإِن يَمْسَسْكَ اللَّهُ بِضُرّٖ فَلَا كَاشِفَ لَهُٓ إِلَّا هُوَۖ وَإِن يُرِدْكَ بِخَيْرٖ فَلَا رَآدَّ لِفَضْلِهِ﴾</div>
           <div class="verse-ref">يونس : ١٠٧</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿قُل لَّآ أَملِكُ لِنَفسِي نَفعٗا وَلَا ضَرًّا إِلَّا مَا شَآ ءَ ٱللَّهُ﴾</div>
+          <div class="verse-text">﴿قُل لَّآ أَمْلِكُ لِنَفْسِي نَفْعٗا وَلَا ضَرًّا إِلَّا مَا شَآءَ اللَّهُ﴾</div>
           <div class="verse-ref">الأعراف : ١٨٨</div>
         </div>
       </div>
@@ -540,19 +592,19 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿إِنَّ ٱللَّهY� هُوَ ٱلرَّزَّاقُ ذُو ٱلۡقُوَّةِ ٱلۡمَتِينُ﴾</div>
+          <div class="verse-text">﴿إِنَّ اللَّهَ هُوَ الرَّزَّاقُ ذُو الْقُوَّةِ الْمَتِينُ﴾</div>
           <div class="verse-ref">الذاريات : ٥٨</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَمَا مِن دَآبَّةٖ فِي ٱلءأَرٱضِ إِلَّا عَلَى ٱللَّهِ رِزءقُهَا وَيَعلَمُمُسةتَقَرَّهَا وَمُسةتَوءدَعَهَاۚ كُلّٞ فِي كِتَٰبٖ مُّبِينٖ﴾</div>
+          <div class="verse-text">﴿وَمَا مِن دَآبَّةٖ فِي الْأَرْضِ إِلَّا عَلَى اللَّهِ رِزْقُهَا وَيَعْلَمُ مُسْتَقَرَّهَا وَمُسْتَوْدَعَهَاۚ كُلّٞ فِي كِتَٰبٖ مُّبِينٖ﴾</div>
           <div class="verse-ref">هود : ٦</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَفِي ٱلسَّمَآءِ رِزءقُكُمء وَمَا تُوعَدُونَ﴾</div>
+          <div class="verse-text">﴿وَفِي السَّمَآءِ رِزْقُكُمْ وَمَا تُوعَدُونَ﴾</div>
           <div class="verse-ref">الذاريات : ٢٢</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿ٱللَّهُ يَبسُطُ ٱلرِّزءقََ لِمَن يَشَآءُ وَيَقءدِرُ﴾</div>
+          <div class="verse-text">﴿اللَّهُ يَبْسُطُ الرِّزْقَ لِمَن يَشَآءُ وَيَقْدِرُ﴾</div>
           <div class="verse-ref">الرعد : ٢٦</div>
         </div>
       </div>
@@ -574,7 +626,7 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿مَّا يَفۡتَحِ ٱللَّهُ لِلنَّاسِ مِن رَّحۡمَةٖ فَلَا مُمۡسِكَ لَهَاۖ وَمَا يُمۡسِكۡ فَلَا مُرۡسِلَ لَهُۥ مِنۢ بَعۡدِهِۦۚ وَهُوَ ٱلۡعَزِيزُ ٱلۡحَكِيمُ﴾</div>
+          <div class="verse-text">﴿مَّا يَفْتَحِ اللَّهُ لِلنَّاسِ مِن رَّحْمَةٖ فَلَا مُمْسِكَ لَهَاۖ وَمَا يُمْسِكْ فَلَا مُرْسِلَ لَهُ مِن بَعْدِهِۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ﴾</div>
           <div class="verse-ref">فاطر : ٢</div>
         </div>
       </div>
@@ -596,15 +648,15 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿وَٱلَّذِينَ تَدۡعُونَ مِن دُونِهِۦ مَا يَمۡلِكُونَ مِن قِطۡمِيرٍ﴾</div>
+          <div class="verse-text">﴿وَالَّذِينَ تَدْعُونَ مِن دُونِهِ مَا يَمْلِكُونَ مِن قِطْمِيرٍ﴾</div>
           <div class="verse-ref">فاطر : ١٣</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿إِن تَدۡعُوهُمۡ لَا يَسۡمَعُواْ دُعَآءَكُمۡ وَلَوۡ سَمِعُواْ مَا ٱسۡتَجَابُواْ لَكُمۡ﴾</div>
+          <div class="verse-text">﴿إِن تَدْعُوهُمْ لَا يَسْمَعُواْ دُعَآءَكُمْ وَلَوْ سَمِعُواْ مَا اسْتَجَابُواْ لَكُمْ﴾</div>
           <div class="verse-ref">فاطر : ١٤</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿أَمَّن يُجِيبُ ٱلۡمُضۡطَرَّ إِذَا دَعَاهُ وَيَكۡشِفُ ٱلسُّوٓءَ وَيَجۡعَلُكُمۡ خُلَفَآءَ ٱلۡأَرۡضِۗ أَءِلَٰهٞ مَّعَ ٱللَّهِ﴾</div>
+          <div class="verse-text">﴿أَمَّن يُجِيبُ الْمُضْطَرَّ إِذَا دَعَاهُ وَيَكْشِفُ السُّوٓءَ وَيَجْعَلُكُمْ خُلَفَآءَ الْأَرْضِۗ أَءِلَٰهٞ مَّعَ اللَّهِ﴾</div>
           <div class="verse-ref">النمل : ٦٢</div>
         </div>
       </div>
@@ -626,11 +678,11 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿فَلَا تَخۡشَوُاْ ٱلنَّاسَ وَٱخۡشَوۡنِ﴾</div>
+          <div class="verse-text">﴿فَلَا تَخْشَوُاْ النَّاسَ وَاخْشَوْنِ﴾</div>
           <div class="verse-ref">المائدة : ٤٤</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿ٱلَّذِينَ قَالَ لَهُمُ ٱلنَّاسُ إِنَّ ٱلنَّاسَ قَدۡ جَمَعُواْ لَكُمۡ فَٱخۡشَوۡهُمۡ فَزَادَهُمۡ إِيمَٰنٗا وَقَالُواْ حَسۡبُنَا ٱللَّهُ وَنِعۡمَ ٱلۡوَكِيلُ﴾</div>
+          <div class="verse-text">﴿الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُواْ لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَٰنٗا وَقَالُواْ حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ﴾</div>
           <div class="verse-ref">آل عمران : ١٧٣</div>
         </div>
       </div>
@@ -652,11 +704,11 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿مَن كَانَ يُرِيدُ ٱلۡعِزَّةَ فَلِلَّهِ ٱلۡعِزَّةُ جَمِيعًا﴾</div>
+          <div class="verse-text">﴿مَن كَانَ يُرِيدُ الْعِزَّةَ فَلِلَّهِ الْعِزَّةُ جَمِيعًا﴾</div>
           <div class="verse-ref">فاطر : ١٠</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَلِلَّهِ ٱلۡعِزَّةُ وَلِرَسُولِهِۦ وَلِلۡمُؤۡمِنِينَ وَلَٰكِنَّ ٱلۡمُنَٰفِقِينَ لَا يَعۡلَمُونَ﴾</div>
+          <div class="verse-text">﴿وَلِلَّهِ الْعِزَّةُ وَلِرَسُولِهِ وَلِلْمُؤْمِنِينَ وَلَٰكِنَّ الْمُنَٰفِقِينَ لَا يَعْلَمُونَ﴾</div>
           <div class="verse-ref">المنافقون : ٨</div>
         </div>
       </div>
@@ -678,11 +730,11 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿وَمَن يَتَّقِ ٱللَّهَ يَجۡعَل لَّهُۥ مَخۡرَجٗا ۝ وَيَرۡزُقۡهُ مِنۡ حَيۡثُ لَا يَحۡتَسِبُ﴾</div>
+          <div class="verse-text">﴿وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجٗا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ﴾</div>
           <div class="verse-ref">الطلاق : ٢-٣</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿وَلَوۡ أَنَّ أَهۡلَ ٱلۡقُرَىٰٓ ءَامَنُواْ وَٱتَّقَوۡاْ لَفَتَحۡنَا عَلَيۡهِم بَرَكَٰتٖ مِّنَ ٱلسَّمَآءِ وَٱلۡأَرۡضِ﴾</div>
+          <div class="verse-text">﴿وَلَوْ أَنَّ أَهْلَ الْقُرَىٰٓ ءَامَنُواْ وَاتَّقَوْاْ لَفَتَحْنَا عَلَيْهِم بَرَكَٰتٖ مِّنَ السَّمَآءِ وَالْأَرْضِ﴾</div>
           <div class="verse-ref">الأعراف : ٩٦</div>
         </div>
       </div>
@@ -704,15 +756,15 @@ body {
     <div class="stage-body">
       <div class="stage-verses">
         <div class="verse-card">
-          <div class="verse-text">﴿وَمَن يَتَوَكَّلۡ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥٓۚ إِنَّ ٱللَّهY� بَٰلِغُ أَمۡرِهِۦۚ قَدۡ جَعَلَ ٱللَّهُ لِكُلِّ شَيۡءٖ قَدۡرٗا﴾</div>
+          <div class="verse-text">﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُٓۚ إِنَّ اللَّهَ بَٰلِغُ أَمْرِهِۚ قَدْ جَعَلَ اللَّهُ لِكُلِّ شَيْءٖ قَدْرٗا﴾</div>
           <div class="verse-ref">الطلاق : ٣</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿أَلَيۡسَ ٱللَّهُ بِكَافٍ عَبۡدَهُۥ﴾</div>
+          <div class="verse-text">﴿أَلَيْسَ اللَّهُ بِكَافٍ عَبْدَهُ﴾</div>
           <div class="verse-ref">الزمر : ٣٦</div>
         </div>
         <div class="verse-card">
-          <div class="verse-text">﴿حَسۡبُنَا ٱللَّهُ وَنِعۡمَ ٱلۡوَكِيلُ﴾</div>
+          <div class="verse-text">﴿حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ﴾</div>
           <div class="verse-ref">آل عمران : ١٧٣</div>
         </div>
       </div>
@@ -721,7 +773,7 @@ body {
 
   <!-- CLOSING -->
   <div class="closing">
-    <div class="closing-verse">﴿أَلَا بِذِكۡرِ ٱللَّهY� تَطۡمَئِنُّ ٱلۡقُلُوبُ﴾</div>
+    <div class="closing-verse">﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾</div>
     <div class="closing-ref">الرعد : ٢٨</div>
     <div class="closing-message">من أيقن أن كل شيء بيد الله — تحرّر من كل قيد بشري</div>
   </div>
