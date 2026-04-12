@@ -178,15 +178,131 @@ body {
   margin-bottom: 30px;
 }
 
-/* ============= AUDIO SUMMARY PLAYER ============= */
-.audio-summary {
+/* ============= MEDIA SUMMARY (Audio + Video) ============= */
+.media-summary {
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  max-width: 400px;
+  max-width: 480px;
+}
+
+.media-summary-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.media-tabs {
+  display: flex;
+  gap: 0;
+  border-radius: 25px;
+  overflow: hidden;
+  border: 1px solid var(--gold-border);
+}
+
+.media-tab {
+  padding: 8px 24px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.media-tab:hover {
+  color: var(--gold-light);
+  background: rgba(201, 150, 58, 0.08);
+}
+
+.media-tab.active {
+  color: var(--navy);
+  background: var(--gold);
+}
+
+.media-tab svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.media-panel {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.media-panel.active {
+  display: flex;
+}
+
+.video-thumb {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--gold-border);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.video-thumb:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(201, 150, 58, 0.2);
+  transform: translateY(-2px);
+}
+
+.video-thumb img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+
+.video-thumb:hover .video-play-btn {
+  opacity: 1;
+}
+
+.video-play-btn svg {
+  width: 68px;
+  height: 48px;
+}
+
+.media-note {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ============= AUDIO SUMMARY PLAYER ============= */
+.audio-summary {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .audio-summary-label {
@@ -861,6 +977,9 @@ button.qw.has-meaning {
   .landing-question { font-size: 1.15rem; }
   .scale-illustration { width: 220px; height: 150px; margin-bottom: 30px; }
   .audio-summary audio { max-width: 300px; }
+  .media-summary { max-width: 100%; }
+  .video-wrapper { max-width: 100%; }
+  .media-tab { padding: 7px 18px; font-size: 0.8rem; }
   .btn-start { padding: 14px 36px; font-size: 1rem; }
   .scale-visual { flex-direction: column; }
   .scale-vs { padding: 4px 0; }
@@ -1015,17 +1134,42 @@ details.words-details[open] summary.words-summary { opacity: 1; }
     <div class="landing-title">الفتن الأربعة والثبات على الحق</div>
     <div class="landing-meta">١١٠ آيات · مكية · تُقرأ يوم الجمعة</div>
 
-    <!-- Audio Summary from NotebookLM -->
-    <div class="audio-summary">
-      <div class="audio-summary-label">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-        استمع للملخص الصوتي
+    <!-- Media Summary: Audio + Video from NotebookLM -->
+    <div class="media-summary">
+      <div class="media-summary-title">ملخص السورة</div>
+
+      <div class="media-tabs">
+        <button class="media-tab active" onclick="switchMedia('audio')">
+          <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          صوتي
+        </button>
+        <button class="media-tab" onclick="switchMedia('video')">
+          <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM10 8l6 4-6 4z"/></svg>
+          فيديو
+        </button>
       </div>
-      <audio controls preload="metadata">
-        <source src="audio/al-kahf-summary.mp3" type="audio/mpeg">
-        متصفحك لا يدعم تشغيل الصوت
-      </audio>
-      <div class="audio-summary-note">ملخص صوتي للسورة — بواسطة NotebookLM</div>
+
+      <!-- Audio Panel -->
+      <div class="media-panel active" id="panel-audio">
+        <div class="audio-summary">
+          <audio controls preload="metadata">
+            <source src="audio/al-kahf-summary.mp3" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت
+          </audio>
+        </div>
+        <div class="media-note">ملخص صوتي — بواسطة NotebookLM</div>
+      </div>
+
+      <!-- Video Panel -->
+      <div class="media-panel" id="panel-video">
+        <a href="https://youtu.be/cQ8yQZmUzI0" target="_blank" rel="noopener" class="video-thumb">
+          <img src="https://img.youtube.com/vi/cQ8yQZmUzI0/hqdefault.jpg" alt="ملخص فيديو سورة الكهف" loading="lazy">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 .06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24L27 14v20" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="media-note">ملخص مرئي — اضغط للمشاهدة على YouTube</div>
+      </div>
     </div>
 
     <!-- Cave SVG: stylized cave entrance with 4 small orbs (fitan) -->
@@ -3314,6 +3458,17 @@ details.words-details[open] summary.words-summary { opacity: 1; }
     document.querySelectorAll('.verse-block.highlighted').forEach(function(b){ b.classList.remove('highlighted'); });
     activeWord = null;
   });
+
+  /* Media tabs (audio/video) */
+  window.switchMedia = function(type) {
+    document.querySelectorAll('.media-tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.media-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('panel-' + type).classList.add('active');
+    // activate the clicked tab
+    document.querySelectorAll('.media-tab').forEach(function(t){
+      if (t.textContent.trim().indexOf(type === 'audio' ? '\u0635\u0648\u062a\u064a' : '\u0641\u064a\u062f\u064a\u0648') !== -1) t.classList.add('active');
+    });
+  };
 
   /* Deep Dive tabs */
   document.querySelectorAll('.deep-tab').forEach(function(tab){
