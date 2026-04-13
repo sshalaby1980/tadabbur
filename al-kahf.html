@@ -247,47 +247,19 @@ body {
   display: flex;
 }
 
-.video-thumb {
-  display: block;
-  position: relative;
+.video-wrapper {
   width: 100%;
   max-width: 460px;
+  aspect-ratio: 16 / 9;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--gold-border);
-  cursor: pointer;
-  transition: all 0.3s;
 }
 
-.video-thumb:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(201, 150, 58, 0.2);
-  transform: translateY(-2px);
-}
-
-.video-thumb img {
+.video-wrapper iframe {
   width: 100%;
-  display: block;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.video-play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.85;
-  transition: opacity 0.3s;
-}
-
-.video-thumb:hover .video-play-btn {
-  opacity: 1;
-}
-
-.video-play-btn svg {
-  width: 68px;
-  height: 48px;
+  height: 100%;
+  border: none;
 }
 
 .media-note {
@@ -300,17 +272,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  max-width: 400px;
-  padding: 14px 24px;
+  max-width: 440px;
+  padding: 18px 28px;
   margin-top: 8px;
   background: rgba(201, 150, 58, 0.08);
   border: 1.5px solid var(--gold-border);
   border-radius: 14px;
   color: var(--gold-light);
   font-family: 'Cairo', sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s;
@@ -1191,13 +1163,13 @@ details.words-details[open] summary.words-summary { opacity: 1; }
 
       <!-- Video Panel -->
       <div class="media-panel" id="panel-video">
-        <a href="https://youtu.be/cQ8yQZmUzI0" target="_blank" rel="noopener" class="video-thumb">
-          <img src="https://img.youtube.com/vi/cQ8yQZmUzI0/hqdefault.jpg" alt="ملخص فيديو سورة الكهف" loading="lazy">
-          <div class="video-play-btn">
-            <svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 .06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24L27 14v20" fill="white"/></svg>
-          </div>
-        </a>
-        <div class="media-note">ملخص مرئي — اضغط للمشاهدة على YouTube</div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/cQ8yQZmUzI0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"></iframe>
+        </div>
+        <div class="media-note">ملخص مرئي — بواسطة NotebookLM</div>
       </div>
 
       <!-- Visual Slideshow Link -->

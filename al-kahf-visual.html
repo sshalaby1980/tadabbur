@@ -142,7 +142,30 @@ body {
 }
 .slide-counter .current {
   color: var(--gold);
-  font-size: 1.1rem;
+}
+
+/* Landscape recommendation for mobile */
+.landscape-hint {
+  display: none;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 0 auto 16px;
+  max-width: 400px;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  background: rgba(201,150,58,0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+}
+.landscape-hint svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--gold);
+  vertical-align: middle;
+  margin-left: 6px;
+}
+@media (max-width: 700px) and (orientation: portrait) {
+  .landscape-hint { display: block; }
 }
 
 /* Progress dots */
@@ -313,8 +336,9 @@ body {
   justify-content: center;
 }
 .slideshow.fullscreen .slide-container img {
-  width: 100vw;
-  max-height: 70vh;
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
   object-fit: contain;
 }
 .slideshow.fullscreen .slide-title {
@@ -349,8 +373,9 @@ body {
 /* Mobile fullscreen adjustments */
 @media (max-width: 700px) {
   .slideshow.fullscreen .slide-container img {
-    width: 100vw;
-    max-height: 50vh;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
   }
   .slideshow.fullscreen .slide-title {
     font-size: 0.85rem;
@@ -458,13 +483,17 @@ body {
 </div>
 
 <!-- Slideshow -->
+<div class="landscape-hint">
+  <svg viewBox="0 0 24 24"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77c-.59-.59-1.54-.59-2.12 0L1.75 8.11c-.59.59-.59 1.54 0 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.38zm-7.31.29C4.25 19.94 1.91 16.76 1.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/></svg>
+  للحصول على أفضل تجربة، أدِر هاتفك أفقياً
+</div>
 <div class="slideshow">
   <div class="slide-title" id="slideTitle">سورة الكهف: خارطة التحصين والثبات</div>
 
   <div class="slide-container" id="slideContainer">
     <img id="slideImg" src="slides/kahf-slide-01.jpg" alt="شريحة ١">
-    <button class="slide-nav slide-prev" onclick="changeSlide(1)" aria-label="الشريحة التالية">‹</button>
-    <button class="slide-nav slide-next" onclick="changeSlide(-1)" aria-label="الشريحة السابقة">›</button>
+    <button class="slide-nav slide-prev" onclick="changeSlide(-1)" aria-label="الشريحة التالية">‹</button>
+    <button class="slide-nav slide-next" onclick="changeSlide(1)" aria-label="الشريحة السابقة">›</button>
   </div>
 
   <div class="slide-counter">
@@ -542,12 +571,10 @@ body {
     if (n > total) n = 1;
     current = n;
     var pad = n < 10 ? '0' + n : '' + n;
-    img.style.opacity = '0';
-    setTimeout(function(){
-      img.src = 'slides/kahf-slide-' + pad + '.jpg';
-      img.alt = '\u0634\u0631\u064a\u062d\u0629 ' + toArabicNum(n);
-      img.style.opacity = '1';
-    }, 200);
+    var newSrc = 'slides/kahf-slide-' + pad + '.jpg';
+    // Force image change immediately
+    img.src = newSrc;
+    img.alt = '\u0634\u0631\u064a\u062d\u0629 ' + toArabicNum(n);
     titleEl.textContent = titles[n - 1];
     counterEl.textContent = toArabicNum(n);
     var dots = dotsContainer.querySelectorAll('.slide-dot');
