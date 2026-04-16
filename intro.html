@@ -392,6 +392,29 @@
             color: var(--gold); width: 40px; height: 40px;
             border-radius: 50%; cursor: pointer;
             font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            z-index: 210;
+        }
+
+        /* Fullscreen slide navigation */
+        .modal-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: var(--gold-dim); border: 1px solid var(--gold-glow);
+            color: var(--gold); width: 48px; height: 48px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 1.3rem; display: flex; align-items: center; justify-content: center;
+            z-index: 210; transition: all 0.3s;
+        }
+        .modal-nav:hover { background: var(--gold-glow); }
+        .modal-nav:disabled { opacity: 0.2; cursor: default; }
+        .modal-nav.nav-prev { right: 16px; }
+        .modal-nav.nav-next { left: 16px; }
+        .modal-counter {
+            position: absolute; bottom: 24px; left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold); font-size: 0.95rem; font-weight: 600;
+            background: rgba(10,22,40,0.8); padding: 6px 20px;
+            border-radius: 20px; border: 1px solid var(--gold-glow);
+            z-index: 210;
         }
     </style>
 </head>
@@ -401,9 +424,12 @@
 <div class="stars" id="stars"></div>
 
 <!-- Image Modal -->
-<div class="modal-overlay" id="modal" onclick="closeModal()">
+<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
     <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-nav nav-prev" id="modalPrev" onclick="modalPrevSlide(event)">→</button>
     <img id="modal-img" src="" alt="">
+    <button class="modal-nav nav-next" id="modalNext" onclick="modalNextSlide(event)">←</button>
+    <div class="modal-counter" id="modalCounter" style="display:none;"></div>
 </div>
 
 <!-- Nav -->
@@ -607,15 +633,78 @@
     });
 
     // ===== Image Modal =====
+    let modalSlideMode = false; // true when viewing slides in fullscreen
+    let modalCurrentSlide = 0;
+
     function openModal(src) {
         document.getElementById('modal-img').src = src;
         document.getElementById('modal').classList.add('open');
         document.body.style.overflow = 'hidden';
+
+        // Check if this is a slide image
+        const match = src.match(/slides\/slide-(\d+)\.jpg/);
+        if (match) {
+            modalSlideMode = true;
+            modalCurrentSlide = parseInt(match[1]) - 1;
+            updateModalNav();
+        } else {
+            modalSlideMode = false;
+            document.getElementById('modalPrev').style.display = 'none';
+            document.getElementById('modalNext').style.display = 'none';
+            document.getElementById('modalCounter').style.display = 'none';
+        }
     }
+
     function closeModal() {
         document.getElementById('modal').classList.remove('open');
         document.body.style.overflow = '';
+        modalSlideMode = false;
     }
+
+    function handleModalClick(event) {
+        // Only close if clicking the overlay background itself
+        if (event.target === document.getElementById('modal')) {
+            closeModal();
+        }
+    }
+
+    function updateModalNav() {
+        const prev = document.getElementById('modalPrev');
+        const next = document.getElementById('modalNext');
+        const counter = document.getElementById('modalCounter');
+        prev.style.display = 'flex';
+        next.style.display = 'flex';
+        counter.style.display = 'block';
+        prev.disabled = modalCurrentSlide === 0;
+        next.disabled = modalCurrentSlide === totalSlides - 1;
+        counter.textContent = toArabicNum(modalCurrentSlide + 1) + ' / ' + toArabicNum(totalSlides);
+    }
+
+    function modalGoToSlide(n) {
+        modalCurrentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+        const num = String(modalCurrentSlide + 1).padStart(2, '0');
+        document.getElementById('modal-img').src = `slides/slide-${num}.jpg`;
+        updateModalNav();
+        // Sync the main slides viewer too
+        goToSlide(modalCurrentSlide);
+    }
+
+    function modalPrevSlide(e) { e.stopPropagation(); modalGoToSlide(modalCurrentSlide - 1); }
+    function modalNextSlide(e) { e.stopPropagation(); modalGoToSlide(modalCurrentSlide + 1); }
+
+    // Touch swipe in modal
+    let modalTouchStartX = 0;
+    document.getElementById('modal').addEventListener('touchstart', e => {
+        if (modalSlideMode) modalTouchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    document.getElementById('modal').addEventListener('touchend', e => {
+        if (!modalSlideMode) return;
+        const diff = e.changedTouches[0].screenX - modalTouchStartX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) modalGoToSlide(modalCurrentSlide - 1);
+            else modalGoToSlide(modalCurrentSlide + 1);
+        }
+    }, {passive: true});
 
     // ===== Infographic image loader =====
     const infImg = document.getElementById('infographic-img');
@@ -692,9 +781,14 @@
 
     // Keyboard navigation
     document.addEventListener('keydown', e => {
-        if(e.key==='ArrowRight') prevSlide();
-        if(e.key==='ArrowLeft') nextSlide();
-        if(e.key==='Escape') closeModal();
+        if (e.key === 'Escape') { closeModal(); return; }
+        if (modalSlideMode && document.getElementById('modal').classList.contains('open')) {
+            if (e.key === 'ArrowRight') modalGoToSlide(modalCurrentSlide - 1);
+            if (e.key === 'ArrowLeft') modalGoToSlide(modalCurrentSlide + 1);
+        } else {
+            if (e.key === 'ArrowRight') prevSlide();
+            if (e.key === 'ArrowLeft') nextSlide();
+        }
     });
 
     // Init on load
